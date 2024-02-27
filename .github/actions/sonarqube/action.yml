@@ -1,0 +1,113 @@
+name: SonarQube code scan
+description: |
+  Implement a SonarQube code scan.
+  This action tries to be generic. This means that it should work with JAVA and NODEJS. As a consequence, you may need 
+  to generate files before you call this action (i.e. nodejs code coverage files).
+  When you do, pass:
+    SKIP_CHECKOUT: true
+  to avoid any possible override of the code inside the action.
+inputs:
+  GITHUB_TOKEN:
+    description: ''
+    required: true
+  GITHUB_WORKSPACE:
+    description: ''
+    required: true
+  SONAR_TOKEN:
+    description: |
+      It is a secret stored in the github repo settings.
+    required: true
+  SONAR_WAIT_FOR_QUALITY_GATE:
+    description: |
+      Wait or not for the quality gate checks.
+      Defaults to true.
+    required: false
+    default: 'true'
+  SONAR_PROJECT_KEY:
+    description: |
+      The SONAR PROJECT KEY. You can find this value in the SonarQube console
+    required: true
+  SONAR_SOURCES:
+    description: ''
+    required: false
+    default: '.'
+  SONAR_EXTRA_FLAGS:
+    description: |
+      Extra sonar args. Will have the following syntax:
+      -Dsonar.java.binaries=./target/classes -Dsonar.exclusions=src/serv*
+      There is NO NEED to pass the flags used to obtain a PR comment, they are added automatically from the action.
+    required: false
+    default: ''
+  SKIP_CHECKOUT:
+    description: |
+      Pass true if you don't want the code to be pulled inside this action again (for example if you generated files 
+      before calling it). 
+      Default to false.
+    required: false
+    default: 'false'
+  CODE_REF:
+    description: |
+      If you don't want to pull latest, pass the SHA ore TAG to pull. This may be needed when deploying a specific TAG.
+      Default to "latest" which is "" in Github Actions
+    required: false
+    default: ""
+runs:
+  using: 'composite'
+  steps:
+    - name: Code checkout
+      if: ${{ inputs.SKIP_CHECKOUT == 'false' }}
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        ref: ${{ inputs.CODE_REF }}
+    - uses: actions/setup-node@v3 # Required by sonarqube
+      with:
+        node-version: 16
+    - name: Checkout GitHub Action Repo
+      uses: actions/checkout@v3
+      with:
+        repository: warchant/setup-sonar-scanner
+        ref: v3
+        token: ${{ inputs.GITHUB_TOKEN }}
+        path: .github/actions/setup-sonar-scanner
+    - name: Setup sonarqube
+      uses: ./.github/actions/setup-sonar-scanner
+    - name: Run Sonar Scanner in PR
+      shell: bash # Needed for composite actions
+      if: ${{ github.event_name == 'pull_request' }}
+      env:
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ inputs.SONAR_TOKEN }}
+      run: sonar-scanner
+        -Dsonar.host.url=https://sq.prod.tio.elsevier.systems
+        -Dsonar.login=${{ inputs.SONAR_TOKEN }}
+        -Dsonar.projectBaseDir=${{ inputs.GITHUB_WORKSPACE }}
+        -Dsonar.projectKey=${{ inputs.SONAR_PROJECT_KEY }}
+        -Dsonar.scm.provider=git
+        -Dsonar.sources=${{ inputs.SONAR_SOURCES }}
+        -Dsonar.qualitygate.wait=${{ inputs.SONAR_WAIT_FOR_QUALITY_GATE }}
+        -Dsonar.sourceEncoding=utf-8
+        -Dsonar.pullrequest.branch=${GITHUB_HEAD_REF#refs/heads/}
+        -Dsonar.pullrequest.key=${{ github.event.pull_request.number }}
+        -Dsonar.pullrequest.base=${GITHUB_BASE_REF#refs/heads/}
+        -Dsonar.pullrequest.provider=github
+        -Dsonar.pullrequest.github.repository=${GITHUB_REPOSITORY}
+        -Dsonar.pullrequest.github.endpoint=${GITHUB_API_URL}
+        -Dsonar.scm.revision=${{ github.event.pull_request.head.sha }}
+        ${{ inputs.SONAR_EXTRA_FLAGS }}
+    - name: Run Sonar Scanner outside PR
+      shell: bash # Needed for composite actions
+      if: ${{ github.event_name != 'pull_request' }}
+      env:
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ inputs.SONAR_TOKEN }}
+      run: sonar-scanner
+        -Dsonar.host.url=https://sq.prod.tio.elsevier.systems
+        -Dsonar.login=${{ inputs.SONAR_TOKEN }}
+        -Dsonar.projectBaseDir=${{ inputs.GITHUB_WORKSPACE }}
+        -Dsonar.projectKey=${{ inputs.SONAR_PROJECT_KEY }}
+        -Dsonar.scm.provider=git
+        -Dsonar.sources=${{ inputs.SONAR_SOURCES }}
+        -Dsonar.qualitygate.wait=${{ inputs.SONAR_WAIT_FOR_QUALITY_GATE }}
+        -Dsonar.sourceEncoding=utf-8
+        ${{ inputs.SONAR_EXTRA_FLAGS }}

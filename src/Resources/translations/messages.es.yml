@@ -1,0 +1,1111 @@
+book:
+    edition_label: 'Edición'
+    request:
+        request_digital: Formato Digital
+        request_print: Formato impreso
+        digital_requested: Muestra digital solicitada
+        print_requested: Print copy requested
+        digital_pre_ordered: Pre-ordered digital copy
+        print_pre_ordered: Pre-ordered print copy
+        print_preorder_approved_info: Permitir entrega de 10-14 días
+        digital_preorder_approved_info: Acceso inmediato
+        print_order_approved_info: Permitir entrega de 10-14 días
+        digital_order_approved_info: Acceso inmediato
+        digital_order_popup: Sujeto a aprobación; no incluye StudentConsult o recursos docentes
+        digital_preorder_popup: subject to approval; does not include Student Consult or teacher resources
+        request-book: "Solicitar"
+        preorder-book: "Pre-order"
+        preorder-label: Pronto estará disponible de nuevo
+        form:
+            course_details: Detalles del curso
+            check_course_details: Revisar detalles del curso
+            confirm_course_details: Confirmar o actualizar los detalles del curso
+            institution: Institución
+            continue_btn: Continuar
+            submit_btn: Enviar
+            leave_req_msg: Are you sure you want to leave? Registration must be complete before you can request a book
+            step1:
+                title: ¿Cómo va a utilizar este libro?
+                single: Solo un curso
+                multiple: En más de un curso
+            step2:
+                title: Seleccionar Universidad / Institución
+                title2: Seleccionar universidades / instituciones
+                add_inst_btn: Añadir nueva Universidad / Institución
+            step3:
+                considering_book: 'Para este curso, consideraré este título como:'
+                no_used_similar: Referencia adicional para mi asignatura
+                now_course: Para un nuevo curso
+                alternative: Para sustituir o actualizar un recurso existente
+                book_currently_use: Título recomendado actualmente
+                currentUsedBook: Por favor, proporcione el título, autor y el número de edición del libro.
+            step4:
+                course_type: Tipo de Asignatura
+                course_type_contextuel_help: Seleccione la opción que mas se ajuste a su asignatura
+                course_name: Nombre de la Asignatura (Opcional)
+                course_name_contextuel_help: Por favor, informe el nombre de su asignatura en su institución.
+                course_code: Código del curso
+                course_level: Año académico y titulación
+                student_number: Número esperado de estudiantes (por año)
+                students_number_contextuel_help: Número total de estudiantes que asisten a este curso durante un año académico completo.
+                start_date: Fecha de comienzo
+                end_date: Fecha de finalización
+                end_date_error: End date should be after start date
+                date-format: dd-mm-aaaa
+                contextuel_help: Por favor, indique el año académico y el tipo de titulación (licenciatura, Grado, etc.)
+            step5:
+                title: 'Este título será para este curso:'
+                core: Clave en mi asignatura
+                core_help: "Obligatorio para el curso: el estudiante debería comprar este título o tener acceso al contenido del mismo."
+                recommended: Bibliografía recomendada
+                recommended_help: Un título "clave" para el curso, pero no es obligatorio que el estudiante lo compre o tenga acceso al contenido del mismo.
+                supplementary: Bibliografía complementaria
+                supplementary_help: Incluido en la lista de lectura como opcional y/o material para consultar de forma adicional
+                undecided: No lo he decidido aún
+                undecided_help: Le preguntaremos en otro momento.
+            step6:
+                title: 'Select delivery address'
+                add_addr_btn: Añadir nueva
+                confirm_msg: Please confirm your address
+                select: Select another address
+                confirm_addr: Confirmar dirección de entrega
+                confirm: Confirmar
+                edit_addr: Editar dirección
+            step7:
+                success_title: ¡Su petición ha sido enviada!
+                success_msg: 'Le informaremos una vez el libro esté disponible. Cuanto le sea posible, por favor revíselo, nos pondremos en contacto con usted para saber su opinión sobre el mismo.'
+                success_msg_EC: 'Si tiene alguna duda, contacte con su <a class="decorate" href="__education_consultant__">Education Consultant</a> de Elsevier.'
+                finish_btn: Finalizar
+            cancel_box: ¿Quiere cancelar su solicitud?
+        complete_url: Welcome to the new Inspection Copy website! <a href ="__url__" class="url-msg">Log in</a> to discover great new content for your courses now.
+        add: Agregar
+    review:
+        title: ¿Añadirá este título a su bibliografía?
+        yes: Sí
+        no: No
+        give_feedback: Dar Opinión
+        rate_this_book: Califique este libro
+        update_librarian: Actualizar biblioteca
+        rate_review: Califique & Revise
+        people_find_this_review_helpful: personas encuentran esta reseña útil.
+        reviewed_on: Revisado en
+        helpful: Útil
+        course_details:
+            title: Proporcionar información
+            course_type: Tipo de Asignatura
+            course_name: Nombre de la Asignatura (Opcional)
+            course_level: Año académico / Semestre
+            students: Número de estudiantes esperado
+            start_date: Fecha de comienzo
+            end_date: Fecha de finalización
+            check_adoption: ¿Añadirá este título en su bibliografía?
+        negative:
+            step1:
+                title: "No es adecuado para esta asignatura"
+                option1: "El contenido no apoya completamente mi asignatura"
+                option2: "No es apropiado para mi asignatura"
+                option3: "No es apropiado para el nivel de la asignatura"
+                option4: "El contenido es demasiado avanzado."
+                option5: "El contenido es muy básico."
+                option9: "Precio"
+                option_other_book: "He elegido otro libro"
+                option_other_reason: "Otros motivos (por favor, especifique) "
+                other_reason_placeholder: "Por favor proporcione el motivo"
+            step2:
+                title: "Título del libro escogido"
+                book_name: "Por favor proporcione el motivo"
+            step3:
+                title: "He elegido este libro porque..."
+            reason_title: 'Por favor, explíquenos los motivos'
+        positive:
+            step1:
+                title: "Detalles del curso"
+                edit_course: "Editar detalles de la asignatura"
+            step2:
+                title: "Este título será"
+                core: "Clave en mi asignatura"
+                core_help: "Obligatorio para el curso: el estudiante debería comprar este título o tener acceso al contenido del mismo."
+                recommended: "Bibliografía recomendada"
+                recommended_help: Un título "clave" para el curso, pero no es obligatorio que el estudiante lo compre o tenga acceso al contenido del mismo.
+                supplementary: "Bibliografía complementaria"
+                supplementary_help: "Incluido en la bibliografía como opcional o lectura adicional."
+        multiple:
+            step1:
+                title: "Por favor confirme para cada asignatura"
+                title_help: "Seleccione Sí/No para cada asignatura"
+            positive_step:
+                title: "I’m adopting this book for"
+            negative_step:
+                title: "Not adopting this book for"
+            current_course:
+                title: 'Para esta asignatura'
+        feedback:
+            title:  "Nos gustaría saber su opinión (opcional)"
+            placeholder: "Mi opinión"
+            info: "Su opinión será revisada antes de su publicación"
+            accept_public: "Acepto que mis comentarios sean compartidos públicamente."
+            accept_public_info: "Todos los comentarios serán revisados antes de publicarse. Una vez que compartes tu opinión sobre los títulos, das permiso a Elsevier a usar tus datos personales de acuerdo a la <a href='__url__'>Política de Privacidad</a> y a usar tus reseñas en medios de Elsevier."
+            accept_name_public: "Acepto que mi nombre sea publicado."
+            previous: 'Mi opinión anterior sobre este título'
+            new: 'Puede añadir nuevos comentarios aquí.'
+            new_placeholder: 'Comentarios actualizados (opcional)'
+        courses_details:
+            see_details: Ver más información
+            title: Proporcionar información
+            confirmed_for: Confirmado para <span>##nbr##</span> asignaturas
+            confirmed_for_one: Confirmado para mi <span>##nbr##</span> asignatura
+            not_right_for: Não confirmado para <span>##nbr##</span> asignaturas
+            not_right_for_one: Não confirmado para mi <span>##nbr##</span> asignatura
+            confirmed_and_not_right_for: "Confirmado para ##confirmed_nbr##, no confirmado para ##not_confirmed_nbr## asignaturas"
+            confirmed_and_not_right_for_one: "Confirmado para ##confirmed_nbr##, no confirmado para mi ##not_confirmed_nbr## asignatura"
+            renewed_and_not_right_for_one: "Renewing for ##confirmed_nbr##, not renewing for ##not_confirmed_nbr## course"
+            renewed_and_not_right_for: "Renewing for ##confirmed_nbr##, not renewing for ##not_confirmed_nbr## courses"
+        success:
+            title: "¡Gracias!<br> su opinión es muy importante para nosotros."
+            feedtext: "Tienes acceso ilimitado al contenido digital (este terminará en el momento en el que el título se descatalogue)."
+            message: "<a href='__contact_link__' target='_blank'>¿Tiene alguna pregunta?</a>"
+        submit: "Enviar"
+        logout_msg: Se ha desconectado. Por favor vuelva a iniciar sesión para darnos su opinión.
+        previously: 'Previamente'
+        on: ''
+        dash: '-'
+        slash: '/'
+        at: ''
+        reading_list: ''
+        reading: ''
+        book_successfully_copied: ¡Libro copiado exitosamente!
+        book_successfully_moved: ¡Libro movido con éxito!
+        see_all_lists: Ver todas las listas
+    renewal:
+        title_one: '¿Va a mantener este título en la bibliografía de su asignatura?'
+        title_many: '¿Va a mantener este título en la bibliografía de sus asignaturas?'
+        negative:
+            step1:
+                title: 'No, no usaré este libro en mi asignatura porque:'
+                option1: 'Ya no imparto este curso'
+                option2: 'El currículo ha cambiado'
+        multiple:
+            title: 'Renovaré este título en el próximo curso'
+    modal:
+        you_don_t_have_any_list_yet: Aún no tiene ninguna lista
+        Please_add_at_least_one_list: Please add at least one list
+        review_rating_book_modal:
+            thank_you_for_taking_the_time_to_write_a_review: Gracias por tomarse el tiempo para escribir una reseña. Su nombre (como se muestra en su perfil) y su institución se mostrarán junto a su reseña. Todos los comentarios serán revisados antes de su exhibición pública.
+            i_agree_to_my_name_and_institution: Acepto que mi nombre e institución se muestren junto a mi reseña.
+        save_changes: Guardar cambios
+product_page:
+    editors: 'Autores'
+    publication_date: 'Fecha de publicación'
+    digital_not_available: 'No disponible en formato impreso'
+    print_not_available: ''
+    buttons:
+        pre_order_digital: Formato Digital
+        pre_order_print: Formato impreso
+        pre_ordered_digital: Libros solicitados que todavía no están disponibles
+        pre_ordered_print: Libros solicitados que todavía no están disponibles
+    purchase_book: 'Comprar libro'
+    share_dots:
+        share: Copiar enlace
+        message: Mensaje
+        mail: Correo
+        education_consultant: Contactar con mi Education Consultant
+        copied_clipboard: 'Enlace copiado'
+        mail_subject: 'Pregunta sobre Inspection Copy'
+        whatsapp: Whatsapp
+    details:
+        toc_tab:
+            title:  'Índice'
+        description_tab:
+            new_feature: 'Novedades de esta edición'
+            title: 'Descripción'
+            key_features: 'Informaciones principales'
+        review_tab:
+            title: 'Opiniones de Profesores'
+        details_tab:
+            title: 'Detalles del libro'
+            illustrations: 'Figuras'
+            page_count: 'Páginas'
+            isbn: 'ISBN'
+            price: ''
+        author_tab:
+            title: 'Sobre el autor'
+        ancillary_tab:
+            title: 'Material para profesores/as'
+            msg: 'El acceso a los recursos para profesores/estudiantes está disponible para usuarios registrados con muestras digitales aprobadas o incluidas en la bibliografía. Para revisar este material, por favor solicite una muestra digital'
+        companion_tab:
+            title: 'Material para estudiantes'
+        audience_tab:
+            title: 'Audiencia'
+    related:
+        title: 'Libros Relacionados'
+    preview_label: Vista previa
+contact_us:
+    title: 'Contacto'
+    form:
+        label_name: 'Nombre'
+        label_email: 'Correo electrónico'
+        label_country: 'País'
+        label_phone: 'Teléfono (opcional)'
+        label_institution: 'Institución'
+        label_subject: 'Asunto'
+        label_description: 'Descripción'
+        please_select: 'Por favor, escoja '
+        subject_choices:
+            registration_issue: 'Problemas con el registro'
+            login_issue: 'Problemas para identificarme'
+            where_book: '¿Dónde está mi libro?'
+            heath_resource: 'Ayuda - Recursos para Salud'
+            stem_resource: 'Ayuda - recursos para STEM'
+            other: 'Otro'
+            digital_not_available: 'Copia digital aún no disponible.'
+        error:
+            wrong_phone_format: Por favor ,verifique que el formato sea correcto
+    support_email: 'atencionalcliente@elsevier.com'
+    stem_email: 'emeatextbook@elsevier.com'
+    digital_not_descr: 'Informe de copia digital no disponible para ISBN '
+    flash:
+        success:  You have successfully submitted your request, one of our team will get back to you very soon.
+    mailer:
+        confirm_subject: 'Confirmación de contacto'
+        confirm_message: '<p>Hola ,<br>Gracias por ponerse en contacto. Nuestro equipo contestará a su consulta así que posible.</p>'
+    submit: 'Enviar'
+adresses:
+    title: No hacemos entregas en Apartados de Correos. Por favor incluya solo correo postal.
+    add-adress: Añadir dirección de entrega
+    add: Añadir
+profile:
+    education-consultant:
+        title: 'Su Education Consultant de Elsevier puede ayudarle de varias formas:'
+        liste1: Proporcionarle consejos sobre el contenido de Elsevier que mejor se adecua a su asignatura.
+        liste2: Apoyo en recursos electrónicos para sus clases.
+        liste3: Ofreciéndole un período de prueba en,<span class="clinicalKey"><img class="retina-reload clinical-img" src="#img_src#" alt="ClincalKey"/></span>
+        liste4: ''
+        get-in-touch: ¡Contáctenos!
+        contact_your_team_at: 'Contactar al equipo en:'
+    no_education_consultant:
+        title: 'Se te asignará un Education Consultant de Elsevier una vez que hagas tu primera solicitud. Este podrá apoyarte en todo lo que necesites:'
+home:
+    beta_release:
+        feedback_msg: 'Agradecemos mucho tu opinión en relación a tu experiencia con Inspection Copy. Nos ayudará a mejorar la plataforma.'
+        feedback_placeholder: 'Comparte tu experiencia'
+        give_feedback: 'Danos tu opinión'
+        submit: 'Enviar'
+        success_msg: '¡Gracias! Tu opinión es muy importante'
+        btn_continue: 'Continuar buscando'
+        beta_release: 'Lanzamiento BETA'
+    discover:
+        title: Descubra. <span>Revise.</span> Enseñe.
+        link: ' <a href="__url__"  id="click-here">Haz clic aquí para ver tus muestras para evaluación</a> '
+        welcome: Bienvenido/a a Inspection Copy,<br>La plataforma de muestras para revisión de Elsevier.
+        welcome_first_login: 'Bienvenido/a a Inspection Copy, ##username##!<br>La plataforma de muestras para revisión de Elsevier.'
+        login: o identifíquese
+        register: Crear una Cuenta
+        welcome_back: 'Bienvenido/a de nuevo a Inspection Copy, ##username##!'
+        welcome_ic: '¡Le damos la bienvenida al catálogo digital de Elsevier! , ##username##!'
+    banner:
+        covid-content: 'Las tiendas online de <a href="https://tienda.elsevier.es/" target="_blank">Elsevier Health </a>continúan abiertas. Al igual que la mayoría de nuestros socios minoristas, continuamos enviando pedidos hasta nuevo aviso.'
+    booksInterest:
+        title: "Libros en los que puede estar interesado(a):"
+    timeline:
+        title: ¿Cómo funciona?
+        descrp: "Esta web está destinada exclusivamente a profesores que están interesados en usar libros del catálogo de Elsevier como bibliografía y complemento para sus asignaturas."
+        discover: Descubra
+        label_descover: Busque contenido
+        inspect: Revise
+        label_inspect: Elija un libro
+        teach: Enseñe
+        label_teach: A sus alumnos
+        feedback: Le pediremos su opinión para seguir mejorando
+    books:
+        title: Encuentra el libro adecuado para sus clases
+        medicine_book: Medicina
+        nursing_book: Enfermería
+        health_book: Odontología
+        dentistry_book: Veterinaria
+        veterinary_book: otras profesiones sanitarias
+        teach: Enseño
+        title_block: Encuentra los libros adecuados para su curso
+    cookies:
+        cookie_label: Usamos cookies para poder ofrecerle los mejores servicios y seguir mejorando. Accediendo a esta web usted consiente el uso de cookies. <a href="__url__"  target=_blank>Saber más. </a>
+    virtual_tour:
+        back: Anterior
+        next: Siguiente
+        skip: Saltar
+        done: Finalizar
+        intro: ¡Bienvenido/a! Te mostramos cómo puedes empezar
+        step1: Visualice sus notificaciones cada vez que iniciar una sesión.
+        step2: Haga clic en el icono de su usuario para visualizar la información de su cuenta.
+        step3: Puede cambiar el catálogo de libros para buscar libros en otros idiomas.
+        step4: Puede ver la página en un idioma diferente.
+        step5: Acceso rápido a sus solicitudes de muestras digitales para hacer la revisión y dar feedback.
+    virtual_tour_ic_page:
+        phase1:
+            step1:
+                intro_line: "Bienvenido/a a la sección de ‘Mis muestras Digitales’. Aquí podrás:"
+                first_line: "acceder a tus muestras digitales"
+                second_line: "acceder a recursos disponibles para estudiantes y/o profesores"
+                third_line: "enviarnos tu valoración"
+            step2: "Aquí encontrarás todas tus solicitudes de muestras digitales"
+            step3: "así como el estado de las mismas."
+        phase2:
+            step1: "Cuando tu solicitud esté aprobada, haz clic aquí para acceder al libro"
+            step2: "Haz clic aquí en cualquier momento para contarnos si incluirás el título en tu bibliografía."
+            step3: "Puedes ver y gestionar tu lista de muestras digitales en cualquier momento"
+            step4: "Cuando el listado de títulos sea muy largo, puedes buscar tus muestras digitales aquí."
+    recommendations_inbox:
+        title: 'Mi bandeja de entrada de recomendaciones'
+        read_now_btn: 'Leer ahora'
+        load_more_btn: 'Mostrar más'
+        no_books_text: '<p>Hoy no tenemos recomendaciones.</p>'
+        share_dots:
+            mail_subject: 'Eche un vistazo a este libro de texto de Elsevier'
+        add_book:
+            title: 'Añadir a mi lista de lectura'
+            btn: 'Añadir'
+            success_step:
+                success_msg: '¡Todo listo!'
+                btn_go_to_readingList: 'Mi lista de libros de texto'
+                btn_explore: 'Explorar más'
+        might_like: 'Te puede gustar'
+        shared_collegues: 'Compartido por colegas'
+        add_to_my_books: Añadir a Mis Libros de texto
+        awaiting_publication: 'Todavía no ha sido publicado'
+        back_soon: 'Pronto estará disponible de nuevo'
+        title_recommended: Recomendado para ti
+    remove_recommendation: Eliminar recomendación
+    confirm_remove_recommendation: Este libro no se volverá a mostrar como recomendado. Siempre puedes volver a buscarlo en el catálogo.
+    catchy_image:
+        link_text: Ver ahora
+        title_text1: Rang and Dale’s Pharmacology
+        title_text2: Títulos de enfermería
+        title_text3: Macleod's Clinical Examination
+        title_text4: Explore our essential anatomy books
+        description_text1: Internationally acknowledged as the core textbook for students of pharmacology, providing accessible, up-to-date information on drugs and their mechanism of action.
+        description_text2: <span>Discover the right resource for your course</span> Explore our nursing textbooks.
+        description_text3: The textbook of choice for students who understand that excellence in clinical examination is integral to good practice.
+        description_text4: Focusing on the core information medical students need to know with world-renowned illustrations to enhance understanding and retention.
+    engage_banner:
+        title_content: Estimula a tus estudiantes con recursos de aprendizaje de alta calidad.
+        description_content: Nuestro contenido está diseñado para diversos propósitos de enseñanza y aprendizaje, brindando a docentes y estudiantes una amplia gama de opciones para lograr resultados exitosos.
+        link_text: Explora libros con recursos disponibles
+    newbooks:
+        title: Novedades
+    text_book:
+        title: Costanzo. Fisiología
+        sub_title: Fácil de leer. Fácil de comprender
+        first_content: Presentamos la nueva edición del texto de fisiología en el que se presentan los contenidos de un modo sencillo y explicados paso a paso que ofrece al estudiante los conceptos básicos de la asignatura.
+        second_content: Esta edición incluye las siguientes características diseñadas para facilitar el estudio de la fisiología:<br/><ul><li>Fundamentos sólidos en fisiología humana con una orientación concisa y clara.</li><li>Perspectiva global y sistemática de los conceptos fisiológicos esenciales, tanto a nivel de los sistemas orgánicos como a nivel celular.</li><li>Nuevos contenidos sobre la fisiología del SARS-Cov-2, el control renal del ácido úrico o la fisiología endolinfática, entre otros.</li><li>Resúmenes y preguntas de autoevaluación en cada capítulo, así como cuadros sobre fisiología clínica que facilitan el repaso y refuerzan la retención de conceptos.</li><li>Incluye una versión electrónica del libro en inglés.</li></ul>
+        third_content: ""
+        btn_know_more: Saber más
+    reviews: reviews
+notification:
+    notification: Notificaciones
+    notif_digital_available: '¡Buenas noticias! la muestra digital <span class="book-title">__title__</span><span class="status"> ya está disponible.</span>'
+    notif_digital_approved: 'Su muestra anticipada de <span class="book-title">__title__</span><span class="status"> ha sido aprobada.</span>'
+    notif_print_approved: 'Su muestra anticipada de <span class="book-title">__title__</span><span class="status"> ha sido aprobada.</span>'
+    notif_update_print: 'Actualizaciones sobre su muestra impresa.'
+    notif_feedback:  'Dar mi opinión sobre <span class="book-title">__title__</span>.'
+    notif_confirm_book:  '¿Usará <span class="book-title">__title__</span><span class="status"> este año?</span>'
+    notif_expired_digital: 'El acceso a <span class="book-title">__title__</span><span class="status"> caducará pronto. Consulte ahora el libro.</span>'
+    notif_same_book: ¿Usará el mismo libro este año?
+    notif_none: Actualmente no tiene notificaciones nuevas.
+    new_user: ¡Bienvenido/a a Inspection Copy! Hemos realizado cambios en la plataforma con el fin de poder ofrecerle una mejor experiencia y apoyo en sus clases. Haga clic en el icono de su perfil para ver el nuevo espacio y modificar su información.
+    new_user_v1: Usa el menú principal en la parte superior de la pantalla para comenzar a explorar los libros de texto de Elsevier o haz clic en el icono de búsqueda para encontrar el libro que necesitas.
+    new_user_v2: ¡Ya están disponibles títulos de Ciencia y Tecnología de Elsevier! Haz clic en "Ciencia y Tecnología" en el menú principal para comenzar a navegar.
+    new_user_v3: Usa el menú principal en la parte superior de la pantalla para comenzar a explorar los libros de texto de Elsevier o haz clic en el icono de búsqueda para encontrar el libro que necesitas.
+    new_user_v5: ¡Bienvenido/a a la nueva web de Inspection Copy! Trabajamos de forma continua para apoyar tu labor docente y tus clases. Haz clic en el icono de perfil para ver el nuevo espacio dedicado a tu perfil.
+    new_user_v4:
+    new_user_v6:
+    new_user_v7:
+    like_book: "Pensamos que te podría gustar __book_title__"
+    sahred_by: "__firstname_lastname__ compartió __book_title__ contigo"
+    new_edition: "¡Se acerca la nueva edición de __book_title__! <a href='__book_link__' class='more_details'>Más detalles</a>"
+    new_book: "¡ __book_title__ ya está disponible para que lo vea!"
+books_page:
+    books:
+        meta_title: 'Libros en'
+        breadcrumb:
+            home: 'Principal'
+            all_product: Todos los Productos
+            product: Productos
+        filter_show: 'Mostrar'
+        showing_page: 'Mostrando #from# - #length# de #total#'
+        show_result: Mostrar resultados
+        view_all: Ver todos
+        next: Siguiente
+        prev: Anterior
+        pagination_of: 'de'
+        sortBy:
+            title: Ordenar por
+            author_a_z: Autor A-Z
+            author_z_a: Autor Z-A
+            title_a_z: Título A-Z
+            title_z_a: Título Z-A
+            new: Novedades primero
+            old: Más antiguos primero
+            popularity: Popularidad
+        new_edition_label: Nueva edición
+        new_label: Nuevo
+        top_seller_label: Más vendido
+        most_popular_label: Más popular
+        tag_filter:
+            new: Novedades
+            most_popular: Más vendido
+            top_seller: Más vendido
+    export:
+        export_list_btn: Exportar lista
+        export_btn: Exportar
+        export_list_title: Exportar lista
+        course_book_list: "Lista de libros del curso:"
+        created: "Creada"
+        course_code: "Course code"
+        start_date: "Fecha de inicio"
+        student_intake: "Número de estudiantes"
+        contant_name: "Nombre del contacto"
+        email: "Correo electrónico"
+        comments: "Comentarios"
+        comments_text: "En blanco para añadir tus comentarios"
+        published_date: "Fecha de publicación:"
+        publisher: "Editor/a:"
+        edition: "Edición:"
+        isbn: "ISBN:"
+        generated: 'Generado en '
+        by: ' por '
+        using: ' usando '
+        select_all: 'Seleccionar todo'
+        deselect_all: 'Deseleccionar todo'
+        btn_export: 'Exportar'
+        export_error: 'Por favor seleccionar un libro'
+        export_file: 'Exportar'
+    filter:
+        specialism: Especialidad
+        category: Categoría
+        pub_year: Año de publicación
+        filter_title: Filters
+        sort_title: Ordenar por
+        book_name: Título
+        author_name: Autor
+        pub_date: Fecha de publicación
+        clear: Borrar
+        show_more: Mostrar más
+        show_less: Muestra menos
+        coming_soon: Próxima publicación
+        published: Publicado
+        digital_copy: Muestra digital disponible
+        requested: Solicitada
+        reading_list: En mi lista de lectura
+        never_requested: No solicitada
+    error:
+        data_loading_failed: 'La carga de datos ha fallado, por favor recargar'
+        try_again: 'Intente de nuevo'
+faq:
+    faq_title: Preguntas frecuentes
+    question1:  He olvidado mis datos de acceso
+    answer1: "<a href='__contact_link__' target='_blank' >Contacte con nosotros</a>  y le ayudaremos a restaurar su cuenta."
+    question2: He olvidado mi contraseña
+    answer2: Vaya a "Iniciar sesión" y haga clic en "¿Olvidó su contraseña"?. Le solicitaremos incluir el correo electrónico con el que se registró. Introduzca su correo electrónico y, si está registrado, recibirá un mensaje con las instrucciones para restaurar su contraseña.
+    question3: ¿Cómo solicito una muestra impresa de un libro?
+    answer3: '<ul><li>Busque el libro en el que está interesado bucando por ISBN, título o por autor. O busque en nuestro catálogo.</li><li>Haga clic en los detalles del libro y, si las muestras impresas están disponibles, el botón de "Solicitar muestra impresa" estará activo.</li><li>Haga clic en el botón y le preguntaremos los detalles de su curso y una dirección de entrega.</li><li>Una vez su solicitud se haya registrado, su Education Consultant de Elsevier la revisará y aprobará, en su caso.</li><li>La entrega de libros se realiza entre 10-14 días. Con cada muestra impresa, recibirá acceso de forma automática a la versión digital en xxxxxx [update with SP/LATAM site]</li><li>Si el libro aún no se ha publicado, puede solicitar una muestra anticipada haciendo clic en "Solicitar muestra impresa anticipada" y, si está aprobada, recibirá el libro tan pronto esté disponible.</li></ul>'
+    question4: ¿Cómo solicito una muestra digital?
+    answer4: '<ul><li>Busque el libro en el que está interesado bucando por ISBN, título o por autor. O busque en nuestro catálogo.</li><li>Haga clic en los detalles del libro y, si las muestras digitales están disponibles, el botón de "Solicitar muestra digital" estará activo.</li><li>Haga clic en el botón y le preguntaremos los detalles de su curso.</li><li>Una vez su solicitud se haya registrado, su Education Consultant de Elsevier la revisará y aprobará, en su caso.</li><li>Le informaremos mediante correo electrónico así como en la web de Inspection Copy. Tendrá acceso inmediato a la muestra digital a través de "Mis muestras digitales" en la sección "Mi perfil".</li><li>Si el libro aún no se ha publicado, puede solicitar una muestra anticipada haciendo clic en "Enviar cuando esté disponible" y, si está aprobada, recibirá el libro tan pronto esté en la plataforma. </li></ul>'
+    question5: ¿Cuándo recibiré la muestra?
+    answer5: 'Una vez que la muestra digital de un libro ya publicado ha sido aprobada por su Education Consultant, tendrá acceso inmediato a través de la web Inspection Copy.'
+    question6: He solicitado una muestra digital por error,  ¿cómo puedo cancelarla?
+    answer6: 'Acceda a su perfil a la sección "Mis muestras para evaluación" y cancele la solicitud.'
+    question8: Imparto clases en una universidad situada en un país que no está incluido en Inspection Copy, pero vivo en uno que sí. ¿Puedo solicitar una muestra digital?
+    answer8: 'Sí, por favor regístrese y contacte su Education Consultant (podrá encontrar los detalles de contacto en "Mi Education Consultant", en la sección de "Mi perfil")'
+    question9: Vivo en un país no incluido en Inspection Copy pero imparto clases en línea en una universidad de Europa, Oriente Medio y África. ¿Puedo solicitar una muestra?
+    answer9: 'Por favor<a href="http://www.elsevier.es/es-soporte" target="_blank"> haga clic en</a> para obtener más información.'
+    question10: ¿Es necesario que revise todos los títulos que me proporcionan?
+    answer10: 'No. Pero le solicitaremos confirmar si va a incluirlos/recomendarlos en su bibliografía, y asegurarnos así que tendremos las existencias apropiadas en las librerías de la zona y en la tienda en línea. Hemos tratado de facilitar el sistema de revisión de forma que este sea más rápido y fácil para usted. Le damos la opción de proporcionar sus comentarios y evaluación pero no es obligatorio.'
+    question11: ¿Existe un límite en el número de títulos que puedo solicitar?
+    answer11: El número de títulos que puede solicitar ha de ajustarse a las asignaturas que imparte. La aprobación dependerá de su Education Consultant de Elsevier. Nuestro equipo está muy implicado en dicho proceso, por lo que podrá obtener el apoyo que necesite a la hora de planificar su bibliografía.
+    question13: ¿Puedo enviar mis comentarios por correo electrónico en vez de a través del formulario estándar? ¿Quién recibe este formulario?
+    answer13: 'Le solicitamos que nos proporcione información sobre el curso y sobre su decisión a través de "Mis muestras" en la sección "Mi perfil". '
+admin:
+    layout:
+        hello: Hello
+        faq_page: FAQ page
+        dashboard: Dashboard
+        back: Back
+    cover:
+        home_page_visuals: Imágenes de la página principal
+        error: El ancho máximo debe de ser menos de 750 px y la altura máxima menos de 600 px
+        update_btn: Actualizar imágenes
+        discard_btn: Descartar Cambios
+        select_file: Seleccione un fichero
+        drag_drop: Arrastrar y soltar una imagen
+    delete_faq_msg: Are you sure you want to delete this FAQ?
+    cookies:
+        top_section: Top Section
+        bottom_section: Bottom Section
+        edit_cookie: Edit cookie page
+        add_cookie: Add Cookie
+        service: Service
+        cookie: Galleta
+        purpose: Purpose
+        more_info: Más información
+        action: Action
+        cancel: Cancel
+        save: Save
+        edit: Edit
+        hide: Hide
+        description: La siguiente tabla explica las galletas únicas específicas del  sitio y su propósito.
+        service_name_title: 'Service name *'
+        service_name_placeholder: Please enter service name
+        cookie_title: 'Cookies *'
+        cookies_placeholder: Por favor seleccione al menos una galleta
+    faq:
+        faq: Preguntas frecuentes
+        add_question: Añadir una pregunta
+        discard_changes: Descartar los cambios
+        preview_faqs: Previsualizar las Preguntas Frecuentes
+        question: Preguntas
+        type_question: Escribir una pregunta aquí...
+        answer: Respuesta
+        type_answer: Escribir una respuesta aquí...
+        cancel: Cancelar
+        add: Añadir
+        preview: Previsualizar
+        publish: Publicar
+        edit: Editar
+    banner:
+        activate: Estás activando el banner para TODAS  las regiones e idiomas.
+        deactivate: Estás desactivando el banner para TODAS  las regiones e idiomas.
+tooltip:
+    notification: Notificaciones
+    search: Buscar
+    Filter: Filtro
+    edit: Editar
+    upper_arrow: Más nuevos primero
+    lower_arrow: Más antiguos primero
+    disable: Deshabilitar dirección
+    delete: Eliminar Dirección
+    more: Más
+    Expand: Desplegar
+    Collapse: Cerrar
+    delete_faq: Borrar
+    reorder-faq: Reorganizar
+search:
+    placeholder: Buscar un libro
+    title_placeholder: Título
+    keywords_placeholder: Palabras clave
+    author_placeholder: Autor
+    ISBN_placeholder: ISBN
+    discipline_placeholder: Especialidad
+    category_placeholder: Temario
+    search_btn: Búsqueda
+    breadcrumb: Búsqueda
+    no_search_result: No se encontraron resultados para
+    search_result_for: resultados para
+    go_to: También puede ir a
+    go_to_homepage: Página principal
+    edit_search: '<ul><li class=editSearch><a>Editar Búsqueda <img class="retina-reload" data-toggle="tooltip" data-placement="bottom" title="Editar" src="#img_src#" alt="editIcon" width="13" height="15"/></a></li></ul>'
+    edit_search_label: Editar Búsqueda
+    result_found: 'Resultados'
+user:
+    #Reset password journey
+    reset_password:
+        reset_password_text: Cambiar la contraseña
+        error: La contraseña debe tener una complejidad media para ser válida.
+        info: La contraseña debe tener una complejidad media para ser válida
+        notification: ¡Éxito! Le enviamos un correo con instrucciones de como cambiar su contraseña.
+        expired_token: ¡Vaya!<br><br>El link para restaurar la contraseña ha caducado.<br><br><a href='__link__?r=true'>Haga clic aquí para comenzar de nuevo.</a>
+        check_email: 'Le hemos enviado un correo electrónico. Por favor acceda al link para restaurar su contraseña.'
+        old_password_placeholder: Contraseña anterior
+        old_password_invalid: Esta contraseña no coincide con la que está en nuestro sistema. Por favor, proporcione su última contraseña registrada en esta plataforma.
+        close_btn: Cerrar
+        #Reset password emails
+        email:
+            # Account found email
+            found:
+                subject: Cambiar contraseña en la Plataforma de Muestras Digitales de Elsevier
+                body: Hola __username__,<br><p>Enviamos este correo en respuesta a su solicitud para cambiar su contraseña en nuestra Plataforma de Muestras Digitales. Para cambiar su contraseña, por favor, haga clic en el enlace abajo. Le informamos que este enlace expirará en 6 horas.</p>
+                botton: Cambiar Contraseña
+            # Account not found email
+            not_found:
+                subject: Solicitud de contraseña para Muestras Digitales Elsevier
+                body: Hola, <br><br> <p>gracias por contactarse con la Plataforma de Muestras Digitales de Elsevier. Lamentablemente no identificamos su correo en nuestros registros. Para hacer su registro en nuestra plataforma, por favor haga clic en el enlace:<p>
+                botton: Hacer Registro
+            # Password was successfully reset email
+            sucess:
+                subject: Su contraseña fue cambiada correctamente.
+                body: Hola __username__,<br><br><p>su contraseña en la Plataforma de Muestras Digitales Elsevier fue cambiada correctamente.</a></p>
+                salutation: '<br />¡Gracias por utilizar nuestra Plataforma!<br /><br /><img src="http://www.3sixtycreative.com/mailhosting/1561_INN/logo.png" width="120" height="19" alt="Elsevier"/><br />
+                <p style="FONT-SIZE: 12px; line-height:16px; padding-top: 0px; FONT-FAMILY: Arial, Helvetica, sans-serif; COLOR: #747474; "></p>'
+                bottom: <br><br><b>¿Usted no la cambió?</b> Por favor, acceda a la Plataforma y cambie su contraseña inmediatamente.
+        enter_email: 'Introducir correo electrónico'
+        not_match: 'La contraseña no coincide, por favor compruébela.'
+        confirm_password_placeholder: 'Confirme contraseña'
+    change_password:
+        title: Cambiar contraseña
+        success: La contraseña ha sido actualizada
+        error: Algo salió mal. Por favor revisa e intenta de nuevo.
+        confirm_new_password: Confirmar contraseña nueva
+    #Registration journey
+    register:
+        step1:
+            title: Crear una cuenta
+            email: Correo electrónico
+            password: Contraseña
+            confirm_password: Confirmar contraseña
+            notification_check_box: 'Nos gustaría poder comunicarle novedades en Inspection Copy que puedan resultar de su interés. Si no quiere recibir estos mensajes, por favor haga clic aquí.'
+            accept_term: Por favor aceptar los términos y condiciones
+            bad: Baja
+            medium: Media
+            good: Alta
+            register_agree: 'Acepto los <a href="https://www.elsevier.com/legal/elsevier-website-terms-and-conditions" target=_blank>Terminos y condiciones</a> y la <a href="https://www.elsevier.es/corp/politica-de-privacidad" target=_blank>Politica de privacidad</a>.'
+        step2:
+            title: Por favor comprueba tu correo electrónico.
+            msg1: Te hemos enviado un  correo electrónico.
+            msg2: Por favor haz clic en el link para completar el registro.
+            msg3: Ya puedes cerrar esta ventana.
+            msg4: Si no te llega dicho correo electrónico a tu bandeja de entrada en unos minutos, comprueba la carpeta de correo no deseado.
+        step3:
+            title: Sobre usted
+        step4:
+            title: Más sobre usted
+            delete_inst: Borrar Institución
+            add_inst: Añadir instituiciones
+        step5:
+            title: Su dirección
+            cep:
+                data_not_found: 'Datos no encontrados'
+        title_content: ¡Le damos la bienvenida al catálogo digital de Elsevier!
+        description_content: Copias digitales de evaluación de cortesía están disponibles para que docentes las revisen
+        continue_btn: Continuar
+        info: "El registro es fácil y gratis para profesores universitarios. Al registrarse podrá solicitar muestras digitales para su evaluación y posible adopción de nuestros libros.<small class='fs-12'><br>"
+        required: "* = Obligatorio</small>. <a href='https://www.elsevier.es/corp/politica-de-privacidad/' target='_blank'>Política de Privacidad</a>."
+        token_expired:
+            title: Enlace expiró
+            message: "¡Vaya! <br><br>El link de registro ha caducado<br>Haga clic <a href='__link__'>aquí</a> para comenzar de nuevo."
+        completed:
+            email:
+                subject: Completa tu registro, por favor.
+                body: <p>Hola __username__,<br><br>Gracias por tu interés en la plataforma de muestras digitales de Elsevier.</p><p>Por favor haz clic en el link de abajo con el fin de verificar tu correo electrónico y completar el proceso de registro.</p><p><strong>Este link caducará en 6 horas.</strong></p>
+                btn_browse: VERIFICACIÓN DE CORREO ELECTRÓNICO
+                finish: ¡Enhorabuena! Ya se ha registrado en Inspection Copy
+            get_started_btn: Empezar
+        form:
+            fields:
+                email: Email
+                email_popover: Esta web es exclusiva para docentes del área de la salud. Por favor, ayúdanos a validar su registro proporcionando un enlace a tu perfil profesional o enviando un documento que confirme de que eres profesor de Ciencias de la Salud.
+                email_tooltip: Proporcione un enlace a su perfil profesional o documento de respaldo.
+                email_error: Este sitio web es exclusivamente para profesores. Todas las solicitudes están sujetas a aprobación. Desea continuar ?
+                password: Contraseña
+                country: País
+                title:  Tratamiento
+                firstname: Nombre
+                lastname:  Apellido
+                phone: Teléfono
+                cpf: CPF
+                url: Perfil profesional online
+                institution: Universidad/Institución
+                department: Departamento
+                profession: Área de trabajo
+                program: Programa
+                speciality: Especialidad/Asignatura
+                isPrimary:
+                    label: Make this my primary institution
+                    yes: si
+                    no: No
+            button:
+                other: Otro
+                cancel: Cancelar
+                save: Guardar
+                add: Añadir
+            help:
+                title: "¿Necesita ayuda?"
+                text: "puede incluir el link a si perfil profesional online (por ejemplo, su perfil en la web de la universidad o de LinkedIn)"
+                country: "¿No encuentra su país?"
+                content: "<a href='https://service.elsevier.com/app/answers/detail/a_id/7203/supporthub/ecommerce/' target='_blank'>Haz clic aquí</a> para saber cómo solicitar muestras digitales en otros países."
+                password: "Forgot password?"
+                email: "¿Quiere cambiar su dirección de correo electrónico? Contacte con su <a href='mailto:__ec_email__'>Education Consultant de Elsevier</a>"
+                add_institution: '¿No puede encontrar su institución en la lista? Haga clic en "Añadir" para ingresar manualmente.'
+            error:
+                invalid_email: Correo inválido.
+                invalid_url: La URL a la que intenta acceder no es válida. Por favour introduzca de nuevo una URL válida.
+                recaptcha_not_found: You have to enter recaptcha
+            placeholder:
+                title: 'Please type in your title'
+                url: Introducir URL
+            upload:
+                label: o
+                zone: Arrastra un archivo (pdf, jpg, png) o haz clic en <span class="browse-btn">buscar</span>
+                tooltip: "Envía un documento que nos permita verificar tu perfil como docente activo."
+                delete: borrar archivo
+                max_size: 'Error - tamaño del archivo superior a 1 megabyte'
+            url:
+                tooltip: "Todas las solicitudes de muestras digitales se revisan antes de su aprobación. Proporcionar un link o un documento que certifique que eres docente agilizará el proceso."
+        #request register email
+        email:
+            subject: Completar Registro
+            body: ¡Gracias por registrarse en nuestra plataforma! <br><br>Para completar tu registro haz clic en el enlace a continuación. Ten en cuenta que este enlace caducará en 6 horas.
+            button: Completar Registro
+        #request register existing slx account
+        email_user_not_ic:
+            subject: Completar registro en la Plataforma de Muestras Digitales de Elsevier
+            body: Hola,<br><p>Gracias por intentar registrarse en nuestra Plataforma. Identificamos que su correo ya está en nuestro sistema.  Lo único que necesita hacer es crear una nueva contraseña para empezar a solicitar sus muestras digitales.</p>
+            button: Crear Contraseña
+        #request register existing ic account
+        email_user_from_ic:
+            subject: Completar registro en la Plataforma de Muestras Digitales de Elsevier
+            body: Hola __username__,<br><p>Gracias por intentar registrarse en nuestra Plataforma. Identificamos que su correo ya está en nuestro sistema.  Para cambiar su contraseña y empezar a utilizar la plataforma, por favor haga clic abajo. Le informamos que este enlace expirará en 6 horas.</p>
+            button: Cambiar Contraseña
+    #edit profile
+    profile:
+        profile_overview: < Perfil
+        sign_out_btn: Desconectar
+        update-info: Sus datos se han actualizado
+        education_consultant: Mi Education Consultant
+        no_education_consultant: Sin información de Consultor de Educación. Por favor contactar al servício de soporte
+        my_profile: Mi perfil
+        home: Página de inicio
+        inspection_copies: Mis muestras para evaluación
+        inspection_copies_page: Mis muestras para evaluación
+        books:
+            no_books:
+                title: Aún no ha solicitado una muestra para evaluación
+                button: Haga clic aquí para ver los títulos disponibles
+            pending: En espera de aprobación (título ya solicitado)
+            pending_filter: En espera de aprobación
+            reviewed: Revisado
+            adopted: Confirmado el uso para este curso
+            adopted_for: Confirmado por <span>##confirmed_nbr##</span> cursos
+            not_adopted: No es adecuado para mi asignatura
+            has_feedback: Ya he leído y revisado este título
+            feedback_contextual_help:
+                title: Leer ahora
+                help1: Nos ayuda a crear nuevo contenido
+                help2: Nos permite tener stock en las librerías
+                help3: Asegura que podremos cubrir la demanda del mismo en nuestra tienda online
+            coming_soon: Disponible próximamente
+            coming_soon_contextual_help: Le informaremos en cuanto el libro se publique
+            read_book_contextual_help: La muestra digital para revisión no incluye recursos en línea adicionales como Student Consult.
+            approved: Revisión en proceso
+            on_its_way: (¡Su copia impresa está de camino!)
+            declined: Solicitud no aprobada
+            cancelled: Cancelada
+            expired: A la espera de su opinión
+            digital_expired: <span>El acceso a la muestra digital ha expirado</span><br><span class="expired-info">¿Necesita más tiempo? Contacte con <a href="mailto:__education_consultant__">su Education Consultant</a></span>
+            dispatched: 'Dispatched:'
+            dispatched_msg: '<p class="dispatched-date">Muestra impresa enviada: __day__ - disponible en 10-14 días</p><p class="expected">Si no ha recibido aún su muestra, contacte con:</p><p class="mail"><a href="mailto:inspectioncopy-es@elsevier.com">inspectioncopy-es@elsevier.com</a></p>'
+            expire: 'Su copia digital expirará en '
+            allow: '- Por favor espere 2-3 semana para el envío. ¿Problemas con el envío?'
+            contact_us: Contactenos.
+            adopt_btn: Adopt
+            read_btn: Leer muestra digital
+            read_more_btn: Ver muestra digital
+            renewed: 'Confirmado el uso para este curso'
+            not_renewed: 'No usaré este título en el curso'
+            renewed_for: 'Confirmado por <span>##confirmed_nbr##</span> cursos'
+            renew_book: 'Renew book'
+            cancel_request: 'Cancelar Solicitud'
+            filter_no_results: 'Lo sentimos, no pudimos encontrar ningún resultado para su búsqueda, intente nuevamente'
+        address:
+            title: Direcciónes de entrega
+            titles: Direcciones de entrega
+            new_address: Añadir una nueva dirección de entrega
+            add_address: ¿Quiere añadir una dirección de entrega?
+            address_msg: No hacemos entregas en Apartados de Correos
+            address1: Tipo via
+            address2: Calle y número
+            address3: Facultad/Departamento
+            address4: Extensión/Despacho/Edificion
+            city: Ciudad
+            postalCode: Codigo Postal
+            state: País/Estado o Comunidad
+            delete_btn: Delete this address
+            message: Si usted ve un error en su dirección, contacte con su consultor de educación
+            phone_help: Introduzca un número de teléfono válido incluyendo el prefijo correspondiente, por favor.
+            confirm_box:
+                close_message: Has realizado cambios, estas seguro de abandonar esta pagina?
+                delete_message: Estas seguro de borrar esta direccion de tu perfil?
+                confirm_btn: Confirmar
+        details: Información personal
+        institutions:
+            title:  Mi Universidad / Institución
+            titles: Mis Universidades / Instituciones
+            edit_title: Editar institución
+            delete_btn: Borrar Institución
+            disable_btn: Dejar de utilizar esta Institución
+            add_btn: Añadir instituciones
+            primary_institution: Primary Institution
+            institution: Institution
+            primary_info: When you add more institution,you can change this
+            isPrimary: Cambiar esta a principal
+            has_request_msg: A request has been made for this affiliation; you cannot make changes
+            require_one: Es necesario por lo menos una institución
+        update_btn: Actualizar
+        password_help:
+            title: Lorem ipsum
+            text: Lorem ipsum
+            placeholder_new_pwd: Nueva Contraseña
+        confirm_box:
+            close_message: Se han realizado todos los cambios. ¿Está seguro de que quiere salir sin guardar los cambios
+            delete_message: Está seguro que quiere eliminar esta institución de su perfil?
+            delete_address_message: ¿Está seguro qué desea eliminar esta dirección de su perfil?
+            disable_address_message: ¿Esta seguro qué desea deshabilitar esta dirección de su perfil?
+            delete_last_address_message: ¿Está seguro que desea eliminar esta dirección? Es necesaria una dirección de envío para solicitar una muestra impresa.
+            disable_last_address_message: ¿Está seguro que desea deshabilitar esta dirección? Es necesaria una dirección de envío para solicitar una muestra impresa.
+            no_address_message: No se ha guardado su dirección
+            confirm_btn: Confirmar
+            yes_btn: Sí
+            no_btn: No
+        password_box:
+            text: ¿Ha olvidado su contraseña?
+            link:  acceda a este link recuperar sus credenciales.
+            contact_us: 'O <a href="__url__" target="_blank">contactenos </a> si necesita ayuda.'
+    confirm_logout_msg: '¿Está seguro/a que desea cerrar la sesión?'
+#Login
+navbar:
+    login_btn: Identificarse
+    register_btn: Crear una Cuenta
+    remember_me: 'Recuérdame'
+#validators:
+validation:
+    required: Por favor, completar los campos obligatorios.
+    firstname: Por favor añadir nombre
+    lastname: Por favor añadir apellido
+    password: Por favor crear una contraseña
+    email: Por favor incluir un correo electrónico
+    confirm_password: Por favor confirmar la contraseña
+    number_required: Por favor introduzca una cantidad numérica.
+    wrong_phone_number: Introduzca un número de teléfono válido incluyendo el prefijo correspondiente, por favor.
+    institution_zip_code: No se ha encontrado ninguna institución con este código postal, verifique el código postal o haga clic en 'agregar' a continuación para añadir su institución manualmente.
+    teacher_url: Por favor, añade una URL o sube un documento.
+#footer
+footer:
+    contact_us_footer: 'Contacto'
+    resource_center_footer: '<a href="https://www.elsevier.es/corp/" target="_blank">Centro de Recursos</a>'
+    terms_footer: '<a href="https://www.elsevier.com/legal/elsevier-website-terms-and-conditions" target="_blank">Términos y condiciones</a>'
+    privacy_footer: '<a href="https://www.elsevier.es/corp/politica-de-privacidad/" target="_blank">Política de privacidad</a>'
+    register_footer: '<a href="https://www.elsevier.com/legal/elsevier-registered-user-agreement" target="_blank">Aceptación de Usuario</a>'
+    help_footer: '<a href="http://www.elsevier.es/es-soporte" target="_blank">Ayuda</a>'
+    faq_footer: 'Preguntas frecuentes'
+    copyright: 'Todo el contenido en este sitio: Copyright © __current_year__ Elsevier, sus licenciantes y colaboradores. Se reservan todos los derechos, incluidos los de minería de texto y datos, entrenamiento de IA y tecnologías similares. Para todo el contenido de acceso abierto, se aplican los términos de licencia de Creative Commons.'
+    cookie_link: 'Si no está de acuerdo o quiere saber más, visite nuestra <button id="ot-sdk-btn" class="cookie-settings ot-sdk-show-settings">Configuración de galletas</button>.'
+#layout:
+layout:
+    page_title: 'Muestras de Evaluación Elsevier Salud'
+    health_sciences: 'Ciencias de la Salud'
+    science_tech: 'Ciencia y Tecnología'
+    page_generic_title: 'Elsevier Inspection Copies'
+    page_description: 'Esta web es exclusiva para docentes que se apoyan en libros de Elsevier para sus clases.'
+    book_description: 'El docente puede solicitar una muestra digital de este título para su revisión.'
+#mainling
+email:
+    ip_date: 'Solicitando IP : %ip% Hora: %date%'
+    support: 'Si necesita ayuda, por favor póngase en <a href="__contact_url__" style="color: #007398; text-decoration: none">contacto con nosotros</a>.'
+    sent: 'Te hemos enviado un correo electrónico con instrucciones para cambiar su contraseña actual'
+    els_team: 'El equipo de Elsevier.'
+    best_wishes: 'Saludos cordiales, '
+    subject: 'Inspection Copy account access attempt'
+    access: 'Someone is attempting to access your Inspection Copy account from a new device'
+    when: 'When:'
+    device: 'Device:'
+    country: 'Country:'
+    msg_code: 'Use this unique authentication code to continue to log in:'
+error:
+    error: '¡Oops! Algo salió mal. Por favor, inténtelo de nuevo más tarde.'
+    nb_1103: 'Por favor ingrese su dirección de correo electrónico'
+    nb_1074: 'Correo inválido.'
+    nb_1105: '¡Vaya! <br>Esta cuenta aún no se ha activado.<br>Por favor haz clic en el link que hemos enviado a tu correo electrónico cuando te registraste o haz <a href="__url__" class="inline" target="_blank">clic aquí</a> para comenzar de nuevo.'
+    nb_1121: 'Credenciales incorrectas. Por favor compruebe su dirección de correo y contraseña.'
+    nb_1201: "La solicitud no puede ser cancelada, ya está en aprobación."
+    captcha: 'Por favor, rellene el captcha.'
+    logged_out: 'You have been logged out please login first'
+login_modal:
+    title: 'Entrar'
+    subtitle: 'Si ya tiene una cuenta, por favor identifíquese.'
+    email: 'Correo electrónico'
+    password: 'Contraseña'
+    forget_password:
+        link: '¿Ha olvidado su contraseña?'
+        title: 'Recuperar contraseña'
+        submit: 'Enviar'
+        cancel: 'Cancelar'
+    create_account: 'Crear nueva cuenta'
+    confirm_box:
+        close_btn: 'Cerrar'
+welcome_modal:
+    title: '¡Hola!'
+    subtitle1: ¿Estás en el lugar correcto?
+    subtitle2: Confirme el idioma deseado y la elección del catálogo.
+    language: Idioma
+    catalogue: Catálogo
+    btn_label: Continuar
+datepicker:
+    clear: 'Borrar'
+
+#language:
+languages:
+    en: 'Inglés'
+    es: 'Español'
+    fr: 'Francés'
+    de: 'Alemán'
+#catalogues language
+catalogues:
+    en: 'Libros en inglés'
+    de: 'Libros en alemán'
+    es: 'Libros en español'
+    fr: 'Libros en francés'
+    in: ''
+
+historical_data:
+    title: El título XXX ya ha sido solicitado con anterioridad. <a href ="__url__">Ver mi historial de solictudes.</a>
+    link_name: Mu historial de solicitudes
+    request_btn: Solicitar de nuevo
+    desciption_1: Títulos de Elsevier solicitados con anterioridad a través de Textbooks.Elsevier.Com.
+    desciption_2: Para solicitar acceso, haz clic en "Solicitar otra vez"
+    msg_request_again: Solicitada de nuevo el dd-Mon-yyyy. Para revisarla, accede a <a href="__url__" class="p-0"><u>Mis Muestras Digitales</u></a>.
+    back_profile: Volver a mi perfil
+    back_ic: Volver a mis muestras digitales
+    show_history: Ver historial
+    hide_history: Ocultar historial
+    students_number: Número esperado de estudiantes
+
+reading_list:
+    title: Mis Libros
+    uncategorized: Sin categoría
+    books: Libros
+    students_number: Número de alumnos
+    would_you_like_to: 'Te gustaría:'
+    remove_book_from_list: Eliminar libro de la lista
+    remove_book_current_list: Eliminar libro solo de la lista de lectura actual
+    remove_book_all_lists: Eliminar libro de todas mis listas de lectura
+    remove: Eliminar
+    core: Principal
+    Supplementary: Complementar
+    Recommended: Recomendado
+    drag_books: Esta sección está vacía. Arrastre los libros aquí para organizarlos.
+    remove_book_success: Antes de que se vaya, nos gustaría saber por qué este libro ya no está en su lista, por favor
+    pending_btn: Aprovación pendiente
+    pending_tooltip: El acceso requiere la validación de un Education Consultant de Elsevier. Informaremos cuando el acceso sea activado
+    add_reading_list:
+        btn: 'Agregar una nueva lista'
+        cancel_btn: '¿Estás seguro/a de que quiere cancelar?'
+    remove_list: Liste entfernen
+    remove_list_popup:
+        popup_text: '¿Estás seguro/a de que deseas eliminar esta lista de tu cuenta? <br> (No podrás recuperarla más tarde)'
+        success_msg: 'Lista eliminada correctamente'
+    success_adding_list: 'Ahora puedes comenzar a agregar libros para administrar tu lista y obtener acceso.'
+    create_list: Crear nueva lista
+    list_name: Nombre de la lista
+    list_btn: Crear lista
+    default_list_name: Lista de libros de texto
+    no_books: Esta lista esta vacia.<br> Agregue los libros de texto que le gustaría leer aquí.
+    no_lists: Esta pagina esta vacia.<br> Agregue nuevas listas aquí.
+    requested_book: Copias digitales solicitadas previamente
+    move_to_other_list: Ir a una lista diferente
+    copy_to_other_list: Copiar a otra lista
+    copy_to: Copiar para
+    move_to: Mover para
+    section_name: Nombre de la sección
+    new_section: Nueva sección
+    empty_section: Esta sección está vacía.
+    alert_remove: Se eliminarán todos los libros guardados en esta sección.
+    add_section: Agregar sección
+    change_history:  Changes History
+    list_created: List created on
+    last_update: Última actualización
+ancillary:
+    instructor_resources: 'Este libro incluye material complementar para profesor/a'
+    student_resources: 'Este libro incluye material complementar para estudiantes'
+    instructor_resources_label: Recursos para docentes
+    student_resources_label: Recursos para estudiantes
+    ancillary_text: "Los materiales adicionales disponibles aquí están relacionados con [título del libro  <span class='books_info'> <a class='book-title' href='__basePath__/book/details/__isbn__'> __title__ </a> (ISBN __isbn__)</span>.Están disponibles para que los descargue y los utilice con fines didácticos."
+    ancillary_tc: "Tenga en cuenta que el acceso al libro en ElsevierInspection Copy está sujeto <a href='__url__' target='_blank'>los Términos y Condiciones</a> de Elsevier."
+    ClinicalKey_label: Disponible en ClinicalKey Student
+explore:
+    explore_name: Explorar
+
+user_interests:
+    wlc_msg: Gracias por confirmar el correo electrónico
+    wlc_ic: ¡Bienvenidos y bienvenidas a Inspection Copy!
+    select_catg_msg: Ayúdanos a brindarte acceso instantáneo a libros de texto seleccionando las categorías de libros que más te interesan.
+    started_btn: Empezar
+    error_interests: Por favor seleccionar por lo menos uno para continuar
+    select_catg_msg_old_user: Antes de echar un vistazo más de cerca, ayúdenos a brindarle acceso instantáneo a los libros de texto seleccionando las categorías de libros que más le interesen.
+    wlc_ic_updated: Elsevier Inspection Copy ha sido actualizada!
+    started_btn_ic: Ir a Inspection Copy
+qualified:
+    qualified-title: Complete tu perfil para tener acceso a las muestras digitales de Elsevier.
+    qualified-msg: Para ayudarnos a confirmarte como Profesor/a, te pedimos un enlace a tu perfil profesional en línea o un documento que confirme tu puesto.
+    account-details-btn: Ir a Detalles de la Cuenta
+identity_verification:
+    basic_account: Cuenta de base
+    p_basic_account: Con solo verificar su correo electrónico podrá
+    create_basic_account: Crea una cuenta básica gratuita.
+    qualified_account: Cuenta cualificada
+    create_free_account: Crear cuenta GRATIS
+    browse_cat: Explorar catálogo de libros Elsevier
+    create_lists: Crear lista de libros
+    auto_access: instantáneo a cualquier copia digital
+    access_student: Acceso a recursos de estudiantes
+    access_teacher: Acceso a recursos para Profesores/as
+    share: Compartir con otros/as profesores/as
+    export: Exportar detalles del libro para enviar a la biblioteca
+    send_feedback: Enviar comentarios al editor de Elsevier
+    add_ratings: Agregar calificaciones y reseñas
+    confirmed_instructor: Profesor confirmado
+    institutional_information: Información institucional completa
+    qualify: Calificación
+    completed: Completo
+    email_verif: Verificación de correo
+    pending: Pendiente
+    more_info: Más información
+    access_student_educator: Acceder a recursos para estudiantes y docentes
+    confirm_status_instructor:  Confirme su perfil como docente
+    identify_verification: Verificación de la identidad
+    recommendations: Recomendaciones
+account_verification:
+  modal_title: 'Calificación de la cuenta de profesor/a'
+  step1:
+    select_program: 'Seleccionar programa'
+    add_inst_program_btn: 'Añadir nueva institución/programa'
+  step3:
+    success_msg: '¡Gracias!'
+    finish_msg: Recibirá una notificación por correo electrónico confirmando el estado de su nueva cuenta. <br>
+      Aunque nuestro objetivo es comunicarnos contigo lo antes posible, la respuesta a veces puede demorar hasta 5 días hábiles en completarse en períodos de mucha actividad.
+  pending_modal:
+      success_msg: 'Calificación de cuenta pendiente'
+      finish_msg: 'Mientras esperas, puedes agregar este título a tu área ¨Mis libros¨ para acceder fácilmente más tarde.'
+
+share_book:
+    share_btn: Compartir
+    share_btn_popup: Enviar
+    confirm_msg: ¿Continuar sin un mensaje personal?
+    notif_msg: Tu colega recibirá este mensaje con tu nombre y un enlace que invita a visualizar el libro en Inspectioncopy.elsevier.com.
+    error_no_mail: Agrega la (s) dirección (es) de correo electrónico del destinatario
+    filed_mail: Correo de un/una colega
+    filed_msg: Tu mensaje
+    add_msg: Añadir mensaje
+    success_send: ¡Mensaje enviada!
+    btn_continue: Continuar buscando
+    share: Compartir
+    no_books: '¡No se ha compartido nada todavía! <br>Haz clic en compartir en cualquier libro para comenzar a colaborar'
+    add_mail: Añadir correo electrónico
+    invalid_mail: El correo electrónico no es válido
+    shared_with_you: Compartido con usted por
+support:
+    support_msg: 'Comuníquese con <a href="__contact_link__">el soporte</a> para revisar este libro de texto.'
+features:
+    title: Características de la cuenta
+    explore: Explore el contenido
+    explore_descrp: Explore nuestros libros de texto y descubra el mejor contenido para apoyar su enseñanza con acceso instantáneo a copias digitales de cortesía
+    access_student: Acceda a recursos de enseñanza
+    access_student_descrp: Descargue y use materiales auxiliares para apoyar su enseñanza, involucrar a los estudiantes y mejorar los resultados de aprendizaje
+    share_colleague: Comparta con colegas
+    share_colleague_descrp: Colabore con sus compañeros para construir y desarrollar sus materiales didácticos con nuestra sencilla función de compartir
+    see_features: Ver todas las funcionalidades
+    feature_descrp: Este sitio web es exclusivamente para instructores que buscan libros de texto de Elsevier para apoyar su enseñanza.
+    feature_header: Para obtener acceso a las copias digitales de Elsevier, debe ser confirmado/a como docente. Solicitamos un enlace a su perfil profesional en línea o un documento que confirme su puesto, además de la información institucional completa.
+    feature_confirm_status: Para obtener acceso automático a las copias digitales gratuitas, debe estar confirmado/a como docente. Solicitamos enlace a su perfil profesional en línea o un documento que confirme su posición y información institucional completa. Una vez que tenga una cuenta calificada, también podrá Tener acceso
+confirm_authentication:
+    you_are_logging_in_from_a_new_device: Estás iniciando sesión desde un dispositivo nuevo.
+    please_enter_the_authentication_code_received_by_email: Ingrese el código de autenticación de 6 dígitos recibido por correo electrónico.
+    please_add_the_correct_code: Por favor agregue el código correcto
+    enter_code: Introduzca el código
+    click_here_to_resend_authentication_code:   <a id="resend-code" >Haga </a> clic aquí para reenviar el código de autenticación.
+    new_code_has_been_sent: ¡Se ha enviado un nuevo código!

@@ -1,0 +1,86 @@
+<div class="institution-block small-12 medium-8 large-6 columns ">
+    <div class="text-right">
+        <label class="switch">
+            <input class="switch-institution-status" data-institution="{{ newInstitution.id }}"
+                   type="checkbox" checked>
+            <span class="slider"></span>
+        </label>
+    </div>
+    <input type="hidden" name="register[institutions][{{ newInstitution.id }}][id]" value="{{ newInstitution.id }}">
+    <div class="input-field institution-selector-block" {% if not newInstitution.institutionId %} style="display: none" {% endif %}>
+        <label for="register_institutions_{{ newInstitution.id }}_institutionId">{{ 'user.register.form.fields.institution'|trans }}</label>
+        <select id="register_institutions_{{ newInstitution.id }}_institutionId"
+                name="register[institutions][{{ newInstitution.id }}][institutionId]" class="institution-id validate"
+                title="{{ 'validation.required'|trans }}">
+            <option value=""></option>
+            {% for id,name in institutions %}
+                <option {% if (id==newInstitution.institutionId) %} selected {% endif %}
+                        value="{{ id }}">{{ name }}</option>
+            {% endfor %}
+        </select>
+        <a class="pull-right btn-new-institution">{{ 'user.register.form.button.other'|trans }}</a>
+    </div>
+    <div class="input-field institution-text-block" {% if not newInstitution.institutionId %} style="display: block" {% endif %}>
+        <label for="register_institutions_{{ newInstitution.id }}_institutionName">{{ 'user.register.form.fields.institution'|trans }}</label>
+        <input type="text" id="register_institutions_{{ newInstitution.id }}_institutionName"
+               name="register[institutions][{{ newInstitution.id }}][institutionName]" class="institution-name validate"
+               title="{{ 'validation.required'|trans }}" value="{{ newInstitution.institutionName }}">
+        {% if institutions|length>0 %}
+            <a class="pull-right btn-cancel-new-institution">{{ 'user.register.form.button.cancel'|trans }}</a>
+        {% endif %}
+    </div>
+
+    <div class="input-field">
+        <label class="required">{{ 'user.profile.institutions.isPrimary'|trans }}</label>
+        <div id="profile_institutions_{{ newInstitution.id }}_isPrimary" class="isPrimary">
+            <input type="radio" id="profile_institutions_{{ newInstitution.id }}_isPrimary_0" name="profile[institutions][{{ newInstitution.id }}][isPrimary]"
+                   required="required" value="1" {% if newInstitution.isPrimary %} checked="checked" {% endif %}>
+            <label for="profile_institutions_{{ newInstitution.id }}_isPrimary_0" class="required">{{ 'user.register.form.fields.isPrimary.yes'|trans }}</label>
+            <input type="radio" id="profile_institutions_{{ newInstitution.id }}_isPrimary_1" name="profile[institutions][{{ newInstitution.id }}][isPrimary]"
+                    required="required" value="0"  {% if not newInstitution.isPrimary %} checked="checked" {% endif %}>
+            <label for="profile_institutions_{{ newInstitution.id }}_isPrimary_1" class="required">{{ 'user.register.form.fields.isPrimary.no'|trans }}</label></div>
+    </div>
+
+    <div class="input-field department-selector-block {% if lang=="br" %} is-br {% endif %}" {% if not newInstitution.departmentId %} style="display: none" {% endif %}>
+        <label for="register_institutions_{{ newInstitution.id }}_departmentId">{{ 'user.register.form.fields.department'|trans }}</label>
+        <select id="register_institutions_{{ newInstitution.id }}_departmentId"
+                name="register[institutions][{{ newInstitution.id }}][departmentId]"
+                data-value="{{ newInstitution.departmentId }}" data-institution="{{ newInstitution.institutionId }}"
+                class="department-id validate" title="{{ 'validation.required'|trans }}">
+        </select>
+            <a class="pull-right btn-new-department">{{ 'user.register.form.button.other'|trans }}</a>
+    </div>
+    <div class="input-field department-text-block {% if lang=="br" %} is-br {% endif %}" {% if not newInstitution.departmentId %} style="display: block" {% endif %}>
+        <label for="register_institutions_{{ newInstitution.id }}_departmentName">{{ 'user.register.form.fields.department'|trans }}</label>
+        <input type="text" id="register_institutions_{{ newInstitution.id }}_departmentName"
+               name="register[institutions][{{ newInstitution.id }}][departmentName]" class="department-name validate"
+               title="{{ 'validation.required'|trans }}" value="{{ newInstitution.departmentName }}">
+        {% if lang!="br" %}
+            <a class="pull-right btn-cancel-new-department">{{ 'user.register.form.button.cancel'|trans }}</a>
+        {% endif %}
+    </div>
+    <div class="input-field">
+        <label for="register_institutions_{{ newInstitution.id }}_profession">{{ 'user.register.form.fields.profession'|trans }}</label>
+        <select id="register_institutions_{{ newInstitution.id }}_profession"
+                name="register[institutions][{{ newInstitution.id }}][profession]"
+                class="validate profession" title="{{ 'validation.required'|trans }}">
+            <option value=""></option>
+            {% for profession in professions %}
+                <option {% if (profession==newInstitution.profession) %} selected {% endif %}
+                        value="{{ profession }}">{{ profession }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="input-field" {% if not newInstitution.speciality %} style="display: none" {% endif %}>
+        <label for="register_institutions_{{ newInstitution.id }}_speciality">{{ 'user.register.form.fields.speciality'|trans }}</label>
+        <select id="register_institutions_{{ newInstitution.id }}_speciality"
+                name="register[institutions][{{ newInstitution.id }}][speciality]"
+                data-value="{{ newInstitution.speciality }}" data-profession="{{ newInstitution.profession }}"
+                class="validate speciality" title="{{ 'validation.required'|trans }}"></select>
+    </div>
+    <div class="small-12 medium-12 large-12 columns instutution-bloc-btn">
+        <div class="small-12 medium-12 large-12 columns text-center">
+            <button data-institution="{{ newInstitution.id }}"  id="institution-del-btn" type="button" class="btn btn-black reverse institution-del-btn">{{ 'user.profile.institutions.delete_btn'|trans }}</button>
+        </div>
+    </div>
+</div>

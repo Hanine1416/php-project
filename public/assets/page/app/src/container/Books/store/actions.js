@@ -1,0 +1,9 @@
+export const SET_PAGE = "SET_PAGE";
+export const SET_FILTER = "SET_FILTER";
+export const SET_ORDER_BY = "SET_ORDER_BY";
+export const SET_PAGE_SIZE = "SET_PAGE_SIZE";
+export const START_LOADING_DATA = "START_LOADING_DATA";
+export const DATA_LOADED = "DATA_LOADED";
+export const LOADING_DATA_FAIL = "LOADING_DATA_FAIL";
+export const WINDOW_BACK_STATE = "WINDOW_BACK_STATE";
+export const SET_READING_FILTER = "SET_READING_FILTER"

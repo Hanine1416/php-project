@@ -1,0 +1,99 @@
+<div class="login-modal lightbox modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="close" id="close-login-modal"></div>
+        <div class="modal-container scroll1 modal-content login-container">
+            <div id="login-content">
+                <form id="custom-login" class="hide-form-content login-form-modal" data-hide="custom-login-content"
+                      action="{{ url('login') }}" novalidate>
+                    <div class="popup-title">{{ "login_modal.title"|trans }}</div>
+                    <span class="log-subTitle">{{ "login_modal.subtitle"|trans }}</span>
+                    <div class="login-content row">
+                        <input type="hidden" name="auth" value="auth" id="auth" class="validate">
+                        <div class="clearfix small-12 columns p-0">
+                            <div class="input-field" id="login-email-field">
+                                <label for="username" class="label-title">{{ "login_modal.email" |trans }}</label>
+                                <input name="username" id="username"
+                                       type="email" class="validate username">
+                            </div>
+                            <div class="input-field mb-0 password-field">
+                                <label for="password" class="label-title">{{ "login_modal.password" |trans }}</label>
+                                <input name="password" id="password"
+                                       type="password" class="validate password">
+                                <span toggle="#password" class="eye-icon toggle-password"></span>
+                            </div>
+                        </div>
+                        <div class="remember-group small-12 columns p-0">
+                            <div class="rememberMe checkbox__item ">
+                                <input type="checkbox" id="_remember_me" name="remember"
+                                       class="validate checkbox__input"/>
+                                <label class="checlbox__label"
+                                       for="_remember_me">{{ "navbar.remember_me"|trans }}</label>
+                            </div>
+                            <div class="forgetLink nexusSerif">
+                                <a class="orange decorate" id="show-forget-pwd-content" href="#">
+                                    {{ "login_modal.forget_password.link"|trans }}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="small-12 columns btngroup p-0">
+                            <button type="submit" class="login-btn btn btn-blue">{{ "navbar.login_btn"|trans }}
+                                <span></span></button>
+                        </div>
+                        <div id="register-content" class="hidden small-12 cloumns p-12">
+                            <div class="log-btnsTwo mb-10">
+                                <span class="log-subTitle">{{ "login_modal.create_account"|trans }}</span>
+                                <a class="btn-s btn-grey register-btn"
+                                   href="{{ url('register') }}">{{ "navbar.register_btn"|trans }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="forget-content" class="hidden">
+                <form id="custom-forget-password" class="forget-pwd-modal" novalidate
+                      action="{{ url('reset-password') }}" autocomplete="off">
+                    <div class="popup-title forget-pswd">{{ "login_modal.forget_password.title"|trans }}</div>
+                    <label class="label-title">{{ "user.reset_password.enter_email"|trans }}</label>
+                    <div id="custom-forgot-password-content">
+                        <input type="hidden" name="_token_reset_password" value="{{ _token_reset_password() }}"
+                               autocomplete="new-password">
+                        <div class="clearfix">
+                            <div class="input-field" id="forget-password-email-field">
+                                <input name="email" id="email" type="text" class="validate" autocomplete="new-email">
+                            </div>
+                            <div class="input-field" id="reset-password-recaptcha">
+                                <div class="g-recaptcha" id="fpRecaptcha" data-sitekey="{{ recaptchasite }}"></div>
+                            </div>
+                        </div>
+                        <div class="generalError"></div>
+                        <div class="forget-pwd-buttons">
+                            <div class="small-12 large-6 columns p-0 text-center submit-bloc">
+                                <button class="btn btn-blue log-forgot-custom"
+                                        type="submit">{{ "login_modal.forget_password.submit"|trans }} <span></span>
+                                </button>
+                            </div>
+                            <div class="small-12 large-6 columns p-0 text-center cancel-bloc">
+                                <button id="back-login"
+                                        class="btn btn-cancel">{{ "login_modal.forget_password.cancel"|trans }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="success-email hidden">
+                <div class="small-12 meduim-12 text-center">
+                    <img src="{{ asset('assets/img/icon-mail/icon_mail@1x.png') }}" class="retina-reload"
+                         alt="success email">
+                </div>
+                <div class="small-12 meduim-12 text-center">
+                    <h2>{{ 'user.register.step2.title'|trans }}</h2>
+                    <p>{{ 'user.reset_password.check_email'|trans }}</p>
+                    <p>{{ 'user.register.step2.msg3'|trans }}</p>
+                </div>
+            </div>
+            <div class="loader">
+                <img src="{{ asset('assets/img/ajax-loader.gif') }}">
+            </div>
+        </div>
+    </div>
+</div>

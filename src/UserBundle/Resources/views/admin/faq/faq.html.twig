@@ -1,0 +1,128 @@
+{% extends 'admin.layout.html.twig' %}
+{% block bs3 %}
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.css') }}">
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/fontawesome-all.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/sortable/jquery-ui.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/admin/faq.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-component/css/bs-tooltip.css') }}">
+{% endblock %}
+{% block body %}
+    <div class="inner-wrap adminEdit register-account verticalPadding">
+        <main role="main" class="faq-page">
+            <div class="large-12 faq-container">
+                <div class="block">
+                    <div class="row">
+                        <div class="columns">
+                            <a class="backLink" href="{{ url('admin') }}"><i class="fa fa-chevron-left"></i> {{ 'admin.layout.back'|trans }}</a>
+                            <h1 class="page-title text-left">{{ 'admin.faq.faq'|trans }} </h1>
+                            <form method="post" class="form-full-width" id="formFaqPage">
+
+                                <div class="table-area text-right">
+                                    <button type="button" id="openModal" class="btn-custom" data-toggle="modal"
+                                            data-target="#faqModal"><i
+                                                class="fa fa-plus"></i> {{ 'admin.faq.add_question'|trans }}
+                                    </button>
+                                </div>
+                                <ul id="sortable" class="large-12" >
+                                    {% for faq in faqs  %}
+                                    <li class="ui-state-default" data-token="{{ faq.token }}" data-order="{{ faq.order }}">
+                                        <p class="faq-question" >{{ faq.question }}</p>
+                                        <input type="hidden" name="faq[{{ faq.token }}]" class="faq-answer" value="{{ faq.answer }}">
+                                        <i class="edit-faq" data-url="{{ url('admin-edit-faq',{token:faq.token}) }}" data-token="{{ faq.token }}" data-toggle="tooltip" data-placement="bottom"
+                                           title="{{ 'tooltip.edit'|trans }}"></i>
+                                        <i class="delete-faq" data-url="{{ url('admin-delete-faq',{token:faq.token}) }}" data-toggle="tooltip" data-placement="bottom"
+                                        title="{{ 'tooltip.delete_faq'|trans }}"></i>
+                                        <i class="sort-faq"  data-toggle="tooltip" data-placement="bottom"
+                                           title="{{ 'tooltip.reorder-faq'|trans }}"></i>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                                <div class="form-buttons text-right mt-20">
+                                    <a href="{{ url('admin-faq') }}" class="btn btn-cancel">{{ 'admin.faq.discard_changes'|trans }}</a>
+                                    <button data-toggle="modal" data-target="#preview-modal" class="btn preview-faq-btn" >{{ 'admin.faq.preview_faqs'|trans }}</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="modal fade " tabindex="-1" role="dialog" id="faqModal">
+        <div class="modal-dialog modal-lg " role="document">
+            <div class="modal-content">
+                <div class="modal-body row width-inherit center">
+                    <div id="formFaq" class="form-horizontal" role="form"
+                         data-url="{{ url('admin-add-faq') }}">
+                        <div>
+                            <label class="label" for="faq-question">{{ 'admin.faq.question'|trans }}</label>
+                            <input id="faq-question" type="text" placeholder="{{ 'admin.faq.type_question'|trans }}" class="form-control">
+                            <span class="error text-center hide" id="questionError">{{ 'admin.faq.type_question'|trans }}</span>
+                        </div>
+                        <div class="mg-top-20">
+                            <label class="label" for="faq-answer">{{ 'admin.faq.answer'|trans }}</label>
+                            <textarea id="faq-answer" placeholder="{{ 'admin.faq.type_answer'|trans }}"
+                                      class="form-control wysiwygModal"></textarea>
+                            <span class="error text-center hide"
+                                  id="answerError">{{ 'admin.faq.type_answer'|trans }}</span>
+                        </div>
+
+                    </div>
+                    <div class="form-buttons text-right mt-20">
+                        <button class="btn btn-cancel btn-reset-form" data-dismiss="modal">{{ 'admin.faq.cancel'|trans }}</button>
+
+                        <button id="newFaqBtn" class="btn btn-submit btn-save-faq">{{ 'admin.faq.add'|trans }}</button>
+                        <button id="editFaqBtn" class="btn btn-submit hide" >{{ 'admin.faq.edit'|trans }}</button>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- Preview faq page modal -->
+    <div class="modal fade " tabindex="-1" role="dialog" id="preview-modal">
+        <div class="modal-dialog modal-lg " role="document">
+            <div class="modal-content">
+                <div class="modal-body row width-inherit center">
+                    <div class="section-one">
+                        <div class="row">
+                            <div class=" faq-title text-center">
+                                {{ "faq.faq_title"|trans }}
+                            </div>
+                            <div class="faqTabs">
+                                <div class="tabsList nexusSans book-description-tiles accordion">
+                                    {% for faq in faqs %}
+                                        <div class="tile-tab">
+                                            <a id="Description"
+                                               class="title-accordion">{{ faq.question }}
+                                                <i class="expand-tile" data-toggle="tooltip" data-placement="bottom"></i>
+                                                <i class="collapse-tile" data-toggle="tooltip" data-placement="bottom" ></i>
+                                            </a>
+                                            <div class="hiddenDescription content">
+                                                <div class="descriptionContent">
+                                                    {{ faq.answer | raw }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-buttons text-right mg-top-20">
+                                    <a class="btn btn-cancel-preview" data-dismiss="modal" > {{ "admin.faq.cancel"|trans }}</a>
+                                    <button class="btn publish-faq-btn" type="submit"  data-url="{{ url('admin-edit-order-faq') }}"> {{ "admin.faq.publish"|trans }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preview faq page modal -->
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="https://cdn.tiny.cloud/1/tdcgdkkews0u3qs5x98hlqw70cvbqxyit01cguww2cbflkzy/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="{{ asset('assets/js/sortable/jquery-ui.js') }}"></script>
+    <script src="{{ asset('assets/page/admin/faq.min.js') }}"></script>
+{% endblock %}

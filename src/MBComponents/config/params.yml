@@ -1,0 +1,4 @@
+parameters:
+    jsVars:
+        recaptcha_duration: 300
+        reset_password_count: 2

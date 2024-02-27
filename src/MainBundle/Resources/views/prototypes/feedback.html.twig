@@ -1,0 +1,9 @@
+{% if feedbackText %}
+    <div class="columns small-12 medium-9 large-9 feedback-content">
+        <div class="reviewed-book-title small-8 columns  p-0">{{ 'user.profile.books.has_feedback'|trans }}</div>
+        <div class="reviewed-book-title small-4 columns text-right p-0 feedback-date">{{ feedbackDate }}</div>
+        <div class="small-12 columns feed-back-container p-0">
+            <p class="feedback-comment" data-more="Read more" data-less="Read less">{{ feedbackText }}</p>
+        </div>
+    </div>
+{% endif %}

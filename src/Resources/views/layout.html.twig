@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if IE 9]>
+<html class="no-js ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-js" lang= {{ lang }}>
+<!--<![endif]-->
+<head>
+    <meta charset="UTF-8"/>
+    <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    {% set categoriesByType = getCategoryByType(categories) %}
+    <title>{% block title %} {% endblock %}
+        {% if  categoriesByType['SH']|length > 0 and categoriesByType['ST']|length > 0 %}
+            {{ "layout.page_generic_title"|trans }}
+        {% else %}
+            {{ "layout.page_title"|trans }}
+        {% endif %}
+    </title>
+    <meta name="description" content="{% block description %}{% endblock %}">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta http-equiv="cleartype" content="on">
+    <meta property="og:url" content="{{ currentUrl }}"/>
+    <meta property="og:type" content="{% block ogType %}Website{% endblock %}"/>
+    <meta property="og:title" content="{% block ogTitle %}{% endblock %}{{ 'layout.page_title'|trans }}"/>
+
+    <meta property="og:description" content="{% block ogDescription %}{% endblock %}"/>
+
+    <meta property="og:image"
+          content="{% block ogImage %}{{ asset('assets/img/logoElsevier.png') }}{% endblock %}"/>
+
+    <link rel="shortcut icon" href="{{ asset('assets/img/favicon.ico') }}">
+    <!-- Responsive and mobile friendly stuff -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ asset('assets/css/mercutio.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/jquery.growl.css') }}" media="all">
+    <link href='//fonts.googleapis.com/css?family=Merriweather:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-component/css/bs-modal.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}" media="all">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-component/css/bootstrap-component.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/layout.css') }}" media="all">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/fontawesome-all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-component/css/bs-dropdown.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-component/css/bs-tooltip.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/main/login-modal.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/intro/minified/introjs.min.css') }}">
+    {% block stylesheets %}
+    {% endblock %}
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" href="{{ asset('assets/css/ie8.css') }}" media="all">
+    <![endif]-->
+    <script src="https://cdn.elsevier.io/verona/ui/1.3.6/mercutio.js"></script>
+
+    <!-- OneTrust Cookies Consent Notice start for inspectioncopy.elsevier.com -->
+    <script type="text/javascript"
+            src=https://cdn.cookielaw.org/consent/5dc2b1ad-dec8-4cba-847f-b53499ec3568-test/OtAutoBlock.js></script>
+    <script src=https://cdn.cookielaw.org/scripttemplates/otSDKStub.js type="text/javascript" charset="UTF-8"
+            data-domain-script="5dc2b1ad-dec8-4cba-847f-b53499ec3568-test" data-document-language="true"></script>
+    <script type="text/javascript">
+        function OptanonWrapper() {
+        }
+    </script>
+    <!-- OneTrust Cookies Consent Notice end for inspectioncopy.elsevier.com -->
+
+    <!-- Adobe DTM -->
+    <script
+            {% if getEnv()|lower in  ['develop','staging','preprod'] and app.request.Host|lower in ['ic-staging']   %}
+                {%  set URL="https://assets.adobedtm.com/4a848ae9611a/e9644b746b10/launch-03e1171c08ef-staging.min.js" %}
+            {% elseif getEnv()|lower in  ['develop', 'local','staging','preprod'] %}
+                {%  set URL="https://assets.adobedtm.com/4a848ae9611a/e9644b746b10/launch-4645ee607239-development.min.js" %}
+            {% elseif getEnv()|lower == 'prod' %}
+                {%  set URL="https://assets.adobedtm.com/4a848ae9611a/e9644b746b10/launch-d45bb03d61c2.min.js" %}
+            {% else %}
+                {%  set URL="https://assets.adobedtm.com/4a848ae9611a/e9644b746b10/launch-4645ee607239-development.min.js" %}
+            {% endif %}
+            src = {{URL}} >
+    </script>
+    <!-- End Adobe DTM -->
+
+    <!-- Pendo code snippet -->
+    {% set user = getUser() %}
+    <script>
+        (function(apiKey){
+            (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=o._q||[];
+                v=['initialize','identify','updateOptions','pageLoad','track'];for(w=0,x=v.length;w<x;++w)(function(m){
+                    o[m]=o[m]||function(){o._q[m===v[0]?'unshift':'push']([m].concat([].slice.call(arguments,0)));};})(v[w]);
+                y=e.createElement(n);y.async=!0;y.src='https://cdn.pendo.io/agent/static/'+apiKey+'/pendo.js';
+                z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo');
+
+            // Call this whenever information about your visitors becomes available
+            // Please use Strings, Numbers, or Bools for value types.
+            pendo.initialize({
+                visitor: {
+                    id:             '{{ user.userId }}',   // Required if user is logged in
+                    // role:         // Optional
+
+                    // You can add any additional visitor level key-values here,
+                    // as long as it's not one of the above reserved names.
+                },
+
+                account: {
+                    //id:           'ACCOUNT-UNIQUE-ID' // Required if using Pendo Feedback
+                    // name:         // Optional
+                    // is_paying:    // Recommended if using Pendo Feedback
+                    // monthly_value:// Recommended if using Pendo Feedback
+                    // planLevel:    // Optional
+                    // planPrice:    // Optional
+                    // creationDate: // Optional
+
+                    // You can add any additional account level key-values here,
+                    // as long as it's not one of the above reserved names.
+                }
+            });
+        })('44d2acae-f8c1-48fd-423e-757edb3ec1fa');
+    </script>
+    <!-- End Pendo code snippet -->
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-74136313-3"></script>
+    <script src='https://www.google.com/recaptcha/api.js?onload=reCaptchaCallback&render=explicit&hl={{ lang in ['in','en']?'en-GB':lang=='br'?'pt-BR':lang }}'
+            async></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-74136313-3');
+    </script>
+    <!-- End Global site tag (gtag.js) - Google Analytics -->
+
+    <!-- Old code Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(), event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WFLBHK');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- new google tag manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3NCZRK62D6"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-3NCZRK62D6');
+    </script>
+    <!-- End new google tagmanager -->
+
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return;
+            n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = '2.0';
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '264317368033222');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+                   src="https://www.facebook.com/tr?id=264317368033222&ev=PageView&noscript=1"
+        /></noscript>
+    <!-- End Facebook Pixel Code -->
+
+    <!-- LinkedIn Pixel Code ANZ and others -->
+    <script type="text/javascript">
+        _linkedin_partner_id = "2112426";
+        window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+        window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+    </script>
+    <script type="text/javascript">
+        (function () {
+            var s = document.getElementsByTagName("script")[0];
+            var b = document.createElement("script");
+            b.type = "text/javascript";
+            b.async = true;
+            b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+            s.parentNode.insertBefore(b, s);
+        })();
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none;" alt=""
+             src="https://px.ads.linkedin.com/collect/?pid=2112426&fmt=gif"/>
+    </noscript>
+    <!-- End LinkedIn Pixel Code -->
+
+    <script>
+        function imgError(image) {
+            var lng = "{{ lang }}" !== undefined ? '{{ lang }}' : '{{ session.get("site-lang") }}';
+
+            const allcat = ['fr','es','de','en'];
+            if(allcat.includes(lng) )
+            {
+                image.src = '' + document.location.origin + '/assets/img/no_cover_'+lng+'.png'
+            }
+            else{
+                image.src = '' + document.location.origin + '/assets/img/no_cover_en.png';
+            }
+            image.onerror = "";
+            return true;
+        }
+    </script>
+</head>
+<body class="{% block bodyClass %} {% endblock %}">
+
+{% if (session.get('region') not in ["9","4","5","1","8","10"])  %}
+    <div class=" welcome_popin modal fade" id="languageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ 'welcome_modal.title'|trans }}</h5>
+                    <div class="description_modal">{{ 'welcome_modal.subtitle1'|trans }}</div>
+                    <div class="description_modal">{{ 'welcome_modal.subtitle2'|trans }}</div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" data-url="{{ url('languageCatalog') }}" data-region="" id="popuplangcat">
+                        <div class="form-group">
+                            <label for="language-name" class="col-form-label">{{ 'welcome_modal.language'|trans }}:</label>
+                            <select name="lang-popup" id="language-name" class="form-control">
+                                <option value="en" {% if session.get('region') in [7,4,9,1,8,10,5] %} selected {% endif %}>{{ 'languages.en'|trans }}</option>
+                                <option value="es" {% if session.get('region') == 6 %} selected {% endif %}>{{ 'languages.es'|trans }}</option>
+                                <option value="fr" {% if session.get('region') == 11 %} selected {% endif %}>{{ 'languages.fr'|trans }}</option>
+                                <option value="de" {% if session.get('region') == 12 %} selected {% endif %}>{{ 'languages.de'|trans }}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="catalogues-name" class="col-form-label">{{ 'welcome_modal.catalogue'|trans }}:</label>
+                            <select name="catalog-popup" id="catalogues-name" class="form-control">
+                                <option value="/7/en/" {% if session.get('region') in [7,4,9,1,8,10,5] %} selected {% endif %}>{{ 'catalogues.en'|trans }}</option>
+                                <option value="/6/es/" {% if session.get('region') == 6 %} selected {% endif %}>{{ 'catalogues.es'|trans }}</option>
+                                <option value="/11/fr/" {% if session.get('region') == 11 %} selected {% endif %}>{{ 'catalogues.fr'|trans }}</option>
+                                <option value="/12/de/" {% if session.get('region') == 12 %} selected {% endif %}>{{ 'catalogues.de'|trans }}</option>
+                            </select>
+                        </div>
+                        <input type="submit" value="{{ 'welcome_modal.btn_label'|trans }}">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% include "parts/navbar.html.twig" %}
+{% block body %}
+{% endblock %}
+{% include "parts/lang-switcher.html.twig" %}
+{% include "parts/footer.html.twig" %}
+{% include "parts/messages.html.twig" %}
+{% if is_logged_in() == false %}
+    {% include '@MainBundle/modal/login-modal.html.twig' %}
+{% endif %}
+{% include '@MainBundle/modal/box-alert.html.twig' %}
+
+<div class="small-12 columns nexusSans p-0">
+    <div class="cookie-block small-12 medium-6 large-6 columns p-0 text-center nexusSans">
+        <div class="close-btn"></div>
+        <div class="cookies-content">
+            {{ 'home.cookies.cookie_label'|trans|replace({"__url__":url('cookies')})|raw }}
+        </div>
+    </div>
+</div>
+<script src="{{ asset('assets/js/cookie.min.js') }}"></script>
+<!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
+<script src="{{ asset('assets/js/jquery-1.9.1.min.js') }}"></script>
+<script src="{{ asset('assets/js/jquery.cookie.min.js') }}"></script>
+<script src="{{ asset('assets/js/jquery.backgroundSize.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/js/jquery.cycle2.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/js/respond.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/js/imagesloaded.pkgd.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/js/jquery.growl.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/js/jquery.maskedinput.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/plugins/zxcvbn/dist/zxcvbn.js') }}" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+<script src="{{ asset('assets/plugins/select2/select2.js') }}"></script>
+<script src="{{ asset('assets/plugins/select2/select2-custom.js') }}"></script>
+<script src="{{ asset('assets/plugins/moment/moment.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/intro/minified/intro.min.js') }}"></script>
+{% if lang in ['br','es','fr','de'] %}
+    <script src="{{ asset('assets/plugins/moment/locale/'~(lang=='br'?'pt':lang)~'.js') }}"></script>
+    <script src="{{ asset('assets/plugins/select2/i18n/'~(lang=='br'?'pt':lang)~'.js') }}"></script>
+{% endif %}
+<script src="{{ asset('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+<script data-months='{{ months }}' id="months-src">
+    var captchaSite = '{{ recaptchasite }}';
+    {% if lang in ['br','es','de','fr'] %}
+    moment().locale('{{ lang=='br'?'pt':lang }}');
+    var months = JSON.parse($('#months-src').data('months'));
+    $.fn.datepicker.dates['{{ lang }}'] = $.fn.datepicker.dates['en'];
+    $.fn.datepicker.dates['{{ lang }}'] = {
+        monthsShort: months['{{ lang }}']['monthsShort'],
+        daysShort: months['{{ lang }}']['daysShort'],
+        months: months['{{ lang }}']['months'],
+        days: months['{{ lang }}']['days'],
+        daysMin: months['{{ lang }}']['daysMin'],
+        clear: "{{ 'datepicker.clear'|trans }}"
+    };
+    {% endif %}
+</script>
+<script src="{{ asset('assets/plugins/bootstrap-component/js/bootstrap-component.js') }}"></script>
+
+<script src="{{ asset('assets/page/main/layout.min.js') }}"></script>
+
+{% if is_logged_in() == false %}
+    <script src="{{ asset('assets/page/forgetPassword/custom-user-login-forget-password.min.js') }}"></script>
+{% endif %}
+<script>
+    var baseUrl = "{{ basePath }}";
+    var imageCdn = "{{ imageCdn }}";
+    var errorMsg = "{{ 'error.error'|trans }}"
+</script>
+{% block javascripts %}
+{% endblock %}
+
+<!-- Google Tag Manager -->
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WFLBHK" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe>
+</noscript>
+<!-- End Google Tag Manager -->
+<!-- Adobe DTM -->
+<script>
+    var pageTitle = document.getElementById("page-title").value;
+    var pageData = {
+        page: {
+            environment: {% if getEnv()|lower in  ['develop', 'local','staging','preprod'] %} 'dev' {% else %} 'prod' {% endif %},
+            name: pageTitle,
+            businessUnit :  "ELS:inc" ,
+            productName: 'Inspection Copy'
+        }
+    };
+    pageDataTracker.trackPageLoad();
+</script>
+<!-- End Adobe DTM -->
+</body>
+</html>

@@ -1,0 +1,25 @@
+<div class="request-book-modal history-modal lightbox modal" id="history-modal-{{ listId }}">
+    <div class="modal-dialog" role="document">
+        <div class="close" data-dismiss="modal"></div>
+        <div class="modal-container scroll1 modal-content">
+            <div class="popup-title"> {{ 'reading_list.change_history'|trans }}</div>
+            <div class="list_name">  {{ listName }}</div>
+            {% if readingListHistory|length > 0 %}
+                <ul class="history_list scroll scroll1">
+                    {% for history in readingListHistory%}
+                        <li class="history_list_item">
+                            <div class="date_history">{{ history.DateStamp|date('j/m/Y h:i')  }}</div>
+                            <span class="history_details">{{  history.Details| raw}}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <ul class="history_list scroll scroll1">
+                    <li class="history_list_item">
+                        <span class="history_details">{{ 'reading_list.list_created'|trans }} {{ "now"|date("d-m-Y") }}</span>
+                    </li>
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</div>

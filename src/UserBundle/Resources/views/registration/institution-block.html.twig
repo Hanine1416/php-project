@@ -1,0 +1,96 @@
+<div data-lang="{{ lang }}" class="institution-block small-12 medium-12 large-12 columns p-0" data-index="__index__">
+    <a class="institution-delete"></a>
+    {% if lang == 'in' %}
+        <div class="input-field city-selector">
+            <label for="city_filter___index__">{{ 'user.profile.address.city'|trans }}</label>
+            <select name="city_filter___index__" id="city_filter___index__" class="city-filter">
+                <option value=""></option>
+            </select>
+        </div>
+    {% endif %}
+    {% if lang == 'de' %}
+        <div class="input-field zip-filter-block" style="margin-bottom: 30px!important;">
+            <label for="zip_filter___index__">{{ 'user.profile.address.postalCode'|trans }}</label>
+            <input data-country="" type="text" id="zip_filter___index__"
+                   class="zip-filter validate" title="{{ 'validation.required'|trans }}" data-wrong="{{ 'validation.institution_zip_code'|trans }}">
+        </div>
+    {% endif %}
+    <div class="input-field institution-selector-block">
+        <label for="complete_register_institutions___index___institutionId">{{ 'user.register.form.fields.institution'|trans }}</label>
+        <select id="complete_register_institutions___index___institutionId"
+                name="complete_register[institutions][__index__][institutionId]" class="institution-id validate"
+                title="{{ 'validation.required'|trans }}"></select>
+            <a class="pull-right btn-new-institution">{{ 'user.register.form.button.other'|trans }}</a>
+    </div>
+    <div class="input-field institution-text-block">
+        <label for="complete_register_institutions___index___institutionName">{{ 'user.register.form.fields.institution'|trans }}</label>
+        <input type="text" id="complete_register_institutions___index___institutionName"
+               name="complete_register[institutions][__index__][institutionName]" class="institution-name validate"
+               title="{{ 'validation.required'|trans }}">
+        <a class="pull-right btn-cancel-new-institution">{{ 'user.register.form.button.cancel'|trans }}</a>
+    </div>
+    {% if lang == 'in' %}
+    <div class="input-field">
+        <label for="complete_register_institutions___index___profession">{{ 'user.register.form.fields.profession'|trans }}</label>
+        <select id="complete_register_institutions___index___profession"
+                name="complete_register[institutions][__index__][profession]" class="validate profession"
+                title="{{ 'validation.required'|trans }}">
+            <option value=""></option>
+            {% for profession in professions %}
+                <option value="{{ profession.value }}">{{ profession.label }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    {% endif %}
+    <div class="input-field hidden">
+        <label class="required">{{ 'user.register.form.fields.isPrimary.label'|trans }}</label>
+        <div id="profile_institutions___index___isPrimary" class="isPrimary">
+            <input type="radio" id="complete_register_institutions___index___isPrimary_0"
+                   name="complete_register[institutions][__index__][isPrimary]" required="required" value="1">
+            <label for="complete_register_institutions___index___isPrimary_0"
+                   class="required">{{ 'user.register.form.fields.isPrimary.yes'|trans }}</label>
+            <input type="radio" id="complete_register_institutions___index___isPrimary_1"
+                   name="complete_register[institutions][__index__][isPrimary]" required="required" value="0"
+                   checked="checked">
+            <label for="complete_register_institutions___index___isPrimary_1"
+                   class="required">{{ 'user.register.form.fields.isPrimary.no'|trans }}</label>
+        </div>
+    </div>
+    <div class="input-field department-selector-block">
+        <label for="complete_register_institutions___index___departmentId">{{ 'user.register.form.fields.department'|trans }}</label>
+        <select id="complete_register_institutions___index___departmentId"
+                name="complete_register[institutions][__index__][departmentId]" class="department-id validate"
+                title="{{ 'validation.required'|trans }}">
+        </select>
+        <a class="pull-right btn-new-department">{{ 'user.register.form.button.other'|trans }}</a>
+    </div>
+    <div class="input-field department-text-block">
+        <label for="complete_register_institutions___index___departmentName">{{ 'user.register.form.fields.department'|trans }}</label>
+        <input type="text" id="complete_register_institutions___index___departmentName"
+               name="complete_register[institutions][__index__][departmentName]" class="department-name validate"
+               title="{{ 'validation.required'|trans }}">
+        <a class="pull-right btn-cancel-new-department">{{ 'user.register.form.button.cancel'|trans }}</a>
+    </div>
+    {% if lang != 'in' %}
+        <div class="input-field">
+            <label for="complete_register_institutions___index___profession">{{ 'user.register.form.fields.profession'|trans }}</label>
+            <select id="complete_register_institutions___index___profession"
+                    name="complete_register[institutions][__index__][profession]" class="validate profession"
+                    title="{{ 'validation.required'|trans }}">
+                <option value=""></option>
+                {% for profession in professions %}
+                    <option value="{{ profession.value }}">{{ profession.label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    {% endif %}
+    <div class="input-field {% if lang == 'in' %} hidden {% endif %}">
+        <label for="complete_register_institutions___index___speciality">{{ 'user.register.form.fields.speciality'|trans }}</label>
+        <select id="complete_register_institutions___index___speciality"
+                name="complete_register[institutions][__index__][speciality]" class="validate speciality"
+                title="{{ 'validation.required'|trans }}"></select>
+    </div>
+    <div class="small-12 text-center">
+        <a href="javascript:;" class="institution-delete">{{ 'user.register.step4.delete_inst'|trans }}</a>
+    </div>
+</div>

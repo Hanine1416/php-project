@@ -1,0 +1,294 @@
+/** Hide top nav */
+.topMenu,
+.mainMenu,
+.mobileMenu {
+  display: none;
+}
+nav{
+  border-bottom: 0;
+}
+.input-field {
+  max-width: 100% !important;
+  margin: 0 auto 24px auto;
+  &.pays-brasil{
+    .error{
+      max-width: 180px;
+    }
+  }
+  &.error-case{
+    .error{
+      max-width: 200px;
+    }
+  }
+  .error {
+    margin-top: 8px;
+    bottom: inherit !important;
+    max-width: 280px;
+  }
+  .error-phone{
+    position: relative;
+    margin-bottom: 0;
+    color: red;
+    background: transparent;
+    line-height: 1;
+    padding: 0;
+    font-style: normal;
+    font-size: 12px;
+    margin-top: 8px;
+    bottom: inherit !important;
+    max-width: 280px;
+  }
+
+}
+span.phone-contextual-txt {
+  font-size: 13px;
+  color: #707376;
+  display: inherit;
+  margin-top: 0px;
+}
+/* popover style */
+.popover-close {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  display: block;
+  position: absolute;
+  right: 2px;
+  top: 4px;
+
+  &:before, &:after {
+    cursor: pointer;
+    content: "";
+    position: absolute;
+    height: 13px;
+    width: 13px;
+    right: -2px;
+    top: 7px;
+    border-top: 2px solid #000;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
+  &:before {
+    right: 6px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+}
+
+.register-form .popover {
+  font-size: 13px;
+  line-height: 24px;
+  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.16);
+  background-color: #ffffff;
+  max-width: 100%;
+  color: #404040;
+  width: 100%;
+  border-radius: 4px;
+  left: 0 !important;
+  border-color: transparent;
+  padding: 15px 15px;
+  &:before {
+    display: none;
+  }
+}
+
+.popover {
+  &:before, &:after {
+    content: "";
+    position: absolute;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    top: 100%;
+    right: 20px;
+    margin-left: -10px;
+  }
+  &:before {
+    border-top: 10px solid rgba(0, 0, 0, 0.5);
+    margin-top: 5px;
+  }
+}
+
+.help-popover {
+  margin-top: 8px;
+  a {
+    color: #00749c;
+    font-size: 13px;
+    margin-bottom: 10px;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+  .popover-title,
+  .arrow{
+    display: none;
+  }
+}
+
+/* Triangle hack to make tooltip look like a speech bubble */
+.popover:after {
+  border-top: 10px solid #fff;
+  margin-top: -2px;
+  z-index: 1;
+}
+
+.url-field input {
+  margin-bottom: 0;
+}
+
+#institution-container {
+  .select2-selection__rendered, input, .select2 {
+    max-width: 100%;
+  }
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  padding: 20px;
+  line-height: 0;
+}
+.register-account{
+  margin: 32px auto 80px auto;
+  padding-left: 0;
+  padding-right: 0;
+  .register-form {
+    #step-1,
+    #step-3{
+      padding: 0 24px;
+    }
+    .title-register {
+      font-size: 23px;
+      margin-bottom: 24px;
+      line-height: 1.39;
+      letter-spacing: normal;
+      text-align: center;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      color: #404040;
+    }
+    hr.institution-divider{
+      margin-bottom: 0 !important;
+    }
+    .institution-block {
+      padding: 0 24px!important;
+      &.loading div {
+        visibility: hidden;
+      }
+      input {
+        margin-bottom: 0;
+      }
+      &.loading {
+        background: url("../../../assets/img/ajax-loader.gif") center no-repeat;
+      }
+      .institution-delete{
+        margin-bottom: 24px;
+        display: block;
+        font-size: 18px;
+        &:hover{
+          color: #429BB9 !important;
+          text-decoration: underline;
+        }
+      }
+    }
+    #addInstitution {
+      background-color: transparent;
+      border: none;
+      font-size: 18px;
+      color: #00749c;
+      padding: 0;
+      margin: 17px 0 0;
+      &::before{
+        content: "";
+        background-image: url("../../img/icon_add.png");
+        background-size: 16px 16px;
+        display: inline-block;
+        height: 16px;
+        width: 16px;
+        margin-right: 8px;
+
+      }
+      &:hover,
+      &:active,
+      &:focus{
+        background-color: transparent;
+        outline: 0;
+        color: #429BB9 !important;
+      }
+    }
+    @media (-webkit-min-device-pixel-ratio: 2){
+      #addInstitution:before {
+        background-image: url(../../img/icon_add@2x.png);
+        background-size: contain;
+      }
+    }
+    @media (-webkit-min-device-pixel-ratio: 3){
+      #addInstitution:before {
+        background-image: url(../../img/icon_add@3x.png);
+        background-size: contain;
+      }
+    }
+    .checlbox__label a:before {
+      content: "";
+    }
+  }
+}
+.institution-text-block, .department-text-block:not(.is-br), .department-selector-block.is-br {
+  display: none;
+}
+.btn-new-institution,
+.btn-new-department{
+  &:hover{
+    text-decoration: underline;
+  }
+}
+
+/************** this applies from 600px onwards **********/
+@media screen and (min-width: 640px) {
+  .register-account {
+    width: 425px;
+    max-width: 425px;
+    margin: 40px auto 230px auto;
+    .register-form {
+      padding: 0;
+      .title-register {
+        font-size: 32px;
+        margin-bottom: 32px;
+      }
+    }
+  }
+}
+
+button.btn-continue {
+  background-color: #00749c;
+  color: #fff;
+  width: 100%;
+  padding: 0;
+  height: 56px;
+  margin-bottom: 0;
+  border-color: transparent;
+  margin-top: 10px;
+  font-size: 23px;
+  &:hover {
+    background-color: #429BB9;
+  }
+  &:focus {
+    outline: 0;
+  }
+  &.loading>span{
+    top: 13px;
+    right: 13px;
+    border-radius: 50%;
+    border: 3px solid;
+    border-color: #fbfbfb transparent #f5f5f5 transparent;
+    -webkit-animation: lds-dual-ring 1s linear infinite;
+    animation: lds-dual-ring 1s linear infinite;
+    color: #fffbfb;
+  }
+}
+
+

@@ -1,0 +1,44 @@
+<!-- Add reading list modal -->
+<div class=" request-book-modal lightbox modal new_reading_list_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div id="close-modal" class="close-add-reading-list"></div>
+        <div class="modal-container scroll1 modal-content">
+            <form autocomplete="off" role="form"  id="formAddReadingList" data-url="{{ url('add-reading-list') }}">
+                <!-- Add reading list name and select Institution -->
+                <div class="modal-step active" id="step1">
+                    <div class="modal-step-content row small-popup xs-popup">
+                        <div id="single-institution">
+                            <div class="popup-title"> {{ 'reading_list.create_list'|trans}}</div>
+                            <div class="small-12 medium-12 large-12 columns input-step pl-0 pr-0 mb-24">
+                                <div>
+                                    <label for="readingListName"
+                                           class="label-title">{{ 'reading_list.list_name'|trans}}</label>
+                                    <input type="text" name="readingListName" id="readingListName" class="validate mb-0-imp"
+                                           title="{{ 'validation.required'|trans }}" maxlength="100" data-default-text="{{ 'reading_list.default_list_name'|trans}}">
+                                           <span id="error_msg"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row step-controller p-0 text-right pl-0 pr-0">
+                        <button class="btn btn-transparent goStep"
+                                data-target-step="step3">{{ 'reading_list.list_btn'|trans}}</button>
+                    </div>
+                </div>
+                <!-- Finish step -->
+                <div class="modal-step" id="step3">
+                    <div class="modal-step-content row small-popup">
+                        <div class="finish-img">
+                            <img class="retina-reload" src="{{ asset('assets/img/icon_success@1x.png') }}"
+                                 style="height: 60px;width: 60px;">
+                        </div>
+                        <div class="success-msg">{{ 'home.recommendations_inbox.add_book.success_step.success_msg'|trans}}</div>
+                        <div class="finish-msg" id="reading-lists-success">
+                            {{ 'reading_list.success_adding_list'|trans}}
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

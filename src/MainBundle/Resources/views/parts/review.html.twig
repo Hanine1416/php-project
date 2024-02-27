@@ -1,0 +1,54 @@
+
+    {% if feedBacks|length > 0 %}
+        <div class="tile-tab review">
+            <a id="review" class="title-accordion">Reviews<i class="expand-tile" data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.Expand'|trans }}"></i>
+            <i class="collapse-tile" data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.Collapse'|trans }}"></i></a>
+            <div class="hiddenReview content">
+                {% for feedBack in feedBacks|sortbyfield('NumLikes','desc') %}
+                    <div class="review_block row pr-0 pl-0">
+                        <div class="descriptionContent">
+                            <div class="reviewer_info">
+                                <span><a class="initial_user" href=""><span
+                                class="tooltip-wrapper-initial" title=""
+                                data-original-title="{{ feedBack.Name }}">{{ feedBack.Name|first|upper }}</span></a></span>
+                                <span class="name">{{ feedBack.Name }}</span>
+                                {% if feedBack.Allowname==true and feedBack.InstitutionName is defined %}<span class="institution">({{ feedBack.InstitutionName }}) </span> {% endif %}
+                            </div>
+                            {%  if feedBack.Rating != 0 %}
+                                <div class="review-container">
+                                    {% for i in 1..5 %}
+                                        {% set starClass = (feedBack.Rating >= i ? "star active" : "star") %}
+                                        <button class="{{ starClass }}"><span class="stararea"><i class="star_icon"></i></span></button>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            {% if feedBack.FeedbackDate is not empty %}
+                                <div class="date-review">
+                                    {{ 'book.review.reviewed_on'|trans }} {{ feedBack.FeedbackDate|date('j M Y')|site_date_format }}
+                                </div>
+                            {% endif %}
+
+                            {% if feedBack.Feedback is not empty %}
+                                <div class="review_content">
+                                    <p class="feedback-comment" data-more="Read more" data-less="Read less">
+                                        {{ feedBack.Feedback }}
+                                    </p>
+                                </div>
+                            {% endif %}
+
+                            {% if feedBack.NumLikes is not empty %}
+                                <div class="helpful_content">
+                                    <span><span class="likes">{{feedBack.NumLikes}}</span> {{ 'book.review.people_find_this_review_helpful'|trans }}</span>
+                                    {% if is_logged_in() %}
+                                        <span class="helpful_icon {% if feedBack.CurrentUserLike == true %}active {% endif %}" data-feedback-id="{{ feedBack.Feedbackid }}" data-likes="{{feedBack.NumLikes}}" ><i
+                                                    class="thumbs-up"></i>{{ 'book.review.helpful'|trans }}</span>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}

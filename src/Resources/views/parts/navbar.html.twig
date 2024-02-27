@@ -1,0 +1,518 @@
+<!-- start navbar -->
+{% set mainUrl = url('main') %}
+{% if(app.request.pathinfo == '/confirm-authentication' or app.request.pathinfo == '/registration-completed') %}
+    {% set mainUrl = url('logout') %}
+{% endif %}
+<nav>
+    <div class="fullWidth">
+        <!--Banner-->
+        {% set banner = getActiveBanner(cookies.get('region')) %}
+        {% if banner is not empty %}
+        <div class="row covid-banner {{ banner['color'] }}">
+            {%  if banner['close'] == '1' %}
+            <div class="close" id="close-covid-banner"></div>
+            {% endif %}
+            <div class="maincontainer covid-container ">
+                <span class="covid-tag">{{ banner['title']|raw }}</span>
+                <span class="covid-content">{{ banner['content']|replace({'<a':'<a target="_blank"'})| raw }}</span>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="row header maincontainer {% if  session.get('site-lang') == 'fr'%} header_french {% endif %}" >
+            <div class="mobileMenu nexusSans small-1 medium-1 columns p-0 menu-mobile-block">
+                <div class="menu-expand">
+                    <div id="top-menu-mobile">
+                        <div class="burguerMenu">
+                            <img class="menu-on retina-reload"
+                                 src="{{ asset('assets/img/mobile-menu-toggle/mobile_menu_on@1x.png') }}" alt="">
+                        </div>
+                        <a class="logoLink" href="{{ mainUrl }}">
+                            <div class="logo  {% if session.get('region')!=1 %} {% if  session.get('site-lang') == 'fr'%} french-site {% elseif session.get('site-lang') == 'us'%}us-site{% endif %} {% endif %}" ></div>
+                        </a>
+                    </div>
+                    <div class="mainMenu">
+                        <ul id="navigationpro-mobile-top"
+                            class="small-12 columns">
+                            {% if not is_logged_in() %}
+                                <ul class="login-burger row">
+                                    <li class="menuItem register nexusSans columns small-12 medium-5 p-0">
+                                        <a href="{{ url('register') }}" class="grey btn-register">{{ 'home.discover.register'|trans }}</a></li>
+                                    <li class="menuItem signIn nexusSans columns small-12  medium-5 p-0"><a
+                                                class="grey show-login modalForm login">{{ "navbar.login_btn"|trans }}</a>
+                                    </li>
+                                </ul>
+                            {% endif %}
+                            {% if  categoriesByType['SH']|length > 0 and categoriesByType['ST']|length > 0 %}
+                            {% if  session.get('region') in [11,12,6]  %}
+                                <ul id="navigationpro-top" class="small-block-grid-1 medium-block-grid-4 large-block-grid-6">
+                                    {% if is_logged_in() %}
+                                    <li class="menuItem reading-label">
+                                        <a class="reading-list-link nexusSans mobile_reading_list" href="{{ url('my-books')}}">{{ 'reading_list.title'|trans }}</a>
+                                    </li>
+                                    {% endif %}
+                                    <li class="menuItem explore_item">
+                                        <div class="explore_title">{{ 'explore.explore_name'|trans }}</div>
+                                        {% if  session.get('lang') != 'in' and session.get('lang') != 'us' and session.get('region') != '1' and session.get('region') !='5' and session.get('region') !='8' and session.get('region') !='9' %}
+                                            <div class="language-links">
+                                                <ul>
+                                                    <li class="dropdown" id="language-switcher">
+                                                        <span class="language-icon" data-toggle="dropdown" aria-expanded="true"></span><div class="dropdown-toggle nexusSans active-language" data-toggle="dropdown" aria-expanded="true">{%  if(session.get('site-lang') == 'in') %}{{('languages.en')|trans}}{% else %}{% if session.get('site-lang') != 'us' %}{{('languages.' ~session.get('site-lang'))|trans }}{% endif %}{% endif %}
+                                                        </div>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a data-lang="en" data-cat="/7/en/" id="lang-en">{{ 'languages.en'|trans }}</a></li>
+                                                            <li><a data-lang="es" data-cat="/6/es/" id="lang-es">{{ 'languages.es'|trans }}</a></li>
+                                                            <li><a data-lang="fr" data-cat="/11/fr/" id="lang-fr">{{ 'languages.fr'|trans }}</a></li>
+                                                            <li><a data-lang="de" data-cat="/12/de/" id="lang-de">{{ 'languages.de'|trans }}</a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        {% endif %}
+                                    </li>
+                                    {% for key,item in categories %}
+                                        {%  if 'PROMISH' in key %}
+                                            {% set innerItems = item %}
+                                            <li class="menuItem">
+                                                <a href="{{ basePath }}/books/all?cat={{ item.category|raw }}">{{ item.category }}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <li class="menuItem ">
+                                            <a href="{{ basePath }}/books/st">Science & Technology</a>
+                                    </li>
+                                </ul>
+                            {% elseif session.get('region') == 5 %}
+                                <ul id="navigationpro-top" class="small-block-grid-1 medium-block-grid-4 large-block-grid-6 menu-en">
+                                    <li class="menuItem dropdown ">
+                                        <a href="{{ basePath }}/books/st">Science & Technology</a>
+                                    </li>
+                                </ul>
+                            {% else %}
+                                {% if is_logged_in() %}
+                                <li class="menuItem reading-label">
+                                    <a class="reading-list-link nexusSans mobile_reading_list" href="{{ url('my-books')}}">{{ 'reading_list.title'|trans }}</a>
+                                </li>
+                                {% endif %}
+                                <li class="menuItem explore_item">
+                                    <div class="explore_title">{{ 'explore.explore_name'|trans }}</div>
+                                    {% if  session.get('lang') != 'in' and session.get('lang') != 'us' and session.get('region') != '1' and session.get('region') !='5' and session.get('region') !='8' and session.get('region') !='9' %}
+                                    <div class="language-links">
+                                        <ul>
+                                            <li class="dropdown" id="language-switcher">
+                                                <span class="language-icon" data-toggle="dropdown" aria-expanded="true"></span><div class="dropdown-toggle nexusSans active-language" data-toggle="dropdown" aria-expanded="true">{%  if(session.get('site-lang') == 'in') %}{{('languages.en')|trans}}{% else %}{% if session.get('site-lang') != 'us' %}{{('languages.' ~session.get('site-lang'))|trans }}{% endif %}{% endif %}
+                                                </div>
+                                                <ul class="dropdown-menu">
+                                                    <li><a data-lang="en" data-cat="/7/en/" id="lang-en">{{ 'languages.en'|trans }}</a></li>
+                                                    <li><a data-lang="es" data-cat="/6/es/" id="lang-es">{{ 'languages.es'|trans }}</a></li>
+                                                    <li><a data-lang="fr" data-cat="/11/fr/" id="lang-fr">{{ 'languages.fr'|trans }}</a></li>
+                                                    <li><a data-lang="de" data-cat="/12/de/" id="lang-de">{{ 'languages.de'|trans }}</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                {% endif %}
+                                </li>
+                                <li class="menuItem dropdown">
+                                    <div class="main-menu-item nexusSans" >
+                                        <a  href="{{ basePath }}/books/hs">{{ 'layout.health_sciences'|trans }}</a></div>
+                                </li>
+                                <li class="menuItem dropdown">
+                                    <div class="main-menu-item nexusSans">
+                                        <a href="{{ basePath }}/books/st">Science & Technology</a>
+                                    </div>
+                                </li>
+                            {% endif %}
+                            {% else %}
+                                 {% if is_logged_in() %}
+                                <li class="menuItem reading-label">
+                                    <a class="reading-list-link nexusSans mobile_reading_list" href="{{ url('my-books')}}">{{ 'reading_list.title'|trans }}</a>
+                                </li>
+                                {% endif %}
+                                <li class="menuItem explore_item">
+                                    <div class="explore_title">{{ 'explore.explore_name'|trans }}</div>
+                                    {% if  session.get('lang') != 'in' and session.get('lang') != 'us' and session.get('region') != '1' and session.get('region') !='5' and session.get('region') !='8' and session.get('region') !='9' %}
+                                    <div class="language-links">
+                                        <ul>
+                                            <li class="dropdown" id="language-switcher">
+                                                <span class="language-icon" data-toggle="dropdown" aria-expanded="true"></span><div class="dropdown-toggle nexusSans active-language" data-toggle="dropdown" aria-expanded="true">{%  if(session.get('site-lang') == 'in') %}{{('languages.en')|trans}}{% else %}{% if session.get('site-lang') != 'us' %}{{('languages.' ~session.get('site-lang'))|trans }}{% endif %}{% endif %}
+                                                </div>
+                                                <ul class="dropdown-menu">
+                                                    <li><a data-lang="en" data-cat="/7/en/" id="lang-en">{{ 'languages.en'|trans }}</a></li>
+                                                    <li><a data-lang="es" data-cat="/6/es/" id="lang-es">{{ 'languages.es'|trans }}</a></li>
+                                                    <li><a data-lang="fr" data-cat="/11/fr/" id="lang-fr">{{ 'languages.fr'|trans }}</a></li>
+                                                    <li><a data-lang="de" data-cat="/12/de/" id="lang-de">{{ 'languages.de'|trans }}</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                {% endif %}
+                                </li>
+                                {% for key,item in categories %}
+                                    <li class="menuItem">
+                                        <a href="{{ basePath }}/books/all?cat={{ item.category|raw |url_encode}}">{{ item.category }}</a>
+                                    </li>
+                                {% endfor %}
+                                {% if session.get('region') ==9 %}
+                                    <li class="menuItem">
+                                        <a class="show-modal-evolve">{{ 'layout.health_sciences'|trans }}</a>
+                                    </li>
+                                {% endif %}
+                                
+                            {% endif %}
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="small-7 medium-3 large-3 columns p-0 logo-block">
+                <div class="burguerMenu">
+                    <img class="menu-off retina-reload"
+                         src="{{ asset('assets/img/mobile-menu-toggle/mobile_menu@1x.png') }}" alt="">
+                </div>
+                <a class="logoLink" href="{{ mainUrl }}">
+                    <div class="logo {% if session.get('region')!=1 %}
+                        {% if  session.get('site-lang') == 'fr'%} french-site
+                        {% elseif session.get('site-lang') == 'us'%}us-site
+                        {% endif %}  {% endif %}"></div>
+                </a>
+            </div>
+            <div class="small-5 medium-9 large-9 columns p-0 log-in-group {% if is_logged_in() == true %} loged-in{% endif %}">
+                <!--Top Menu-->
+                <div class="topMenu">
+                    <ul class="mainMenuList">
+                        <li class="dropdown nexusSans explore_menu" >
+                            <a href="#" class="dropdown-toggle nexusSans explore_item" data-toggle="dropdown">
+                                <i id="" data-toggle="tooltip" data-placement="bottom"
+                                   title=""></i> {{ 'explore.explore_name'|trans }}</a>
+                            <ul class="dropdown-menu nexusSans">
+                                <div class=" explore_menu_items scroll scroll1">
+                                    <!--Menu-->
+                                    <div class="small-12 medium-12 large-12  menu nexusSans bold">
+                                        <!--Main Menu-->
+                                        <div class="mainMenu clearfix">
+                                            {% if  categoriesByType['SH']|length > 0 and categoriesByType['ST']|length > 0 %}
+                                                {% if  session.get('region') in [11,12,6]  %}
+                                                    <ul id="navigationpro-top" class="small-block-grid-1 medium-block-grid-4 large-block-grid-6">
+                                                        {% for key,item in categories %}
+                                                            {%  if 'PROMISH' in key %}
+                                                                {% set innerItems = item %}
+                                                                <li class="menuItem">
+                                                                    <a href="{{ basePath }}/books/all?cat={{ item.category|raw }}">{{ item.category }}</a>
+                                                                </li>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                        <li class="menuItem dropdown ">
+                                                                <a href="{{ basePath }}/books/st">Science & Technology</a>
+                                                        </li>
+                                                    </ul>
+                                                {% elseif session.get('region') == 5 %}
+                                                    <ul id="navigationpro-top" class="small-block-grid-1 medium-block-grid-4 large-block-grid-6 menu-en">
+                                                        <li class="menuItem dropdown ">
+                                                                <a href="{{ basePath }}/books/st">Science & Technology</a>
+                                                        </li>
+                                                    </ul>
+                                                    {% else %}
+                                                        <ul id="navigationpro-top" class="small-block-grid-1 medium-block-grid-4 large-block-grid-6 menu-en">
+                                                            <li class="menuItem dropdown ">
+                                                                <a href="{{ basePath }}/books/hs">{{ 'layout.health_sciences'|trans }}</a>
+                                                            </li>
+                                                            <li class="menuItem dropdown ">
+                                                                <a href="{{ basePath }}/books/st">Science & Technology</a>
+
+                                                            </li>
+                                                        </ul>
+                                                {% endif %}
+                                            {% else %}
+                                                <ul id="navigationpro-top" class="small-block-grid-1 medium-block-grid-4 large-block-grid-6">
+                                                    {% for key,item in categories %}
+                                                        {% set innerItems = item %}
+                                                        <li class="menuItem">
+                                                            <a href="{{ basePath }}/books/all?cat={{ item.category|raw|url_encode }}">{{ item.category }}</a>
+                                                        </li>
+                                                    {% endfor %}
+                                                    {% if session.get('region') ==9 %}
+                                                        <li class="menuItem">
+                                                            <a class="show-modal-evolve">{{ 'layout.health_sciences'|trans }}</a>
+                                                        </li>
+                                                    {% endif %}
+                                                </ul>
+                                            {% endif %}
+
+                                        </div>
+                                        <!--end mainMenu-->
+                                    </div>
+                                    <!--Mobile Menu-->
+                                </div>
+                            </ul>
+                        </li>
+                        <div class="log_btns">
+                        <li class="search_menu_bar">
+                            <div class="search_menu_form" style="position: relative">
+                                <input id="search-input" type="text" placeholder="{{ 'search.placeholder'|trans }}" name="q" class="hidden-mobile search-input">
+                                <div id="searchActive" class="right menuItem search uppercase normal mobile-search-icon search-desktop"
+                                     data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.search'|trans }}"></div>
+                                <ul class="result_search_book"></ul></div>
+
+                        </li>
+                        {% if is_logged_in() == false %}
+
+                                <li class="menuItem signIn nexusSans"><a
+                                            class="grey show-login modalForm login">{{ "navbar.login_btn"|trans }}</a></li>
+                                <li class="menuItem register nexusSans">
+                                    <a href="{{ url('register') }}" class="grey btn-register">{{ 'home.discover.register'|trans}}</a>
+                                </li>
+                            </div>
+                        {% else %}
+                            <li class="reading-label">
+                                <a class="reading-list-link nexusSans" href="{{ url('my-books')}}">{{ 'reading_list.title'|trans }}</a>
+                            </li>
+                            {% set notifications = getNotifications(session.get('site-lang'), session.get('region')) %}
+                            {% if notifications|length>0 %}
+                                <li class="dropdown dropdown-notif nexusSans" data-user-version="{{ getUser().getIcProfileVersion }}" >
+                                    <a href="#" class="dropdown-toggle nexusSans {% if(getUser().getIcProfileVersion) != "0" %} update-version {% endif %}" data-toggle="dropdown">
+                                        <i class="fa fa-bell"  id="notification-belt" data-toggle="tooltip" data-placement="bottom"
+                                           title="{{ 'tooltip.notification'|trans }}"></i></a>
+                                    <ul class="dropdown-menu nexusSans">
+                                        <li class="dropdown-header nexusSans"><span
+                                                    class="title-notif">{{ 'notification.notification'|trans }}</span>
+                                        </li>
+                                        <div class="notif-content scroll scroll1">
+                                            {% set count = 0 %}
+                                            {% for notification in notifications|sort_by_read_date %}
+                                                {% if notification.isRead == false %}
+                                                    {% set count = count + 1 %}
+                                                {% endif %}
+                                                <!--shared with me-->
+                                                {% if(notification.eventType == 'Recomendations') %}
+                                                    <li class="nexusSans {% if not notification.isRead %}new-notif{% endif %}">
+                                                        <a href="/?tag=shared#shared-{{ notification.Isbn }}" class="link-book" data-isbn="{{ notification.Isbn  }}">
+                                                            <img class="notif-img retina-reload"
+                                                                src="{{ imageCdn }}/{{ notification.Isbn }}.jpg"
+                                                                onerror="imgError(this);"/>
+                                                            <div class="descp-notif">
+                                                                {{ 'notification.sahred_by'|trans|replace({'__book_title__':notification.Title,'__firstname_lastname__':notification.Details})|raw }}
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                {% elseif notification.eventType == 'NewUserRecommendations' %}
+                                                    <li class="nexusSans {% if not notification.isRead %}new-notif{% endif %}">
+                                                        <a href="/?tag=like#{{ notification.Isbn }}" class="link-book" data-isbn="{{ notification.Isbn  }}">
+                                                            <img class="notif-img retina-reload"
+                                                                 src="{{ imageCdn }}/{{ notification.Isbn }}.jpg"
+                                                                 onerror="imgError(this);"/>
+                                                            <div class="descp-notif">
+                                                                {{ 'notification.like_book'|trans|replace({'__book_title__':notification.Title})|raw }}
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                {% elseif notification.eventType == 'PublishedBooks' %}
+                                                    <li class="nexusSans {% if not notification.isRead %}new-notif{% endif %}">
+                                                        <a href="/my-books#{{ notification.Isbn }}" class="link-book" data-isbn="{{ notification.Isbn  }}">
+                                                            <img class="notif-img retina-reload"
+                                                                 src="{{ imageCdn }}/{{ notification.Isbn }}.jpg"
+                                                                 onerror="imgError(this);"/>
+                                                            <div class="descp-notif">
+                                                                {{ 'notification.new_book'|trans|replace({'__book_title__':notification.Title})|raw }}
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                {% elseif notification.eventType == 'NewEditions' %}
+                                                    <li class="nexusSans {% if not notification.isRead %}new-notif{% endif %}" style="display: flex">
+                                                        <a href="/?tag=like#{{ notification.Isbn }}" class="link-book" data-isbn="{{ notification.Isbn  }}">
+                                                            <img class="notif-img retina-reload"
+                                                                 src="{{ imageCdn }}/{{ notification.Isbn }}.jpg"
+                                                                 onerror="imgError(this);"/>
+                                                            <div class="descp-notif" style="margin-left: -30px;">
+                                                                {{ 'notification.new_edition'|trans|replace({'__book_title__':notification.Title, '__book_link__':'/book/details/'~notification.Isbn})|raw }}
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                {% elseif notification.eventType!='newUser' %}
+                                                    <li class="nexusSans {% if not notification.isRead %}new-notif{% endif %}">
+                                                        <a href="{{ notification.link }}">
+                                                            <img class="notif-img retina-reload"
+                                                                src="{{ imageCdn }}/{{ notification.Isbn }}.jpg"
+                                                                onerror="imgError(this);"/>
+                                                            <div class="descp-notif">
+                                                                {% if notification.eventType=='DigitalAvailable' %}
+                                                                    {{ 'notification.notif_digital_available'|trans|replace({'__title__':notification.title})|raw }}
+                                                                {% elseif notification.eventType=='PrintApproved' %}
+                                                                    {{ 'notification.notif_print_approved'|trans|replace({'__title__':notification.title})|raw }}
+                                                                {% elseif notification.eventType=='PrintStatusChanged' %}
+                                                                    {{ 'notification.notif_update_print'|trans|replace({'__title__':notification.title})|raw }}
+                                                                {% elseif notification.eventType=='DigitalApproved' %}
+                                                                    {{ 'notification.notif_digital_approved'|trans|replace({'__title__':notification.title})|raw }}
+                                                                {% elseif notification.eventType=='DigitalExpired' %}
+                                                                    {{ 'notification.notif_expired_digital'|trans|replace({'__title__':notification.title})|raw }}
+                                                                {% elseif notification.eventType=='ConfirmationDue' %}
+                                                                    {{ 'notification.notif_confirm_book'|trans|replace({'__title__':notification.title})|raw }}
+                                                                {% endif %}
+                                                                <span class="book-title"></span>
+                                                                <span class="status"></span>
+                                                                <span class="date-notif">{{ notification.date|date('j M Y')|site_date_format }}</span>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                {% else %}
+                                                    <li class="nexusSans ">
+                                                        <a href="{{ notification.link }}" class="new-user-notif">
+                                                             {% if(getUser().getIcProfileVersion != "2" and getUser().getIcProfileVersion != "3") %}
+                                                                 <span class="logo-icon">{{ getUser().getFirstName()|first|upper }}</span>
+                                                             {% endif %}
+                                                            <div class="descp-notif">
+                                                                {% if(getUser().getIcProfileVersion == "3") %}
+                                                                    <!-- previously requested inspection copies via Textbooks -->
+                                                                    {{ 'notification.new_user_v3'|trans }}
+                                                                {% elseif(getUser().getIcProfileVersion == "2") %}
+                                                                    <!--  They were a user of the IC website before S&T books were added -->
+                                                                    {{ 'notification.new_user_v2'|trans }}
+                                                                {% elseif(getUser().getIcProfileVersion == "4") %}
+                                                                    {{ 'notification.new_user_v4'|trans }}
+                                                                {% elseif(getUser().getIcProfileVersion == "6") %}
+                                                                    {{ 'notification.new_user_v6'|trans }}
+                                                                {% else %}
+                                                                    {{ 'notification.new_user'|trans }}
+                                                                {% endif %}
+                                                                <span class="date-notif">{{ notification.date |date('j M Y')|site_date_format }}</span>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </ul>
+                                    {% if count > 0 %}
+                                        <span class="count nexusSans" id="notifications-count"
+                                              style="display: block;">{{ count }}</span>
+                                    {% endif %}
+                                </li>
+                            {% else %}
+                                <li class="dropdown dropdown-notif nexusSans">
+                                    <a href="#" class="dropdown-toggle nexusSans" data-toggle="dropdown">
+                                        <i class="fa fa-bell" data-toggle="tooltip" data-placement="bottom"
+                                           title="{{ 'tooltip.notification'|trans }}"></i></a>
+                                    <ul class="dropdown-menu nexusSans">
+                                        <li class="dropdown-header nexusSans">
+                                            <span class="title-notif">{{ 'notification.notification'|trans }}</span>
+                                        </li>
+                                        <div class="notif-content scroll scroll1">
+                                            <li class="nexusSans empty-li">
+                                                <div class="empty-notif">
+                                                    <img class="retina-reload"
+                                                         src="{{ asset('assets/img/bell-icon/notifs_empty@1x.png') }}"
+                                                         alt="bell" width="108" height="127"/>
+                                                    <p class="descp-notif no-capitalize nexusSans">{{ 'notification.notif_none'|trans }}</p>
+                                                </div>
+                                            </li>
+                                        </div>
+                                    </ul>
+                                </li>
+                            {% endif %}
+                            <li class="menuItem profile dropdown">
+                                <a class="profile-nav dropdown-toggle" href="" data-toggle="dropdown">
+                                    <span class="tooltip-wrapper-initial" data-toggle="tooltip" data-placement="bottom"
+                                          title="{{ getUser().getFullName() }}">{{ getUser().getFirstName()|first|upper }}</span></a>
+                                <ul class="dropdown-menu nexusSans">
+                                    <div class="profile-content">
+                                        <li>
+                                            <div class="userName">{{ getUser().getFullName() }}<span
+                                                        class="user-mail">{{ getUser().getEmail() }}</span></div>
+                                        </li>
+                                        <li class="home-link"><a
+                                                    href="{{ url('main') }}">{{ 'user.profile.home'|trans }}</a></li>
+                                       {# <li class="IC-link"><a
+                                                    href="{{ url('my-inspection-copies') }}">{{ "user.profile.inspection_copies"|trans }}</a>
+                                        </li>#}
+                                        {% if '/personal-details' not in  app.request.pathinfo %}
+                                        <li class="profile-link"><a
+                                                href="{{ url('my-personal-details') }}">{{ 'user.profile.my_profile'|trans }}</a>
+                                        </li>
+                                        {% endif %}
+                                        <li> <a href="javascript:;" data-url="{{ url('logout') }}" style="cursor: pointer" class="logout"
+                                           data-msg="{{ 'user.confirm_logout_msg'|trans }}">{{ 'user.profile.sign_out_btn'|trans }}</a>
+                                        </li>
+                                    </div>
+                                </ul>
+                            </li>
+                        {% endif %}
+                        {% if  session.get('lang') != 'in' and session.get('lang') != 'us' and session.get('region') != '1' and session.get('region') !='5' and session.get('region') !='8' and session.get('region') !='9' %}
+                            <div class="language-links">
+                                <ul>
+                                    <li class="dropdown" id="language-switcher">
+                                        <span class="language-icon" data-toggle="dropdown" aria-expanded="true"></span><div class="dropdown-toggle nexusSans active-language" data-toggle="dropdown" aria-expanded="true">{%  if(session.get('site-lang') == 'in') %}{{('languages.en')|trans}}{% else %}{% if session.get('site-lang') != 'us' %}{{('languages.' ~session.get('site-lang'))|trans }}{% endif %}{% endif %}
+                                        </div>
+                                        <ul class="dropdown-menu">
+                                            <li><a data-lang="en" data-cat="/7/en/" id="lang-en">{{ 'languages.en'|trans }}</a></li>
+                                            <li><a data-lang="es" data-cat="/6/es/" id="lang-es">{{ 'languages.es'|trans }}</a></li>
+                                            <li><a data-lang="fr" data-cat="/11/fr/" id="lang-fr">{{ 'languages.fr'|trans }}</a></li>
+                                            <li><a data-lang="de" data-cat="/12/de/" id="lang-de">{{ 'languages.de'|trans }}</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        {% endif %}
+                    </ul>
+                </div>
+                <!--end topMenu-->
+            </div>
+        </div>
+
+    </div>
+</nav>
+<!--end nav-->
+
+
+<!-- SearchBar -->
+<div class="searchBarSection searchActive">
+    <div class="row">
+        <div class="small-12 columns container-search">
+            <div class="close"></div>
+            <div class="close-desktop maincontainer">
+                <div class="close"></div>
+            </div>
+            <!--Search Input-->
+            <div class="search-container">
+                <div class="searchInput nexusSans">
+                    <span class="back"></span>
+                    <input id="search-input" placeholder="{% if session.get('site-lang') != 'us' %} {{ 'search.placeholder'|trans }} {% else %} Search Review Copies {% endif %}" name="q"
+                           tabindex="-1"
+                           value="{% if results.searchedWord %}{{ results.searchedWord }}{% endif %}" maxlength="98"/>
+                    <button class="searchIcon" data-toggle="tooltip" data-placement="bottom"
+                            title="{{ 'tooltip.search'|trans }}"></button>
+                </div>
+                <!--Search Filter-->
+                <div class="searchFilter">
+                    <div class="checkbox__item radio-box mt_checkbox small-12 medium-12 large-3 columns">
+                        <input checked id="searchTitle" type="radio" name="type" value="title"
+                               class="searchCat checkbox__input"/>
+                        <label for="searchTitle" class="checlbox__label" data-toggle="tooltip" data-placement="bottom"
+                               title="{{ 'tooltip.Filter'|trans }}"> {{ "search.title_placeholder"|trans }}</label>
+                    </div>
+                    <div class="checkbox__item radio-box mt_checkbox small-12 medium-12 large-4 columns">
+                        <input id="searchKeyword" type="radio" name="type" value="description"
+                               class="searchCat checkbox__input" {% if
+                            results.searchedType== "keyword" %} checked {% endif %}/>
+                        <label for="searchKeyword" class="checlbox__label" data-toggle="tooltip" data-placement="bottom"
+                               title="{{ 'tooltip.Filter'|trans }}">{{ "search.keywords_placeholder"|trans }}</label>
+                    </div>
+                    <div class="checkbox__item radio-box mt_checkbox small-12 medium-12 large-3 columns">
+                        <input id="searchAuthor" type="radio" name="type" value="author"
+                               class="searchCat checkbox__input" {% if
+                            results.searchedType== "author" %} checked {% endif %}/>
+                        <label for="searchAuthor" class="checlbox__label" data-toggle="tooltip" data-placement="bottom"
+                               title="{{ 'tooltip.Filter'|trans }}">{{ "search.author_placeholder"|trans }}</label>
+                    </div>
+                    <div class="checkbox__item radio-box mt_checkbox small-12 medium-12 large-2 columns">
+                        <input id="searchISBN" type="radio" name="type" value="isbn"
+                               class="searchCat checkbox__input" {% if
+                            results.searchedType== "isbn" %} checked {% endif %}/>
+                        <label for="searchISBN" class="checlbox__label" data-toggle="tooltip" data-placement="bottom"
+                               title="{{ 'tooltip.Filter'|trans }}">{{ "search.ISBN_placeholder"|trans }}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--end row-->
+</div>

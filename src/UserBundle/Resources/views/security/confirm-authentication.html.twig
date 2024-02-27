@@ -1,0 +1,45 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/page/security/confirm-authentication.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/register/request-register.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/profile/profile.css') }}">
+{% endblock %}
+{% block body %}
+    <input type="hidden" id="page-title" value="profile: confirm authentication">
+        <div class="confirm-auth-page confirm-auth-container">
+            <div class="security_icon">
+                <img class="retina-reload" src="{{ asset('assets/img/security/shield@1x.png') }}"
+                     style="height: 110px;width: 88px;">
+            </div>
+            <div class="welcome-msg">
+                <p>{{ 'confirm_authentication.you_are_logging_in_from_a_new_device'|trans }}</p>
+                <p>
+                    {{ 'confirm_authentication.please_enter_the_authentication_code_received_by_email'|trans }}
+                </p>
+            </div>
+
+            <div class="small-12 medium-12 large-12 row m-0">
+                <div class="input-field small-12 medium-12 large-12 columns pl-0 pr-0 digital_code">
+                    <input type="text" id="confirmation_code" name="confirmation_code" title="{{ 'confirm_authentication.please_add_the_correct_code'|trans }}" class="validate" maxlength="8" placeholder="{{ 'confirm_authentication.enter_code'|trans }}">
+                </div>
+                <div class="small-12 medium-12 large-12 columns pl-0 pr-0">
+                    <button role="button" id="submit-code" class="btn btn-continue" data-url="{{ url('confirm-authentication') }}"> {{ 'navbar.login_btn'|trans }} <span></span></button>
+                </div>
+                <div class="small-12 medium-12 large-12 columns pl-0 pr-0 reset_code">
+                    <p>
+                        {{ 'confirm_authentication.click_here_to_resend_authentication_code'|trans|raw }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="update-notif" id="email-sent-block" style="display: none">
+            <div class="close-btn"></div>
+            <div class="validation-icon"></div>
+            <div class="cookies-content">
+                {{ 'confirm_authentication.new_code_has_been_sent'|trans }}
+            </div>
+        </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('assets/page/security/confirm-authentication.min.js') }}"></script>
+{% endblock %}

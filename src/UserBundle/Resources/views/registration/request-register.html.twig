@@ -1,0 +1,134 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/page/register/request-register.css') }}">
+{% endblock %}
+{% block body %}
+    <div class="banner_register">
+                    <div class="bannerCover">
+                            <img class="retina-reload banner_img_desktop"
+                                src="{{ asset('assets/img/Image_Banner@1x.png') }}"
+                            alt="{{ 'user.register.title_content'|trans|raw}}">
+                            <img class="retina-reload banner_img_mobile"
+                                src="{{ asset('assets/img/Image_banner_mobile@1x.png') }}"
+                            alt="{{ 'user.register.title_content'|trans|raw}}">
+                    </div>
+                    <div class="content_banner">
+                        <div class="bannerTitle nexusSans">{{ 'user.register.title_content'|trans|raw}}</div>
+                        <div class="desc_banner nexusSans">
+                            {{ 'user.register.description_content'|trans|raw}}
+                        </div>
+                    </div>
+    </div>
+    <input type="hidden" id="page-title" value="registration: request">
+<div class="inner-wrap register-account">
+    <div class="row" id="step-1" data-region="{{session.get('region') }}">
+        {{ form_start(form,{attr:{class:'form-full-width register-form',id:'register_form' }}) }}
+            <div class="small-12 medium-12 large-12 row m-0">
+                    <h2 class="title-register">{{ 'user.register.step1.title'|trans }}</h2>
+                    <div class="input-field small-12 medium-12 large-12 columns pl-0 pr-0">
+                        {{ form_label(form.title) }}
+                        {{ form_widget(form.title, {attr:{'class':(lang =="de"?"validate":"")} } ) }}
+                    </div>
+                    <div class="input-field small-12 medium-12 large-12 columns pl-0 pr-0">
+                        {{ form_label(form.firstname) }}
+                        {{ form_widget(form.firstname,{attr:{'class':'validate'}}) }}
+                    </div>
+                    {% if lang =="in" %}
+                        <div class="input-field small-12 medium-12 large-12 columns pl-0 pr-0">
+                            {{ form_label(form.middlename) }}
+                            {{ form_widget(form.middlename) }}
+                        </div>
+                    {% endif %}
+                    <div class="input-field small-12 medium-12 large-12 columns pl-0 pr-0">
+                        {{ form_label(form.lastname) }}
+                        {{ form_widget(form.lastname,{attr:{'class':'validate'}}) }}
+                    </div>
+                    <div class="small-12 medium-12 large-12 columns p-0 email-popover">
+                        <div class="input-field" id="email_registration">
+                            {{ form_label(form.email) }}
+                            {{ form_widget(form.email,{attr:{'class':'validate',autocomplete:"new-email"}}) }}
+                            {%  if (lang != 'de' or region !=1 ) %}
+                                <div class="text-left Contextuel-help hidden" id="email-msg">
+                                    <div class="popover fade right in" role="tooltip" id="popover611033" style="display: block;max-width: 100% !important;">
+                                        <h3 class="popover-title" style="display: none;"></h3>
+                                        <div class="popover-content">{{ 'user.register.form.fields.email_tooltip'|trans }}</div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {%  if (lang == 'de' or region ==1)  %} <i class="fa fa-info-circle"
+                               data-toggle="popover" data-html="true"
+                               data-content= "{{'user.register.form.fields.email_popover'|trans }}"
+                               data-placement="right"></i> {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="small-12 medium-12 large-12 columns p-0 password-field" id="error_msg">
+                        <div class="input-field">
+                            {{ form_label(form.password.first) }}
+                            {{ form_widget(form.password.first, {'attr' : {'data-error':'user.reset_password.error'|trans,autocomplete:"new-password",title:'validation.password'|trans},required:false}) }}
+                            <span toggle="#request_register_password_first" class="eye-icon toggle-password"></span>
+                            <div class="ps-st-meter-wrapper hide" data-strengthifyfor="p1">
+                                <div class="ps-st-meter-bg"></div>
+                                <div class="pwd-good " id="ps-st-meter-container"
+                                     style="width: 0;"></div>
+                                <div class="ps-st-meter-separator" style="left: 25%;"></div>
+                                <div class="ps-st-meter-separator" style="left: 50%;"></div>
+                                <div class="ps-st-meter-separator" style="left: 75%;"></div>
+                                <div class="ps-strength-text">
+                                    <span>{{ 'user.register.step1.bad'|trans }}</span>
+                                    <span>{{ 'user.register.step1.medium'|trans }}</span>
+                                    <span>{{ 'user.register.step1.good'|trans }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-field">
+                            {{ form_label(form.password.second) }}
+                            {{ form_widget(form.password.second,{required:false,attr:{title:'validation.confirm_password'|trans}}) }}
+                            {{ form_errors(form.password) }}
+                            <span toggle="#request_register_password_second" class="eye-icon toggle-password"></span>
+                        </div>
+                    </div>
+                    <div class="input-field user-term small-12 medium-12 large-12 columns checkbox__item first">
+                        {{ form_widget(form.acceptMarketing,{attr:{class:'checkbox__input'}}) }}
+                        {{ form_label(form.acceptMarketing,null,{label_attr:{class:'marketing_agreement checlbox__label'}}) }}
+                    </div>
+                    <div class="input-field user-term small-12 medium-12 large-12 columns checkbox__item last-check-box">
+                        <input id="confirm_register_tC" type="checkbox" class="checkbox__input">
+                        <label class="termsAndConditions checlbox__label" id="terms_accept" for="confirm_register_tC"
+                               data-text="{{ 'user.register.step1.accept_term'|trans }}">{{ "user.register.step1.register_agree"|trans|raw }}
+                        </label>
+                    </div>
+                        <div class="input-field small-12 medium-12 large-12 columns p-0" id="register-recaptcha">
+                            <div class="g-recaptcha" id="regRecaptcha" data-sitekey="{{ recaptchasite }}"></div>
+                        </div>
+                    <div class="btn-goStep2 small-12 medium-12 large-12 columns pl-0 pr-0">
+                        <div class="input-field small-12 medium-12 large-12 columns error_msg_block" id="continue_registration">
+                        </div>
+                        <button role="button" id="submit-register" class="btn btn-continue">{{ 'user.register.continue_btn'|trans }} <span></span></button>
+                    </div>
+                    <span type="hidden" data-utm-source="{{ source }}" id="utm-source"></span>
+                </div>
+            {{ form_widget(form._token) }}
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+    <div id="step-2" class="row success-email hidden">
+        <div class="small-12 meduim-12 text-center">
+            <img src="{{ asset('assets/img/icon-mail/icon_mail@1x.png') }}" class="retina-reload" alt="success email">
+        </div>
+        <div class="small-12 meduim-12 text-center">
+            <h2>{{ 'user.register.step2.title'|trans }}</h2>
+            <p>{{ 'user.register.step2.msg1'|trans }} {{ 'user.register.step2.msg2'|trans }}</p>
+            <p>{{ 'user.register.step2.msg4'|trans }}</p>
+            <p>{{ 'user.register.step2.msg3'|trans }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+       var popUperror = "{{ 'user.register.form.fields.email_error'|trans }}";
+       var btnYes = "{{ 'user.register.form.fields.isPrimary.yes'|trans }}";
+    </script>
+    <script src="{{ asset('assets/plugins/dropzone/dropzone.js') }}"></script>
+    <script src="{{ asset('assets/page/register/request-register.min.js') }}"></script>
+{% endblock %}

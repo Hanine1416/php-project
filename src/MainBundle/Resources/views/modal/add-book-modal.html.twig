@@ -1,0 +1,66 @@
+<div class="modal-container scroll1 modal-content">
+    {% set readingListLength = readingLists|length %}
+    <form autocomplete="off" role="form" id="formAddBook" data-url="{{ url('add-book') }}">
+        <!-- select multiple or single reading list -->
+        <div class="modal-step" id="step1-add-book">
+            <div class="modal-step-content row reading-lists">
+                <div class="popup-title p-24">{{ 'home.recommendations_inbox.add_book.title'|trans }}</div>
+                <div class="modal-copy-container scroll scroll1">
+                    <div class="small-12 medium-12 large-12 columns scroll scroll1 p-top p-bottom pl-0 pr-0"
+                         title="reading-lists-check"
+                            {% if readingListLength == 0 %} id="reading-lists-check-container" {% endif %}>
+                        {% if readingListLength > 0 %}
+                            {% for readingList in readingLists %}
+                                {% if (readingList.ReadingListID not in exists) and readingList.Status != 'REQUESTED' %}
+                                    <div class="input-field user-term small-12 medium-12 large-12 columns checkbox__item reading-list-item ">
+                                        <input class="checkbox__input multi_institutions"
+                                               type="checkbox"
+                                               name="" id="{{ readingList.ReadingListID }}"
+                                               value="{{ readingList.ReadingListID }}">
+                                        <label class="checlbox__label"
+                                               for="{{ readingList.ReadingListID }}">{{ readingList.ListName }}</label>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <div class="empty-modal nexusSans">
+                                {{ 'book.modal.you_don_t_have_any_list_yet'|trans }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <p class="warning  p-24" style="display: none;color: #f63f33;font-size: 13px;"
+                   id="checkOneReadingListMsg">{{ 'book.modal.Please_add_at_least_one_list'|trans }}</p>
+            </div>
+            <div class="row step-controller p-24">
+                <button type="button" class="btn btn-transparent left" id="btn-add-reading-list">
+                    <span class="reading_list_label">+ {{ 'reading_list.add_reading_list.btn'|trans }}</span>
+                </button>
+                <button class="btn btn-transparent goStep right {% if readingListLength == 0 %} disabled-btn {% endif %}"
+                        {% if readingListLength == 0 %} disabled {% endif %}
+                        id="add-book-reading-list">{{ 'home.recommendations_inbox.add_book.btn'|trans }}</button>
+            </div>
+        </div>
+        <div class="modal-step" id="step2-add-book">
+            <div class="modal-step-content row">
+                <div class="finish-img">
+                    <img class="retina-reload" src="{{ asset('assets/img/icon_success@1x.png') }}"
+                         style="height: 60px;width: 60px;">
+                </div>
+                <div class="success-msg">{{ 'home.recommendations_inbox.add_book.success_step.success_msg'|trans }}</div>
+                <div class="finish-msg" id="reading-lists-success">
+
+                </div>
+                <div class="small-12 medium-12 large-12 columns step-controller p-0">
+                    <a class="btn btn-blue" id="browse_btn_add_book">
+                        {{ 'home.recommendations_inbox.add_book.success_step.btn_explore'|trans }}
+                    </a>
+                    <a class="btn btn-transparent" href="{{ url('my-books') }}"
+                       id="go-reading-list"> {{ 'home.recommendations_inbox.add_book.success_step.btn_go_to_readingList'|trans }}
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

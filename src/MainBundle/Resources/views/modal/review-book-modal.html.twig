@@ -1,0 +1,190 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/page/showBookDetails/request-book.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/my_books/review-book-modal.css') }}">
+{% endblock %}
+<!-- review book modal -->
+<div class="review-book-modal lightbox modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="close close-step-1"></div>
+        <div class="modal-container scroll1 modal-content">
+            <form autocomplete="off" class="fakeForm" data-url="{{ url('review-book') }}" id="formBookReview">
+                <!-- Positive review click Yes -->
+                <div class="modal-step" id="positive-step-1">
+                    <div class="modal-step-content">
+                        <div class="popup-title">{{ 'book.review.positive.step2.title'|trans }}</div>
+                        {% if lang != 'br' %}
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box label-down  mt_checkbox {% if lang == 'br' %} mb-24-imp {% endif %}">
+                            <input type="radio" name="recLevel" id="core_rev" value="Core" class="checkbox__input"
+                                   checked>
+                            <label for="core_rev"
+                                   class="checlbox__label">{{ 'book.review.positive.step2.core'|trans }}</label>
+                        </div>
+                        {% endif %}
+                        {% if lang!='br' %}  <span
+                                class="contextual-txt radio-txt"> {{ 'book.review.positive.step2.core_help'|trans|raw }}</span>{% endif %}
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box label-down  mt_checkbox {% if lang == 'br' %} mb-24-imp  {% endif %}">
+                            <input type="radio" name="recLevel" id="recommended_rev" class="checkbox__input"
+                                   value="Recommended">
+                            <label for="recommended_rev"
+                                   class="checlbox__label">{{ 'book.review.positive.step2.recommended'|trans }}</label>
+                        </div>
+                        {% if lang!='br' %}  <span
+                                class="contextual-txt radio-txt"> {{ 'book.review.positive.step2.recommended_help'|trans|raw }}</span> {% endif %}
+
+                            <div class="small-12 medium-12 large-12 columns checkbox__item radio-box label-down  mt_checkbox  {% if lang == 'br' %} mb-24-imp  {% endif %}">
+                                <input type="radio" name="recLevel" id="supplementary_rev" class="checkbox__input"
+                                       value="Supplementary">
+                                <label for="supplementary_rev"
+                                       class="checlbox__label">{{ 'book.review.positive.step2.supplementary'|trans }}</label>
+                            </div>
+                        {% if lang!='br' %}  <span
+                                class="contextual-txt radio-txt hidden"> {{ 'book.review.positive.step2.supplementary_help'|trans|raw }}</span>{% endif %}
+
+                    </div>
+                    <div class="row step-controller p-0 text-right">
+                        <button class="btn btn-transparent goStep continue-step1"
+                                data-target-step="feedback-step">{{ 'book.request.form.continue_btn'|trans }}
+                            <span></span></button>
+                    </div>
+                </div>
+                <!-- Feedback -->
+                <div class="modal-step" id="feedback-step">
+                    <div class="modal-step-content">
+                        <div class="popup-title">{{ 'book.review.feedback.title'|trans }}</div>
+                        <div class="small-12 medium-12 large-12 columns feedback-txt p-0 renewal-display">
+                            <textarea name="feedBack_previous" id="feedBack_previous" class="feedback" rows="6"
+                                      readonly title="{{ 'validation.required'|trans }}"></textarea>
+                            <div class="contextual-txt mb-32">{{ 'book.review.feedback.previous'|trans }} - <span id="feedback_previous_date"></span></div>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns feedback-txt p-0">
+                            <textarea name="feedBack" id="feedBack" class="feedback"
+                                      placeholder="{{ 'book.review.feedback.placeholder'|trans }}" rows="6"
+                                      data-adoption-placeholder="{{ 'book.review.feedback.placeholder'|trans }}"
+                                      data-renewal-placeholder="{{ 'book.review.feedback.new_placeholder'|trans }}"
+                                      title="{{ 'validation.required'|trans }}"></textarea>
+                            <div class="contextual-txt mb-0 renewal-display">{{ 'book.review.feedback.new'|trans }}</div>
+                        </div>
+                            <div class="columns checkbox__item radio-box label-down mt-24">
+                                <input type="checkbox" name="feedback_public" id="feedback_public"
+                                       class="checkbox__input"
+                                       value="1">
+                                <label for="feedback_public"
+                                       class="checlbox__label">{{ 'book.review.feedback.accept_public'|trans }}</label>
+                            </div>
+                        <div class="contextual-txt mb-0 public-info hidden">
+                            <small>{{ "book.review.feedback.accept_public_info"|trans|replace({"__url__":"https://www.elsevier.com/legal/privacy-policy"})|raw }} </small>
+                        </div>
+                            <div class=" columns checkbox__item radio-box label-down mt-24">
+                                <input type="checkbox" name="feedback_name_public" id="feedback_name_public"
+                                       class="checkbox__input" value=1>
+                                <label for="feedback_name_public"
+                                       class="checlbox__label">{{ 'book.review.feedback.accept_name_public'|trans }}</label>
+                            </div>
+
+                    </div>
+                    <div class="row step-controller p-0 text-right">
+                        <button class="btn btn-transparent goStep continue-step2"
+                                data-target-step="positive-step-2">{{ 'book.request.form.continue_btn'|trans }}
+                            <span></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-step" id="positive-step-2">
+                    <div class="modal-step-content">
+                        <div class="popup-title">{{ 'book.request.form.check_course_details'|trans }}</div>
+                        <div id="courseDetailList">
+                        </div>
+                    </div>
+                    <div class="row step-controller p-0 text-right">
+                        <button class="btn btn-transparent goStep  validate-feedback submit-book-review">{{ 'book.review.submit'|trans }}
+                            <span></span></button>
+                    </div>
+                    </div>
+                <!-- Negative review click No -->
+                <div class="modal-step" id="negative-step-1">
+                    <div class="modal-step-content">
+                        <div class="popup-title adoption-display">{{ 'book.review.negative.step1.title'|trans }}</div>
+                        <div class="popup-title renewal-display">{{ 'book.renewal.negative.step1.title'|trans }}</div>
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box  mt_checkbox renewal-display">
+                            <input type="radio" name="negative_reason" id="option_renew_1"
+                                   value="{{ 'book.renewal.negative.step1.option1'|trans({local:'en'}) }}" class="checkbox__input">
+                            <label for="option_renew_1"  class="checlbox__label">{{ 'book.renewal.negative.step1.option1'|trans }}</label>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box  mt_checkbox renewal-display">
+                            <input type="radio" name="negative_reason" id="option_renew_2"
+                                   value="{{ 'book.renewal.negative.step1.option2'|trans({local:'en'}) }}" class="checkbox__input">
+                            <label for="option_renew_2"  class="checlbox__label">{{ 'book.renewal.negative.step1.option2'|trans }}</label>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box">
+                            <input type="radio" name="negative_reason" id="option4" class="checkbox__input"
+                                   value="{{ 'book.review.negative.step1.option4'|trans({'locale':'en'}) }}">
+                            <label for="option4"
+                                   class="checlbox__label">{{ 'book.review.negative.step1.option4'|trans }}</label>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box">
+                            <input type="radio" name="negative_reason" id="option5" class="checkbox__input"
+                                   value="{{ 'book.review.negative.step1.option5'|trans({'locale':'en'}) }}">
+                            <label for="option5"
+                                   class="checlbox__label">{{ 'book.review.negative.step1.option5'|trans }}</label>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box">
+                            <input type="radio" name="negative_reason" id="option_other_book" class="checkbox__input"
+                                   value="{{ 'book.review.negative.step1.option_other_book'|trans({'locale':'en'}) }}">
+                            <label for="option_other_book"
+                                   class="checlbox__label">{{ 'book.review.negative.step1.option_other_book'|trans }}</label>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box">
+                            <input type="radio" name="negative_reason" id="option9" class="checkbox__input"
+                                   value="{{ 'book.review.negative.step1.option9'|trans({'locale':'en'}) }}">
+                            <label for="option9"
+                                   class="checlbox__label">{{ 'book.review.negative.step1.option9'|trans }}</label>
+                        </div>
+                        {% if lang =='in' or lang =='en' %}
+                            <div class="small-12 medium-12 large-12 columns checkbox__item radio-box ">
+                                <input type="radio" name="negative_reason" id="option_other_reason" class="checkbox__input"
+                                       value="{{ 'book.review.negative.step1.option_other_reason'|trans({'locale':'en'}) }}">
+                                <label for="option_other_reason"
+                                       class="checlbox__label">{{ 'book.review.negative.step1.option_other_reason'|trans }}</label>
+                            </div>
+                            <div id="other_reason_block" class="small-12 medium-12 large-12 columns">
+                                <input type="text" id="other_reason"
+                                       placeholder="{{ 'book.review.negative.step1.other_reason_placeholder'|trans }}"
+                                       class="validate" title="{{ 'validation.required'|trans }}">
+                            </div>
+                        {% endif %}
+                        <div id="other_book_block" class="small-12 medium-12 large-12 columns">
+                            <div class="small-12 medium-12 large-12 columns p-0">
+                                <label for="book_current_use">{{ 'book.review.negative.step2.title'|trans }}</label>
+                                <input type="text" name="book_current_use" id="book_current_use"
+                                       placeholder="{{ 'book.review.negative.step2.book_name'|trans }}"
+                                       class="validate" title="{{ 'validation.required'|trans }}">
+                            </div>
+                            <div class="small-12 medium-12 large-12 columns p-0 feedback-txt mt-15">
+                                <label for="book_description">{{ 'book.review.negative.step3.title'|trans }}</label>
+                                <textarea name="book_description" id="book_description" class="validate"
+                                          cols="30" rows="8" title="{{ 'validation.required'|trans }}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row step-controller p-0 text-right">
+                        <button class="btn btn-transparent no-validate-feedback submit-book-review">{{ 'book.request.form.continue_btn'|trans }}
+                            <span></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Finish review success message -->
+                <div class="modal-step" id="finish-step">
+                    <div class="modal-step-content">
+                        <div class="finish-img">
+                            <img class="retina-reload" src="{{ asset('assets/img/icon_success@1x.png') }}" style="height: 60px;width: 60px;">
+                        </div>
+                        <div class="success-msg">{{ 'book.review.success.title'|trans|raw }}</div>
+                        <div class="success-msg">{{ 'book.review.success.feedtext'|trans|raw }}</div>
+                        <div class="finish-msg">{{ 'book.review.success.message'|trans|replace({'__contact_link__':url('contactUs')})|raw }}</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

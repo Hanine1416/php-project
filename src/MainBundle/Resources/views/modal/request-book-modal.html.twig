@@ -1,0 +1,336 @@
+<!-- request book modal -->
+<div class="request-book-modal lightbox modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div id="close-modal"></div>
+        <div class="modal-container scroll1 modal-content">
+            <form autocomplete="off" class="fakeForm" data-url="{{ url('request-book') }}" id="formBookRequest">
+                <!-- select multiple or single institution -->
+                <div class="modal-step active" id="step1" {% if institutions|length ==0 %} data-first-request="true" {%else %}data-first-request="false" {% endif %}>
+                    <div class="modal-step-content row">
+                        <div class="popup-title">{{ 'book.request.form.step1.title'|trans }}</div>
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box mt_checkbox">
+                            <input type="radio" name="multipleInstitution" id="singleInstitution"
+                                   class="checkbox__input"
+                                   checked>
+                            <label for="singleInstitution"
+                                   class="checlbox__label">   {{ 'book.request.form.step1.single'|trans }}</label>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box">
+                            <input type="radio" name="multipleInstitution" id="multipleInstitution"
+                                   class="checkbox__input">
+                            <label for="multipleInstitution" class="checlbox__label">
+                                {{ 'book.request.form.step1.multiple'|trans }}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row step-controller p-0 text-right">
+                        <button class="btn btn-transparent goStep"
+                                data-target-step="step2">{{ 'book.request.form.continue_btn'|trans }}</button>
+                    </div>
+                </div>
+                <!-- Check institution if multiple or select an institution if single -->
+                <div class="modal-step" id="step2">
+                    <div class="modal-step-content row">
+                        <div id="single-institution">
+                            <div class="popup-title">{{ 'book.request.form.step2.title'|trans }}</div>
+                            <div class="small-12 medium-12 large-12 columns pl-0 pr-0">
+                                <label class="hidden popup-title"
+                                       for="institutions-selector">{{ 'book.request.form.institution'|trans }}</label>
+                                <select name="institutions-list" id="institutions-selector" data-inst="{{institutions|length}}" data-user="{{ user.id }}"
+                                        data-first="{{institutions|length}}">
+                                    {% for institution in institutions %}
+                                        {% if institution.enabled %}
+                                            <option value="{{ institution.id }}" {% if institution.isPrimary %} selected class="my-primary" {% endif %}>
+                                                {{ institution.institutionName~" - "~institution.departmentName~"-"~institution.profession~"-"~institution.speciality }}
+                                            </option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div id="multiple-institutions">
+                            <div class="popup-title">{{ 'book.request.form.step2.title2'|trans }}</div>
+                            <div class="small-12 medium-12 large-12 columns scroll scroll1 pl-0 pr-0"
+                                 id="institution-check-container">
+                                {% for institution in institutions %}
+                                    {% if institution.enabled %}
+                                        <div class="input-field user-term small-12 medium-12 large-12 columns checkbox__item ">
+                                            <input {% if institution.isPrimary %} checked class="my-primary checkbox__input multi_institutions" {% else %}  class="checkbox__input multi_institutions" {% endif %}
+                                                    type="checkbox"
+                                                    name="institution-check-list" id="{{ institution.id }}"
+                                                    value="{{ institution.id }}"
+                                                    data-name="{{ institution.institutionName~" - "~institution.departmentName~"-"~institution.profession~"-"~institution.speciality }}">
+                                            <label class="checlbox__label"
+                                                   for="{{ institution.id }}">{{ institution.institutionName~" - "~institution.departmentName~"-"~institution.profession~"-"~institution.speciality }}</label>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <p class="warning" style="display: none"
+                               id="checkOneInstitutionMsg">{{ 'book.request.form.step2.check_institution_msg'|trans }}</p>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns pl-0 pr-0">
+                            <button class="btn btn-new-institution"
+                                    id="new-institution-btn">{{ 'book.request.form.step2.add_inst_btn'|trans }}</button>
+                        </div>
+                    </div>
+                    <div class="row step-controller p-0 text-right pl-0 pr-0">
+                        <button class="btn btn-transparent goStep"
+                                data-target-step="step3">{{ 'book.request.form.continue_btn'|trans }}</button>
+                    </div>
+                </div>
+                <div class="modal-step" id="step3">
+                    <div class="modal-step-content row">
+                        <span class="current-inst-name"></span>
+                        <div class="popup-title">{{ 'book.request.form.course_details'|trans }}</div>
+
+                        <div class="small-12 medium-12 large-12 columns input-step pl-0 pr-0 current-book">
+                            {{ 'book.request.form.step3.considering_book'|trans }}
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns input-step checkbox__item radio-box">
+                            <input type="radio" name="bookUsedReason" id="noCurrentTitle"
+                                   value="No currently used a similar title" class="checkbox__input" checked>
+                            <label for="noCurrentTitle" class="checlbox__label">
+                                {{ 'book.request.form.step3.no_used_similar'|trans }}
+                            </label>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns input-step checkbox__item radio-box">
+                            <input type="radio" name="bookUsedReason" id="newCourse" value="New course"
+                                   class="checkbox__input">
+                            <label for="newCourse" class="checlbox__label">
+                                {{ 'book.request.form.step3.now_course'|trans }}
+                            </label>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns input-step checkbox__item radio-box">
+                            <input type="radio" name="bookUsedReason" id="alternative" value="Considering alternative"
+                                   class="checkbox__input">
+                            <label for="alternative" class="checlbox__label">
+                                {{ 'book.request.form.step3.alternative'|trans }}
+                            </label>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns input-step pl-0 pr-0" id="usedBookBlock">
+                            <div>
+                                <label for="currentUsedBook"
+                                       class="label-title">{{ 'book.request.form.step3.book_currently_use'|trans }}</label>
+                                <input type="text" name="currentUsedBook" id="currentUsedBook" class="validate"
+                                       title="{{ 'validation.required'|trans }}">
+                            </div>
+                            <span class="contextual-txt">{{ 'book.request.form.step3.currentUsedBook'|trans }}</span>
+                        </div>
+                    </div>
+
+                    <div class="row step-controller p-0 text-right">
+                        <button class="btn btn-transparent goStep"
+                                data-target-step="step4">{{ 'book.request.form.continue_btn'|trans }}</button>
+                    </div>
+                </div>
+                <div class="modal-step" id="step4">
+                    <div class="modal-step-content row">
+                        <span class="current-inst-name"></span>
+                        <div class="popup-title">{{ 'book.request.form.course_details'|trans }}</div>
+                        {% if session.get('lang') in ['en','anz','in','us'] %}
+                        <div class="small-12 medium-12 large-12 columns input-step pl-0 pr-0">
+                            <div class="small-6 medium-6 large-6 columns pl-0">
+                                <div>
+                                    <label for="course" class="label-title">{{ 'book.request.form.step4.course_name'|trans }}</label>
+                                    <input type="text" name="courseName" id="courseName" data-max-length="50"
+                                           title="{{ 'validation.required'|trans }}">
+                                </div>
+                                <span class="contextual-txt">{{ 'book.request.form.step4.course_name_contextuel_help'|trans }}</span>
+                            </div>
+                            <div class="small-6 medium-6 large-6 columns pr-0">
+                                <div>
+                                    <label for="courseCode" class="label-title">{{ 'book.request.form.step4.course_code'|trans }}</label>
+                                    <input type="text" name="courseCode" id="courseCode" data-max-length="20" {% if session.get('region') == '1' %} class="validate" {% endif %}
+                                           title="{{ 'validation.required'|trans }}">
+                                </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="small-12 medium-12 large-12 columns input-step pl-0 pr-0">
+                            <div>
+                                <label for="course" class="label-title">{{ 'book.request.form.step4.course_name'|trans }}</label>
+                                <input type="text" name="courseName" id="courseName" data-max-length="50"
+                                       title="{{ 'validation.required'|trans }}">
+                            </div>
+                            <span class="contextual-txt">{{ 'book.request.form.step4.course_name_contextuel_help'|trans }}</span>
+                        </div>
+                        {% endif %}
+                        <div class="level-selector-block small-12 medium-12 large-12 columns input-step pl-0 pr-0">
+                                <label for="courseLevel"
+                                       class="label-title">{{ 'book.request.form.step4.course_level'|trans }}</label>
+                                <div id="level-selector-block">
+                                    <select name="courseLevel" id="courseLevel" class="validate"
+                                            title="{{ 'validation.required'|trans }}" placeholder="{{ "contact_us.form.please_select"|trans }}">
+                                        <option value=""></option>
+                                        {% for level in levels %}
+                                            <option value="{{ level.text }}">
+                                                {{ level.text }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            <div class="">
+                                <a class="pull-right btn-new-department new-level decorate">{{ 'user.register.form.button.other'|trans }}</a>
+                            </div>
+                        </div>
+                        <div class="level-text-block small-12 medium-12 large-12 columns input-step pl-0 pr-0 hidden">
+                            <div>
+                                <label for="courseLevelInput"
+                                       class="label-title">{{ 'book.request.form.step4.course_level'|trans }}</label>
+                                <input type="text" name="courseLevelInput" id="courseLevelInput" class="validate"
+                                       title="{{ 'validation.required'|trans }}">
+                            </div>
+                            <div class="">
+                                <a class="pull-right btn-cancel-new-department cancel-level decorate">{{ 'user.register.form.button.cancel'|trans }}</a>
+                            </div>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns input-step pl-0 pr-0 mb-24">
+                            <div>
+                                <label for="studentsNumber"
+                                       class="label-title">{{ 'book.request.form.step4.student_number'|trans }}</label>
+                                <input type="number" name="studentsNumber" id="studentsNumber" class="validate"
+                                       title="{{ 'validation.required'|trans }}"
+                                       data-msg="{{ 'validation.number_required'|trans }}">
+                            </div>
+                            <span class="contextual-txt">{{ 'book.request.form.step4.students_number_contextuel_help'|trans }}</span>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns p-0">
+                            <div class="small-6 medium-6 large-6 columns input-step pl-0 pr-0 start-date-bloc date">
+                                <label for="startDate"
+                                       class="label-title">{{ 'book.request.form.step4.start_date'|trans }}</label>
+                                <input type="text" name="startDate" readonly="readonly" id="startDate"
+                                       class="courseDate validate"
+                                       placeholder="{{ 'book.request.form.step4.date-format'|trans }}"
+                                       title="{{ 'validation.required'|trans }}">
+                            </div>
+                            <div class="small-6 medium-6 large-6 columns input-step date end-date-bloc pr-0">
+                                <label for="endDate"
+                                       class="label-title end-date">{{ 'book.request.form.step4.end_date'|trans }}</label>
+                                <input type="text" name="endDate" readonly="readonly" id="endDate"
+                                       class="courseDate"
+                                       placeholder="{{ 'book.request.form.step4.date-format'|trans }}"
+                                       data-error="{{ 'book.request.form.step4.end_date_error'|trans }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row step-controller p-0 text-right">
+                        <button class="btn btn-transparent goStep"
+                                data-target-step="step5">{{ 'book.request.form.continue_btn'|trans }}</button>
+                    </div>
+                </div>
+                <div class="modal-step" id="step5">
+                    <div class="modal-step-content row">
+                        <span class="current-inst-name"></span>
+                        <div class="popup-title">{{ 'book.request.form.step5.title'|trans }}</div>
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box label-down  mt_checkbox">
+                            <input type="radio" name="recLevel" id="core" value="Core" class="checkbox__input" checked>
+                            <label for="core" class="checlbox__label">{{ 'book.request.form.step5.core'|trans }}</label>
+                        </div>
+                        <span
+                                class="contextual-txt radio-txt">{{ 'book.request.form.step5.core_help'|trans|raw }} </span>
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box label-down">
+                            <input type="radio" name="recLevel" id="recommended" class="checkbox__input"
+                                   value="Recommended">
+                            <label for="recommended" class="checlbox__label">
+                                {{ 'book.request.form.step5.recommended'|trans }}
+                            </label>
+                        </div>
+                        <span
+                                class="contextual-txt radio-txt">{{ 'book.request.form.step5.recommended_help'|trans|raw }}</span>
+                            <div class="small-12 medium-12 large-12 columns checkbox__item radio-box label-down ">
+                                <input type="radio" name="recLevel" id="supplementary" class="checkbox__input"
+                                       value="Supplementary">
+                                <label for="supplementary" class="checlbox__label">
+                                    {{ 'book.request.form.step5.supplementary'|trans }}
+                                </label>
+                            </div>
+                            <span class="contextual-txt radio-txt"> {{ 'book.request.form.step5.supplementary_help'|trans|raw }}</span>
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box label-down">
+                            <input type="radio" name="recLevel" id="undecided" class="checkbox__input"
+                                   value="">
+                            <label for="undecided" class="checlbox__label">
+                                {{ 'book.request.form.step5.undecided'|trans }}
+                            </label>
+                        </div>
+                        <span class="contextual-txt radio-txt"> {{ 'book.request.form.step5.undecided_help'|trans|raw }}</span>
+                    </div>
+                    <div class="row step-controller p-0 text-right">
+                        <button class="btn btn-transparent goStep" id="submit-request-btn"
+                                data-target-step="step6">{{ 'book.request.form.continue_btn'|trans }} <span></span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Display/choose addresses -->
+                <div class="modal-step" id="step6">
+                    <div class="small-12 medium-12 large-12 columns pl-0 pr-0">
+                        <div id="addressList" class="address-length">
+                            <div class="popup-title"> {{ 'book.request.form.step6.title'|trans }}  </div>
+                            <div id="addresses" class="tile-block scroll scroll1">
+                                {% for address in user.addresses %}
+                                    {% if  address.type != 'Disabled' %}
+                                        <a class="select-address" data-address-id="{{ address.id }}">
+                                            <span class="institution-name">{{ address.address2 }} </span>
+                                            <span class="institution-details">{{ address.city }}
+                                                , {{ address.postalCode }}</span>
+                                        </a>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <div class="small-12 medium-12 large-12 columns pl-0 pr-0 ">
+                                <button type="button" class="btn-new-address btn-add" id="new-address-btn">
+                                    {{ 'book.request.form.step6.add_addr_btn'|trans }}
+                                </button>
+                            </div>
+
+                        </div>
+                        <div id="confirmAddress">
+                            <div class="modal-step-content row">
+                                <div class="popup-title"> {{ 'book.request.form.step6.confirm_msg'|trans }}
+                                </div>
+                                <div id="address-container">
+                                    {% for address in addresses %}
+                                        {% include '@UserBundle/profile/address/address-details.html.twig' with {'address':address} %}
+                                    {% endfor %}
+                                </div>
+                                <div class="small-12 medium-12 large-12 columns pl-0 pr-0 ">
+                                    <a href="javascript:;"
+                                       class="select-other-address">{{ 'book.request.form.step6.select'|trans }}</a>
+                                </div>
+                            </div>
+                            <div class="small-12 medium-12 large-12 columns step-controller p-0 text-right">
+                                <button class="btn btn-transparent goStep" id="confirm-btn"
+                                        data-target-step="step7"> {{ 'book.request.form.step6.confirm'|trans }}
+                                    <span></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-step" id="step7">
+                    <div class="modal-step-content row">
+                        <div class="finish-img">
+                            <img class="retina-reload" src="{{ asset('assets/img/icon_success@1x.png') }}"
+                                 style="height: 60px;width: 60px;">
+                        </div>
+                        <div class="success-msg">{{ 'book.request.form.step7.success_title'|trans }}</div>
+                        <div class="finish-msg" id="request"
+                             hidden>
+                            {{ 'book.request.form.step7.success_msg'|trans}}
+                            {% if user.amEmail is not null and user.amEmail is not empty and user.amEmail != "" %}
+                                {{ 'book.request.form.step7.success_msg_EC'|trans|replace({'__education_consultant__': url('my-education-consultant') })|raw }}
+                            {% endif %}
+                        </div>
+                        <div class="finish-msg" id="preorder"
+                             hidden>
+                            {{ 'book.request.form.step7.success_msg'|trans }}
+                            {% if user.amEmail is not null and user.amEmail is not empty and user.amEmail != "" %}
+                                {{ 'book.request.form.step7.success_msg_EC'|trans|replace({'__education_consultant__': url('my-education-consultant') })|raw }}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

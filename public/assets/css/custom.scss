@@ -1,0 +1,109 @@
+/*====================
+GERAL
+=====================*/
+
+.textLeft {
+  text-align: left;
+}
+
+.bookStatus .requestCopy {
+  max-width: 152px;
+}
+
+.bookProcessed {
+  .requestCopy {
+    max-width: 152px;
+    float: left;
+    width: 100%;
+    margin: 0;
+    margin-right: 14px;
+  }
+  .bProcessed {
+    padding: 10px 0;
+  }
+}
+
+.requestPublication {
+  .prodTitle {
+    padding-top: 0;
+  }
+  .prodDetail {
+    padding-left: 0;
+  }
+  .prodAuthor {
+    padding-bottom: 25px;
+  }
+  .prodColumn {
+    margin-bottom: 28px;
+  }
+}
+
+.profileUpdate {
+  background-color: #F2F2F2;
+  padding: 10px 20px 40px 20px;
+}
+
+ .accountManager, .wishlistArea {
+  margin-bottom: 40px;
+}
+
+.profileUpdate .requestCopy {
+  max-width: 152px;
+}
+
+.wishProduct {
+  .requestCopy {
+    clear: both;
+    float: left;
+    margin: 0;
+    margin-right: 6px;
+    width: 100%;
+  }
+  img {
+    width: auto;
+    float: left;
+    padding: 8px 10px;
+    cursor: pointer;
+  }
+  margin-bottom: 38px;
+}
+
+.wishInfo {
+  display: inline-block;
+  width: auto;
+  font-size: 0.938em;
+  padding-left: 26px;
+  h3 {
+    font-size: 1em;
+    margin-bottom: 0;
+  }
+  .prodAuthor {
+    padding-top: 0;
+    p {
+      padding-bottom: 0;
+    }
+  }
+}
+
+.profileUpdate .myAccountTitle, .requestPublication .myAccountTitle {
+  margin-bottom: 38px;
+}
+
+.profileInfo .requestCopy {
+  margin-top: 22px;
+  margin-bottom: 0;
+}
+
+.wishProduct:last-child, .wishlistArea:last-child {
+  margin-bottom: 0;
+}
+
+.disableHref {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.3;
+}
+
+.additionalInformation .g-recaptcha {
+  display: none;
+}

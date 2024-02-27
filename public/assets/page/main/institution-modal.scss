@@ -1,0 +1,327 @@
+html{
+  overflow: unset;
+}
+body.modal-open {
+  position: relative;
+  overflow: hidden!important;
+}
+nav{
+  border-bottom: none;
+}
+/*.menu{
+  border: none;
+}*/
+.header{
+  .mobileMenu {
+    margin-top: 0px;
+    display: none;
+  }
+  .logo-block{
+    margin-left: 0;
+  }
+}
+.institution-modal {
+  z-index: 308;
+  display: none;
+  padding: 0;
+  .modal-dialog{
+    width: 100%;
+    height: 100%;
+    .modal-content{
+      padding: 24px;
+      overflow: initial;
+    }
+  }
+  .modal-container > .row {
+    margin-top: 40px;
+  }
+  .new-institution-modal-title, .edit-institution-modal-title {
+    font-size: 25px;
+    margin-bottom: 0;
+    line-height: 1.44;
+    color: #404040;
+  }
+  .edit-institution-modal-title {
+    display: none;
+  }
+  .edit-controls {
+    display: none;
+  }
+  &.edit-mode {
+    .new-institution-modal-title {
+      display: none;
+    }
+    .edit-institution-modal-title, .edit-controls {
+      display: block;
+    }
+    .add-controls {
+      display: none;
+    }
+  }
+  .close-institution-modal {
+    background: url(../../img/button_close.jpg) no-repeat scroll;
+    cursor: pointer;
+    height: 24px;
+    width: 24px;
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    float: right;
+    opacity: 1;
+    z-index: 308;
+  }
+  a.btn-new-institution.disabled {
+    pointer-events: none;
+    cursor: default;
+    color: #505050;
+  }
+  .btn-new-institution,
+  .btn-new-department,
+  .btn-cancel-new-institution,
+  .btn-cancel-new-department {
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    color: #00749c;
+    padding: 0;
+    margin-top: 3px !important;
+    margin-bottom: 0;
+    z-index: 10;
+    cursor: pointer;
+    display: block;
+    &:before {
+      display: none;
+    }
+    &:hover,
+    &:active {
+      color: #429BB9 !important;
+      background-color: transparent;
+      text-decoration: underline;
+    }
+  }
+  .input-field {
+    margin: 0 !important;
+    padding: 0;
+    padding-bottom: 32px;
+    .error{
+      bottom: inherit !important;
+      background: transparent;
+      color: red;
+      font-style: inherit;
+      padding: 0;
+      margin-bottom: 0;
+      margin-top: 8px;
+      font-size: 13px;
+      display: block;
+    }
+    .select2-selection {
+      margin-bottom: 0;
+    }
+    input {
+      height: 52px;
+    }
+    .error {
+      margin-top: 8px;
+      bottom: inherit !important;
+    }
+  }
+}
+
+
+@media (-webkit-min-device-pixel-ratio: 2) {
+  .institution-modal .close-institution-modal {
+    background: url(../../img/button_close@2x.png) no-repeat scroll;
+    background-size: contain;
+  }
+}
+
+@media (-webkit-min-device-pixel-ratio: 3) {
+  .institution-modal .close-institution-modal {
+    background: url(../../img/button_close@3x.png) no-repeat scroll;
+    background-size: contain;
+  }
+}
+
+.mb-24 {
+  margin-bottom: 24px;
+}
+
+.institution-block {
+  margin-top: 24px;
+}
+
+.institution-text-block, .department-text-block:not(.is-br), .department-selector-block.is-br {
+  display: none;
+}
+
+#addInstitution {
+  background-color: #404040;
+  color: #fff;
+  width: 100%;
+  margin-bottom: 0;
+  border-color: transparent;
+  margin-top: 20px;
+  &:hover {
+    opacity: 0.8;
+    color: #fff !important;
+  }
+}
+
+.institution-block input {
+  margin-bottom: 0;
+}
+
+/*.btn-new-institution, .btn-new-department {
+  margin-top: 0 !important;
+}*/
+
+.select2.select2-container {
+  width: 100% !important;
+}
+
+.warning ~ span span.select2-selection--single {
+  border: 1px solid #E32510 !important;
+}
+
+.institution-block.loading {
+  div {
+    visibility: hidden;
+  }
+  background: url("../../../assets/img/ajax-loader.gif") center no-repeat;
+}
+
+#deleteInstitution, #disableInstitution {
+  color: #de350b;
+}
+#addInstitution, #updateInstitution {
+  position: relative;
+  margin-top: 6px !important;
+}
+/************** this applies from 600px onwards **********/
+@media screen and (min-width: 640px) {
+  //nav {
+  //  border-bottom: solid 1px #e0e0e0;
+  //}
+  .menu{
+    border-top: solid 1px #e0e0e0;
+  }
+  .scroll1::-webkit-scrollbar {
+    width: 5px;
+  }
+  .scroll1::-webkit-scrollbar-thumb {
+    background: #666;
+  }
+  .scroll1::-webkit-scrollbar-track {
+    background: #ddd;
+  }
+  .institution-modal {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 0;
+    height: auto;
+    form{
+      display: block;
+    }
+    .modal-dialog{
+      max-width: 630px;
+      min-height: 480px;
+      margin: 70px auto;
+      height: auto;
+    }
+    z-index: 358;
+    box-shadow: 0 4px 8px 0 rgba(9, 30, 66, 0.16);
+  }
+
+  .modal-container{
+    overflow: auto;
+    overflow-x: hidden;
+    margin-bottom: 24px;
+    border-radius: 4px;
+  }
+  .input-field {
+    max-width: 100%;
+  }
+  #addInstitution, #updateInstitution {
+    font-size: 23px;
+    position: relative;
+    margin-top: 0!important;
+    text-align: right!important;
+    width: fit-content!important;
+    background-color: transparent !important;
+    color: #00749c !important;
+   /* height: 33px !important;*/
+  }
+  #addInstitution:hover, #updateInstitution:hover{
+    color: #00749c !important;
+  }
+  #deleteInstitution, #disableInstitution {
+    position: relative;
+    font-size: 23px;
+    line-height: 1.44;
+  }
+  .right-ctr {
+    float: right;
+    text-align: right!important;
+  }
+  .left-ctr {
+    float: left!important;
+    text-align: left!important;
+  }
+}
+
+.lh-30 {
+  line-height: 30px !important;
+}
+#primary-block{
+  float: left;
+  .apple-switch{
+    width: 20%;
+    display: inline-block;
+  }
+  >label{
+    width: 80%;
+    display: inline-block;
+  }
+}
+
+.apple-switch {
+  input[type=checkbox] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+  }
+  label.label-switch {
+    margin: 0;
+    text-align: right;
+    float: right;
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 55px;
+    height: 30px;
+    background: #d8d8d8;
+    display: block;
+    border-radius: 100px;
+    position: relative;
+    &:after {
+      content: '';
+      position: absolute;
+      top: 1px;
+      left: 1px;
+      width: 28px;
+      height: 28px;
+      background: #fff;
+      border-radius: 90px;
+      transition: 0.3s;
+    }
+  }
+  input:checked + label.label-switch {
+    background: #00749c;
+    &:after {
+      left: calc(100% - 1px);
+      transform: translateX(-100%);
+      &:active {
+        width: 30px;
+
+      }
+    }
+  }
+}

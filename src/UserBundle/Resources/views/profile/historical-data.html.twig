@@ -1,0 +1,96 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/page/my_books/my-books.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-component/css/bootstrap-component.css') }}">
+{% endblock %}
+{% block title %} {{ "historical_data.link_name"|trans }} {% endblock %}
+{% block body %}
+    <input type="hidden" id="page-title" value="profile: historical-data">
+    <div class="p-relative mt-15 maincontainer">
+        {% if(source == 'profile') %}
+            <a href="{{ url('my-personal-details') }}" class="go-back-ic"> {{ "historical_data.back_profile"|trans }}</a>
+        {% else %}
+            <a href="{{ url('my-books') }}" class="go-back-ic"> {{ "historical_data.back_ic"|trans }}</a>
+        {% endif %}
+    </div>
+<div class="profile-container historical-page">
+    <!--My Inspection copy page title-->
+    <div class="p-relative">
+         <span class="page-title my-inspections-copies">{{ "historical_data.link_name"|trans }}</span>
+    </div>
+    <!--Historical data link -->
+    <div class="p-relative text-center historical-data">
+        <span class="historical-content">{{ 'historical_data.desciption_1'|trans}} </span>
+        <span class="historical-content">{{ 'historical_data.desciption_2'|trans}} </span>
+    </div>
+    <!--Historical data link-->
+    <div id="my-inspections-copies" class="row historical-data-page">
+        {% if myBooks|length >0 %}
+            <!-- historical books -->
+            <div id="pending-container">
+                {% for historicalBook in myBooks %}
+                    <!--Prod List listStyle-->
+                    <div class="small-12 columns prodColumn listStyle book-info">
+                        <div class="row {{ historicalBook.Isbn ~'-'~ historicalBook.Format }} bookRowAccount">
+                            <div class=" large-12 small-12 books-status columns">
+                                <!-- Book Image -->
+                                <div class="row book-content">
+                                    <div class="columns large-8 small-12 medium-8 p-0 part-one">
+                                        <div class="prodImg columns large-6 small-12 medium-6 p-0">
+                                            <a class="imgBlock"
+                                               href="{{ url('showBookDetails',{'isbn':historicalBook.Isbn}) }}"><img
+                                                        src="{{ imageCdn ~'/'~ historicalBook.Isbn~'.jpg' }}"
+                                                        onerror="imgError(this);"></a>
+                                        </div>
+                                        <!-- End Book Image -->
+                                        <div class="prodDetail columns large-6 medium-6 small-12 p-0">
+                                            <!-- Book Title -->
+                                            <div class="prodTitle">
+                                                <h2 class="nexusSerif">
+                                                    <a class="title-book nexusSans"
+                                                       href="{{ url('showBookDetails',{'isbn':historicalBook.Isbn}) }}">{{ historicalBook.Title }}</a>
+                                                </h2>
+                                            </div>
+                                            <!-- End Book Title -->
+                                            <!-- Book Editors -->
+                                            <div class="prodAuthor nexusSerif">
+                                                <p class="nexusSans">{{ historicalBook.Author }}</p>
+                                            </div>
+                                            <!-- End Book Editors -->
+                                        </div>
+                                    </div>
+
+                                    <div class="columns large-4 small-12 medium-4 p-0 part-two">
+                                        <!-- Book Action  -->
+                                        <div class="bookStatus small-12 medium-12 large-12 columns">
+                                            <div class="small-12 medium-12 large-12 columns">
+                                                <div class="small-12 medium-12 large-12 columns controls-btn">
+
+                                                    <a href="{% if (historicalBook.Isbn in requestedBooks|keys == false) %} {{ url('showBookDetails',{'isbn':historicalBook.Isbn}) }} {% endif %}" class="btn btn-blue {% if (historicalBook.Isbn in requestedBooks|keys == true) %} disableHref{% endif %}">{{ "historical_data.request_btn"|trans }} </a>
+                                                </div>
+                                            </div>
+                                            <span class="read-book-contextual small-12 columns">
+                                                {% if (historicalBook.Isbn in requestedBooks|keys == true) %}
+                                                    <p> {{ 'historical_data.msg_request_again'|trans|replace({"__url__":url('my-books'),'dd-Mon-yyyy':requestedBooks[historicalBook.Isbn].RequestedDate})|raw}} </p>
+                                                {% endif %}
+                                            </span>
+                                        </div>
+                                        <!-- End Book Action  -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--End row-->
+                    </div>
+                    <!--End Prod List listStyle-->
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-books-div">
+                <p>{{ "user.profile.books.no_books.title"|trans }}</p>
+                <a href="{{ url('main') }}"
+                   class="no-books-link decorate">{{ "user.profile.books.no_books.button"|trans }}</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

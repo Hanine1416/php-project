@@ -1,0 +1,62 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/page/address/new-address.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/switcher.css') }}">
+{% endblock %}
+{% block body %}
+    <div class="inner-wrap verticalPadding">
+        <div class="row adress-page-container">
+            <span id="edit_profile_content">
+                <span class="page-title">{{ "adresses.add-adress"|trans }}</span>
+                <div class="deliver-adress">{{ 'adresses.title'|trans }}</div>
+                <div class="row">
+                    <div class="profile-container">
+                        <div id="new-address" class="new-adress-container">
+                            <fieldset>
+                                {{ form_start(addressForm,{attr:{class:'form-full-width width-form-edit',id:'add-address-form','autocomplete':'off'}}) }}
+                                <div class="input-field">
+                                    {{ form_label(addressForm.address3) }}
+                                    {{ form_widget(addressForm.address3,{attr:{'class':'validate','title':'validation.required'|trans}}) }}
+                                </div>
+                                <div class="input-field">
+                                    {{ form_label(addressForm.address1) }}
+                                    {{ form_widget(addressForm.address1,{attr:{'class':'validate','title':'validation.required'|trans}}) }}
+                                </div>
+                                {% if lang in ['br','es'] %}
+                                    <div class="input-field">
+                                        {{ form_label(addressForm.address4) }}
+                                        {{ form_widget(addressForm.address4,{attr:{'class':'validate','title':'validation.required'|trans}}) }}
+                                    </div>
+                                {% endif %}
+                                <div class="input-field">
+                                    {{ form_label(addressForm.state) }}
+                                    {{ form_widget(addressForm.state,{attr:{'class':'validate','title':'validation.required'|trans}}) }}
+                                </div>
+                                <div class="input-field">
+                                    {{ form_label(addressForm.city) }}
+                                    {{ form_widget(addressForm.city,{attr:{'class':'validate','title':'validation.required'|trans}}) }}
+                                </div>
+                                <div class="input-field">
+                                    {{ form_label(addressForm.postalCode) }}
+                                    {{ form_widget(addressForm.postalCode,{attr:{'class':'validate','title':'validation.required'|trans}}) }}
+                                </div>
+                                <div class="input-field">
+                                    {{ form_label(addressForm.country) }}
+                                    {{ form_widget(addressForm.country,{attr:{'class':'validate','data-invalid':'validation.required'|trans}}) }}
+                                </div>
+                                <div class="small-12 medium-12 large-12 columns text-center pl-0 pr-0">
+                                    <button id="add-address-btn" type="submit" class="btn btn-black update-address-btn"> {{ 'adresses.add'|trans }}
+                                        <span></span></button>
+                                </div>
+                                {{ form_end(addressForm, {'render_rest': false}) }}
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('assets/page/address/new-address.min.js') }}"></script>
+{% endblock %}

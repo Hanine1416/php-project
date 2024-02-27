@@ -1,0 +1,144 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/switcher.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/showBookDetails/request-book.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/page/profile/personal-details.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/profile/identify-account.css') }}">
+{% endblock %}
+{% block title %} {{ "user.profile.education_consultant"|trans }} {% endblock %}
+{% block body %}
+    <input type="hidden" id="page-title" value="profile: account details">
+    <div class="profile-container row">
+        <!--menu profile section-->
+        <div class="menu-profile-mobile">
+            {% include '@UserBundle/profile/profile-menu.html.twig' with {'user' : user} %}
+        </div>
+        <!--Account details page -->
+        <div class="desktop main-content-menu">
+            <div class="main-menu-profile-container maincontainer identify-page">
+                {% include '@UserBundle/profile/profile-menu.html.twig' with {'user' : user} %}
+                <div class="small-12 columns nexusSans identify-verification ">
+                    {# <div class="features_header">
+                        <div class="empty-cell"></div>
+                      
+                        <div class="header_cell">
+                            {{ 'identity_verification.qualified_account'|trans }}
+                            <span>{{ 'identity_verification.confirmed_instructor'|trans }}</span>
+                            <span>{{ 'identity_verification.institutional_information'|trans }}</span>
+                            {% if user.digitalAutoapproval == false and user.institutions|length>0 %}
+                                <a class="btn-verification btn btn-blue pending" >{{ 'identity_verification.pending'|trans }}</a>
+                            {% elseif user.digitalAutoapproval == false %}
+                                <a class="btn-verification btn btn-blue" id="verify-btn">{{ 'identity_verification.qualify'|trans }}</a>
+                                {% elseif user.digitalAutoapproval == true  %}
+                                    <a class="btn-verification btn btn-blue completed">{{ 'identity_verification.completed'|trans }}</a>
+                            {% endif %}
+                        </div>
+                    </div> #}
+                    
+                    <div class="small-12 nexusSans title pr-0 pl-0">{{ "features.title"|trans }}</div>
+                    <div class="content_identify">
+                    <div class="left_zone">
+                        <div class="features_header">
+                        <div class="header_cell">1. {{ 'identity_verification.create_basic_account'|trans }}
+                                <a class="btn-verification btn btn-blue completed">{{ 'identity_verification.completed'|trans }}</a>
+                        </div>
+                        </div>
+                        <div class="p_identify">{{ 'identity_verification.p_basic_account'|trans }} :</div>
+                        <div class="desktop_cell">
+                        <div class="featured-cell">
+                                
+                                <div  class="checked_icon">
+                                </div>
+                            </div>
+                            <div class="features_name">{{ 'identity_verification.browse_cat'|trans }}</div>
+                        
+                        </div>
+
+                        <div class="desktop_cell">
+                            <div class="featured-cell">
+                                <div  class="checked_icon">
+                                </div>
+                            </div>
+                            <div class="features_name">{{ 'identity_verification.create_lists'|trans }}</div>
+                            
+                        </div>
+                 
+                    </div>
+                   <div class="right_zone">
+                        <div class="features_header">
+                            <div class="header_cell">
+                            2. {{ 'identity_verification.confirm_status_instructor'|trans }}
+                                {% if user.digitalAutoapproval == false and user.institutions|length>0 %}
+                                    <a class="btn-verification btn btn-blue pending" >{{ 'identity_verification.pending'|trans }}</a>
+                                {% elseif user.digitalAutoapproval == false %}
+                                    <a class="btn-verification btn btn-blue" id="verify-btn">{{ 'identity_verification.qualify'|trans }}</a>
+                                {% elseif user.digitalAutoapproval == true  %}
+                                    <a class="btn-verification btn btn-blue completed">{{ 'identity_verification.completed'|trans }}</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                         <div class="p_identify nexusSans">
+                        {{ "features.feature_confirm_status"|trans }}:
+                        </div>
+                    <div class="desktop_cell">
+                        <div class="featured-cell">
+                            <div class="checked_icon">
+
+                            </div>
+                        </div>
+                        <div class="features_name">{{ 'identity_verification.auto_access'|trans }}</div>
+                        
+                    </div>
+                    <div class="desktop_cell">
+                        <div class="featured-cell">
+                            <div class="checked_icon"></div>
+                        </div>
+                        <div class="features_name">{{ 'identity_verification.access_student_educator'|trans }}</div>
+                       
+                    </div>
+                  
+                    <div class="desktop_cell">
+                        <div class="featured-cell">
+                            <div class="checked_icon">
+
+                            </div>
+                        </div>
+                        <div class="features_name">{{ 'identity_verification.share'|trans }}</div>
+                       
+                    </div>
+                    <div class="desktop_cell">
+                        <div class="featured-cell">
+                            <div class="checked_icon">
+                            </div>
+                        </div>
+                        <div class="features_name">{{ 'identity_verification.export'|trans }}</div>
+                        
+                    </div>
+                    <div class="desktop_cell">
+                        <div class="featured-cell">
+                            <div class="checked_icon"></div>
+                        </div>
+                        <div class="features_name">{{ 'identity_verification.send_feedback'|trans }}</div>
+                       
+                    </div>
+                    <div class="desktop_cell">
+                        <div class="featured-cell">
+                            <div class="checked_icon"></div>
+                        </div>
+                        <div class="features_name">{{ 'identity_verification.add_ratings'|trans }}</div>
+                        
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <!--End Account details page -->
+    </div>
+    {% include '@UserBundle/modal/account-verification-modal.html.twig' with {'institutions':institutions,'professions': professions,'user': user} %}
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('assets/plugins/dropzone/dropzone.js') }}"></script>
+    <script src="{{ asset('assets/page/profile/menu-profile.min.js') }}"></script>
+    <script src="{{ asset('assets/page/profile/account-verification.min.js') }}"></script>
+{% endblock %}

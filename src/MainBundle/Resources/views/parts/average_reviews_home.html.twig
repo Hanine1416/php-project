@@ -1,0 +1,12 @@
+<span class="review-container">
+   {% for i in 1..5 %}
+       {% if i <= book.rating %}
+           <button class="star active"><span class="stararea"><i class="star_icon"></i></span></button>
+        {% elseif (i - book.rating >= 0.2) and (i - book.rating <= 0.8) %}
+           <button class="star half_star"><span class="stararea"><i class="star_icon"></i></span></button>
+        {% else %}
+           <button class="star"><span class="stararea"><i class="star_icon"></i></span></button>
+       {% endif %}
+   {% endfor %}
+</span>
+<a class="total_reviews" href="{{ url('showBookDetails',{isbn: book.Isbn}) }}#review"> {{ book.numReviews }}  {{ "home.reviews"|trans }}</a>

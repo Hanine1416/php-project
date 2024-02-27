@@ -1,0 +1,41 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/page/showBookDetails/request-book.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/my_books/review-book-modal.css') }}">
+{% endblock %}
+<!-- review book modal -->
+<div class="review-book-modal lightbox modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="close" id="close-feedback-modal"></div>
+        <div class="modal-container scroll1 modal-content">
+            <!-- Feedback -->
+            <div class="modal-step" id="feedback-step">
+                <div class="modal-step-content">
+                    <div class="popup-title">{{ 'home.beta_release.give_feedback'|trans }}</div>
+                    <div class="small-12 medium-12 large-12 columns feedback-txt p-0">
+                        <span class="feedback-descrption">{{ 'home.beta_release.feedback_msg'|trans|raw }}</span>
+                        <textarea name="feedBack" id="feedBack" class="feedback" maxlength="250"
+                                  placeholder="{{ 'home.beta_release.feedback_placeholder'|trans }}" rows="6"
+                                  data-error="{{ 'validation.required'|trans }}"></textarea>
+                    </div>
+                    <div class="input-field small-12 medium-12 large-12 columns p-0 mt-20" id="feedback-recaptcha">
+                        <div class="g-recaptcha mb-10" id="feedRecaptcha" data-sitekey="{{ recaptchasite }}"></div>
+                    </div>
+                </div>
+                <div class="row p-0 text-right">
+                    <button class="btn btn-transparent" id="give-public-feedback" data-url="{{ url('give-feedback') }}">{{ 'home.beta_release.submit'|trans }}
+                    </button>
+                </div>
+            </div>
+            <!-- Finish review success message -->
+            <div class="modal-step feedback-modal" id="finish-step">
+                <div class="modal-step-content">
+                    <div class="finish-img">
+                        <img class="retina-reload" src="{{ asset('assets/img/icon_success@1x.png') }}" style="height: 60px;width: 60px;">
+                    </div>
+                    <div class="success-msg">{{ 'home.beta_release.success_msg'|trans }}</div>
+                    <a href="" class="btn btn-blue continue-browsing">{{ 'home.beta_release.btn_continue'|trans }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

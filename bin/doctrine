@@ -1,0 +1,10 @@
+#!/usr/bin/env php
+<?php
+
+set_time_limit(0);
+
+$cmd = __DIR__ . "/../vendor/doctrine/orm/bin/doctrine.php";
+
+for ($i = 1; $i < count($argv); $i++)
+    $cmd .= ' ' . $argv[$i];
+echo exec('php '.$cmd);

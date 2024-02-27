@@ -1,0 +1,44 @@
+{
+    "name":"Elsevier Catalog",
+    "type":"framework",
+    "description":"MVC front end Elsevier Catalog",
+    "keywords":["microframework", "rest", "router", "mvc"],
+    "homepage":"https://bitbucket.org/elsevieremea-ondemand/inspection_copy",
+    "license":"MIT",
+    "authors":[
+        {
+            "name":"Performance Sales"
+        }
+    ],
+    "repositories": [ {
+       "type": "package",
+       "package": {
+           "name": "llagerlof/MyLogPHP",
+           "version": "1.2.5",
+           "source": {
+               "url": "https://github.com/llagerlof/MyLogPHP",
+               "type": "git",
+               "reference": "master"
+             }
+        }
+   }
+    ],
+    "require":{
+        "php":">=5.3.0",
+        "slim/slim":"2.*",
+        "slim/views":"0.1.*",
+        "llagerlof/MyLogPHP":"1.2.*",
+        "twig/twig":"1.*",
+<<<<<<< HEAD
+        "twig/extensions": "1.2",
+        "Reflic/l18n":"*"
+=======
+        "twig/extensions": "1.2"
+>>>>>>> b41883829c2f57af7692cb899500c9e9a853afd3
+    },
+    "autoload":{
+        "psr-0":{
+            "": ""
+        }
+    }
+}

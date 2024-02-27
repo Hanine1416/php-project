@@ -1,0 +1,331 @@
+@charset "UTF-8";
+/*.menu {
+  border: none;
+}*/
+
+.header .mobileMenu {
+  margin-top: 14px; }
+
+.header .logo-block {
+  margin-left: 0; }
+
+.phone-block {
+  margin-top: 10px; }
+  .phone-block .label_phone {
+    font-size: 15px;
+    line-height: 2.33;
+    color: #6b6b6b; }
+  .phone-block .number-phone {
+    font-size: 17px;
+    color: #404040;
+    line-height: 6px; }
+
+.new-address-modal {
+  overflow-y: scroll;
+  bottom: 0px;
+  z-index: 350;
+  display: none;
+  position: fixed;
+  background-color: #ffffff;
+  width: 100%;
+  height: 100%;
+  padding: 24px 24px; }
+
+.add-new-address-btn button {
+  margin: 0 auto;
+  display: block;
+  margin-top: 0 !important;
+  margin-bottom: 52px !important; }
+
+.popup-title {
+  font-size: 25px !important;
+  margin-bottom: 14px;
+  margin-top: 34px;
+  color: #404040; }
+
+.close {
+  background: url(../../img/button_close.png) no-repeat scroll;
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  float: right;
+  opacity: 1; }
+
+@media (-webkit-min-device-pixel-ratio: 2) {
+  .close {
+    background: url(../../img/button_close@2x.png) no-repeat scroll;
+    background-size: contain; } }
+
+@media (-webkit-min-device-pixel-ratio: 3) {
+  .close {
+    background: url(../../img/button_close@3x.png) no-repeat scroll;
+    background-size: contain; } }
+
+.delivery-address-content {
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 24px;
+  margin: 0 auto;}
+
+.unique-address > .tile {
+  display: block; }
+
+.unique-address > button.tile-toggle {
+  display: none; }
+
+@media (-webkit-min-device-pixel-ratio: 2) {
+  .back-btn {
+    background-image: url(../../img/back_button@2x.png);
+    background-size: contain; } }
+
+@media (-webkit-min-device-pixel-ratio: 3) {
+  .back-btn {
+    background-image: url(../../img/back_button@3x.png);
+    background-size: contain; } }
+
+.verticalPadding {
+  padding: 0; }
+
+.address-block {
+  padding: 0;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  margin-top: -1px; }
+  .address-block.address-block-request {
+    border: none;
+    margin-top: 32px; }
+  .address-block.active .tile-toggle {
+    border-bottom: 0;
+    border-top: 0;
+    margin-top: 10px; }
+  .address-block .tile-toggle {
+    border: none;
+    padding: 5px 24px;
+    color: #000;
+    margin-bottom: 0;
+    background-color: #fff;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    outline: none;
+    transition: 0.4s; }
+    .address-block .tile-toggle.active > button.tile-toggle {
+      /*    font-size: 14px;*/
+      color: #53565a;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      /*remove blue higlight on tap botton */
+      padding: 5px 28px;
+      height: 45px; }
+  .address-block .address-label {
+    font-size: 21px;
+    line-height: 36px;
+    margin-bottom: 24px;
+    color: #000; }
+  .address-block label {
+    color: #000;
+    font-size: 14px; }
+  .address-block .btn-black {
+    max-width: 100% !important;
+    width: 100% !important; }
+    .address-block .btn-black:focus {
+      outline: 0; }
+
+.address-info {
+  color: #404040;
+  padding: 24px;
+  box-shadow: 0 1px 0 0 #e0e0e0; }
+  .address-info .title-address .institution-name,
+  .address-info .title-address .icon-disable, .address-info .title-address .icon-delete {
+    display: block; }
+    .address-info .title-address .institution-name a,
+    .address-info .title-address .icon-disable a, .address-info .title-address .icon-delete a {
+      float: right; }
+  .address-info .title-address .institution-name-phone {
+    color: #6b6b6b;
+    font-size: 15px;
+    line-height: 35px;
+    margin-bottom: 10px; }
+  .address-info .title-address .icon-edit {
+    display: none; }
+  .address-info .title-address h3 {
+    color: #404040; }
+  .address-info .title-address .institution-infos {
+    font-size: 17px;
+    color: #404040;
+    line-height: 25px; }
+  .address-info.disabled-inst {
+    border-top: 1px solid #e0e0e0;
+    background: #f9f9f9;
+    color: #6b6b6b !important; }
+    .address-info.disabled-inst .title-address h3 {
+      color: #6b6b6b; }
+    .address-info.disabled-inst .title-address .disable-address-btn {
+      display: none; }
+    .address-info.disabled-inst .title-address .delete-address-btn {
+      display: none; }
+    .address-info.disabled-inst .title-address .institution-infos {
+      color: #6b6b6b; }
+
+.contextual-address-message .address-message {
+  font-size: 13px;
+  padding: 0 24px 120px 24px;
+  color: #969696;
+  line-height: 23px;
+  margin-top: 24px}
+  .contextual-address-message .address-message .accountEmail {
+    color: #0075a0;
+    cursor: pointer; }
+    .contextual-address-message .address-message .accountEmail:before {
+      display: none; }
+
+.address-page-container.border {
+  position: relative; }
+
+.address-details-block {
+  color: #404040;
+  padding: 24px;
+  box-shadow: 0 1px 0 0 #e0e0e0; }
+  .address-details-block .title-address h3 {
+    color: #404040; }
+  .address-details-block.disabled-addr {
+    border-top: 1px solid #e0e0e0;
+    background: #f9f9f9;
+    color: #b2b2b2 !important; }
+    .address-details-block.disabled-addr .title-address h3 {
+      color: #b2b2b2; }
+    .address-details-block.disabled-addr .title-address .edit-address-btn {
+      display: none; }
+  .address-details-block .title-address.row {
+    margin: 0; }
+  .address-details-block .title-address h3 {
+    margin-bottom: 0;
+    font-size: 19px;
+    line-height: 1.89;
+    padding-left: 0; }
+  .address-details-block .title-address div {
+    padding-right: 0;
+    text-align: right; }
+    .address-details-block .title-address div .icon_edit {
+      width: 22px;
+      height: 22px;
+      object-fit: contain; }
+  .address-details-block .state, .address-details-block .city, .address-details-block .street, .address-details-block .postalCode, .address-details-block .country, .address-details-block .CEP, .address-details-block .Endereço, .address-details-block .Nº, .address-details-block .Complemento, .address-details-block .Bairro, .address-details-block .Cidade, .address-details-block .Estado {
+    margin-top: 10px;
+    line-height: 1;
+    font-size: 17px;
+    text-align: left; }
+    .address-details-block .state .desc, .address-details-block .city .desc, .address-details-block .street .desc, .address-details-block .postalCode .desc, .address-details-block .country .desc, .address-details-block .CEP .desc, .address-details-block .Endereço .desc, .address-details-block .Nº .desc, .address-details-block .Complemento .desc, .address-details-block .Bairro .desc, .address-details-block .Cidade .desc, .address-details-block .Estado .desc {
+      margin-top: 2px;
+      color: #6b6b6b; }
+
+span.plus-icon {
+  font-size: 30px;
+  font-weight: 300;
+  color: #000;
+  position: absolute;
+  right: 24px;
+  -webkit-transition: 400ms ease-in-out;
+  -moz-transition: 400ms ease-in-out;
+  -o-transition: 400ms ease-in-out;
+  transition: 400ms ease-in-out; }
+
+.address-block.active > button > span.plus-icon {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg); }
+
+.tile {
+  display: none; }
+
+.tile-block.active {
+  padding-bottom: 7px; }
+  .tile-block.active > .tile {
+    display: block;
+    padding: 0 28px; }
+  .tile-block.active .btn-black:disabled {
+    max-width: 100% !important; }
+
+.new-address a {
+  color: #000;
+  font-size: 14px; }
+
+nav {
+  border-bottom: none; }
+
+.btn-add,
+.address-del-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 18px !important;
+  color: #00749c;
+  padding: 0 !important;
+  margin-top: 23px !important;
+  margin-bottom: 0 !important; }
+  .btn-add::before,
+  .address-del-btn::before {
+    content: "";
+    background-image: url("../../img/icon_add.png");
+    background-size: 16px 16px;
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    margin-right: 8px; }
+  .btn-add:hover,
+  .address-del-btn:hover {
+    background-color: transparent;
+    color: #429BB9 !important; }
+  .btn-add:focus,
+  .address-del-btn:focus {
+    outline: 0; }
+
+.address-del-btn {
+  margin-bottom: 24px; }
+  .address-del-btn:before {
+    display: none; }
+
+/************** this applies from 600px onwards **********/
+@media screen and (min-width: 640px) {
+  .row.header{
+    border-bottom: 0;
+  }
+  .header.fixed{
+    border-bottom: solid 1px #e0e0e0;
+  }
+  nav {
+    border-bottom: 1px solid #DCDCDC; }
+  .new-address-modal {
+    overflow: initial;
+    top: 130px;
+    display: none;
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 600px;
+    min-height: 480px;
+    height: auto;
+    width: 100%;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px 0 rgba(9, 30, 66, 0.16); }
+  .address-page-container .address-info:first-child {
+    border-top: 1px solid #e0e0e0; }
+  .address-page-container .contextual-address-message {
+    margin-bottom: 112px; }
+    .address-page-container .contextual-address-message .address-message {
+      color: #6b6b6b;
+      font-size: 17px; }
+    .address-page-container .contextual-address-message .accountEmail a {
+      text-decoration: none; }
+  .address-block {
+    border: 1px solid #e0e0e0; }
+  body.modal-open.scrollable {
+    overflow-y: auto; }
+  .deliver-adress {
+    line-height: 24px;
+    padding-left: 0; } }

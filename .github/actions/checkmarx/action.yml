@@ -1,0 +1,60 @@
+name: Checkmarx code scan
+description: Checkmarx code scan
+inputs:
+  CHECKMARX_USER:
+    description: ""
+    required: true
+  CHECKMARX_PASS:
+    description: ""
+    required: true
+  RUN_ID:
+    description: ""
+    required: true
+  CX_PROJECT:
+    description: ""
+    required: true
+  CX_TEAM:
+    description: ""
+    required: true
+  CX_SKIP_IF_FAIL: # true or false
+    description: ""
+    required: true
+  CX_INCREMENTAL: # true or false
+    description: ""
+    required: true
+  CODE_REF:
+    description: ""
+    required: false
+    default: ""
+runs:
+  using: "composite"
+  steps:
+    - name: Code checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        ref: ${{ inputs.CODE_REF }}
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+    - name: Checkmarx scan
+      uses: checkmarx-ts/checkmarx-github-action@v1.0.6
+      with:
+        cxServer: https://codescan.elsevier.com
+        cxUsername: SCIENCE\${{ inputs.CHECKMARX_USER }}
+        cxPassword: ${{ inputs.CHECKMARX_PASS }}
+        cxTeam: ${{ inputs.CX_TEAM }}
+        cxProject: ${{ inputs.CX_PROJECT }}
+        cxIncremental: ${{ inputs.CX_INCREMENTAL }}
+        cxSkipIfFail: ${{ inputs.CX_SKIP_IF_FAIL }}
+        cxReportPDF: '${{ inputs.CX_PROJECT }}_Cx_SAST_Full_report_${{ inputs.RUN_ID }}.pdf'
+        cxExcludeFolders: css*,img,font*,vendor,less,node_modules,coverage
+  #          cxExcludeFolders: build,ux_test,mock-server,__mocks__,node_modules,coverage,server
+  #          cxExcludeFiles: '*.test.js,oidc-client.min.js'
+    - name: Upload report
+      uses: actions/upload-artifact@v2
+      with:
+        name: '${{ inputs.CX_PROJECT }}_Cx_SAST_Full_report_${{ inputs.RUN_ID }}'
+        path: 'cxcli/Checkmarx/Reports/'
+        retention-days: 7

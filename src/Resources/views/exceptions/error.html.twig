@@ -1,0 +1,103 @@
+<html>
+<head>
+    <title>Inspection Copy | {{ exception.message }}</title>
+    <!-- FAV AND TOUCH ICONS -->
+    <link rel="apple-touch-icon" href="{{ asset('assets/img/favicon.ico') }}">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+            text-align: center;
+            vertical-align: middle;
+        }
+        .wrapper{
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+       .btn-home{
+           background: #007398;
+           color: white;
+           padding: 15px 10px;
+           text-align: center;
+           display: inline-block;
+           font-size: 1.149em;
+           max-width: 184px;
+           width: 100%;
+           text-decoration: none;
+           transition: all 0.1s ease-in-out;
+           -webkit-transition: all 0.1s ease-in-out;
+           font-family: Arial, Helvetica, sans-serif;
+       }
+        .btn-home:hover,.btn-home:active{
+            background-color: #429BB9;
+            color: #fff;
+            border: 0;
+            outline: 0;
+            cursor: pointer;
+        }
+        p{
+            margin-top: 0.85cm;
+            margin-bottom: 1.1cm;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #6b6b6b;
+            font-size: 15px;
+            line-height: 1.4;
+            margin-bottom: 18px;
+        }
+        .error-img{
+            width: 300px;
+        }
+        .error-img.retina-reload{
+            width: 180px;
+        }
+        .error-code{
+            position: absolute;
+            transform: rotate(-10deg);
+            font-size: 39px;
+            color: #ff9a37;
+            font-weight: 600;
+            margin-left: -20px;
+            width: 100%;
+        }
+        .img-container{
+            position: relative;
+            margin-bottom: 1.60cm;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="wrapper">
+        {% if 'ISBN' in exception.message and  exception.code == 404 %}
+            <img class="error-img retina-reload" width="180" height="180" src="{{ asset('assets/img/not-found-img/search_book@1x.png') }}">
+        {% else %}
+            <div class="img-container">
+                <p class="error-code">
+                    {% if exception.code in [404,403]  %}
+                        {{ exception.code }}
+                    {% else %}
+                        500
+                    {% endif %}
+                    <br>
+                    {{ 'error.error'|trans }}
+                </p>
+                <img class="error-img" src="{{ asset('assets/img/ic_error_404.png') }}"><br>
+            </div>
+            <img src="{{ asset('assets/img/logoElsevier.png') }}"/>
+        {% endif %}
+
+        {% if exception.code in [404,403] %}
+            <p>{{ exception.message|raw }}</p>
+        {% else %}
+            <p>Internal server error</p>
+        {% endif %}
+        <a class="btn-home" href="{{ url('main') }}">{{ 'user.profile.home'|trans }}</a>
+    </div>
+</div>
+</body>
+</html>

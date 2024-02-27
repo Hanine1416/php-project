@@ -1,0 +1,177 @@
+{% extends 'admin.layout.html.twig' %}
+{% block bs3 %}
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.css') }}">
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/fontawesome-all.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/sortable/jquery-ui.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/admin/banner.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-component/css/bs-tooltip.css') }}">
+{% endblock %}
+{% block body %}
+    <div class="inner-wrap adminEdit register-account verticalPadding">
+        <main role="main" class="banner-page">
+            <div class="large-12 banner-container">
+                <div class="block">
+                    <div class="row">
+                        <div class="columns">
+                            <a class="backLink" href="{{ url('admin') }}"><i class="fa fa-chevron-left"></i> {{ 'admin.layout.back'|trans }}</a>
+                            <h1 class="page-title text-left">Banner </h1>
+                            <form method="post" class="form-full-width" id="formBannerPage">
+
+                                <div class="table-area text-right">
+                                    <button type="button" id="openModal" class="btn-custom " data-toggle="modal"
+                                            data-target="#bannerModal"><i
+                                                class="fa fa-plus"></i> Add banner
+                                    </button>
+                                </div>
+                                <ul id="sortable" class="large-12" >
+                                    {% for banner in banners  %}
+                                            <li class="ui-state-default banner-info {{ banner.type }}{% if banner.isEnabled == '0' %} disabled-banner{% endif %}" data-token="{{ banner.token }}" data-title-es="{{ banner.titleES }}"
+                                                data-title-fr="{{ banner.titleFR }}" data-title-de="{{ banner.titleDE }}" data-title-en="{{ banner.titleEN }}" data-title-anz="{{ banner.titleANZ }}"
+                                                data-content-es="{{ banner.contentES }}" data-content-fr="{{ banner.contentFR }}" data-content-de="{{ banner.contentDE }}"
+                                                data-content-en="{{ banner.contentEN }}" data-content-anz="{{ banner.contentANZ }}" data-active="{{ banner.isEnabled }}" data-close="{{ banner.isClosed }}"
+                                                data-type="{{ banner.type }}">
+                                                <p class="title-banner" >{{ banner.titleEN }}</p>
+                                                <input type="hidden" name="banner[{{ banner.token }}]" class="banner-content" value="{{ banner.contentEN }}">
+                                                <i class="edit-banner" data-url="{{ url('admin-edit-banner',{token:banner.token}) }}" data-token="{{ banner.token }}" data-toggle="tooltip" data-placement="bottom" title="edit banner"></i>
+                                                <i class="delete-banner" data-url="{{ url('admin-delete-banner',{token:banner.token}) }}" data-toggle="tooltip" data-placement="bottom" title="delete banner"></i>
+                                                <i class="enable-banner" data-url="{{ url('admin-enable-banner',{token:banner.token}) }}" data-toggle="tooltip" data-placement="bottom" title="enable banner"></i>
+                                                <i class="disable-banner" data-url="{{ url('admin-disable-banner',{token:banner.token}) }}" data-toggle="tooltip" data-placement="bottom" title="disable banner"></i>
+                                                <i class="preview-banner" data-toggle="modal" data-target="#preview-modal" data-toggle="tooltip" data-placement="bottom" title="preview banner"></i>
+                                            </li>
+                                    {% endfor %}
+                                </ul>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="bannerModal">
+        <div class="modal-dialog modal-lg " role="document">
+            <div class="modal-content">
+                <div class="modal-body row width-inherit center edit-banner-modal">
+                    <div id="formBanner" class="form-horizontal" role="form"
+                         data-url="{{ url('admin-add-banner') }}">
+                        <div class="small-12 medium-12 large-12 columns radio-box label-down toggle-switch p-0">
+                            <input type="checkbox" name="banner_active" id="banner_active" value="">
+                            <label for="banner_active"> Activate the banner? <span class="toggle-track"></span></label>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns radio-box label-down toggle-switch p-0">
+                            <input type="checkbox" name="banner_close" id="banner_close" value="">
+                            <label for="banner_close"> Add close button? <span class="toggle-track"></span></label>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns radio-box label-down p-0">
+                            <label for="banner-type"> Choose banner type</label>
+                            <select name="bannerType" class="grey" id="banner-type" >
+                                <option value="banner-orange">Special events/circumstances </option>
+                                <option value="banner-blue">Informative messages/announcements</option>
+                                <option value="banner-grey">Other </option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="label title-banner" for="banner-title-en">Title in English</label>
+                            <input id="banner-title-en" type="text" placeholder="Type title here..." class="form-control validate-title" maxlength="25">
+                            <span class="error text-center hide" id="questionError">{{ 'admin.faq.type_question'|trans }}</span>
+                        </div>
+                        <div class="mg-top-20">
+                            <label class="label" for="banner-content-en">Content in English</label>
+                            <textarea id="banner-content-en"
+                                      class="form-control wysiwygModal validate"></textarea>
+                            <span class="error text-center hide"
+                                  id="answerError">{{ 'admin.faq.type_answer'|trans }}</span>
+                        </div>
+                        <div>
+                            <label class="label title-banner" for="banner-title-fr">Title in French</label>
+                            <input id="banner-title-fr" type="text" placeholder="Type title here..." class="form-control validate-title" maxlength="25">
+                            <span class="error text-center hide" id="questionError">{{ 'admin.faq.type_question'|trans }}</span>
+                        </div>
+                        <div class="mg-top-20">
+                            <label class="label" for="banner-content-fr">Content in French</label>
+                            <textarea id="banner-content-fr"
+                                      class="form-control wysiwygModal validate"></textarea>
+                            <span class="error text-center hide"
+                                  id="answerError">{{ 'admin.faq.type_answer'|trans }}</span>
+                        </div>
+                        <div>
+                            <label class="label title-banner" for="banner-title-es">Title in Spanish</label>
+                            <input id="banner-title-es" type="text" placeholder="Type title here..." class="form-control validate-title" maxlength="25">
+                            <span class="error text-center hide" id="questionError">{{ 'admin.faq.type_question'|trans }}</span>
+                        </div>
+                        <div class="mg-top-20">
+                            <label class="label" for="banner-content-es">Content in Spanish</label>
+                            <textarea id="banner-content-es"
+                                      class="form-control wysiwygModal validate"></textarea>
+                            <span class="error text-center hide"
+                                  id="answerError">{{ 'admin.faq.type_answer'|trans }}</span>
+                        </div>
+                        <div>
+                            <label class="label title-banner" for="banner-title-de">Title in Deutsh</label>
+                            <input id="banner-title-de" type="text" placeholder="Type title here..." class="form-control validate-title" maxlength="25">
+                            <span class="error text-center hide" id="questionError">{{ 'admin.faq.type_question'|trans }}</span>
+                        </div>
+                        <div class="mg-top-20">
+                            <label class="label" for="banner-content-de">Content in Deutsch</label>
+                            <textarea id="banner-content-de"
+                                      class="form-control wysiwygModal validate"></textarea>
+                            <span class="error text-center hide error-content"
+                                  id="answerError">{{ 'admin.faq.type_answer'|trans }}</span>
+                        </div>
+                        <div>
+                            <label class="label title-banner" for="banner-title-anz">Title in ANZ</label>
+                            <input id="banner-title-anz" type="text" placeholder="Type title here..." class="form-control validate-title" maxlength="25">
+                            <span class="error text-center hide" id="questionError">{{ 'admin.faq.type_question'|trans }}</span>
+                        </div>
+                        <div class="mg-top-20">
+                            <label class="label" for="banner-content-anz">Content in ANZ</label>
+                            <textarea id="banner-content-anz"
+                                      class="form-control wysiwygModal validate"></textarea>
+                            <span class="error text-center hide error-content"
+                                  id="answerError">{{ 'admin.faq.type_answer'|trans }}</span>
+                        </div>
+                    </div>
+                    <div class="form-buttons text-right mt-20">
+                        <button class="btn btn-cancel btn-reset-form" data-dismiss="modal">{{ 'admin.faq.cancel'|trans }}</button>
+
+                        <button id="newBannerBtn" class="btn btn-submit btn-save-banner">{{ 'admin.faq.add'|trans }}</button>
+                        <button id="editBannerBtn" class="btn btn-submit hide" >{{ 'admin.faq.edit'|trans }}</button>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- Preview faq page modal -->
+    <div class="modal fade " tabindex="-1" role="dialog" id="preview-modal">
+        <div class="modal-dialog modal-lg " role="document">
+            <div class="modal-content">
+                <div class="modal-body row width-inherit center">
+                    <div class="section-one">
+                        <div class="small-12 medium-12 large-12 columns radio-box label-down p-0">
+                            <label for="banner-language" class="banner-language-title"> Choose banner language</label>
+                            <select name="bannerLanguage" class="grey" id="banner-language" >
+                                <option value="en">English</option>
+                                <option value="fr">French</option>
+                                <option value="es">Spanish</option>
+                                <option value="de">German</option>
+                                <option value="anz">ANZ</option>
+                            </select>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns radio-box label-down show-banner">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preview faq page modal -->
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="https://cdn.tiny.cloud/1/tdcgdkkews0u3qs5x98hlqw70cvbqxyit01cguww2cbflkzy/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="{{ asset('assets/js/sortable/jquery-ui.js') }}"></script>
+    <script src="{{ asset('assets/page/admin/banner.min.js') }}"></script>
+{% endblock %}

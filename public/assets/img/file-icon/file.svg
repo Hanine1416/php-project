@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="44.746" height="53.695" viewBox="0 0 44.746 53.695">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #e6782b;
+        opacity: 0.558;
+      }
+    </style>
+  </defs>
+  <path id="file" class="cls-1" d="M1,10V63.7H29.432L45.746,47.331V10ZM40.774,45.278,27.365,58.724H5.972V14.972h34.8ZM26.853,44.8H36.8V39.831H21.882V54.746h4.972Z" transform="translate(-1 -10)"/>
+</svg>

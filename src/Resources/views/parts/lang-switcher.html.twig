@@ -1,0 +1,30 @@
+{% if  session.get('lang') != 'in' and session.get('lang') != 'us' and session.get('region') != '1' and session.get('region') !='5' and session.get('region') !='8'  and session.get('region') !='10'  and session.get('region') !='9' %}
+<div class="row footer-container switcher-container">
+    <div class="small-12 medium-12 large-12 columns pl-0 pr-0 desktop-catalog-switcher">
+        <ul class="catalog-links"  style="display: flex;justify-content: center;">
+            <li data-lang="en" data-region="7" id="language-en">{{ 'catalogues.en'|trans }}</li>
+            <li data-lang="es" data-region="6" id="language-es">{{ 'catalogues.es'|trans }}</li>
+            <li data-lang="fr" data-region="11" id="language-fr">{{ 'catalogues.fr'|trans }}</li>
+            <li data-lang="de" data-region="12" id="language-de">{{ 'catalogues.de'|trans }}</li>
+        </ul>
+    </div>
+    <div class="small-6 medium-10 large-10 columns pl-0 pr-0 mobile-catalog-switcher">
+        <div class="catalog-links">
+            <ul>
+                <li class="dropdown">
+                    <span class="language-icon" data-toggle="dropdown" aria-expanded="true"></span><div class="dropdown-toggle nexusSans active-catalog" data-toggle="dropdown" aria-expanded="true">
+                        {{('catalogues.' ~session.get('site-lang'))|trans}}
+                    </div>
+                    <ul class="dropdown-menu">
+                        <li data-lang="en" data-region="7" id="language-en">{{ 'catalogues.en'|trans }}</li>
+                        <li data-lang="es" data-region="6" id="language-es">{{ 'catalogues.es'|trans }}</li>
+                        <li data-lang="fr" data-region="11" id="language-fr">{{ 'catalogues.fr'|trans }}</li>
+                        <li data-lang="de" data-region="12" id="language-de">{{ 'catalogues.de'|trans }}</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endif %}
+

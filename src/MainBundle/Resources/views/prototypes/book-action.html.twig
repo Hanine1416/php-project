@@ -1,0 +1,71 @@
+{% set today = "now"|date("Y-m-d") %}
+{% set isPublished = book.PublicationDate|first|date("Y-m-d") < today %}
+{% set digital = book.availableTypes.contains('Digital') %}
+<div class="bookStatus">
+    <div class="read-now-btn" data-isbn="{{ book.isbn }}">
+        {% if user.digitalAutoapproval == true %}
+            {% if isPublished %}
+                {% if digital %}
+                    <a href="{{ url('read-book',{'isbn': book.ExternalBookId}) }}" class="btn btn-blue"
+                       target="_blank">{{ 'home.recommendations_inbox.read_now_btn'|trans|raw }}
+                    </a>
+                {% else %}
+                    <div class="read_container recommendation">
+                        <a class="btn btn-blue inActive" target="_blank">{{ 'contact_us.form.subject_choices.digital_not_available'|trans|raw }}</a>
+                {% set tooltipText = ('support.support_msg'|trans|replace({'__contact_link__': url('contactUsIsbn',{'isbn': book.isbn}) }))|raw  %}
+                    <i class="fa fa-info-circle support_tooltip"
+                       data-toggle="popover" data-html="true"
+                       data-content= "{{tooltipText}}"
+                       data-placement="bottom"></i>
+                    </div>
+                {% endif %}
+            {% else %}
+                <a
+                   class="btn btn-blue inActive"
+                   target="_blank">{{ 'home.recommendations_inbox.awaiting_publication'|trans }}
+                </a>
+            {% endif %}
+        {% elseif user.digitalAutoapproval == false and user.institutions|length > 0 %}
+            {% if isPublished %}
+                {% if digital %}
+                    <a class="btn btn-blue" id="pending-btn" data-toggle-pending="tooltip" data-placement="top"
+                       title="{{ 'reading_list.pending_tooltip'|trans|raw }}">{{'home.recommendations_inbox.read_now_btn'|trans|raw}}
+                    </a>
+                {% else %}
+                    <div class="read_container recommendation">
+                        <a class="btn btn-blue inActive" data-toggle-pending="tooltip" data-placement="top"
+                       title="{{ 'reading_list.pending_tooltip'|trans|raw }}">{{ 'contact_us.form.subject_choices.digital_not_available'|trans|raw }}</a>
+                    {%  set tooltipText = ('support.support_msg'|trans|replace({'__contact_link__': url('contactUsIsbn',{'isbn': book.isbn}) }))|raw  %}
+                    <i class="fa fa-info-circle support_tooltip"
+                           data-toggle="popover" data-html="true"
+                           data-content= "{{tooltipText}}"
+                           data-placement="bottom"></i>
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="read_container recommendation">
+                    <a class="btn btn-blue inActive"  data-toggle-pending="tooltip" data-placement="top"
+                       title="{{ 'reading_list.pending_tooltip'|trans|raw }}"> {{ 'home.recommendations_inbox.awaiting_publication'|trans|raw }}
+                    </a>
+                </div>
+            {% endif %}
+        {% elseif user.digitalAutoapproval == false and user.institutions|length == 0 %}
+            {% if isPublished %}
+                {% if digital %}
+                    <a class="btn btn-blue" id="verify-btn"> {{ 'home.recommendations_inbox.read_now_btn'|trans|raw }}</a>
+                {% else %}
+                    <div class="read_container recommendation">
+                        <a class="btn btn-blue inActive" target="_blank">{{ 'contact_us.form.subject_choices.digital_not_available'|trans|raw }}</a>
+                        {% set tooltipText = ('support.support_msg'|trans|replace({'__contact_link__': url('contactUsIsbn',{'isbn': book.isbn}) }))|raw  %}
+                        <i class="fa fa-info-circle support_tooltip"
+                           data-toggle="popover" data-html="true"
+                           data-content= "{{tooltipText}}"
+                           data-placement="bottom"></i>
+                    </div>
+                {% endif %}
+            {% else %}
+                <a class="btn btn-blue inActive">  {{ 'home.recommendations_inbox.awaiting_publication'|trans|raw }} </a>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>

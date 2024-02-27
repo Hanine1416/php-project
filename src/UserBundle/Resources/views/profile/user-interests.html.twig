@@ -1,0 +1,73 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/page/user-interests/interests-profile.css') }}">
+{% endblock %}
+{% block title %}  {% endblock %}
+{% block body %}
+    <input type="hidden" id="page-title" value="profile: recommendations">
+<div class="profile-container row">
+
+    <div class="alert-success-interest update-notif">
+        <div class="close-btn"></div>
+        <div class="validation-icon"></div>
+        <div class="cookies-content">
+            {{ 'user.profile.update-info'|trans }}
+        </div>
+    </div>
+    <!--menu profile section-->
+    <div class="menu-profile-mobile">
+        {% include '@UserBundle/profile/profile-menu.html.twig' with {'user' : user} %}
+    </div>
+    <div class="desktop main-content-menu">
+        <div class="main-menu-profile-container maincontainer identify-page">
+            {% include '@UserBundle/profile/profile-menu.html.twig' with {'user' : user} %}
+            <div class="user-interests-page interests-page-container" data-update-user="{{ url('update-user-interests') }}">
+        <div class="welcome-msg">
+            <p class="welcome-info">
+                {{ 'user_interests.select_catg_msg'|trans }}
+            </p>
+        </div>
+        {% if  categoriesByType['SH']|length > 0 %}
+            <div class="categories_block">
+                <div class="category-name">
+                    {{ 'layout.health_sciences'|trans }}
+                </div>
+                <div class="sub_cat_tags"> {% if user.hasInterests == true %} {% endif %}
+                    {% for key,item in categories %}
+                        {% if 'PROMISH' in key %}
+                            <input type="checkbox" {% if key in user.interests %} checked {% endif%} name="choice" id="{{ key }}" value="{{ key }}"/><label
+                                for="{{ key }}">{{ item.category }}</label>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+        {% if categoriesByType['ST']|length > 0 %}
+            <div class="categories_block">
+                <div class="category-name">
+                    Science and Technology
+                </div>
+                <div class="sub_cat_tags">
+                    {% for key,item in categories %}
+                        {% if 'PROMISH' not in key %}
+                            <input type="checkbox" {% if key in user.interests %} checked {% endif%} name="choice" id="{{ key }}" value="{{ key }}"/><label
+                                for="{{ key }}">{{ item.category }}</label>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+        <div class="started-btn">
+            <button type="submit" class="btn btn-transparent right btn-browse submitBtn">
+                {{ 'book.modal.save_changes'|trans }}
+            </button>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('assets/page/profile/menu-profile.min.js') }}"></script>
+{% endblock %}
+

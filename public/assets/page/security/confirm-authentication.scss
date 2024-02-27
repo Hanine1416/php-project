@@ -1,0 +1,164 @@
+.confirm-auth-container{
+  padding: 8.8% 16px 44% 16px;
+  margin: 0 auto;
+  .security_icon{
+    text-align: center;
+  }
+  .welcome-msg{
+    margin: 24px 0 32px 0;
+    p{
+      font-size: 21px;
+      line-height: 1.4;
+      text-align: center;
+      color: #404040;
+    }
+  }
+  .digital_code{
+    input{
+      width: 100%;
+      height: 56px;
+      padding: 16px;
+      border: solid 1px #e5e5e5;
+      background-color: #fff;
+      margin: 0 auto;
+      font-size: 17px;
+      color: #404040;
+      &::placeholder {
+        font-size: 17px;
+        color: #c3c3c3 !important;
+      }
+    }
+    .error{
+      width: 100%;
+      margin: 8px auto;
+      max-width: 378px;
+    }
+  }
+  #submit-code{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    max-width: 378px;
+    display: block;
+  }
+  .reset_code{
+    p{
+      font-size: 15px;
+      line-height: 1.4;
+      text-align: center;
+      color: #6b6b6b;
+      width: 100%;
+      margin: 24px auto;
+      float: none !important;
+      a{
+        &:hover{
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+.update-notif{
+  border-radius: 3px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16);
+  background-color: #ffffff;
+  max-width: 320px;
+  width: 320px;
+  float: initial;
+  position: fixed;
+  bottom: 20px;
+  right: 0;
+  left: 0;
+  margin: 0 auto;
+  z-index: 999999;
+  .cookies-content{
+    font-size: 15px;
+    line-height: 31px;
+    color: #404040;
+    padding: 10px 16px;
+    text-align: center;
+  }
+  .close-btn{
+    display: block;
+    cursor: pointer;
+    margin-left: 18px;
+    position: absolute;
+    right: 16px;
+    margin-top: 18px;
+    background: url(../../img/validate-icon/ic_close_18px.png) no-repeat center center;
+    background-size: contain;
+    width: 14px;
+    height: 14px;
+  }
+  .validation-icon{
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    left: 16px;
+    margin-top: 18px;
+    background: url(../../img/validate-icon/ic_check_48px.png) no-repeat center center;
+    background-size: contain;
+    width: 18px;
+    height: 14px;
+  }
+}
+@media (-webkit-min-device-pixel-ratio: 2) {
+  .update-notif .close-btn{
+    background: url(../../img/validate-icon/ic_close_18px@2x.png) no-repeat center center;
+    background-size: contain;
+  }
+  .update-notif .validation-icon{
+    background: url(../../img/validate-icon/ic_check_48px@2x.png) no-repeat center center;
+    background-size: contain;
+  }
+}
+@media (-webkit-min-device-pixel-ratio: 3) {
+  .update-notif .close-btn{
+    background: url(../../img/validate-icon/ic_close_18px@3x.png) no-repeat center center;
+    background-size: contain;
+  }
+  .update-notif .validation-icon{
+    background: url(../../img/validate-icon/ic_check_48px@3x.png) no-repeat center center;
+    background-size: contain;
+  }
+}
+/********* desktop *********/
+@media screen and (min-width: 640px) {
+
+  .confirm-auth-container{
+    padding: 3.8% 17.2% 12% 17.2%;
+    .welcome-msg{
+      p{
+        font-size: 23px;
+      }
+    }
+    .digital_code{
+      input{
+        width: 378px;
+        height: 56px;
+        cursor: inherit;
+      }
+      .error{
+        width: 378px;
+        margin: 8px auto;
+        max-width: 378px;
+      }
+    }
+    #submit-code{
+      width: 378px;
+    }
+    .reset_code{
+      p{
+        width: 378px;
+      }
+    }
+  }
+  .update-notif{
+    top: 93px;
+    height: min-content;
+    right: 24px;
+    margin: 0;
+    left: inherit;
+  }
+
+}

@@ -1,0 +1,22 @@
+<!-- Pending qualification modal-->
+<div class=" request-book-modal lightbox modal pending-qualification-modal" id="pending-qualification-modal" tabindex="-1"
+     role="dialog">
+    <div class="modal-dialog" role="document">
+        <div id="close-modal" class="close-verify-account"></div>
+        <div class="modal-container scroll1 modal-content">
+            <!-- Pending modal -->
+            <div class="modal-step active" id="step1">
+                <div class="modal-step-content row">
+                    <div class="finish-img">
+                        <img class="retina-reload" src="{{ asset('assets/img/icon_success@1x.png') }}"
+                             style="height: 60px;width: 60px;">
+                    </div>
+                    <div class="success-msg">{{ 'account_verification.pending_modal.success_msg'|trans }}</div>
+                    <div class="finish-msg">
+                        {{ 'account_verification.pending_modal.finish_msg'|trans }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

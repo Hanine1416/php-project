@@ -1,0 +1,31 @@
+name: DB Backup to S3
+on:
+  workflow_dispatch:
+    inputs:
+      release_env:
+        description: 'Environment'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - qa
+          - prod
+      db_file:
+        description: 'Backup File name'
+        required: true
+
+jobs:
+  db-backup:
+    runs-on: [self-hosted, "${{ github.event.inputs.release_env }}", ephemeral]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: "DB Backup"
+      run: |
+        bash ${GITHUB_WORKSPACE}/.github/scripts/deploy.sh \
+        ${{ github.event.inputs.release_env }} \
+        IC-DBBackup \
+        "DB Backup - Env: ${{ github.event.inputs.release_env }}" \
+        env=${{ github.event.inputs.release_env }},file=${{ github.event.inputs.db_file }}

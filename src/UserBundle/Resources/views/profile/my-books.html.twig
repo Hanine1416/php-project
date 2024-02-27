@@ -1,0 +1,1334 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/page/my_books/my-books.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/showBookDetails/request-book.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/my_books/review-book-modal.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-component/css/bootstrap-component.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/switcher.css') }}">
+{% endblock %}
+{% block title %} {{ "user.profile.inspection_copies_page"|trans }} {% endblock %}
+{% block body %}
+    <input type="hidden" id="page-title" value="profile: my books">
+    <div class="">
+        <!--menu profile section-->
+        <div class="menu-profile-mobile">
+            {% include '@UserBundle/profile/profile-menu.html.twig' with {'user' : user} %}
+        </div>
+        <!--My Inspection copy page title-->
+{#        <div class="p-relative">
+            <span class="page-title my-inspections-copies" data-update-guide-url="{{ url('update-guide') }}">{{ "user.profile.inspection_copies_page"|trans }}</span>
+        </div>#}
+        <!--End My Inspection copy page title-->
+        {% if(nbBooksHistory > 0) %}
+        <!--Historical data link -->
+        <div class="p-relative text-center historical-data">
+           <span class="historical-content">{{ 'historical_data.title'|trans|replace( {'XXX': nbBooksHistory, '__url__': url('historical-data')})|raw }} </span>
+        </div>
+        <!--Historical data link-->
+        {% endif %}
+        {% set dateOfRequests = []  %}
+        <div class="desktop main-content-menu">
+            <div class="main-menu-profile-container maincontainer">
+                {% include '@UserBundle/profile/profile-menu.html.twig' with {'user' : user} %}
+                <div id="my-inspections-copies" class="row" data-user-phase ="{{ userPhase }}">
+            <div class="small-12 medium-12 large-12 columns filter-div">
+                {% if myBooks['Adopted']|length>0 or myBooks['Expired']|length>0 or myBooks['NotAdopted']|length>0 or myBooks['Approved']|length>0 or myBooks['Pending']|length>0 or myBooks['Declined']|length>0 or myBooks['Cancelled']|length>0 %}
+                    <div class="small-12 medium-12 large-12 columns search-books">
+                        <button class="searchIcon" data-toggle="tooltip" data-placement="bottom"
+                                title="{{ 'tooltip.search'|trans }}"></button>
+                        <input id="search-input-books" placeholder="{% if session.get('site-lang') != 'us' %}{{ 'search.placeholder'|trans }} {% else %} Search Review Copies {% endif %}" name="q"
+                               tabindex="-1"
+                               value="" maxlength="98"/>
+                    </div>
+                    <div class="small-12 medium-6 large-6 columns export-mobile p-0">
+                        <a class="btn-blue export-file" id="export-file">{{ "books_page.export.export_list_btn"|trans }}</a>
+                    </div>
+                    <div class="small-12 medium-12 large-12 columns select-books p-0">
+                        <div class="filter-sort-by small-12 medium-6 large-6 columns">
+                            <div class="titleShow">
+                                {{ "books_page.books.sortBy.title"|trans }}:
+                            </div>
+                            <div class="sort-filter sort-by">
+                                <select class="filter-selector" name="sortBy">
+                                    <option value="">{{ 'books_page.books.view_all'|trans }}</option>
+                                    <option value="filter-pending">{{ 'user.profile.books.pending_filter'|trans }}</option>
+                                    <option value="filter-coming-soon">{{ 'user.profile.books.coming_soon'|trans }}</option>
+                                    <option value="filter-approved">{{ 'user.profile.books.approved'|trans }}</option>
+                                    <option value="filter-expired">{{ 'user.profile.books.expired'|trans }}</option>
+                                    <option value="filter-adopted"
+                                        data-extra="mixed-container">{{ 'user.profile.books.adopted'|trans }}</option>
+                                    <option value="filter-not-adopted">{{ 'user.profile.books.not_adopted'|trans }}</option>
+                                    <option value="filter-declined">{{ 'user.profile.books.declined'|trans }}</option>
+                                    <option value="filter-cancelled">{{ 'user.profile.books.cancelled'|trans }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="small-12 medium-6 large-6 columns export-desktop">
+                            <a class="btn-blue export-file" id="export-file" >{{ "books_page.export.export_file"|trans }}</a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            {% if myBooks['Adopted']|length>0 or myBooks['Expired']|length>0 or myBooks['NotAdopted']|length>0 or myBooks['Approved']|length>0 or myBooks['Pending']|length>0 or myBooks['Declined']|length>0 or myBooks['Cancelled']|length>0 %}
+                <!-- Pending books -->
+                <div id="pending-container">
+                    {% for pendingBook in myBooks['Pending']|sort_preorder %}
+                        <!--Prod List listStyle-->
+                        <div class="{% if pendingBook.PreOrder %} filter-coming-soon {% else %} filter-pending {% endif %} small-12 columns prodColumn listStyle book-info {% if bookHasNotif(pendingBook,'Pending',notifications) %} has-notif {% endif %} {% if pendingBook.RequestedDate is defined and pendingBook.RequestedDate in dateOfRequests %} hidden {% endif %}"
+                             data-product="{{ pendingBook.ProductId }}">
+                            <div class="row {{ pendingBook.Isbn ~'-'~ pendingBook.Format }} bookRowAccount">
+                                <div class=" large-12 small-12 books-status columns">
+                                    <!-- Book Status -->
+                                    <div class="nexusSerif book-status-block mobile">
+                                        <div class="book-status nexusSans">
+                                            {% if pendingBook.PreOrder %}
+                                                <div>
+                                                    {{ "user.profile.books.coming_soon"|trans }}
+                                                </div>
+                                                <span class="contextual-txt">
+                                                {{ "user.profile.books.coming_soon_contextual_help"|trans }}
+                                            </span>
+                                            {% else %}
+                                                {{ "user.profile.books.pending"|trans }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <!-- End Book Status -->
+                                    <!-- Book Image -->
+                                    <div class="row book-content">
+                                        <div class="columns large-8 small-12 medium-8 p-0 part-one">
+                                            <div class="prodImg columns large-6 small-12 medium-6 p-0">
+                                                <a class="imgBlock"
+                                                   href="{{ url('showBookDetails',{'isbn':pendingBook.Isbn}) }}"><img
+                                                            src="{{ imageCdn ~'/'~ pendingBook.Isbn~'.jpg' }}"
+                                                            onerror="imgError(this);"></a>
+                                            </div>
+                                            <!-- End Book Image -->
+                                            <div class="prodDetail columns large-6 medium-6 small-12 p-0">
+                                                <div class="nexusSerif book-status-block desktop">
+                                                    <div class="book-status nexusSans">
+                                                        {% if pendingBook.PreOrder %}
+                                                            <div>
+                                                                {{ "user.profile.books.coming_soon"|trans }}
+                                                            </div>
+                                                            <span class="contextual-txt">
+                                                            {{ "user.profile.books.coming_soon_contextual_help"|trans }}
+                                                        </span>
+                                                        {% else %}
+                                                            {{ "user.profile.books.pending"|trans }}
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <!-- Book Title -->
+                                                <div class="prodTitle">
+                                                    <h2 class="nexusSerif">
+                                                        <a class="title-book nexusSans"
+                                                           href="{{ url('showBookDetails',{'isbn':pendingBook.Isbn}) }}">{{ pendingBook.Details.title }}</a>{% if pendingBook.Details.editionNumber is not null %},
+                                                        <span class="edition-book">{{ "book.edition_label"|trans }} {{ pendingBook.Details.editionNumber }}</span>{% endif %}
+                                                    </h2>
+                                                </div>
+                                                <!-- End Book Title -->
+                                                <!-- Book Editors -->
+                                                <div class="prodAuthor nexusSerif">
+                                                    {% if pendingBook.Details.shortAuthor != '' %}
+                                                        <p class="nexusSans">{{ pendingBook.Details.shortAuthor }}</p>
+                                                    {% else %}
+                                                        <p class="nexusSans">{{ pendingBook.Details.editor }}</p>
+                                                    {% endif %}
+                                                </div>
+                                                <!-- End Book Editors -->
+                                                <!-- Begin publication date -->
+                                                {% if pendingBook.Details.publicationDate[lang] != '' %}
+                                                    <div class="pubDate ">
+                                                        <span class="date-label">{{ "product_page.publication_date"|trans }}
+                                                            :</span> {{ pendingBook.Details.publicationDate[lang]|site_date_format }}
+                                                    </div>
+                                                {% endif %}
+                                                <!-- End publication date -->
+                                            </div>
+                                        </div>
+                                        <div class="columns large-4 small-12 medium-4 p-0 part-two">
+                                            <!-- Book Action  -->
+                                            <div class="bookStatus small-12 medium-12 large-12 columns">
+                                                <div class="small-12 medium-12 large-12 columns">
+                                                    <div class="small-12 medium-12 large-12 columns controls-btn">
+                                                        <a href="javascript:;" data-url="{{ url('cancelBookRequest') }}"
+                                                           data-format="{{ pendingBook.Format }}"
+                                                           data-isbn="{{ pendingBook.Isbn }}"
+                                                           data-preorder="{{ pendingBook.PreOrder }}"
+                                                           data-cancelled-title="{{ 'user.profile.books.cancelled'|trans }}"
+                                                           class="btn btn-blue reverse cancelRequest">{{ "user.profile.books.cancel_request"|trans }} </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End Book Action  -->
+                                        </div>
+                                    </div>
+                                    {% set newData = getDuplicateBook(pendingBook, myBooks, lang) %}
+                                    {% if newData['exist'] == true %}
+                                        {% set dateOfRequests = dateOfRequests|merge(newData.dateOfRequest) %}
+                                        {% include '@MainBundle/prototypes/request-historic.html.twig' with {'newData':newData, 'myBooks':myBooks} %}
+                                    {% endif %}
+                                </div>
+                            </div><!--End row-->
+                        </div>
+                        <!--End Prod List listStyle-->
+                    {% endfor %}
+                </div>
+                <!-- End pending books -->
+
+                <!-- Approved books -->
+                <div id="approved-container">
+                    {% for approvedBook in myBooks['Approved'] %}
+                        {% if approvedBook.Isbn not in myBooks['Adopted']|keys and approvedBook.Isbn not in myBooks['NotAdopted']|keys and approvedBook.Isbn not in myBooks['MixedBooks']|keys %}
+                            <!--Prod List listStyle-->
+                            <div class="small-12 columns filter-approved  prodColumn listStyle book-info {% if bookHasNotif(approvedBook,'Approved',notifications) %} has-notif {% endif %} {% if approvedBook.RequestedDate is defined and approvedBook.RequestedDate in dateOfRequests %} hidden {% endif %}"
+                                 data-product="{{ approvedBook.ProductId }}">
+                                <div class="row {{ approvedBook.Isbn ~'-'~ approvedBook.Format }} bookRowAccount">
+                                    <div class=" large-12 small-12 books-status columns">
+                                        <!-- Book Status -->
+                                        <div class="nexusSerif book-status-block mobile">
+                                            <div class="book-status nexusSans"> {{ "user.profile.books.approved"|trans }}</div>
+                                        </div>
+                                        <!-- End Book Status -->
+                                        <!-- Book Image -->
+                                        <div class="row book-content">
+                                            <div class="columns large-8 small-12 medium-8 p-0 part-one">
+                                                <div class="prodImg columns large-6 small-12 medium-6 p-0">
+                                                    <a class="imgBlock"
+                                                       href="{{ url('showBookDetails',{'isbn':approvedBook.Isbn}) }}"><img
+                                                                src="{{ imageCdn ~'/'~ approvedBook.Isbn~'.jpg' }}"
+                                                                onerror="imgError(this);"></a>
+                                                </div>
+                                                <!-- End Book Image -->
+                                                <div class="prodDetail columns large-6 medium-6 small-12 p-0">
+                                                    <div class="nexusSerif book-status-block desktop">
+                                                        <div class="book-status nexusSans"> {{ "user.profile.books.approved"|trans }}</div>
+                                                    </div>
+                                                    <!-- Book Title -->
+                                                    <div class="prodTitle">
+                                                        <h2 class="nexusSerif">
+                                                            <a class="title-book nexusSans"
+                                                               href="{{ url('showBookDetails',{'isbn':approvedBook.Isbn}) }}">{{ approvedBook.Details.title }}</a>{% if approvedBook.Details.editionNumber is not null %},
+                                                            <span class="edition-book">{{ "book.edition_label"|trans }} {{ approvedBook.Details.editionNumber }}</span>{% endif %}
+                                                        </h2>
+                                                    </div>
+                                                    <!-- End Book Title -->
+                                                    <!-- Book Editors -->
+                                                    <div class="prodAuthor nexusSerif">
+                                                        {% if approvedBook.Details.shortAuthor != '' %}
+                                                            <p class="nexusSans">{{ approvedBook.Details.shortAuthor }}</p>
+                                                        {% else %}
+                                                            <p class="nexusSans">{{ approvedBook.Details.editor }}</p>
+                                                        {% endif %}
+                                                    </div>
+                                                    <!-- End Book Editors -->
+                                                    <!-- Begin publication date -->
+                                                    {% if approvedBook.Details.publicationDate[lang] != '' %}
+                                                        <div class="pubDate ">
+                                                        <span>{{ "product_page.publication_date"|trans }}
+                                                            :</span> {{ approvedBook.Details.publicationDate[lang]|site_date_format }}
+                                                        </div>
+                                                    {% endif %}
+                                                    <!-- End publication date -->
+                                                    <!-- If Print Book approved  -->
+                                                    {% if approvedBook.SentDate != '' %}
+                                                        <div class="nexusSans dispatched-book">
+                                                            {{ "user.profile.books.dispatched_msg"|trans|replace({"__contact_india__":(user.country=="India"?"IndiaHSBooks@ReedElsevier.com":"csindia@elsevier.com"),"__day__":approvedBook.SentDate|date("j M Y")})|raw }}
+                                                        </div>
+                                                    {% endif %}
+                                                    <!-- EndIf Print Book approved  -->
+                                                </div>
+                                            </div>
+                                            <div class="columns small-12 feedback-zone mobile">
+                                            </div>
+                                            <div class="columns large-4 small-12 medium-4 p-0 part-two">
+                                                <!-- Book Action  -->
+                                                <div class="bookStatus small-12 medium-12 large-12 columns">
+                                                    <div class="small-12 medium-12 large-12 columns">
+                                                        {% if approvedBook.EndDate != '' and date('now')>date(approvedBook.EndDate) %}
+                                                            <p class="nexusSans digital-expired">{{ 'user.profile.books.digital_expired'|trans|replace({'__education_consultant__':user.amEmail})|raw }}</p>
+                                                        {% elseif  approvedBook.ExternalBookId!='' %}
+                                                            <div class="small-12 medium-12 large-12 columns controls-btn">
+                                                                <a href="{{ url('read-book',{'isbn':approvedBook.ExternalBookId}) }}"
+                                                                   target="_blank"
+                                                                   class="btn btn-blue reverse m-0 view-digital-copy">{{ "user.profile.books.read_more_btn"|trans }} </a>
+                                                            </div>
+                                                            <span class="read-book-contextual small-12 columns">
+                                                            {{ "user.profile.books.read_book_contextual_help"|trans }}
+                                                        </span>
+                                                            {% if approvedBook.EndDate != '' %}
+                                                                <p class="nexusSans expire-date">{{ "user.profile.books.expire"|trans }}
+                                                                    <span class="date">{{ approvedBook.EndDate|site_date_format }}</span>
+                                                                </p>
+                                                            {% endif %}
+                                                        {% endif %}
+                                                        {% if approvedBook.Isbn in myBooks['NotReviewed']|keys and (not book.PreOrder or approvedBook.Details.availableTypes.contains(approvedBook.Format)  ) %}
+                                                            <div class="small-12 medium-12 large-12 columns adoption-block"
+                                                                 data-adoptions="{{ myBooks['NotReviewed'][approvedBook.Isbn]['adoptions']|json_encode }}">
+                                                                {% if myBooks['NotReviewed'][approvedBook.Isbn]['adoptions']|length==1 %}
+                                                                    <div class="reading-book-label">{{ 'book.review.title'|trans }}
+                                                                        <i class="fa fa-question-circle"
+                                                                           data-toggle="popover" data-html="true"
+                                                                           data-content="{% include '@UserBundle/profile/feedback-help-popover.html.twig' %}"
+                                                                           data-placement="top"></i></div>
+                                                                    <div class="small-12 medium-12 large-12 columns controls-btn">
+                                                                        <a href="javascript:;"
+                                                                           class="btn btn-blue review-book adding-read-list"
+                                                                           data-review-status="1">{{ 'book.review.yes'|trans }}</a>
+                                                                        <a href="javascript:;"
+                                                                           class="btn btn-blue reverse review-book no-adding-read-list"
+                                                                           data-review-status="0">{{ 'book.review.no'|trans }}</a>
+                                                                    </div>
+                                                                {% else %}
+                                                                    <div class="small-12 medium-12 large-12 columns controls-btn">
+                                                                        <a href="javascript:;"
+                                                                           class="btn btn-blue review-book-multiple">{{ 'book.review.give_feedback'|trans }}</a>
+                                                                    </div>
+                                                                {% endif %}
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+                                                    <p class="nexusSans digital-expired no-access hidden">{{ 'user.profile.books.digital_expired'|trans|replace({'__education_consultant__':user.amEmail})|raw }}</p>
+                                                </div>
+                                                <!-- End Book Action  -->
+                                            </div>
+                                            <div class="columns small-12 feedback-zone desktop">
+                                            </div>
+                                        </div><!--End row-->
+                                        {% set newData = getDuplicateBook(approvedBook, myBooks, lang) %}
+                                        {% if newData['exist'] == true %}
+                                            {% set dateOfRequests = dateOfRequests|merge(newData.dateOfRequest) %}
+                                            {% include '@MainBundle/prototypes/request-historic.html.twig' with {'newData':newData, 'myBooks':myBooks} %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End Prod List listStyle-->
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <!-- End approved books -->
+
+                <!-- Adopted books -->
+                <div id="adopted-container">
+                    {% for adoptedIsbn,adoptedBook in myBooks['Adopted'] %}
+                        <!--Prod List listStyle-->
+                        <div class="small-12 filter-adopted columns prodColumn listStyle book-info {% if adoptedBook.RequestedDate is defined and adoptedBook.RequestedDate in dateOfRequests %} hidden {% endif %}">
+                            <div class="row  bookRowAccount">
+                                <div class=" large-12 small-12 books-status columns">
+                                    <!-- Book Status -->
+                                    <div class="nexusSerif book-status-block mobile">
+                                        {% if adoptedIsbn in myBooks['Renewed']|keys %}
+                                            {% set renewedYear =  date((myBooks['Renewed'][adoptedIsbn]['adoptions']|last)['EstimatedClose'])|date('Y') %}
+                                            {% if myBooks['Renewed'][adoptedIsbn]['adoptions']|length==1 %}
+                                                <div class="book-status nexusSans">
+                                                    {% if adoptedIsbn in myBooks['Renewal']|keys %}{{ 'book.review.previously'|trans }} {% endif %}
+                                                    {{ 'user.profile.books.adopted'|trans }}
+                                                    <span>{{ 'book.review.dash'|trans }} {{ 'book.review.at'|trans }}
+                                                        {{ (renewedYear-1) ~'book.review.slash'|trans~renewedYear }}
+                                                        {{ 'book.review.reading'|trans }}</span>
+                                                </div>
+                                            {% else %}
+                                                <div class="book-status nexusSans">
+                                                    {% if adoptedIsbn in myBooks['Renewal']|keys %} {{ 'book.review.previously'|trans }} {% endif %}
+                                                    {{ 'user.profile.books.adopted_for'|trans|replace({'##confirmed_nbr##':myBooks['Renewed'][adoptedIsbn]['adoptions']|length})|raw }}
+                                                    <span>{{ 'book.review.dash'|trans }} {{ 'book.review.at'|trans }}
+                                                        {{ (renewedYear-1) ~'book.review.slash'|trans~renewedYear }}
+                                                        {{ 'book.review.reading'|trans }}</span>
+                                                </div>
+                                                <div>
+                                                    <a href="javascript:;" class="see-courses renewal"
+                                                       data-adoptions="{{ myBooks['Renewed'][adoptedIsbn]['adoptions']|json_encode }}">{{ 'book.review.courses_details.see_details'|trans }}</a>
+                                                </div>
+                                            {% endif %}
+                                        {% elseif adoptedIsbn in myBooks['NotRenewed']|keys %}
+                                            {% set notRenewedYear =  date((myBooks['NotRenewed'][adoptedIsbn]['adoptions']|last)['EstimatedClose'])|date('Y') %}
+                                            <div class="book-status nexusSans mb-0">
+                                                {{ 'user.profile.books.not_renewed'|trans }} {{ (notRenewedYear-1) ~'book.review.slash'|trans~notRenewedYear }}
+                                            </div>
+                                        {% else %}
+                                            {% set adoptedYear =  date((adoptedBook['adoptions']|last)['EstimatedClose'])|date('Y') %}
+                                            {% if adoptedBook['adoptions']|length==1 %}
+                                                <div class="book-status nexusSans">
+                                                    {% if adoptedIsbn in myBooks['Renewal']|keys %} {{ 'book.review.previously'|trans }} {% endif %}
+                                                    {{ 'user.profile.books.adopted'|trans }}
+                                                    <span>{{ 'book.review.dash'|trans }} {{ 'book.review.at'|trans }}{{ (adoptedYear-1) ~'book.review.slash'|trans~adoptedYear }} {{ 'book.review.reading'|trans }}</span>
+                                                </div>
+                                            {% else %}
+                                                <div class="book-status nexusSans">
+                                                    {% if adoptedIsbn in myBooks['Renewal']|keys %} {{ 'book.review.previously'|trans }} {% endif %}
+                                                    {{ 'user.profile.books.adopted_for'|trans|replace({'##confirmed_nbr##':adoptedBook['adoptions']|length})|raw }}
+                                                    <span>{{ 'book.review.dash'|trans }} {{ 'book.review.at'|trans }}{{ (adoptedYear-1) ~'book.review.slash'|trans~adoptedYear }} {{ 'book.review.reading'|trans }}</span>
+                                                </div>
+                                                <div>
+                                                    <a href="javascript:;" class="see-courses"
+                                                       data-adoptions="{{ adoptedBook['adoptions']|json_encode }}">{{ 'book.review.courses_details.see_details'|trans }}</a>
+                                                </div>
+                                            {% endif %}
+                                        {% endif %}
+                                    </div>
+                                    <!-- End Book Status -->
+                                    <!-- Book Image -->
+                                    <div class="row book-content">
+                                        <div class="columns large-8 small-12 medium-8 p-0 part-one">
+                                            <div class="prodImg columns large-6 small-12 medium-6 p-0">
+                                                <a class="imgBlock"
+                                                   href="{{ url('showBookDetails',{'isbn':adoptedBook.Isbn}) }}"><img
+                                                            src="{{ imageCdn ~'/'~ adoptedBook.Isbn~'.jpg' }}"
+                                                            onerror="imgError(this);"></a>
+                                            </div>
+                                            <!-- End Book Image -->
+                                            <div class="prodDetail columns large-6 medium-6 small-12 p-0">
+                                                <div class="nexusSerif book-status-block desktop">
+                                                    {% if adoptedIsbn in myBooks['Renewed']|keys %}
+                                                        {% set renewedYear =  date((myBooks['Renewed'][adoptedIsbn]['adoptions']|last)['EstimatedClose'])|date('Y') %}
+                                                        {% if myBooks['Renewed'][adoptedIsbn]['adoptions']|length==1 %}
+                                                            <div class="book-status nexusSans mb-0">
+                                                                {% if adoptedIsbn in myBooks['Renewal']|keys %} {{ 'book.review.previously'|trans }} {% endif %}
+                                                                {{ 'user.profile.books.adopted'|trans }}
+                                                                <span>{{ 'book.review.dash'|trans }} {{ 'book.review.at'|trans }}{{ (renewedYear-1) ~'book.review.slash'|trans~renewedYear }} {{ 'book.review.reading'|trans }}</span>
+                                                            </div>
+                                                        {% else %}
+                                                            <div class="book-status nexusSans mb-0">
+                                                                {% if adoptedIsbn in myBooks['Renewal']|keys %} {{ 'book.review.previously'|trans }} {% endif %}
+                                                                {{ 'user.profile.books.adopted_for'|trans|replace({'##confirmed_nbr##':myBooks['Renewed'][adoptedIsbn]['adoptions']|length})|raw }}
+                                                                <span>{{ 'book.review.dash'|trans }} {{ 'book.review.at'|trans }}{{ (renewedYear-1) ~'book.review.slash'|trans~renewedYear }} {{ 'book.review.reading'|trans }}</span>
+                                                            </div>
+                                                            <div class="text-left">
+                                                                <a href="javascript:;" class="see-courses renewal"
+                                                                   data-adoptions="{{ myBooks['Renewed'][adoptedIsbn]['adoptions']|json_encode }}">{{ 'book.review.courses_details.see_details'|trans }}</a>
+                                                            </div>
+                                                        {% endif %}
+                                                    {% elseif adoptedIsbn in myBooks['NotRenewed']|keys %}
+                                                        {% set notRenewedYear =  date((myBooks['NotRenewed'][adoptedIsbn]['adoptions']|last)['EstimatedClose'])|date('Y') %}
+                                                        <div class="book-status nexusSans mb-0">
+                                                            {{ 'user.profile.books.not_renewed'|trans }} {{ (notRenewedYear-1) ~'book.review.slash'|trans~notRenewedYear }}
+                                                        </div>
+                                                    {% else %}
+                                                        {% set adoptedYear =  date((adoptedBook['adoptions']|last)['EstimatedClose'])|date('Y') %}
+                                                        {% if adoptedBook['adoptions']|length==1 %}
+                                                            <div class="book-status nexusSans mb-0">
+                                                                {% if adoptedIsbn in myBooks['Renewal']|keys %} {{ 'book.review.previously'|trans }} {% endif %}
+                                                                {{ 'user.profile.books.adopted'|trans }}
+                                                                <span>{{ 'book.review.dash'|trans }} {{ 'book.review.at'|trans }}{{ (adoptedYear-1) ~'book.review.slash'|trans~adoptedYear }} {{ 'book.review.reading'|trans }}</span>
+                                                            </div>
+                                                        {% else %}
+                                                            <div class="book-status nexusSans mb-0">
+                                                                {% if adoptedIsbn in myBooks['Renewal']|keys %} {{ 'book.review.previously'|trans }} {% endif %}
+                                                                {{ 'user.profile.books.adopted_for'|trans|replace({'##confirmed_nbr##':adoptedBook['adoptions']|length})|raw }}
+                                                                <span>{{ 'book.review.dash'|trans }} {{ 'book.review.at'|trans }}{{ (adoptedYear-1) ~'book.review.slash'|trans~adoptedYear }} {{ 'book.review.reading'|trans }}</span>
+                                                            </div>
+                                                            <div class="text-left">
+                                                                <a href="javascript:;" class="see-courses"
+                                                                   data-adoptions="{{ adoptedBook['adoptions']|json_encode }}">{{ 'book.review.courses_details.see_details'|trans }}</a>
+                                                            </div>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                </div>
+                                                <!-- Book Title -->
+                                                <div class="prodTitle">
+                                                    <h2 class="nexusSerif">
+                                                        <a class="title-book nexusSans"
+                                                           href="{{ url('showBookDetails',{'isbn':adoptedBook.Isbn}) }}">{{ adoptedBook.Details.title }}</a>{% if adoptedBook.Details.editionNumber is not null %},
+                                                        <span class="edition-book">{{ "book.edition_label"|trans }} {{ adoptedBook.Details.editionNumber }}</span>{% endif %}
+                                                    </h2>
+                                                </div>
+                                                <!-- End Book Title -->
+                                                <!-- Book Editors -->
+                                                <div class="prodAuthor nexusSerif">
+                                                    {% if adoptedBook.Details.shortAuthor != '' %}
+                                                        <p class="nexusSans">{{ adoptedBook.Details.shortAuthor }}</p>
+                                                    {% else %}
+                                                        <p class="nexusSans">{{ adoptedBook.Details.editor }}</p>
+                                                    {% endif %}
+                                                </div>
+                                                <!-- End Book Editors -->
+                                                <!-- Begin publication date -->
+                                                {% if adoptedBook.Details.publicationDate[lang] != '' %}
+                                                    <div class="pubDate ">
+                                                        <span>{{ "product_page.publication_date"|trans }}
+                                                            :</span> {{ adoptedBook.Details.publicationDate[lang]|site_date_format }}
+                                                    </div>
+                                                {% endif %}
+                                                <!-- End publication date -->
+                                                <!-- If Print Book approved  -->
+                                                {% if adoptedBook.SentDate != '' %}
+                                                    <div class="nexusSans dispatched-book">
+                                                        {{ "user.profile.books.dispatched_msg"|trans|replace({"__contact_india__":(user.country=="India"?"IndiaHSBooks@ReedElsevier.com":"csindia@elsevier.com"),"__day__":adoptedBook.SentDate|date("j M Y")})|raw }}
+                                                    </div>
+                                                {% endif %}
+                                                <!-- EndIf Print Book approved  -->
+                                            </div>
+                                        </div>
+                                        <!-- Feedback for mobile -->
+                                        <div class="columns small-12 feedback-zone mobile">
+                                            {% for feedback in adoptedBook['Feedback'] %}
+                                                {% include '@MainBundle/prototypes/feedback.html.twig' with {'feedbackDate':feedback['feedbackDate']|site_date_format ,'feedbackText':feedback['feedbackText']} %}
+                                            {% endfor %}
+                                        </div>
+                                        <!-- End feedback for mobile -->
+                                        <div class="columns large-4 small-12 medium-4 p-0 part-two">
+                                            <!-- Book Action  -->
+                                            <div class="bookStatus small-12 medium-12 large-12 columns">
+                                                <div class="small-12 medium-12 large-12 columns">
+                                                    {% if adoptedBook.Status in ['Approved','Expired'] %}
+                                                        {% if adoptedBook.EndDate != '' and date('now')>date(adoptedBook.EndDate) %}
+                                                            <p class="nexusSans digital-expired">{{ 'user.profile.books.digital_expired'|trans|replace({'__education_consultant__':user.amEmail})|raw }}</p>
+                                                        {% elseif  adoptedBook.ExternalBookId!='' %}
+                                                            <div class="small-12 medium-12 large-12 columns controls-btn">
+                                                                <a href="{{ url('read-book',{'isbn':adoptedBook.ExternalBookId}) }}"
+                                                                   target="_blank"
+                                                                   class="btn btn-blue reverse m-0 view-digital-copy">{{ "user.profile.books.read_more_btn"|trans }} </a>
+                                                            </div>
+                                                            <span class="read-book-contextual small-12 columns">
+                                                                {{ "user.profile.books.read_book_contextual_help"|trans }}
+                                                            </span>
+                                                            {% if adoptedBook.EndDate != '' %}
+                                                                <p class="nexusSans expire-date">{{ "user.profile.books.expire"|trans }}
+                                                                    <span class="date">{{ adoptedBook.EndDate }}</span>
+                                                                </p>
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endif %}
+                                                    <!-- Check book renewal -->
+                                                    {% if adoptedIsbn in myBooks['Renewal']|keys %}
+                                                        <div class="small-12 medium-12 large-12 columns renewal-block"
+                                                             data-feedback="{% if adoptedBook['Feedback']|length>0 %}{{ adoptedBook['Feedback'][adoptedBook['Feedback']|length-1]|json_encode }}{% endif %}"
+                                                             data-adoptions="{{ myBooks['Renewal'][adoptedIsbn]['adoptions']|json_encode }}">
+                                                            {% if  myBooks['Renewal'][adoptedIsbn]['adoptions']|length==1 %}
+                                                                <div class="reading-book-label">{{ 'book.renewal.title_one'|trans }}
+                                                                    <i class="fa fa-question-circle"
+                                                                       data-toggle="popover" data-html="true"
+                                                                       data-content="{% include '@UserBundle/profile/feedback-help-popover.html.twig' %}"
+                                                                       data-placement="top"></i>
+                                                                </div>
+                                                                <div class="small-12 medium-12 large-12 columns controls-btn ">
+                                                                    <a href="javascript:;"
+                                                                       class="btn btn-blue renew-book"
+                                                                       data-renewal-status="1">{{ 'book.review.yes'|trans }}</a>
+                                                                    <a href="javascript:;"
+                                                                       class="btn btn-blue reverse renew-book"
+                                                                       data-renewal-status="0">{{ 'book.review.no'|trans }}</a>
+                                                                </div>
+                                                            {% else %}
+                                                                <div class="reading-book-label">{{ 'book.renewal.title_many'|trans }}
+                                                                    <i class="fa fa-question-circle"
+                                                                       data-toggle="popover" data-html="true"
+                                                                       data-content="{% include '@UserBundle/profile/feedback-help-popover.html.twig' %}"
+                                                                       data-placement="top"></i>
+                                                                </div>
+                                                                <div class="small-12 medium-12 large-12 columns controls-btn">
+                                                                    <a href="javascript:;"
+                                                                       class="btn btn-blue renew-book-multiple">{{ 'book.review.give_feedback'|trans }}</a>
+                                                                </div>
+                                                            {% endif %}
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                                <p class="nexusSans digital-expired no-access hidden">{{ 'user.profile.books.digital_expired'|trans|replace({'__education_consultant__':user.amEmail})|raw }}</p>
+                                            </div>
+                                            <!-- End Book Action  -->
+                                        </div>
+                                        <!-- Feedback for desktop -->
+                                        <div class="columns small-12 feedback-zone desktop">
+                                            {% for feedback in adoptedBook['Feedback'] %}
+                                                {% include '@MainBundle/prototypes/feedback.html.twig' with {'feedbackDate':feedback['feedbackDate']|site_date_format ,'feedbackText':feedback['feedbackText']} %}
+                                            {% endfor %}
+                                        </div>
+                                        <!-- End feedback for desktop -->
+                                    </div>
+                                    {% set newData = getDuplicateBook(adoptedBook, myBooks, lang) %}
+                                    {% if newData['exist'] == true %}
+                                        {% set dateOfRequests = dateOfRequests|merge(newData.dateOfRequest) %}
+                                        {% include '@MainBundle/prototypes/request-historic.html.twig' with {'newData':newData, 'myBooks':myBooks} %}
+                                    {% endif %}
+                                </div>
+                            </div><!--End row-->
+                        </div>
+                        <!--End Prod List listStyle-->
+                    {% endfor %}
+                </div>
+                <!-- End adopted books -->
+
+                <!-- Not adopted books -->
+                <div id="not-adopted-container">
+                    {% for notAdoptedIsbn,notAdoptedBook in myBooks['NotAdopted'] %}
+                        <!--Prod List listStyle-->
+                        <div class="small-12 filter-not-adopted columns prodColumn listStyle book-info {% if notAdoptedBook.RequestedDate is defined and notAdoptedBook.RequestedDate in dateOfRequests %} hidden {% endif %}">
+                            <div class="row  bookRowAccount">
+                                <div class=" large-12 small-12 books-status columns">
+                                    <!-- Book Status -->
+                                    <div class="nexusSerif book-status-block mobile">
+                                        <div class="book-status nexusSans"> {{ 'user.profile.books.not_adopted'|trans }} </div>
+                                    </div>
+                                    <!-- End Book Status -->
+                                    <!-- Book Image -->
+                                    <div class="row book-content">
+                                        <div class="columns large-8 small-12 medium-8 p-0 part-one">
+                                            <div class="prodImg columns large-6 small-12 medium-6 p-0">
+                                                <a class="imgBlock"
+                                                   href="{{ url('showBookDetails',{'isbn':notAdoptedBook.Isbn}) }}"><img
+                                                            src="{{ imageCdn ~'/'~ notAdoptedBook.Isbn~'.jpg' }}"
+                                                            onerror="imgError(this);"></a>
+                                            </div>
+                                            <!-- End Book Image -->
+                                            <div class="prodDetail columns large-6 medium-6 small-12 p-0">
+                                                <div class="nexusSerif book-status-block desktop">
+                                                    <div class="book-status nexusSans"> {{ 'user.profile.books.not_adopted'|trans }} </div>
+                                                </div>
+                                                <!-- Book Title -->
+                                                <div class="prodTitle">
+                                                    <h2 class="nexusSerif">
+                                                        <a class="title-book nexusSans"
+                                                           href="{{ url('showBookDetails',{'isbn':notAdoptedBook.Isbn}) }}">{{ notAdoptedBook.Details.title }}</a>{% if notAdoptedBook.Details.editionNumber is not null %},
+                                                        <span class="edition-book">{{ "book.edition_label"|trans }} {{ notAdoptedBook.Details.editionNumber }}</span>{% endif %}
+                                                    </h2>
+                                                </div>
+                                                <!-- End Book Title -->
+                                                <!-- Book Editors -->
+                                                <div class="prodAuthor nexusSerif">
+                                                    {% if notAdoptedBook.Details.shortAuthor != '' %}
+                                                        <p class="nexusSans">{{ notAdoptedBook.Details.shortAuthor }}</p>
+                                                    {% else %}
+                                                        <p class="nexusSans">{{ notAdoptedBook.Details.editor }}</p>
+                                                    {% endif %}
+                                                </div>
+                                                <!-- End Book Editors -->
+                                                <!-- Begin publication date -->
+                                                {% if notAdoptedBook.Details.publicationDate[lang] != '' %}
+                                                    <div class="pubDate ">
+                                                        <span>{{ "product_page.publication_date"|trans }}
+                                                            :</span> {{ notAdoptedBook.Details.publicationDate[lang]|site_date_format }}
+                                                    </div>
+                                                {% endif %}
+                                                <!-- End publication date -->
+                                                <!-- If Print Book approved  -->
+                                                {% if notAdoptedBook.SentDate != '' %}
+                                                    <div class="nexusSans dispatched-book">
+                                                        {{ "user.profile.books.dispatched_msg"|trans|replace({"__contact_india__":(user.country=="India"?"IndiaHSBooks@ReedElsevier.com":"csindia@elsevier.com"),"__day__":book.SentDate|date("j M Y")})|raw }}
+                                                    </div>
+                                                {% endif %}
+                                                <!-- EndIf Print Book approved  -->
+                                            </div>
+                                        </div>
+                                        <div class="columns large-4 small-12 medium-4 p-0 part-two">
+                                            <!-- Book Action  -->
+                                            <div class="bookStatus small-12 medium-12 large-12 columns">
+                                                <p class="small-12 medium-12 large-12 columns">
+                                                    {% if notAdoptedBook.Status in ['Approved','Expired'] %}
+                                                    {% if notAdoptedBook.EndDate != '' and date('now')>date(notAdoptedBook.EndDate) %}
+                                                <p class="nexusSans digital-expired">{{ 'user.profile.books.digital_expired'|trans|replace({'__education_consultant__':user.amEmail})|raw }}</p>
+                                                {% elseif notAdoptedBook.ExternalBookId!='' %}
+                                                    <div class="small-12 medium-12 large-12 columns controls-btn">
+                                                        <a href="{{ url('read-book',{'isbn':notAdoptedBook.ExternalBookId}) }}"
+                                                           target="_blank"
+                                                           class="btn btn-blue reverse m-0 view-digital-copy">{{ "user.profile.books.read_more_btn"|trans }} </a>
+                                                    </div>
+                                                    <span class="read-book-contextual small-12 columns">
+                                                            {{ "user.profile.books.read_book_contextual_help"|trans }}
+                                                        </span>
+                                                    {% if notAdoptedBook.EndDate != '' %}
+                                                        <p class="nexusSans  expire-date">{{ "user.profile.books.expire"|trans }}
+                                                            <span class="date">{{ notAdoptedBook.EndDate }}</span>
+                                                        </p>
+                                                    {% endif %}
+                                                {% endif %}
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <!-- End Bo636ok Action  -->
+                                    </div>
+                                    {% set newData = getDuplicateBook(notAdoptedBook, myBooks, lang) %}
+                                    {% if newData['exist'] == true %}
+                                        {% set dateOfRequests = dateOfRequests|merge(newData.dateOfRequest) %}
+                                        {% include '@MainBundle/prototypes/request-historic.html.twig' with {'newData':newData, 'myBooks':myBooks} %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div><!--End row-->
+                        <!--End Prod List listStyle-->
+                    {% endfor %}
+                </div>
+                <!-- End not adopted books -->
+
+                <!-- Confirmed for courses & not for other -->
+                <div id="mixed-container">
+                    {% for mixedIsbn,mixedBook in myBooks['MixedAdoption'] %}
+                        {% set book = mixedBook %}
+                        <!--Prod List listStyle-->
+                        <div class="small-12 filter-adopted columns prodColumn listStyle book-info {% if bookHasNotif(book,'Adopted',notifications) %} has-notif {% endif %}  {% if mixedBook.RequestedDate is defined and mixedBook.RequestedDate in dateOfRequests %} hidden {% endif %} ">
+                            <div class="row  bookRowAccount">
+                                <div class=" large-12 small-12 books-status columns">
+                                    <!-- Book Status -->
+                                    <div class="nexusSerif book-status-block mobile">
+                                        {% if mixedIsbn in myBooks['Renewed']|keys %}
+                                            {% set renewedYear =  date((myBooks['Renewed'][mixedIsbn]['adoptions']|last)['EstimatedClose'])|date('Y') %}
+                                            {% if myBooks['Renewed'][mixedIsbn]['adoptions']|length==1 %}
+                                                <div class="book-status nexusSans">
+                                                    {% if mixedIsbn in myBooks['Renewal']|keys %} {{ 'book.review.previously'|trans }} {% endif %}
+                                                    {{ 'user.profile.books.adopted'|trans }}
+                                                    <span>{{ 'book.review.dash'|trans }} {{ 'book.review.at'|trans }}{{ (renewedYear-1) ~'book.review.slash'|trans~renewedYear }} {{ 'book.review.reading'|trans }}</span>
+                                                </div>
+                                            {% else %}
+                                                <div class="book-status nexusSans">
+                                                    {% if mixedIsbn in myBooks['Renewal']|keys %} {{ 'book.review.previously'|trans }} {% endif %}
+                                                    {{ 'user.profile.books.adopted_for'|trans|replace({'##confirmed_nbr##':myBooks['Renewed'][mixedIsbn]['adoptions']|length})|raw }}
+                                                    <span>{{ 'book.review.dash'|trans }} {{ 'book.review.at'|trans }}{{ (renewedYear-1) ~'book.review.slash'|trans~renewedYear }} {{ 'book.review.reading_list'|trans }}</span>
+                                                </div>
+                                                <div>
+                                                    <a href="javascript:;" class="see-courses renewal"
+                                                       data-adoptions="{{ myBooks['Renewed'][mixedIsbn]['adoptions']|json_encode }}">{{ 'book.review.courses_details.see_details'|trans }}</a>
+                                                </div>
+                                            {% endif %}
+                                        {% elseif mixedIsbn in myBooks['NotRenewed']|keys %}
+                                            {% set notRenewedYear =  date((myBooks['NotRenewed'][mixedIsbn]['adoptions']|last)['EstimatedClose'])|date('Y') %}
+                                            <div class="book-status nexusSans mb-0">
+                                                {{ 'user.profile.books.not_renewed'|trans }} {{ (notRenewedYear-1) ~'book.review.slash'|trans~notRenewedYear }}
+                                            </div>
+                                        {% elseif mixedIsbn in myBooks['MixedRenewal']|keys %}
+                                            {% set renewedYear =  date((myBooks['MixedRenewal'][mixedIsbn]['Renewed']|last)['EstimatedClose'])|date('Y') %}
+                                            <div class="book-status nexusSans">
+                                                {% if mixedIsbn in myBooks['Renewal']|keys %} {{ 'book.review.previously'|trans }} {% endif %}
+                                                {% if (myBooks['MixedRenewal'][mixedIsbn]['NotRenewed']|length ==1) %}
+                                                    {{ 'book.review.courses_details.confirmed_and_not_right_for_one'|trans|replace({'##confirmed_nbr##':(mixedBook['Adopted']|length),'##not_confirmed_nbr##':(mixedBook['NotAdopted']|length) })|raw }}
+                                                {% else %}
+                                                    {{ 'book.review.courses_details.confirmed_and_not_right_for'|trans|replace({'##confirmed_nbr##':(mixedBook['Adopted']|length),'##not_confirmed_nbr##':(mixedBook['NotAdopted']|length) })|raw }}
+                                                {% endif %}
+                                                <span>- {{ 'book.review.on'|trans }}{{ (renewedYear-1) ~'book.review.slash'|trans~renewedYear }} {{ 'book.review.reading_list'|trans }}</span>
+                                            </div>
+                                            <div>
+                                                <a href="javascript:;" class="see-courses renewal"
+                                                   data-adoptions="{{ myBooks['MixedRenewal'][mixedIsbn]|json_encode }}">{{ 'book.review.courses_details.see_details'|trans }}</a>
+                                            </div>
+                                        {% else %}
+                                            {% set adoptedYear =  date((mixedBook['Adopted']|last)['EstimatedClose'])|date('Y') %}
+                                            <div class="book-status nexusSans">
+                                                {% if mixedIsbn in myBooks['Renewal']|keys %} {{ 'book.review.previously'|trans }} {% endif %}
+                                                {% if mixedBook['NotAdopted']|length ==1 %}
+                                                    {{ 'book.review.courses_details.confirmed_and_not_right_for_one'|trans|replace({'##confirmed_nbr##':(mixedBook['Adopted']|length),'##not_confirmed_nbr##':(mixedBook['NotAdopted']|length) })|raw }}
+                                                {% else %}
+                                                    {{ 'book.review.courses_details.confirmed_and_not_right_for'|trans|replace({'##confirmed_nbr##':(mixedBook['Adopted']|length),'##not_confirmed_nbr##':(mixedBook['NotAdopted']|length) })|raw }}
+                                                {% endif %}
+                                                <span>- {{ 'book.review.on'|trans }}{{ (adoptedYear-1) ~'book.review.slash'|trans~adoptedYear }} {{ 'book.review.reading_list'|trans }}</span>
+                                            </div>
+                                            <div>
+                                                <a href="javascript:;" class="see-courses"
+                                                   data-adoptions="{{ mixedBook|json_encode }}">{{ 'book.review.courses_details.see_details'|trans }}</a>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <!-- End Book Status -->
+                                    <!-- Book Image -->
+                                    <div class="row book-content">
+                                        <div class="columns large-8 small-12 medium-8 p-0 part-one">
+                                            <div class="prodImg columns large-6 small-12 medium-6 p-0">
+                                                <a class="imgBlock"
+                                                   href="{{ url('showBookDetails',{'isbn':book.Isbn}) }}"><img
+                                                            src="{{ imageCdn ~'/'~ book.Isbn~'.jpg' }}"
+                                                            onerror="imgError(this);"></a>
+                                            </div>
+                                            <!-- End Book Image -->
+                                            <div class="prodDetail columns large-6 medium-6 small-12 p-0">
+                                                <div class="nexusSerif book-status-block desktop">
+                                                    {% if mixedIsbn in myBooks['Renewed']|keys %}
+                                                        {% set renewedYear =  date((myBooks['Renewed'][mixedIsbn]['adoptions']|last)['EstimatedClose'])|date('Y') %}
+                                                        {% if myBooks['Renewed'][mixedIsbn]['adoptions']|length==1 %}
+                                                            <div class="book-status nexusSans mb-0">
+                                                                {% if mixedIsbn in myBooks['Renewal']|keys %} {{ 'book.review.previously'|trans }} {% endif %}
+                                                                {{ 'user.profile.books.adopted'|trans }}
+                                                                <span>- {{ 'book.review.at'|trans }}{{ (renewedYear-1) ~'book.review.slash'|trans~renewedYear }} {{ 'book.review.reading'|trans }}</span>
+                                                            </div>
+                                                        {% else %}
+                                                            <div class="book-status nexusSans mb-0">
+                                                                {% if mixedIsbn in myBooks['Renewal']|keys %} {{ 'book.review.previously'|trans }} {% endif %}
+                                                                {{ 'user.profile.books.adopted_for'|trans|replace({'##confirmed_nbr##':myBooks['Renewed'][mixedIsbn]['adoptions']|length})|raw }}
+                                                                <span>{{ 'book.review.dash'|trans }} {{ 'book.review.at'|trans }}{{ (renewedYear-1) ~'book.review.slash'|trans~renewedYear }} {{ 'book.review.reading'|trans }}</span>
+                                                            </div>
+                                                            <div class="text-left">
+                                                                <a href="javascript:;" class="see-courses renewal"
+                                                                   data-adoptions="{{ myBooks['Renewed'][mixedIsbn]['adoptions']|json_encode }}">{{ 'book.review.courses_details.see_details'|trans }}</a>
+                                                            </div>
+                                                        {% endif %}
+                                                    {% elseif mixedIsbn in myBooks['NotRenewed']|keys %}
+                                                        {% set notRenewedYear =  date((myBooks['NotRenewed'][mixedIsbn]['adoptions']|last)['EstimatedClose'])|date('Y') %}
+                                                        <div class="book-status nexusSans mb-0">
+                                                            {{ 'user.profile.books.not_renewed'|trans }} {{ (notRenewedYear-1) ~'book.review.slash'|trans~notRenewedYear }}
+                                                        </div>
+                                                    {% elseif mixedIsbn in myBooks['MixedRenewal']|keys %}
+                                                        {% set renewedYear =  date((myBooks['MixedRenewal'][mixedIsbn]['Renewed']|last)['EstimatedClose'])|date('Y') %}
+                                                        <div class="book-status nexusSans mb-0">
+                                                            {% if mixedIsbn in myBooks['Renewal']|keys %} {{ 'book.review.previously'|trans }} {% endif %}
+                                                            {% if (myBooks['MixedRenewal'][mixedIsbn]['NotRenewed']|length ==1) %}
+                                                                {{ 'book.review.courses_details.confirmed_and_not_right_for_one'|trans|replace({'##confirmed_nbr##':(mixedBook['Adopted']|length),'##not_confirmed_nbr##':(mixedBook['NotAdopted']|length) })|raw }}
+                                                            {% else %}
+                                                                {{ 'book.review.courses_details.confirmed_and_not_right_for'|trans|replace({'##confirmed_nbr##':(mixedBook['Adopted']|length),'##not_confirmed_nbr##':(mixedBook['NotAdopted']|length) })|raw }}
+                                                            {% endif %}
+                                                            <span>- {{ 'book.review.on'|trans }}{{ (renewedYear-1) ~'book.review.slash'|trans~renewedYear }} {{ 'book.review.reading_list'|trans }}</span>
+                                                        </div>
+                                                        <div class="text-left">
+                                                            <a href="javascript:;" class="see-courses renewal"
+                                                               data-adoptions="{{ myBooks['MixedRenewal'][mixedIsbn]|json_encode }}">{{ 'book.review.courses_details.see_details'|trans }}</a>
+                                                        </div>
+                                                    {% else %}
+                                                        {% set adoptedYear =  date((mixedBook['Adopted']|last)['EstimatedClose'])|date('Y') %}
+                                                        <div class="book-status nexusSans mb-0">
+                                                            {% if mixedIsbn in myBooks['Renewal']|keys %} {{ 'book.review.previously'|trans }} {% endif %}
+                                                            {% if mixedBook['NotAdopted']|length ==1 %}
+                                                                {{ 'book.review.courses_details.confirmed_and_not_right_for_one'|trans|replace({'##confirmed_nbr##':(mixedBook['Adopted']|length),'##not_confirmed_nbr##':(mixedBook['NotAdopted']|length) })|raw }}
+                                                            {% else %}
+                                                                {{ 'book.review.courses_details.confirmed_and_not_right_for'|trans|replace({'##confirmed_nbr##':(mixedBook['Adopted']|length),'##not_confirmed_nbr##':(mixedBook['NotAdopted']|length) })|raw }}
+                                                            {% endif %}
+                                                            <span>- {{ 'book.review.on'|trans }}{{ (adoptedYear-1) ~'book.review.slash'|trans~adoptedYear }} {{ 'book.review.reading_list'|trans }}</span>
+                                                        </div>
+                                                        <div class="text-left">
+                                                            <a href="javascript:;" class="see-courses"
+                                                               data-adoptions="{{ mixedBook|json_encode }}">{{ 'book.review.courses_details.see_details'|trans }}</a>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                                <!-- Book Title -->
+                                                <div class="prodTitle">
+                                                    <h2 class="nexusSerif">
+                                                        <a class="title-book nexusSans"
+                                                           href="{{ url('showBookDetails',{'isbn':book.Isbn}) }}">{{ book.Details.title }}</a>{% if book.Details.editionNumber is not null %},
+                                                        <span class="edition-book">{{ "book.edition_label"|trans }} {{ book.Details.editionNumber }}</span>{% endif %}
+                                                    </h2>
+                                                </div>
+                                                <!-- End Book Title -->
+                                                <!-- Book Editors -->
+                                                <div class="prodAuthor nexusSerif">
+                                                    {% if book.Details.shortAuthor != '' %}
+                                                        <p class="nexusSans">{{ book.Details.shortAuthor }}</p>
+                                                    {% else %}
+                                                        <p class="nexusSans">{{ book.Details.editor }}</p>
+                                                    {% endif %}
+                                                </div>
+                                                <!-- End Book Editors -->
+                                                <!-- Begin publication date -->
+                                                {% if book.Details.publicationDate[lang] != '' %}
+                                                    <div class="pubDate ">
+                                                        <span>{{ "product_page.publication_date"|trans }}
+                                                            :</span> {{ book.Details.publicationDate[lang]|site_date_format }}
+                                                    </div>
+                                                {% endif %}
+                                                <!-- End publication date -->
+                                                <!-- If Print Book approved  -->
+                                                {% if book.SentDate != '' %}
+                                                    <div class="nexusSans dispatched-book">
+                                                        {{ "user.profile.books.dispatched_msg"|trans|replace({"__contact_india__":(user.country=="India"?"IndiaHSBooks@ReedElsevier.com":"csindia@elsevier.com"),"__day__":book.SentDate|date("j M Y")})|raw }}
+                                                    </div>
+                                                {% endif %}
+                                                <!-- EndIf Print Book approved  -->
+                                            </div>
+                                        </div>
+                                        <!-- Feedback for mobile -->
+                                        <div class="columns small-12 feedback-zone mobile">
+                                            {% for feedback in mixedBook['Feedback'] %}
+                                                {% include '@MainBundle/prototypes/feedback.html.twig' with {'feedbackDate':feedback['feedbackDate']|site_date_format ,'feedbackText':feedback['feedbackText']} %}
+                                            {% endfor %}
+                                        </div>
+                                        <!-- End feedback for mobile -->
+                                        <div class="columns large-4 small-12 medium-4 p-0 part-two">
+                                            <!-- Book Action  -->
+                                            <div class="bookStatus small-12 medium-12 large-12 columns">
+                                                <div class="small-12 medium-12 large-12 columns">
+                                                    {% if book.Status in ['Approved','Expired'] %}
+                                                        {% if book.EndDate != '' and date('now')>date(book.EndDate) %}
+                                                            <p class="nexusSans digital-expired">{{ 'user.profile.books.digital_expired'|trans|replace({'__education_consultant__':user.amEmail})|raw }}</p>
+                                                        {% elseif book.ExternalBookId!='' %}
+                                                            <div class="small-12 medium-12 large-12 columns controls-btn">
+                                                                <a href="{{ url('read-book',{'isbn':book.ExternalBookId}) }}"
+                                                                   target="_blank"
+                                                                   class="btn btn-blue reverse m-0 view-digital-copy">{{ "user.profile.books.read_more_btn"|trans }} </a>
+                                                            </div>
+                                                            <span class="read-book-contextual small-12 columns">
+                                                                {{ "user.profile.books.read_book_contextual_help"|trans }}
+                                                            </span>
+                                                            {% if book.EndDate != '' %}
+                                                                <p class="nexusSans expire-date">{{ "user.profile.books.expire"|trans }}
+                                                                    <span class="date">{{ book.EndDate }}</span></p>
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endif %}
+                                                    <!-- Check book renewal -->
+                                                    {% if mixedIsbn in myBooks['Renewal']|keys %}
+                                                        <div class="small-12 medium-12 large-12 columns renewal-block"
+                                                             data-adoptions="{{ myBooks['Renewal'][mixedIsbn]['adoptions']|json_encode }}"
+                                                             data-feedback="{% if mixedBook['Feedback']|length>0 %}{{ mixedBook['Feedback'][mixedBook['Feedback']|length-1]|json_encode }}{% endif %}">
+                                                            {% if myBooks['Renewal'][mixedIsbn]['adoptions']|length==1 %}
+                                                                <div class="reading-book-label">{{ 'book.renewal.title_one'|trans }}
+                                                                    <i class="fa fa-question-circle"
+                                                                       data-toggle="popover" data-html="true"
+                                                                       data-content="{% include '@UserBundle/profile/feedback-help-popover.html.twig' %}"
+                                                                       data-placement="top"></i>
+                                                                </div>
+                                                                <div class="small-12 medium-12 large-12 columns controls-btn">
+                                                                    <a href="javascript:;"
+                                                                       class="btn btn-blue renew-book"
+                                                                       data-renewal-status="1">{{ 'book.review.yes'|trans }}</a>
+                                                                    <a href="javascript:;"
+                                                                       class="btn btn-blue reverse renew-book"
+                                                                       data-renewal-status="0">{{ 'book.review.no'|trans }}</a>
+                                                                </div>
+                                                            {% else %}
+                                                                <div class="reading-book-label">{{ 'book.renewal.title_many'|trans }}
+                                                                    <i class="fa fa-question-circle"
+                                                                       data-toggle="popover" data-html="true"
+                                                                       data-content="{% include '@UserBundle/profile/feedback-help-popover.html.twig' %}"
+                                                                       data-placement="top"></i>
+                                                                </div>
+                                                                <div class="small-12 medium-12 large-12 columns controls-btn">
+                                                                    <a href="javascript:;"
+                                                                       class="btn btn-blue renew-book-multiple">{{ 'book.review.give_feedback'|trans }}</a>
+                                                                </div>
+                                                            {% endif %}
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                                <p class="nexusSans digital-expired hidden no-access">{{ 'user.profile.books.digital_expired'|trans|replace({'__education_consultant__':user.amEmail})|raw }}</p>
+                                            </div>
+                                            <!-- End Book Action  -->
+                                        </div>
+                                        <!-- Feedback for desktop -->
+                                        <div class="columns small-12 feedback-zone desktop">
+                                            {% for feedback in mixedBook['Feedback'] %}
+                                                {% include '@MainBundle/prototypes/feedback.html.twig' with {'feedbackDate':feedback['feedbackDate']|site_date_format ,'feedbackText':feedback['feedbackText']} %}
+                                            {% endfor %}
+                                        </div>
+                                        <!-- End feedback for desktop -->
+                                    </div>
+                                    {% set newData = getDuplicateBook(mixedBook, myBooks, lang) %}
+                                    {% if newData['exist'] == true %}
+                                        {% set dateOfRequests = dateOfRequests|merge(newData.dateOfRequest) %}
+                                        {% include '@MainBundle/prototypes/request-historic.html.twig' with {'newData':newData, 'myBooks':myBooks} %}
+                                    {% endif %}
+                                </div>
+                            </div><!--End row-->
+                        </div>
+                        <!--End Prod List listStyle-->
+                    {% endfor %}
+                </div>
+                <!-- End for confirmed & not confirmed -->
+
+                <!-- Show book to renew without adoption -->
+                <div id="renewal-container">
+                    {% for bookToRenewIsbn,bookToRenew in myBooks['Renewal'] %}
+                        {% if bookToRenewIsbn not in myBooks['Adopted']|keys and bookToRenewIsbn not in myBooks['MixedAdoption']|keys %}
+                            {% set book = bookToRenew %}
+                            <!--Prod List listStyle-->
+                            <div class="small-12 filter-renewed columns prodColumn listStyle book-info {% if bookToRenew.RequestedDate is defined and bookToRenew.RequestedDate in dateOfRequests %} hidden {% endif %}">
+                                <div class="row  bookRowAccount">
+                                    <div class=" large-12 small-12 books-status columns">
+                                        <!-- Book Status -->
+                                        <div class="nexusSerif book-status-block mobile">
+                                            <div class="book-status nexusSans">
+                                                {{ 'user.profile.books.adopted'|trans }}
+                                            </div>
+                                        </div>
+                                        <!-- End Book Status -->
+                                        <!-- Book Image -->
+                                        <div class="row book-content">
+                                            <div class="columns large-8 small-12 medium-8 p-0 part-one">
+                                                <div class="prodImg columns large-6 small-12 medium-6 p-0">
+                                                    <a class="imgBlock"
+                                                       href="{{ url('showBookDetails',{'isbn':book.Isbn}) }}"><img
+                                                                src="{{ imageCdn ~'/'~ book.Isbn~'.jpg' }}"
+                                                                onerror="imgError(this);"></a>
+                                                </div>
+                                                <!-- End Book Image -->
+                                                <div class="prodDetail columns large-6 medium-6 small-12 p-0">
+                                                    <div class="nexusSerif book-status-block desktop">
+                                                        <div class="book-status nexusSans mb-0">
+                                                            {{ 'user.profile.books.adopted'|trans }}
+                                                        </div>
+                                                    </div>
+                                                    <!-- Book Title -->
+                                                    <div class="prodTitle">
+                                                        <h2 class="nexusSerif">
+                                                            <a class="title-book nexusSans"
+                                                               href="{{ url('showBookDetails',{'isbn':book.Isbn}) }}">{{ book.Details.title }}</a>{% if book.Details.editionNumber is not null %},
+                                                            <span class="edition-book">{{ "book.edition_label"|trans }} {{ book.Details.editionNumber }}</span>{% endif %}
+                                                        </h2>
+                                                    </div>
+                                                    <!-- End Book Title -->
+                                                    <!-- Book Editors -->
+                                                    <div class="prodAuthor nexusSerif">
+                                                        {% if book.Details.shortAuthor != '' %}
+                                                            <p class="nexusSans">{{ book.Details.shortAuthor }}</p>
+                                                        {% else %}
+                                                            <p class="nexusSans">{{ book.Details.editor }}</p>
+                                                        {% endif %}
+                                                    </div>
+                                                    <!-- End Book Editors -->
+                                                    <!-- Begin publication date -->
+                                                    {% if book.Details.publicationDate[lang] != '' %}
+                                                        <div class="pubDate ">
+                                                            <span>{{ "product_page.publication_date"|trans }}
+                                                                :</span> {{ book.Details.publicationDate[lang]|site_date_format }}
+                                                        </div>
+                                                    {% endif %}
+                                                    <!-- End publication date -->
+                                                    <!-- If Print Book approved  -->
+                                                    {% if book.SentDate != '' %}
+                                                        <div class="nexusSans dispatched-book">
+                                                            {{ "user.profile.books.dispatched_msg"|trans|replace({"__contact_india__":(user.country=="India"?"IndiaHSBooks@ReedElsevier.com":"csindia@elsevier.com"),"__day__":book.SentDate|date("j M Y")})|raw }}
+                                                        </div>
+                                                    {% endif %}
+                                                    <!-- EndIf Print Book approved  -->
+                                                </div>
+                                            </div>
+                                            <!-- Feedback for mobile -->
+                                            <div class="columns small-12 feedback-zone mobile">
+                                                {% for feedback in bookToRenew['Feedback'] %}
+                                                    {% include '@MainBundle/prototypes/feedback.html.twig' with {'feedbackDate':feedback['feedbackDate']|site_date_format ,'feedbackText':feedback['feedbackText']} %}
+                                                {% endfor %}
+                                            </div>
+                                            <!-- End feedback for mobile -->
+                                            <div class="columns large-4 small-12 medium-4 p-0 part-two">
+                                                <!-- Book Action  -->
+                                                <div class="bookStatus small-12 medium-12 large-12 columns">
+                                                    <div class="small-12 medium-12 large-12 columns">
+                                                        <!-- Check book renewal -->
+                                                        <div class="small-12 medium-12 large-12 columns renewal-block"
+                                                             data-adoptions="{{ bookToRenew['adoptions']|json_encode }}"
+                                                             data-feedback="{% if bookToRenew['Feedback']|length>0 %}{{ bookToRenew['Feedback'][(bookToRenew['Feedback']|length)-1]|json_encode }}{% endif %}">
+                                                            {% if bookToRenew['adoptions']|length==1 %}
+                                                                <div class="reading-book-label">{{ 'book.renewal.title_one'|trans }}
+                                                                    <i class="fa fa-question-circle"
+                                                                       data-toggle="popover" data-html="true"
+                                                                       data-content="{% include '@UserBundle/profile/feedback-help-popover.html.twig' %}"
+                                                                       data-placement="top"></i>
+                                                                </div>
+                                                                <div class="small-12 medium-12 large-12 columns controls-btn">
+                                                                    <a href="javascript:;"
+                                                                       class="btn btn-blue renew-book"
+                                                                       data-renewal-status="1">{{ 'book.review.yes'|trans }}</a>
+                                                                    <a href="javascript:;"
+                                                                       class="btn btn-blue reverse renew-book"
+                                                                       data-renewal-status="0">{{ 'book.review.no'|trans }}</a>
+                                                                </div>
+                                                            {% else %}
+                                                                <div class="reading-book-label">{{ 'book.renewal.title_many'|trans }}
+                                                                    <i class="fa fa-question-circle"
+                                                                       data-toggle="popover" data-html="true"
+                                                                       data-content="{% include '@UserBundle/profile/feedback-help-popover.html.twig' %}"
+                                                                       data-placement="top"></i>
+                                                                </div>
+                                                                <div class="small-12 medium-12 large-12 columns controls-btn">
+                                                                    <a href="javascript:;"
+                                                                       class="btn btn-blue renew-book-multiple">{{ 'book.review.give_feedback'|trans }}</a>
+                                                                </div>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <p class="nexusSans digital-expired hidden no-access">{{ 'user.profile.books.digital_expired'|trans|replace({'__education_consultant__':user.amEmail})|raw }}</p>
+                                                </div>
+                                                <!-- End Book Action  -->
+                                            </div>
+                                            <!-- Feedback for desktop -->
+                                            <div class="columns small-12 feedback-zone desktop">
+                                                {% for feedback in bookToRenew['Feedback'] %}
+                                                    {% include '@MainBundle/prototypes/feedback.html.twig' with {'feedbackDate':feedback['feedbackDate']|site_date_format,'feedbackText':feedback['feedbackText']} %}
+                                                {% endfor %}
+                                            </div>
+                                            <!-- End feedback for desktop -->
+                                        </div>
+                                        {% set newData = getDuplicateBook(bookToRenew, myBooks, lang) %}
+                                        {% if newData['exist'] == true %}
+                                            {% set dateOfRequests = dateOfRequests|merge(newData.dateOfRequest) %}
+                                            {% include '@MainBundle/prototypes/request-historic.html.twig' with {'newData':newData, 'myBooks':myBooks} %}
+                                        {% endif %}
+                                    </div>
+                                </div><!--End row-->
+                            </div>
+                            <!--End Prod List listStyle-->
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <!-- End for confirmed & not confirmed -->
+
+                <!-- Expired books -->
+                <div id="expired-container">
+                    {% for expiredBook in myBooks['Expired'] %}
+                        {% if expiredBook.Isbn not in myBooks['Adopted']|keys and expiredBook.Isbn not in myBooks['NotAdopted']|keys %}
+                            <!--Prod List listStyle-->
+                            <div class="small-12 filter-expired columns prodColumn listStyle book-info {% if bookHasNotif(expiredBook,'Expired',notifications) %} has-notif {% endif %}
+                                  {% if expiredBook.RequestedDate is defined and expiredBook.RequestedDate in dateOfRequests %} hidden {% endif %}"
+                                 data-product="{{ expiredBook.ProductId }}">
+                                <div class="row {{ expiredBook.Isbn ~'-'~ expiredBook.Format }} bookRowAccount">
+                                    <div class=" large-12 small-12 books-status columns">
+                                        <!-- Book Status -->
+                                        <div class="nexusSerif book-status-block mobile">
+                                            <div class="book-status nexusSans"> {{ "user.profile.books.expired"|trans }}</div>
+                                        </div>
+                                        <!-- End Book Status -->
+                                        <!-- Book Image -->
+                                        <div class="row book-content">
+                                            <div class="columns large-8 small-12 medium-8 p-0 part-one">
+                                                <div class="prodImg columns large-6 small-12 medium-6 p-0">
+                                                    <a class="imgBlock"
+                                                       href="{{ url('showBookDetails',{'isbn':expiredBook.Isbn}) }}"><img
+                                                                src="{{ imageCdn ~'/'~ expiredBook.Isbn~'.jpg' }}"
+                                                                onerror="imgError(this);"></a>
+                                                </div>
+                                                <!-- End Book Image -->
+                                                <div class="prodDetail columns large-6 medium-6 small-12 p-0">
+                                                    <div class="nexusSerif book-status-block desktop">
+                                                        <div class="book-status nexusSans"> {{ "user.profile.books.expired"|trans }}</div>
+                                                    </div>
+                                                    <!-- Book Title -->
+                                                    <div class="prodTitle">
+                                                        <h2 class="nexusSerif">
+                                                            <a class="title-book nexusSans"
+                                                               href="{{ url('showBookDetails',{'isbn':expiredBook.Isbn}) }}">{{ expiredBook.Details.title }}</a>{% if expiredBook.Details.editionNumber is not null %},
+                                                            <span class="edition-book">{{ "book.edition_label"|trans }} {{ expiredBook.Details.editionNumber }}</span>{% endif %}
+                                                        </h2>
+                                                    </div>
+                                                    <!-- End Book Title -->
+                                                    <!-- Book Editors -->
+                                                    <div class="prodAuthor nexusSerif">
+                                                        {% if expiredBook.Details.shortAuthor != '' %}
+                                                            <p class="nexusSans">{{ expiredBook.Details.shortAuthor }}</p>
+                                                        {% else %}
+                                                            <p class="nexusSans">{{ expiredBook.Details.editor }}</p>
+                                                        {% endif %}
+                                                    </div>
+
+                                                    <!-- End Book Editors -->
+                                                    <!-- Begin publication date -->
+                                                    {% if expiredBook.Details.publicationDate[lang] != '' %}
+                                                        <div class="pubDate ">
+                                                    <span>{{ "product_page.publication_date"|trans }}
+                                                        :</span> {{ expiredBook.Details.publicationDate[lang]|site_date_format }}
+                                                        </div>
+                                                    {% endif %}
+                                                    <!-- End publication date -->
+                                                </div>
+                                            </div>
+                                            <div class="columns small-12 feedback-zone mobile"></div>
+                                            <!-- Book Action  -->
+                                            <div class="columns large-4 small-12 medium-4 p-0 part-two">
+                                                <div class="bookStatus small-12 medium-12 large-12 columns">
+                                                    <p class="small-12 medium-12 large-12 columns">
+                                                        {% if expiredBook.Isbn in myBooks['NotReviewed']|keys %}
+                                                    <div class="small-12 medium-12 large-12 columns adoption-block"
+                                                         data-adoptions="{{ myBooks['NotReviewed'][expiredBook.Isbn]['adoptions']|json_encode }}">
+                                                        {% if myBooks['NotReviewed'][expiredBook.Isbn]['adoptions']|length==1 %}
+                                                            <div class="reading-book-label">{{ 'book.review.title'|trans }}
+                                                                <i class="fa fa-question-circle"
+                                                                   data-toggle="popover" data-html="true"
+                                                                   data-content="{% include '@UserBundle/profile/feedback-help-popover.html.twig' %}"
+                                                                   data-placement="top"></i>
+                                                            </div>
+                                                            <div class="small-12 medium-12 large-12 columns controls-btn">
+                                                                <a href="javascript:;" class="btn btn-blue review-book adding-read-list"
+                                                                   data-review-status="1">{{ 'book.review.yes'|trans }}</a>
+                                                                <a href="javascript:;"
+                                                                   class="btn btn-blue reverse review-book no-adding-read-list"
+                                                                   data-review-status="0">{{ 'book.review.no'|trans }}</a>
+                                                            </div>
+                                                        {% elseif  myBooks['NotReviewed'][expiredBook.Isbn]['adoptions']|length > 1 %}
+                                                            <div class="small-12 medium-12 large-12 columns controls-btn">
+                                                                <a href="javascript:;"
+                                                                   class="btn btn-blue review-book-multiple">{{ 'book.review.give_feedback'|trans }}</a>
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+                                                    {% endif %}
+                                                    <p class="nexusSans digital-expired">{{ 'user.profile.books.digital_expired'|trans|replace({'__education_consultant__':user.amEmail})|raw }}</p>
+                                                </div>
+                                            </div>
+                                            <!-- End Book Action  -->
+                                            {% set newData = getDuplicateBook(expiredBook, myBooks, lang) %}
+                                            {% if newData['exist'] == true %}
+                                                {% set dateOfRequests = dateOfRequests|merge(newData.dateOfRequest) %}
+                                                {% include '@MainBundle/prototypes/request-historic.html.twig' with {'newData':newData, 'myBooks':myBooks} %}
+                                            {% endif %}
+                                        </div>
+                                    </div><!--End row-->
+                                </div>
+                            </div>
+                            <!--End Prod List listStyle-->
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <!-- End expired books -->
+
+                <!-- Declined books -->
+                <div id="declined-container">
+                    {% for declinedBook in myBooks['Declined'] %}
+                        <!--Prod List listStyle-->
+                        <div class="small-12 filter-declined columns prodColumn listStyle book-info  {% if bookHasNotif(declinedBook,'Declined',notifications) %} has-notif {% endif %}
+                                {% if declinedBook.RequestedDate is defined and declinedBook.RequestedDate in dateOfRequests %} hidden {% endif %}"
+                             data-product="{{ declinedBook.ProductId }}">
+                            <div class="row {{ declinedBook.Isbn ~'-'~ declinedBook.Format }} bookRowAccount">
+                                <div class=" large-12 small-12 books-status columns">
+                                    <!-- Book Status -->
+                                    <div class="nexusSerif book-status-block mobile">
+                                        <div class="book-status nexusSans"> {{ "user.profile.books.declined"|trans }}</div>
+                                    </div>
+                                    <!-- End Book Status -->
+                                    <!-- Book Image -->
+                                    <div class="row book-content">
+                                        <div class="columns large-8 small-12 medium-8 p-0 part-one">
+                                            <div class="prodImg columns large-6 small-12 medium-6 p-0">
+                                                <a class="imgBlock"
+                                                   href="{{ url('showBookDetails',{'isbn':declinedBook.Isbn}) }}"><img
+                                                            src="{{ imageCdn ~'/'~ declinedBook.Isbn~'.jpg' }}"
+                                                            onerror="imgError(this);"></a>
+                                            </div>
+                                            <!-- End Book Image -->
+                                            <div class="prodDetail columns large-6 medium-6 small-12 p-0">
+                                                <div class="nexusSerif book-status-block desktop">
+                                                    <div class="book-status nexusSans"> {{ "user.profile.books.declined"|trans }}</div>
+                                                </div>
+                                                <!-- Book Title -->
+                                                <div class="prodTitle">
+                                                    <h2 class="nexusSerif">
+                                                        <a class="title-book nexusSans"
+                                                           href="{{ url('showBookDetails',{'isbn':declinedBook.Isbn}) }}">{{ declinedBook.Details.title }}</a>{% if declinedBook.Details.editionNumber is not null %},
+                                                        <span class="edition-book">{{ "book.edition_label"|trans }} {{ declinedBook.Details.editionNumber }}</span>{% endif %}
+                                                    </h2>
+                                                </div>
+                                                <!-- End Book Title -->
+                                                <!-- Book Editors -->
+                                                <div class="prodAuthor nexusSerif">
+                                                    {% if declinedBook.Details.shortAuthor != '' %}
+                                                        <p class="nexusSans">{{ declinedBook.Details.shortAuthor }}</p>
+                                                    {% else %}
+                                                        <p class="nexusSans">{{ declinedBook.Details.editor }}</p>
+                                                    {% endif %}
+                                                </div>
+                                                <!-- End Book Editors -->
+                                                <!-- Begin publication date -->
+                                                {% if declinedBook.Details.publicationDate[lang] != '' %}
+                                                    <div class="pubDate ">
+                                                    <span>{{ "product_page.publication_date"|trans }}
+                                                        :</span> {{ declinedBook.Details.publicationDate[lang]|site_date_format }}
+                                                    </div>
+                                                {% endif %}
+                                                <!-- End publication date -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% set newData = getDuplicateBook(declinedBook, myBooks, lang) %}
+                                    {% if newData['exist'] == true %}
+                                        {% set dateOfRequests = dateOfRequests|merge(newData.dateOfRequest) %}
+                                        {% include '@MainBundle/prototypes/request-historic.html.twig' with {'newData':newData, 'myBooks':myBooks} %}
+                                    {% endif %}
+                                </div>
+                            </div><!--End row-->
+                        </div>
+                        <!--End Prod List listStyle-->
+                    {% endfor %}
+                </div>
+                <!-- End declined books -->
+
+                <!-- Cancelled books -->
+                <div id="cancelled-container">
+                    {% for cancelledBook in myBooks['Cancelled'] %}
+                        <!--Prod List listStyle-->
+                        <div class="small-12 filter-cancelled columns prodColumn listStyle book-info  {% if cancelledBook.RequestedDate is defined and cancelledBook.RequestedDate in dateOfRequests %} hidden {% endif %}">
+                            <div class="row bookRowAccount">
+                                <div class=" large-12 small-12 books-status columns">
+                                    <!-- Book Status -->
+                                    <div class="nexusSerif book-status-block mobile">
+                                        <div class="book-status nexusSans"> {{ "user.profile.books.cancelled"|trans }}</div>
+                                    </div>
+                                    <!-- End Book Status -->
+                                    <!-- Book Image -->
+                                    <div class="row book-content">
+                                        <div class="columns large-8 small-12 medium-8 p-0 part-one">
+                                            <div class="prodImg columns large-6 small-12 medium-6 p-0">
+                                                <a class="imgBlock"
+                                                   href="{{ url('showBookDetails',{'isbn':cancelledBook.Isbn}) }}"><img
+                                                            src="{{ imageCdn ~'/'~ cancelledBook.Isbn~'.jpg' }}"
+                                                            onerror="imgError(this);"></a>
+                                            </div>
+                                            <!-- End Book Image -->
+                                            <div class="prodDetail columns large-6 medium-6 small-12 p-0">
+                                                <div class="nexusSerif book-status-block desktop">
+                                                    <div class="book-status nexusSans"> {{ "user.profile.books.cancelled"|trans }}</div>
+                                                </div>
+                                                <!-- Book Title -->
+                                                <div class="prodTitle">
+                                                    <h2 class="nexusSerif">
+                                                        <a class="title-book nexusSans"
+                                                           href="{{ url('showBookDetails',{'isbn':cancelledBook.Isbn}) }}">{{ cancelledBook.Details.title }}</a>{% if cancelledBook.Details.editionNumber is not null %},
+                                                        <span class="edition-book">{{ "book.edition_label"|trans }} {{ cancelledBook.Details.editionNumber }}</span>{% endif %}
+                                                    </h2>
+                                                </div>
+                                                <!-- End Book Title -->
+                                                <!-- Book Editors -->
+                                                <div class="prodAuthor nexusSerif">
+                                                    {% if cancelledBook.Details.shortAuthor != '' %}
+                                                        <p class="nexusSans">{{ cancelledBook.Details.shortAuthor }}</p>
+                                                    {% else %}
+                                                        <p class="nexusSans">{{ cancelledBook.Details.editor }}</p>
+                                                    {% endif %}
+                                                </div>
+                                                <!-- End Book Editors -->
+                                                <!-- Begin publication date -->
+                                                {% if cancelledBook.Details.publicationDate[lang] != '' %}
+                                                    <div class="pubDate">
+                                                     <span>{{ "product_page.publication_date"|trans }}
+                                                         :</span> {{ cancelledBook.Details.publicationDate[lang]|site_date_format }}
+                                                    </div>
+                                                {% endif %}
+                                                <!-- End publication date -->
+                                            </div>
+                                        </div>
+                                        <div class="columns large-4 small-12 medium-4 p-0 part-two">
+                                            <!-- Book Action  -->
+                                            <div class="bookStatus small-12 medium-12 large-12 columns">
+                                                <div class="small-12 medium-12 large-12 columns">
+                                                </div>
+                                            </div>
+                                            <!-- End Book Action  -->
+                                        </div>
+                                    </div>
+                                    {% set newData = getDuplicateBook(cancelledBook, myBooks, lang) %}
+                                    {% if newData['exist'] == true %}
+                                        {% set dateOfRequests = dateOfRequests|merge(newData.dateOfRequest) %}
+                                        {% include '@MainBundle/prototypes/request-historic.html.twig' with {'newData':newData, 'myBooks':myBooks} %}
+                                    {% endif %}
+                                </div>
+                            </div><!--End row-->
+                        </div>
+                        <!--End Prod List listStyle-->
+                    {% endfor %}
+                </div>
+                <!-- End cancelled books -->
+                <div id="no-results-msg" class="no-books-div hidden columns">
+                    <p>{{ "user.profile.books.filter_no_results"|trans }}</p>
+                </div>
+            {% else %}
+                <div class="no-books-div">
+                    <p>{{ "user.profile.books.no_books.title"|trans }}</p>
+                   <p>
+                       <a href="{{ url('main') }}"
+                       class="no-books-link decorate">{{ "user.profile.books.no_books.button"|trans }}</a>
+                   </p>
+                </div>
+            {% endif %}
+        </div>
+            </div>
+        </div>
+    </div>
+    {% include '@MainBundle/modal/review-book-modal.html.twig' %}
+    {% include '@MainBundle/modal/review-book-multiple-modal.html.twig' %}
+    {% include '@MainBundle/modal/course-details-modal.html.twig' %}
+    {% include '@MainBundle/modal/review-courses-info-modal.html.twig' %}
+    {% include '@MainBundle/modal/export-books-modal.html.twig' %}
+
+    <div data-course-prototype='{% include '@MainBundle/book/course-details.html.twig' %}'
+         data-feedback-prototype='{% include '@MainBundle/prototypes/feedback.html.twig' with {'feedbackText':'##feedbackText##','feedbackDate':'##feedbackDate##'} %}'></div>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('assets/plugins/readmore/readmore.js') }}"></script>
+    <script src="{{ asset('assets/page/my_books/review-book.min.js') }}"></script>
+    <script src="{{ asset('assets/page/my_books/my-books.min.js') }}"></script>
+    <script src="{{ asset('assets/page/profile/menu-profile.min.js') }}"></script>
+{% endblock %}

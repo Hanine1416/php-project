@@ -1,0 +1,38 @@
+{% extends 'admin.layout.html.twig' %}
+{% block body %}
+    <main role="main">
+        <div class="inner-wrap verticalPadding">
+            <div class="block">
+                <div class="row">
+                    <div class="columns large-12">
+                        <div class="adminlogin clearfix">
+                            <h1>Elsevier Inspection Copy Admin</h1>
+                            <p class="text warning-text"></p>
+                            <form action="{{ url('admin-login') }}" id="formLogin">
+                                <div class="clearfix">
+                                    <div class="input-field">
+                                        <input placeholder="Username" name="username" id="username" type="text" class="validate required">
+                                    </div>
+                                    <div class="input-field">
+                                        <input placeholder="Password" name="password" id="password" type="password" class="validate required"><div class="small-12 medium-12 large-12 columns help-popover p-0">
+                                    </div>
+                                </div>
+                                <div class="btngroup log-btns">
+                                    <button class="btn-s btn-Lgrey" type="reset">Clear</button>
+                                    <a id="login-btn" role="button" class="login-btn btn-s btn-grey">Login</a>
+                                </div>
+                            </form>
+                            <div class="loader">
+                                <img src="{{ asset('assets/img/ajax-loader.gif') }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('assets/js/jquery.growl.js') }}"></script>
+    <script src="{{ asset('assets/page/admin/login.min.js') }}"></script>
+{% endblock %}

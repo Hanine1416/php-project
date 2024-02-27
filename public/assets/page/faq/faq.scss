@@ -1,0 +1,165 @@
+.faq-title{
+  font-size: 25px;
+  line-height: 36px;
+  text-align: center;
+  color: #404040;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.faqTabs {
+  margin-top: 16px;
+  padding: 0;
+  margin-bottom: 120px;
+  ol>li{
+    list-style: decimal;
+  }
+  /* accordion style */
+  .accordion {
+    max-width: 100%;
+    .tile-tab {
+      border-top: 1px solid #e0e0e0;
+      border-bottom: 0;
+      border-left: 0;
+      position: relative;
+      border-right: 0;
+      .content {
+        display: none;
+        padding: 0 34px 40px 34px;
+        li{
+          border: none;
+        }
+      }
+      &:last-child{
+        border-bottom: 1px solid #e0e0e0;
+      }
+    }
+    .title-accordion {
+      font-size: 18px;
+      line-height: 35px;
+      color: #404040;
+      padding: 20px 34px;
+      width: 90%;
+      display: block;
+      cursor: pointer;
+      font-weight: 400;
+      user-select: none;
+      .expand-tile{
+        background-image: url("../../img/home-page/open-accordion.png");
+        background-size: contain;
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        right: 41px;
+        top: 26px;
+      }
+      .collapse-tile{
+        background-image: url("../../img/home-page/close_accordion.png");
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        right: 41px;
+        top: 26px;
+        display: none;
+      }
+      &.active{
+        .collapse-tile{
+          display: block;
+        }
+        .expand-tile{
+          display: none;
+        }
+      }
+    }
+    .descriptionContent span ,.descriptionContent li, .descriptionContent p {
+      font-family: NexusSans, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+      color: #505050 !important;
+    }
+    .descriptionContent a{
+      font-family: NexusSans, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+      color: #007398 !important;
+    }
+    .descriptionContent {
+      font-size: 15px;
+      line-height: 35px;
+      .degital-book{
+        display: block;
+      }
+      a{
+        &:hover{
+          text-decoration: underline;
+        }
+        &:before{
+          display: none;
+        }
+      }
+      ul{
+        li{
+          &:before{
+            content: "•";
+            display: inline-block;
+            font-size: 24px;
+            color: #ff893d;
+            margin-right: 8px;
+          }
+        }
+      }
+    }
+    @media (-webkit-min-device-pixel-ratio: 2) {
+      .title-accordion .expand-tile {
+        background: url(../../img/home-page/open-accordion@2x.png) no-repeat center center;
+        background-size: contain;
+      }
+    }
+    @media (-webkit-min-device-pixel-ratio: 3) {
+      .title-accordion .expand-tile{
+        background: url(../../img/home-page/open-accordion@3x.png) no-repeat center center;
+        background-size: contain;
+      }
+    }
+    @media (-webkit-min-device-pixel-ratio: 2) {
+      .title-accordion.active .collapse-tile{
+        background: url(../../img/home-page/close_accordion@2x.png) no-repeat center center;
+        background-size: contain;
+      }
+    }
+    @media (-webkit-min-device-pixel-ratio: 3) {
+      .title-accordion.active .collapse-tile{
+        background: url(../../img/home-page/close_accordion@3x.png) no-repeat center center;
+        background-size: contain;
+      }
+    }
+  }
+  /* fin accordion style */
+}
+/************** this applies from 600px onwards **********/
+@media screen and (min-width: 640px) {
+  .faq-title{
+    font-size: 32px;
+    color: #404040;
+    margin-top: 47px;
+    margin-bottom: 40px;
+  }
+.faqTabs {
+  padding: 0 142px;
+  margin-bottom: 100px;
+    .accordion {
+      .tile-tab{
+        &:first-child{
+          border-top: 0;
+        }
+      }
+      .title-accordion {
+          font-size: 23px;
+          line-height: 36px;
+        &:after {
+          right: 41px;
+          top: 27px;
+        }
+      }
+      .descriptionContent {
+        font-size: 17px;
+        line-height: 37px;
+      }
+    }
+  }
+}

@@ -1,0 +1,156 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/page/profile/personal-details.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/profile/profile.css') }}">
+{#    <link rel="stylesheet" href="{{ asset('assets/page/profile/profile.css') }}">#}
+    <link rel="stylesheet" href="{{ asset('assets/css/switcher.css') }}">
+   {# <link rel="stylesheet" href="{{ asset('assets/page/register/request-register.css') }}">#}
+{% endblock %}
+{% block title %} {{ "user.profile.details"|trans }} {% endblock %}
+{% block body %}
+    <input type="hidden" id="page-title" value="profile: my personal details">
+    <!--menu profile section-->
+    <div class="menu-profile-mobile">
+        {% include '@UserBundle/profile/profile-menu.html.twig' with {'user' : user} %}
+    </div>
+    <!--My Personal details page title-->
+{#    <div class="p-relative">
+        <span class="page-title">{{ 'user.profile.my_profile'|trans }}</span>
+    </div>#}
+
+        <div class="personal-details-container desktop main-content-menu">
+            <!--  Personal details -->
+            <div class="maincontainer main-menu-profile-container">
+                {% include '@UserBundle/profile/profile-menu.html.twig' with {'user' : user} %}
+                 <div id="personal-details" class="profile-block tile-block">
+                <fieldset>
+                    {{ form_start(detailForm,{attr:{class:'form-full-width width-form-edit edit-detail-form',id:'edit-details-form','action':url('my-personal-details'),autocomplete:"off"}}) }}
+                    <div class="input-field">
+                        {{ form_label(detailForm.title) }}
+                        {{ form_widget(detailForm.title,{attr:{'data-value':user.title, 'class':(lang =="de"?"validate":"")}}) }}
+                    </div>
+                    <div class="input-field">
+                        {{ form_label(detailForm.firstname) }}
+                        {{ form_widget(detailForm.firstname,{attr:{'class':'validate','data-value':user.firstname}}) }}
+                    </div>
+                    {% if lang =="in" %}
+                        <div class="input-field">
+                            {{ form_label(detailForm.middlename) }}
+                            {{ form_widget(detailForm.middlename,{attr:{'data-value':user.middlename}}) }}
+                        </div>
+                    {% endif %}
+                    <div class="input-field">
+                        {{ form_label(detailForm.lastname) }}
+                        {{ form_widget(detailForm.lastname,{attr:{'class':'validate','data-value':user.lastname}}) }}
+                    </div>
+                    <div class="input-field">
+                        {{ form_label(detailForm.mobile) }}
+                        {{ form_widget(detailForm.mobile,{type:'number',attr:{'class':'validate phone','data-value':user.mobile,'data-wrong':'validation.wrong_phone_number'|trans}}) }}
+                    </div>
+                    <div class="input-field">
+                        {{ form_label(detailForm.email) }}
+                        {{ form_widget(detailForm.email) }}
+                        <div class="text-right Contextuel-help">
+                            {{ 'user.register.form.help.email'|trans|replace({'__ec_email__':user.amEmail})|raw }}
+                        </div>
+                    </div>
+                    {%  if session.get('lang') not in ['de'] and region != 1 %}
+                    <div class="input-field small-12 medium-12 large-12 columns pr-0 pl-0 url-file-container">
+                        <div class="input-field small-12 medium-12 large-12 columns mb-0 url-and-upload-fields pr-0 pl-0">
+                            <div class="input-field small-12 medium-12 large-12 columns mb-0 url-field p-0 email-popover  url-field error-case">
+                                {{ form_label(detailForm.url) }}
+                                {{ form_widget(detailForm.url,{ attr:{'data-value':user.url,'class':(lang =="br"?"validate":"mb-10"),'data-no-url':'user.register.form.error.invalid_url'|trans}}) }}
+                                <i class="fa fa-info-circle"
+                                   data-toggle="popover" data-html="true"
+                                   data-content= "{{ 'user.register.form.url.tooltip'|trans }}"
+                                   data-placement="right"></i>
+                            </div>
+                            <div class="input-field small-12 medium-12 large-12 columns mb-10 p-0 ">
+                                <div class="upload-file-label" data-reg="{{region}}">
+                                    {{ 'user.register.form.upload.label'|trans }}
+                                </div>
+                            </div>
+                            <div class="input-field small-12 medium-12 large-12 columns pl-0 pr-0 email-popover upload-field-block">
+                                <div class="large-12 dropzone
+                                    {% if ( user.profileFileProvided is defined and user.profileFileProvided is not null and user.profileFileProvided>0) or session.get('fileUploaded') == true %}
+                                        has-file"
+                                     data-drag-file-id="{{ user.profileFile['FileId'] }}"
+                                     data-drag-file-title="{{ user.profileFile['Name'] }}
+                                    {% endif %}"
+                                     id="dropzone-upload"
+                                     data-drag-msg="{{ 'user.register.form.upload.zone'|trans }}"
+                                     data-delete-msg="{{ 'user.register.form.upload.delete'|trans }}">
+                                    <input type="file" name="covers[{{ loop.index }}][file]" id="file_{{ loop.index }}">
+                                    <i class="fa fa-info-circle"
+                                       data-toggle="popover" data-html="true"
+                                       data-content= "{{ 'user.register.form.upload.tooltip'|trans }}"
+                                       data-placement="right"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="input-field small-12 medium-12 large-12 columns pl-0 pr-0">
+                        {{ form_label(detailForm.password) }}
+                        {{ form_widget(detailForm.password,{attr:{value:'fakepassword'}}) }}
+                    </div>
+                    <div class="input-field country small-12 medium-12 large-12 columns pl-0 pr-0">
+                        {{ form_label(detailForm.country) }}
+                        <select name="{{ detailForm.children.country.vars.full_name }}" id="{{ detailForm.children.country.vars.id }}" data-value="{{ user.country }}" class="validate" data-invalid="{{ 'validation.required'|trans }}" >
+                            <option value=""></option>
+                            {% for country in countries %}
+                                <option {% if (user.country==country.Text) %} selected {% endif %} value="{{ country.Text }}" data-st="{{ country.Shorttext }}">{{ country.Text }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    {% if lang =="br" %}
+                        <div class="input-field">
+                            {{ form_label(detailForm.cpf) }}
+                            {{ form_widget(detailForm.cpf,{attr:{'class':'validate','data-value':user.cpf}}) }}
+                        </div>
+                    {% endif %}
+                    <div class="small-12 medium-12 large-12 columns text-center pr-0 pl-0">
+                        <button role="button" id="update-detail-btn" class="btn btn-black update-btn"
+                                disabled>{{ 'user.profile.update_btn'|trans }} <span></span></button>
+                    </div>
+                    {{ form_widget(detailForm._token,{attr:{autocomplete:"__token"},readonly: true}) }}
+                    {{ form_end(detailForm, {'render_rest': false}) }}
+                </fieldset>
+            </div>
+            <!-- End Personal details -->
+                {% if isProfileUpdate() %}
+                    <div class="update-profile-cookie">
+                        <div class="close-btn"></div>
+                        <div class="validation-icon"></div>
+                        <div class="cookies-content">
+                            {{ 'user.profile.update-info'|trans }}
+                        </div>
+                    </div>
+                {% endif %}
+    </div>
+        </div>
+
+    <!-- Confirm box -->
+    <div class="box">
+        <div class="confirmBox">
+            <div class="box-content">
+                <p class="box-msg close-msg hidden">{{ 'user.profile.confirm_box.close_message'|trans }}</p>
+                <p class="box-msg delete-msg hidden">{{ 'user.profile.confirm_box.delete_message'|trans }}</p>
+                <p class="box-msg error-msg hidden"></p>
+            </div>
+            <div class="box-footer">
+                <button class="btn btn-black reverse" id="box-cancel">{{ 'user.register.form.button.cancel'|trans }}</button>
+                <button class="btn btn-black" id="box-confirm">{{ 'user.profile.confirm_box.confirm_btn'|trans }} <span></span></button>
+            </div>
+        </div>
+        <div class="confirmBox-background"></div>
+    </div>
+    <!-- End confirm box -->
+{% endblock %}
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/libphonenumber-js/1.9.19/libphonenumber-js.min.js"></script>
+    <script src="{{ asset('assets/plugins/dropzone/dropzone.js') }}"></script>
+    <script src="{{ asset('assets/page/profile/personal-details.min.js') }}"></script>
+    <script src="{{ asset('assets/page/register/request-register.min.js') }}"></script>
+    <script src="{{ asset('assets/page/profile/menu-profile.min.js') }}"></script>
+{% endblock %}

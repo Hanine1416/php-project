@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="{{ asset('assets/css/footer.css') }}" media="all">
+<footer id="footer" class="">
+    <div class="width-footer">
+        <div class="row footer-container">
+            <div class="small-12 medium-12 large-2 columns bloc-elsevier-logo">
+               <a href="https://www.elsevier.com" target="_blank">
+                   <img src="{{ asset('/assets/img/elsevier-logo.png') }}" alt="Elsevier" width="164" height="180"></a>
+            </div>
+            <div class="small-12 medium-12 large-8 columns footer-descrp">
+                <div class="footer_txt">
+                    <p>Inspection Copy v{{ app_version|slice(0,5) }}</p><br>
+                    <p class="line-height mb-10">{{ "footer.copyright"|trans|replace({"__current_year__": "now"|date("Y") }) | raw }}</p>
+                    <p class="line-height">{{ "footer.cookie_link"|trans|raw }}</p>
+                    <div class="terms row">
+                        <div class="term-link"><p class="line-height"><a href="{{ url('contactUs') }}">{{ "footer.contact_us_footer"|trans|raw}}</a></p></div>
+                        <div class="term-link"><p class="line-height">{{ "footer.terms_footer"|trans|raw }}</p></div>
+                        <div class="term-link"><p class="line-height">{{ "footer.privacy_footer"|trans|raw }}</p></div>
+                        <div class="term-link"><p><a href="{{ url('features') }}" target="_blank">{{ 'features.title'|trans }}</a></div>
+                        <div class="term-link"><p>{{"footer.register_footer" |trans|raw}}</p></div>
+                        {#  <div class="term-link"><p>{{ "footer.help_footer"|trans|raw }}</p></div>#}
+                        <div class="term-link"><p><a href="{{ url('faq') }}" target="_blank">{{ "footer.faq_footer"|trans|raw }}</a></p></div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="small-12 medium-12 large-2 columns relxCol">
+                <a href="http://www.relx.com" target="_blank">
+                    <img src="{{ asset('assets/img/relxgroup-logo.png') }}" alt="Relx Group">
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>

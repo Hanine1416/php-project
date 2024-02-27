@@ -1,0 +1,160 @@
+{% extends 'admin.layout.html.twig' %}
+{% block bs3 %}
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.css') }}">
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/fontawesome-all.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/admin/cookie.css') }}">
+{% endblock %}
+{% block body %}
+    <div class="inner-wrap adminEdit register-account verticalPadding">
+        <main role="main">
+            <div class="block">
+                <div class="row">
+                    <div class="columns">
+                        <a class="backLink" href="{{ url('admin') }}"><i class="fa fa-chevron-left"></i> {{ 'admin.layout.back'|trans }}</a>
+                        <h1 class="page-title"><i class="fa fa-edit"></i> {{ 'admin.cookies.edit_cookie'|trans }}</h1>
+                        <form method="post" class="form-full-width" id="formCookiePage">
+                            <div class="top-text-area">
+                                <h2 class="text-center section-title">{{ 'admin.cookies.top_section'|trans }}</h2>
+                                <textarea placeholder="Top Section" name="topSection" class="wysiwyg" cols="30"
+                                          rows="10">{{ cookiePage.topSection }}</textarea>
+                            </div>
+                            <div class="table-area">
+                                <button type="button" id="openModal" class="btn-custom" data-toggle="modal"
+                                        data-target="#cookieModal"><i
+                                            class="fa fa-plus"></i>   {{ 'admin.cookies.add_cookie'|trans }}
+                                </button>
+                                <table>
+                                    <thead>
+                                    <tr id="tableColumnName">
+                                        <th width="15%">
+                                            <input type="text" name="tableElements[service]" value="{% if tableElements.service|length>0 %}{{ tableElements.service }}{% else %}  {{ 'admin.cookies.service'|trans }} {% endif %}">
+                                        </th>
+                                        <th width="10%">
+                                            <input type="text" name="tableElements[cookieName]" value="{% if tableElements.cookieName|length>0 %}{{ tableElements.cookieName }}{% else %} {{ 'admin.cookies.cookie'|trans }} {% endif %}">
+                                        </th>
+                                        <th width="40%">
+                                            <input type="text" name="tableElements[purpose]" value="{% if tableElements.purpose|length>0 %}{{ tableElements.purpose }}{% else %} {{ 'admin.cookies.purpose'|trans }}{% endif %}">
+                                        </th>
+                                        <th width="20%">
+                                            <input type="text" name="tableElements[moreInfo]" value="{% if tableElements.moreInfo|length>0 %}{{ tableElements.moreInfo }}{% else %}  {{ 'admin.cookies.more_info'|trans }}{% endif %}">
+                                        </th>
+                                        <th class="text-center noEffect">
+                                            {{ 'admin.cookies.action'|trans }}
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="cookieContainer">
+                                    <tr class="vr-tr"><td></td></tr>
+                                    {% for cookieTable in cookieTables %}
+                                        <tr data-url="{{ url('admin-edit-cookie-table',{token:cookieTable.token}) }}">
+                                            <td class="serviceNameValue">{{ cookieTable.serviceName }}</td>
+                                            <td class="cookieNamesValue">
+                                                <ul>
+                                                    {% for cookieName in cookieTable.cookieNames %}
+                                                        <li>{{ cookieName }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </td>
+                                            <td class="descriptionValue">
+                                                {{ cookieTable.description|raw }}
+                                            </td>
+                                            <td class="moreInfoValue">
+                                                {{ cookieTable.moreInfo|raw }}
+                                            </td>
+                                            <td class="action">
+                                                <button type="button"
+                                                        data-url="{{ url('admin-enable-cookie-table',{token:cookieTable.token}) }}"
+                                                        title="{{ 'admin.cookies.hide'|trans }}"
+                                                        class="btn-custom btn-sm btn-blue switchCookieStatus {% if not cookieTable.enable %}btn-gray{% endif %}">
+                                                    <i
+                                                            class="fa fa-eye{% if not cookieTable.enable %}-slash{% endif %}"></i>
+                                                </button>
+                                                <button type="button" data-id="{{ cookieTable.token }}" title="{{ 'admin.cookies.edit'|trans }}"
+                                                        class="btn-custom btn-sm btn-orange btn-edit-cookie">
+                                                    <i class="fa fa-pencil-alt"></i></button>
+
+                                                <button type="button"
+                                                        data-url="{{ url('admin-delete-cookie-table',{token:cookieTable.token}) }}"
+                                                        title="{{ 'tooltip.delete_faq'|trans }}"
+                                                        class="btn-custom btn-sm btn-red btn-delete-cookie"><i
+                                                            class="fa fa-trash"></i></button>
+
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                    <caption>
+                                        <input id="captionEdit" name="tableElements[tableCaption]" type="text" value="{% if tableElements.tableCaption|length>0 %}{{ tableElements.tableCaption }}{% else %} {{'admin.cookies.description'|trans  }} {% endif %}">
+                                    </caption>
+                                </table>
+                            </div>
+                            <div class="bottom-text-area mg-top-20">
+                                <h2 class="text-center section-title"> {{ 'admin.cookies.bottom_section'|trans }} </h2>
+                                <textarea placeholder="Bottom Section" name="bottomSection" class="wysiwyg" cols="30"
+                                          rows="10">{{ cookiePage.bottomSection }}</textarea>
+                            </div>
+                            <div class="form-buttons text-center mt-20">
+                                <a href="{{ url('admin') }}" class="btn btn-cancel"> {{ 'admin.cookies.cancel'|trans }} </a>
+                                <button class="btn btn-submit" type="submit"> {{ 'admin.cookies.save'|trans }} </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="modal fade " tabindex="-1" role="dialog" id="cookieModal">
+        <div class="modal-dialog modal-lg " role="document">
+            <div class="modal-content">
+                <div class="modal-body row width-inherit">
+                    <div id="formCookie" class="form-horizontal" role="form"
+                         data-url="{{ url('admin-add-cookie-table') }}">
+                        <div>
+                            <label class="label" for="serviceName"> {{ 'admin.cookies.service_name_title'|trans }} </label>
+                            <input id="serviceName" type="text" placeholder=" {{ 'admin.cookies.service_name_placeholder'|trans }}" class="form-control">
+                            <span class="error text-center hide" id="serviceNameError">{{ 'admin.cookies.service_name_placeholder'|trans }}</span>
+                        </div>
+                        <div class="mg-top-20">
+                            <label class="label" for="cookieName">{{ 'admin.cookies.cookie_title'|trans }}</label>
+                            <div class="cookies">
+                                {% for cookie in cookies %}
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="cookies[]" value="{{ cookie }}">{{ cookie }}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <span class="error text-center hide"
+                                  id="cookieError">{{ 'admin.cookies.cookies_placeholder'|trans }}</span>
+                        </div>
+                        <div class="mg-top-20">
+                            <label class="label" for="cookieDescription">{{ 'admin.cookies.purpose'|trans }}</label>
+                            <textarea id="cookieDescription" placeholder="Cookie description"
+                                      class="form-control wysiwygModal"></textarea>
+                        </div>
+                        <div class="mg-top-20">
+                            <label class="label" for="cookieMoreInfo">{{ 'admin.cookies.more_info'|trans }}</label>
+                            <textarea id="cookieMoreInfo" placeholder="More info"
+                                      class="form-control wysiwygModal"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-buttons">
+                        <button class="btn btn-cancel btn-reset-form" data-dismiss="modal">{{ 'admin.cookies.cancel'|trans }}</button>
+                        <button id="newCookieBtn" class="btn btn-submit btn-save-cookie">{{ 'admin.cookies.save'|trans }}</button>
+                        <button id="editCookieBtn" class="btn btn-submit hide">{{ 'admin.cookies.edit'|trans }}</button>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="https://cdn.tiny.cloud/1/tdcgdkkews0u3qs5x98hlqw70cvbqxyit01cguww2cbflkzy/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="{{ asset('assets/page/admin/cookie.min.js') }}"></script>
+{% endblock %}

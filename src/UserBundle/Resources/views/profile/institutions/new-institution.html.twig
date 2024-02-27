@@ -1,0 +1,111 @@
+<fieldset class="institution-block-fieldset">
+    <div class="institution-block small-12 medium-12 large-12 columns tile-block profile-block {% if institutionIterator is defined %} {% if  not institutionIterator.enabled %} disabled-inst {% endif %}
+    {% if isUnique is defined and institutionLength<2 %} unique-institution {% endif %} {% if institutionIterator.isPrimary %} primary-institution {% endif %} {% else %} new-institution-block {% endif %}">
+        <button type="button" class="tile-toggle">
+            <span class="institution-label">{% if  institutionIteratorName is defined  %} {{ institutionIteratorName }} {% endif %}</span>
+            <span class="plus-icon">+</span>
+        </button>
+        <input class="inst-identification" type="hidden" id="institutions_{{ institutionIterator is defined? institutionIterator.id:'__index__' }}_id" name="institutions[{{ institutionIterator is defined? institutionIterator.id:'__index__' }}][id]" disabled="disabled" value="{% if institutionIterator is defined %}{{ institutionIterator.id }}{% endif %}">
+        <div class="profile-block tile">
+            {% if institutionIterator is defined and (not institutionIterator.enabled or institutionIterator.hasRequest) %} <fieldset disabled>{% endif %}
+            <div class="input-field institution-selector-block" {% if institutionIterator is defined and not institutionIterator.institutionId %}style="display: none"{% endif %}>
+                <label for="institutions_{{ institutionIterator is defined? institutionIterator.id:'__index__' }}_institutionId">{{ 'user.register.form.fields.institution'|trans }}</label>
+                <select id="institutions_{{ institutionIterator is defined? institutionIterator.id:'__index__' }}_institutionId" name="institutions[{{ institutionIterator is defined? institutionIterator.id:'__index__' }}][institutionId]" class="institution-id validate"
+                title="{{ 'validation.required'|trans }}" data-value="{% if institutionIterator is defined  %}{{ institutionIterator.institutionId}}{% endif %}">
+                    <option></option>
+                    {% if institutionIterator is defined  %}
+                        <option value="{{ institutionIterator.institutionId }}" selected>{{ institutionIterator.institutionName }}</option>
+                    {% endif %}
+                    {% for institutionId,institutionName in institutions %}
+                        {% if not( institutionIterator is defined and institutionIterator.institutionId == institutionId) %}
+                            <option value="{{ institutionId }}">{{ institutionName }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <a class="pull-right btn-new-institution">{{ 'user.register.form.button.other'|trans }}</a>
+            </div>
+            <div class="input-field institution-text-block" {% if institutionIterator is defined and not institutionIterator.institutionId %} style="display: block" {% endif %}>
+                <label for="institutions_{{ institutionIterator is defined? institutionIterator.id:'__index__' }}_institutionName">{{ 'user.register.form.fields.institution'|trans }}</label>
+                <input type="text" id="institutions_{{ institutionIterator is defined? institutionIterator.id:'__index__' }}_institutionName"  name="institutions[{{ institutionIterator is defined? institutionIterator.id:'__index__' }}][institutionName]"
+                       class="institution-name validate" title="{{ 'validation.required'|trans }}" value="{% if institutionIterator is defined  %}{{ institutionIterator.institutionName}}{% endif %}"
+                       data-value="{% if institutionIterator is defined  %}{{ institutionIterator.institutionName}}{% endif %}">
+                <a class="pull-right btn-cancel-new-institution">{{ 'user.register.form.button.cancel'|trans }}</a>
+            </div>
+            <div class="input-field checkbox__item {% if institutionIterator is defined and institutionIterator.isPrimary %} hidden {% endif %}">
+                <input class="checkbox__input isPrimary" {% if institutionIterator is defined and institutionIterator.isPrimary%} checked {% endif %}
+                        data-value="{% if institutionIterator is defined %}{{ institutionIterator.isPrimary?"true":"false" }}{% endif %}"
+                        type="checkbox" id="institutions_{{ institutionIterator is defined? institutionIterator.id:'__index__' }}_isPrimary" name="institutions[{{ institutionIterator is defined? institutionIterator.id:'__index__' }}][isPrimary]" value="1">
+                <label class="checlbox__label" for="institutions_{{ institutionIterator is defined? institutionIterator.id:'__index__' }}_isPrimary">{{ 'user.register.form.fields.isPrimary.label'|trans }}</label>
+            </div>
+            <div class="input-field department-selector-block {% if lang=="br" %} is-br {% endif %}" {% if institutionIterator is defined and not institutionIterator.departmentId %} style="display: none" {% endif %}>
+                <label for="institutions_{{ institutionIterator is defined? institutionIterator.id:'__index__' }}_departmentId">{{ 'user.register.form.fields.department'|trans }}</label>
+                <select id="institutions_{{ institutionIterator is defined? institutionIterator.id:'__index__' }}_departmentId" name="institutions[{{ institutionIterator is defined? institutionIterator.id:'__index__' }}][departmentId]"
+                        class="department-id validate" title="{{ 'validation.required'|trans }}" data-value="{% if institutionIterator is defined  %}{{ institutionIterator.departmentId}}{% endif %}" data-loaded=0>
+                    <option></option>
+                    {% if institutionIterator is defined and institutionIterator.departmentId!="" %}
+                        <option value="{{ institutionIterator.departmentId }}" selected>{{ institutionIterator.departmentName }}</option>
+                    {% endif %}
+                </select>
+                <a class="pull-right btn-new-department">{{ 'user.register.form.button.other'|trans }}</a>
+            </div>
+            <div class="input-field department-text-block {% if lang=="br" %} is-br {% endif %}" {% if institutionIterator is defined and not institutionIterator.departmentId %} style="display: block" {% endif %}>
+                <label for="institutions_{{ institutionIterator is defined? institutionIterator.id:'__index__' }}_departmentName">{{ 'user.register.form.fields.department'|trans }}</label>
+                <input type="text" id="institutions_{{ institutionIterator is defined? institutionIterator.id:'__index__' }}_departmentName" name="institutions[{{ institutionIterator is defined? institutionIterator.id:'__index__' }}][departmentName]" class="department-name validate"
+                       title="{{ 'validation.required'|trans }}" data-value="{% if institutionIterator is defined  %}{{ institutionIterator.departmentName}}{% endif %}"
+                        value="{% if institutionIterator is defined  %}{{ institutionIterator.departmentName}}{% endif %}">
+                {% if lang!="br" %}<a class="pull-right btn-cancel-new-department">{{ 'user.register.form.button.cancel'|trans }}</a>{% endif %}
+            </div>
+            <div class="input-field">
+                <label for="institutions_{{ institutionIterator is defined? institutionIterator.id:'__index__' }}_profession">{{ 'user.register.form.fields.profession'|trans }}</label>
+                <select id="institutions_{{ institutionIterator is defined? institutionIterator.id:'__index__' }}_profession" name="institutions[{{ institutionIterator is defined? institutionIterator.id:'__index__' }}][profession]" class="validate profession"
+                title="{{ 'validation.required'|trans }}" data-value="{% if institutionIterator is defined  %}{{ institutionIterator.profession}}{% endif %}">
+                    <option value=""></option>
+                    {% for profession,professionName in professions %}
+                        <option {% if institutionIterator is defined and  institutionIterator.profession == profession %} selected {% endif%}
+                                value="{{ profession }}">{{ professionName }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="input-field {% if lang == 'in' %} hidden {% endif %}" >
+                <label for="institutions_{{ institutionIterator is defined? institutionIterator.id:'__index__' }}_speciality">{{ 'user.register.form.fields.speciality'|trans }}</label>
+                <select id="institutions_{{ institutionIterator is defined? institutionIterator.id:'__index__' }}_speciality" name="institutions[{{ institutionIterator is defined? institutionIterator.id:'__index__' }}][speciality]" class="validate speciality"
+                title="{{ 'validation.required'|trans }}" data-value="{% if institutionIterator is defined  %}{{ institutionIterator.speciality}}{% endif %}" data-loaded=0>
+                    <option></option>
+                    {% if institutionIterator is defined  %}
+                        <option value="{{ institutionIterator.speciality}}" selected>{{ institutionIterator.speciality}}</option>
+                    {% endif %}
+                </select>
+            </div>
+            {% if institutionIterator is not defined %}
+            <div class="small-12 medium-12 large-12 columns text-center institution-new-btn pl-0 pr-0">
+                <button id="addInstitution" class="btn btn-black update-btn"> {{ 'book.request.add'|trans }} <span></span></button>
+                <button id="cancelInstitution" class="btn btn-black reverse">{{ 'user.register.form.button.cancel'|trans }}</button>
+            </div>
+            {% endif %}
+            {% if institutionIterator is defined and (not institutionIterator.enabled or institutionIterator.hasRequest)%}</fieldset>{% endif %}
+            {% if institutionIterator is defined %}
+                <div class="small-12 medium-12 large-12 columns institution-bloc-btn text-center pl-0 pr-0">
+                    {% if institutionIterator.enabled %}
+                        {% if institutionIterator.hasRequest %}
+                            <small class="grey">{{ 'user.profile.institutions.has_request_msg'|trans }}</small>
+                            <button data-institution="{{ institutionIterator.id }}" type="button"
+                                    class="btn btn-black reverse institution-disable-btn{% if isUnique is defined and isUnique %} hidden {% endif %}">{{ 'user.profile.institutions.disable_btn'|trans }} <span></span></button>
+                        {% else %}
+                            <button type="button" class="btn btn-black update-btn update-institution-btn" disabled>{{ 'user.profile.update_btn'|trans }} <span></span></button>
+                            <button data-institution="{{ institutionIterator.id }}" type="button"
+                                    class="btn btn-black reverse institution-del-btn {% if isUnique is defined and isUnique %} hidden {% endif %}">{{ 'user.profile.institutions.delete_btn'|trans }}</button>
+                        {% endif %}
+                    {% endif %}
+                    <button type="button" class="btn btn-black reverse new-institution-btn">{{ 'user.profile.institutions.add_btn'|trans }}</button>
+                </div>
+            {% else %}
+                <div class="small-12 medium-12 large-12 columns institution-bloc-btn text-center hidden pl-0 pr-0">
+                    <button type="button" class="btn btn-black update-btn update-institution-btn" disabled>{{ 'user.profile.update_btn'|trans }} <span></span></button>
+                    <button data-institution="" type="button"
+                    class="btn btn-black reverse institution-del-btn">{{ 'user.profile.institutions.delete_btn'|trans }}</button>
+                    <button type="button" class="btn btn-black reverse new-institution-btn">{{ 'user.profile.institutions.add_btn'|trans }}</button>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</fieldset>

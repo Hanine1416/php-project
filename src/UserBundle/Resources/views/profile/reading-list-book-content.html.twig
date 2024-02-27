@@ -1,0 +1,136 @@
+
+<div class="book_item draggable" id="book-item"
+     data-isbn="{{ book.Isbn }}"  data-reading-list-id="{{ readingListID}}">
+    <div class="book-item-content">
+        <div class="move_icon"></div>
+        <div class="block_cover_book prodImg"  id="{{ book.Isbn }}">
+            <a class="imgBlock" href="{{ basePath }}/book/details/{{ book.Isbn }}">
+                <img class="cover" id="{{ book.Isbn }}"
+                     src="//d16jkos453if22.cloudfront.net/{{ book.Isbn }}.jpg" onerror="imgError(this);"
+                     alt="{{ book.Title }}"></a>
+        </div>
+        <div class="book_info prodDetail">
+            <div class="prodTitle book-title title-book nexusSans">
+                <a class="book-title" href="{{ basePath }}/book/details/{{ book.Isbn }}"> {{ book.Title }}</a>
+            </div>
+            <div class="author-name prodAuthor nexusSans">
+                {{ book.Author }}
+            </div>
+               <!-- ancillary block -->
+
+                        <ul class="ancillary-block">
+                            {% if user.digitalAutoapproval != false and book.HasProfessorResources == true %}
+                                <li>
+                                    <a class="instrutor_ressources ancillary_label" data-toggle="tooltip" data-placement="top" target="_blank" href="{{ url('teacher-resources',{isbn: book.Isbn}) }}"
+                                       title="{{ 'ancillary.instructor_resources'|trans|raw }}">{{ 'ancillary.instructor_resources_label'|trans }}
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if user.digitalAutoapproval != false and book.HasStudentResources == true %}
+                                <li>
+                                    <a class="student_ressources ancillary_label" data-toggle="tooltip" data-placement="top" target="_blank" href="{{ url('student-resources',{isbn: book.Isbn}) }}"
+                                       title="{{ 'ancillary.student_resources'|trans|raw }}">{{ 'ancillary.student_resources_label'|trans }}
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    <!-- End ancillary block -->
+        </div>
+    </div>
+    <!-- Share Action  -->
+    <div class="sharing">
+        <div class="container">
+            <div class="more">
+                <button id="more-btn" class="more-btn" data-toggle="tooltip" data-placement="bottom"
+                        title="{{ 'tooltip.more'|trans }}">
+                    <span class="more-dot"></span>
+                    <span class="more-dot"></span>
+                    <span class="more-dot"></span>
+                </button>
+                <div class="more-menu">
+                    <ul class="more-menu-items" tabindex="-1" role="menu"
+                        aria-labelledby="more-btn" aria-hidden="true">
+                        <li class="more-menu-item"
+                            role="presentation">
+                            <div class="read-now-btn" id="remove-btn"
+                                 data-reading-list-id="{{ readingListID }}"
+                                 data-isbn="{{ book.Isbn }}"
+                                 data-title="{{ book.Title }}">
+                                <a href="javascript:;"
+                                   class="more-menu-btn"
+                                   role="menuitem">{{ 'reading_list.remove_book_from_list'|trans }}</a>
+                            </div>
+                        </li>
+                        <li class="more-menu-item"
+                                    role="presentation">
+                                    {% if existInAll %}
+                                    <div id="copy-book-btn"
+                                         data-isbn="{{ book.Isbn }}"
+                                         data-title="{{ book.Title }}"
+                                         title="">
+                                        <a href="javascript:;" class="more-menu-btn isDisabled"  role="menuitem"> {{ 'reading_list.copy_to_other_list'|trans }} </a></div>
+                                        {% else %}
+                                        <div id="copy-book-btn"
+                                             data-isbn="{{ book.Isbn }}"
+                                             data-title="{{ book.Title }}"
+                                             title="" >
+                                            <a href="javascript:;" class="more-menu-btn" role="menuitem"> {{ 'reading_list.copy_to_other_list'|trans }}</a>
+                                        </div>
+                                        {% endif %}
+                                </li>
+                                <li class="more-menu-item"
+                                    role="presentation">
+                                    {% if existInAll %}
+                                    <div id="move-book-btn"
+                                         data-reading-list-id="{{ readingList.ReadingListID }}"
+                                         data-isbn="{{ book.Isbn }}"
+                                         data-title="{{ book.Title }}"
+                                         title="{{ book.Title }}" >
+                                        <a href="javascript:;" class="more-menu-btn isDisabled"  role="menuitem">
+                                            {{ 'reading_list.move_to_other_list'|trans }}  </a>
+                                    </div>
+                                        {% else %}
+                                        <div id="move-book-btn"
+                                             data-reading-list-id="{{ readingList.ReadingListID }}"
+                                             data-isbn="{{ book.Isbn }}"
+                                             title="{{ book.Title }}"
+                                             data-title="{{ book.Title }}">
+                                            <a href="javascript:;" class="more-menu-btn" role="menuitem">{{ 'reading_list.move_to_other_list'|trans }}  </a>
+                                        </div>
+                                        {% endif %}
+                                </li>
+                        <li class="more-menu-item"
+                            role="presentation">
+                            <div>
+                                <a href="javascript:;"
+                                   class="more-menu-btn review-book"
+                                   data-toggle="modal"
+                                   data-target="#rating-book-modal"
+                                   data-isbn="{{ book.Isbn }}"
+                                   data-title="{{ book.Title }}"
+                                   data-subtitle="{{ book.Author }}"
+                                   data-editionNumber="{{ book.Edition }}"
+                                   role="menuitem">{{ 'book.review.rate_this_book'|trans }} </a>
+                            </div>
+                        </li>
+                        <li class="more-menu-item">
+                            <a class="more-menu-btn share-book" onclick="showStepOne()"
+                               id="share-book" data-toggle="modal" data-target="#share-book-modal" data-isbn="{{ book.Isbn }}"
+                               data-title="{{ book.Title }}" data-subtitle="{{ book.Author }}" data-editionNumber="{{ book.Edition }}">{{ "share_book.share_btn"|trans }}</a>
+                        </li>
+                        <li class="more-menu-item">
+                            <a class="more-menu-btn update_librarian" data-url="{{ url('export-book',{isbn: book.Isbn}) }}"
+                               id="update-librarian">{{ 'book.review.update_librarian'|trans }}</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Share Action  -->
+               <!-- Book Action  -->
+                {% include '@UserBundle/prototypes/book-action.html.twig' with {'book':book,'user':user} %}
+                      <!-- End Book Action  -->
+        </div>
+

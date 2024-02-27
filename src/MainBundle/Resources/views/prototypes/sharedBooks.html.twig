@@ -1,0 +1,190 @@
+<div class="recommended-list row maincontainer">
+    {% for sharedBook in sharedBooks %}
+        <div class="maincontainer recommended-books-list" id="shared-{{ sharedBook.isbn }}">
+            <div class="shared-by">{{ 'share_book.shared_with_you'|trans }} {{ sharedBook.RecommendedBy }}</div>
+            <div class="recommended-books-content">
+                <div class="block_cover_book">
+                    <a class="imgBlock"
+                       href="{{ url('showBookDetails',{isbn:sharedBook.isbn,lang:lang,reg:region}) }}">
+                        <img class="cover" id="{{ sharedBook.isbn }}"
+                             src="{{ imageCdn~'/'~sharedBook.isbn|replace({'DUP':''}) }}.jpg"
+                             onerror="imgError(this);" alt="{{ sharedBook.title }}"></a>
+                </div>
+                <!-- End Book Image -->
+                <!-- book informations -->
+                <div class="book_informations">
+                    {% if sharedBook.tag == 'updatedEdition' %}
+                        <div class="tag_book">
+                            <div class="red">{{ "books_page.books.new_edition_label" |trans }}</div>
+                        </div>
+                    {% endif %}
+                    {% if sharedBook.tag == 'isNew' %}
+                        <div class="tag_book">
+                            <div class="yellow">{{ "books_page.books.new_label" |trans }}</div>
+                        </div>
+                    {% endif %}
+                    {% if sharedBook.tag == 'isMostPopular' %}
+                        <div class="tag_book">
+                            <div class="green">{{ "books_page.books.most_popular_label" |trans }}</div>
+                        </div>
+                    {% endif %}
+                    {% if sharedBook.tag == 'isTopSeller' %}
+                        <div class="tag_book">
+                            <div class="purple">{{ "books_page.books.top_seller_label" |trans }}</div>
+                        </div>
+                    {% endif %}
+                    {% if sharedBook.tag == '' %}
+                        <div class="tag_book">
+                            <div class="no_tag"></div>
+                        </div>
+                    {% endif %}
+                    <!-- Book Title -->
+                    <div class="book_title nexusSans">
+                        <a href="{{ url('showBookDetails',{isbn:sharedBook.isbn,lang:lang,reg:region}) }}">{{ sharedBook.title }}</a>
+                    </div>
+                    <!-- End Book Title -->
+                    <!-- Book Editors -->
+                    <div class="book_edition nexusSans">
+                        {% if sharedBook.subtitle|length >0 %}
+                            {{ sharedBook.subtitle }},
+                        {% endif %}
+                        {% if sharedBook.subtitle is not null %}
+                            {{ "book.edition_label"|trans }} {{ sharedBook.editionNumber }}
+                        {% endif %}
+                    </div>
+                    <!-- End Book Editors -->
+                    <!--  Book author -->
+                    <div class="book_author nexusSans">
+                        {{ sharedBook.author }}
+                    </div>
+                    <!-- End Book author -->
+                    <!-- publication date  -->
+                    <div class="book_pub_date">
+                        {{ "product_page.publication_date"|trans }}
+                        : {{ sharedBook.publicationDate[language]|site_date_format }}
+                    </div>
+                    <div class="rating_book">
+                        <div class="stars_rating">
+                            <div class="average_reviews">
+                                {% include '@MainBundle/parts/average_reviews_home.html.twig' with {'book': sharedBook } %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End publication date -->
+                    <!-- ancillary block -->
+                        <ul class="ancillary-block">
+                            {% if user.digitalAutoapproval != false and sharedBook.HasProfessorResources != false %}
+                                <li>
+                                    <a class="instrutor_ressources ancillary_label" data-toggle="tooltip"
+                                       data-placement="top" target="_blank"
+                                       href="{{ url('teacher-resources',{isbn: sharedBook.Isbn}) }}"
+                                       title="{{ 'ancillary.instructor_resources'|trans|raw }}"> {{ 'ancillary.instructor_resources_label'|trans }}
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if user.digitalAutoapproval != false and sharedBook.HasStudentResources != false %}
+                                <li>
+                                    <a class="student_ressources ancillary_label" data-toggle="tooltip"
+                                       data-placement="top" target="_blank"
+                                       href="{{ url('student-resources',{isbn: sharedBook.Isbn}) }}"
+                                       title="{{ 'ancillary.student_resources'|trans|raw }}">{{ 'ancillary.student_resources_label'|trans }}</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    <!-- End ancillary block -->
+                </div>
+                <!-- End Book informations  -->
+                <!-- Share Action  -->
+                <div class="sharing">
+                    <div class="container">
+                        <div class="more">
+                            <button id="more-btn" class="more-btn" data-toggle="tooltip" data-placement="bottom"
+                                    title="{{ 'tooltip.more'|trans }}">
+                                <span class="more-dot"></span>
+                                <span class="more-dot"></span>
+                                <span class="more-dot"></span>
+                            </button>
+                            <div class="more-menu">
+                                <ul class="more-menu-items" tabindex="-1" role="menu"
+                                    aria-labelledby="more-btn" aria-hidden="true">
+                                    {% if isMobile %}
+                                        <li class="more-menu-item dot-share-message for-mobile"
+                                            role="presentation">
+                                            <a href="sms:;?&body={{ url('showBookDetails',{isbn: sharedBook.Isbn}) }}"
+                                               class="more-menu-btn" role="menuitem">{{ 'product_page.share_dots.message'|trans }}</a>
+                                        </li>
+                                        <li class="more-menu-item dot-share-whatsapp for-mobile"
+                                            role="presentation">
+                                            <a href="whatsapp://send?abid=&text={{ url('showBookDetails',{isbn: sharedBook.Isbn}) }}"
+                                               class="more-menu-btn" role="menuitem">{{ 'product_page.share_dots.whatsapp'|trans }}</a>
+                                        </li>
+                                        <li class="more-menu-item dot-share-mail for-mobile"
+                                            role="presentation">
+                                            <a href="mailto:?body='{{ url('showBookDetails',{isbn: sharedBook.Isbn}) }}'"
+                                               class="more-menu-btn" role="menuitem">{{ 'product_page.share_dots.mail'|trans }}</a>
+                                        </li>
+                                        <li class="more-menu-item dot-share-product"
+                                            role="presentation">
+                                            <a href="javascript:;" class="more-menu-btn"
+                                               data-link="{{ url('showBookDetails',{isbn: sharedBook.Isbn}) }}"
+                                               role="menuitem">{{ "product_page.share_dots.share"|trans }}</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="more-menu-item dot-share-product"
+                                            role="presentation">
+                                            <a href="javascript:;" class="more-menu-btn"
+                                               data-link="{{ url('showBookDetails',{isbn: sharedBook.Isbn}) }}"
+                                               role="menuitem">{{ "product_page.share_dots.share"|trans }}</a>
+                                        </li>
+                                    {% endif %}
+                                    {% if is_logged_in() and user.amEmail is not null and user.amEmail is not empty %}
+                                        <li class="more-menu-item dot-education-consultant"
+                                            role="presentation">
+                                            <a href="mailto:{{ user.amEmail }}?subject={{ "home.recommendations_inbox.share_dots.mail_subject"|trans }}&body={{ url('showBookDetails',{isbn: sharedBook.Isbn}) }}"
+                                               class="more-menu-btn"
+                                               role="menuitem">{{ "product_page.share_dots.education_consultant"|trans }}</a>
+                                        </li>
+                                    {% endif %}
+                                       <li class="more-menu-item share-book"
+                                            role="presentation">
+                                            <a id="add-book-btn"
+                                               data-isbn="{{ sharedBook.isbn }}"
+                                               class="more-menu-btn"
+                                               role="menuitem"
+                                               data-title="{{ sharedBook.title }}">{{ 'home.recommendations_inbox.add_to_my_books'|trans }}</a>
+                                        </li>
+                                    <li class="more-menu-item">
+                                        <a class="more-menu-btn share-book"
+                                           id="share-book" data-toggle="modal" data-target="#share-book-modal"
+                                           data-isbn="{{ sharedBook.isbn }}"
+                                           data-title="{{ sharedBook.title }}"
+                                           data-subtitle="{{ sharedBook.subtitle }}"
+                                           data-editionNumber="{{ sharedBook.editionNumber }}">{{ "share_book.share_btn"|trans }}</a>
+                                    </li>
+                                    <li class="more-menu-item">
+                                        <a class="more-menu-btn remove-recommendation-shared"
+                                           data-isbn="{{ sharedBook.isbn }}">{{ "home.remove_recommendation"|trans }}</a>
+                                    </li>
+                                    <li class="more-menu-item">
+                                        <a class="more-menu-btn update_librarian" data-url="{{ url('export-book',{isbn: sharedBook.isbn}) }}"
+                                           id="update-librarian">{{ 'book.review.update_librarian'|trans }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+   <!-- End Share Action  -->
+    <!-- Book Action  -->
+                {% include '@MainBundle/prototypes/book-action.html.twig' with {'book':sharedBook,'user':user} %}
+                      <!-- End Book Action  -->
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% if numberOfRecordsShared > 10 %}
+    <div class="load-more-btn">
+        <img src="{{ asset('/assets/img/ajax-loader.gif') }}" class="load-more-book hidden">
+        <span class="nexusSans" id="load-more-shared">{{ 'home.recommendations_inbox.load_more_btn'|trans|raw }}</span>
+    </div>
+{% endif %}

@@ -1,0 +1,63 @@
+<input type="hidden" id="page-title" value="books: course details">
+<div class="course-details-block columns" data-adoption-id="##adoptionId##">
+    <div class="title-institution small-12">
+        <h3 class="institution-name small-10 columns">##institutionName##</h3>
+        <div class="small-2 columns edit-icon p-0">
+            <a href="javascript:;" class="edit-course-btn" data-course-id="##courseId##">
+                <img src="{{ asset('assets/img/icon-edit/icon_edit.jpg') }}"
+                     srcset="{{ asset('assets/img/icon-edit/icon_edit@2x.jpg') }} 2x,{{ asset('assets/img/icon-edit/icon_edit@3x.jpg') }} 3x"
+                     class="icon_edit">
+            </a>
+        </div>
+    </div>
+    <div class="details small-12">
+        <div class="department small-6 large-6 columns p-0">
+            <div class="department small-12 large-12 columns p-0">
+                <div class="label">{{ 'book.review.course_details.course_name'|trans }}</div>
+                <div class="desc course-name">##courseName##</div>
+            </div>
+            <div class="department small-12 large-12 columns p-0">
+                <div class="label">{{ 'book.review.course_details.course_level'|trans }}</div>
+                <div class="desc course-level">##courseLevel##</div>
+            </div>
+            <div class="department small-12 large-12 columns p-0">
+                <div class="label">{{ 'book.review.course_details.students'|trans }}</div>
+                <div class="desc student-number">##students##</div>
+            </div>
+        </div>
+        <div class="department small-6 large-6 columns p-0">
+            {% if session.get('lang') in ['en','anz','in','us'] %}
+            <div class="department small-12 large-12 columns p-0">
+                <div class="label">{{ 'book.review.course_details.course_code'|trans }}</div>
+                <div class="desc course-code">##courseCode##</div>
+            </div>
+            {% endif %}
+            <div class="profession small-12 large-12 columns p-0">
+                <div class="label">{{ 'book.review.course_details.start_date'|trans }}</div>
+                <div class="desc start-date">##startDate##</div>
+            </div>
+            <div class="speciality small-12 large-12 columns p-0">
+                <div class="label">{{ 'book.review.course_details.end_date'|trans }}</div>
+                <div class="desc end-date">##endDate##</div>
+            </div>
+        </div>
+    </div>
+    <div class="small-12 adoption-inst-selector">
+        <hr>
+        <div class="confirm-select-msg">{{ 'book.review.course_details.check_adoption'|trans }}</div>
+        <div class="small-4 medium-3 large-3 columns input-step checkbox__item radio-box">
+            <input type="radio" name="selected_courses_details[##institutionId##_##adoptionId##]" id="selected_courses_details_yes_##institutionId##_##adoptionId##"
+                   value="yes" class="checkbox__input">
+            <label for="selected_courses_details_yes_##institutionId##_##adoptionId##" class="checlbox__label">
+                {{ 'book.review.yes'|trans }}
+            </label>
+        </div>
+        <div class="small-4 medium-3 large-3 columns input-step checkbox__item radio-box">
+            <input type="radio" name="selected_courses_details[##institutionId##_##adoptionId##]" id="selected_courses_details_no_##institutionId##_##adoptionId##"
+                   value="no" class="checkbox__input">
+            <label for="selected_courses_details_no_##institutionId##_##adoptionId##" class="checlbox__label">
+                {{ 'book.review.no'|trans }}
+            </label>
+        </div>
+    </div>
+</div>

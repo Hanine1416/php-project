@@ -1,0 +1,123 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    {% if searchFor|length>0 %}
+        {{ "search.breadcrumb"|trans ~ ' : ' ~ searchFor }}
+    {% else %}
+        {{ "books_page.books.meta_title"|trans }} {{ catalogue=='st'?'Science & Technology':'layout.health_sciences'|trans }}
+        {{  app.sfRequest.query.get('cat')|length>0?'/'~app.sfRequest.query.get('cat'):''  }}
+    {% endif %}
+    -
+{% endblock %}
+
+{% block ogTitle %}
+    {% if searchFor|length>0 %}
+        {{ "search.breadcrumb"|trans ~ ' : ' ~ searchFor }}
+    {% else %}
+        {{ "books_page.books.meta_title"|trans }} {{ catalogue=='st'?'Science & Technology':'layout.health_sciences'|trans }}
+        {{  app.sfRequest.query.get('cat')|length>0?'/'~app.sfRequest.query.get('cat'):''  }}
+    {% endif %}
+    -
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/page/books-home/books.css') }}">
+{% endblock %}
+{% block body %}
+    <input type="hidden" id="page-title" value="books">
+    <div class="inner-wrap search-result">
+        <main role="main">
+            <div class="searchResultsSection p-0">
+                <div class="">
+                    <div class="mainRow">
+                        <!--Breadcrumbs-->
+                        <div class="small-12 columns breadcrumbs nexusSans  maincontainer">
+                            <ul class="breadcrumbsHistory">
+                                <li>
+                                    <a href="{{ url('main') }}">{{ "books_page.books.breadcrumb.home"|trans }}<span
+                                                class="pipe">&nbsp;/&nbsp;</span></a></li>
+                                {% if ( searchFor is not null and searchFor is not empty) %}
+                                    <li><a id="edit-search" href="">{{ "search.breadcrumb"|trans }}<span class="pipe">&nbsp;/&nbsp;</span></a>
+                                    </li>
+                                    <li> ‘{{ searchFor }}‘</li>
+                                {% elseif catalogue is not empty %}
+                                    {% if(catalogue == "hs") %}
+                                        <li>{{ 'layout.health_sciences'|trans }}</li>
+                                    {% elseif(catalogue == "st") %}
+                                        <li>Science & Technology</li>
+                                    {% elseif(selectedCategory != '') %}
+                                        <li id="selected-category">{{ selectedCategory }}</li>
+                                        <li id="all-books" style="display: none">{{ 'books_page.books.breadcrumb.all_product'|trans }}</li>
+                                    {% else %}
+                                        <li>{{ 'books_page.books.breadcrumb.all_product'|trans }}</li>
+                                    {% endif %}
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <!--Filter Control-->
+                        <div class="">
+                            <div id="books-container">
+                                <div class="loading-spinner"></div>
+                            </div>
+                        </div>
+                    </div><!--end row-->
+                </div><!--end containerRight-->
+            </div><!--end searchResultSection-->
+
+        </main>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+      var catalogue = "{{ catalogue }}";
+      var languages = {
+          "lang" : "{{ lang }}",
+          "sessionlang" : "{{ session.get('site-lang') }}"
+      };
+      var messages = {
+        "filter_show": "{{ 'books_page.books.filter_show'|trans }}",
+        "show_result": "{{ 'books_page.books.show_result'|trans }}",
+        "filter_title": "{{ 'books_page.filter.filter_title'|trans }}:",
+        "sort_by_title": "{{ 'books_page.books.sortBy.title'|trans }}:",
+        "sort_by_title_a_z": "{{ 'books_page.books.sortBy.title_a_z'|trans }}",
+        "sort_by_title_z_a": "{{ 'books_page.books.sortBy.title_z_a'|trans }}",
+        "sort_by_author_a_z": "{{ 'books_page.books.sortBy.author_a_z'|trans }}",
+        "sort_by_author_z_a": "{{ 'books_page.books.sortBy.author_z_a'|trans }}",
+        "sort_by_date_old": "{{ 'books_page.books.sortBy.old'|trans|raw }}",
+        "sort_by_date_new": "{{ 'books_page.books.sortBy.new'|trans|raw }}",
+        "sort_by_popularity": "{{ 'books_page.books.sortBy.popularity'|trans|raw }}",
+        "showing_page": "{{ 'books_page.books.showing_page'|trans }}",
+        "pagination_prev": "{{ 'books_page.books.prev'|trans }}",
+        "pagination_next": "{{ 'books_page.books.next'|trans }}",
+        "no_search_result": "{{ 'search.no_search_result'|trans }}",
+        "search_result_for": "{{ 'search.search_result_for'|trans }}",
+        "search_go_to": "{{ 'search.go_to'|trans|raw }}",
+        "edit_search": "{{ "search.edit_search_label"|trans }}",
+        "home_page": "{{ 'search.go_to_homepage'|trans|raw }}",
+        "clear_filters": "{{ 'books_page.filter.clear'|trans }}",
+        "show_more": "{{ 'books_page.filter.show_more'|trans }}",
+        "show_less": "{{ 'books_page.filter.show_less'|trans }}",
+        "data_loading_failed": "{{ 'books_page.error.data_loading_failed'|trans }}",
+        "try_again": "{{ 'books_page.error.try_again'|trans }}",
+        'coming_soon': "{{ 'books_page.filter.coming_soon'|trans }}",
+        'published': "{{ 'books_page.filter.published'|trans }}",
+        'requested': "{{ 'books_page.filter.requested'|trans }}",
+        'readingList': "{{ 'books_page.filter.reading_list'|trans }}",
+        'digitalCopy': "{{ 'books_page.filter.digital_copy'|trans }}",
+        "pub_year": "{{ 'books_page.filter.pub_year'|trans|raw }}",
+        "health_sciences": "{{ 'layout.health_sciences'|trans|raw }}",
+        "science_tech": "{{ 'layout.science_tech'|trans|raw }}",
+        "new_edition": "{{ 'books_page.books.new_edition_label'|trans|raw }}",
+        "new": "{{ 'books_page.books.new_label'|trans|raw }}",
+        "top_seller": "{{ 'books_page.books.top_seller_label'|trans|raw }}",
+        "most_popular": "{{ 'books_page.books.most_popular_label'|trans|raw }}",
+        "what_new": "{{ 'books_page.books.tag_filter.new'|trans|raw }}",
+        "reviews": "{{ 'home.reviews'|trans|raw }}",
+        "student_ressource": "{{ 'ancillary.student_resources_label'|trans|raw }}",
+        "professor_ressource": "{{ 'ancillary.instructor_resources_label'|trans|raw }}"
+      };
+    </script>
+    <script src="{{ asset('assets/page/app/config.js') }}"></script>
+    <script src="{{ asset('assets/page/app/build/static/js/main.js') }}"></script>
+{% endblock %}

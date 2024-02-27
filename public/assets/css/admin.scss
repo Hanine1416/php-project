@@ -1,0 +1,299 @@
+main {
+  border-top: none;
+}
+
+textarea {
+  -webkit-appearance: none;
+  border-radius: 0;
+  background-color: #fff;
+  font-family: inherit;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ccc;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.75);
+  display: block;
+  font-size: .875rem;
+  margin: 0 0 1rem;
+  padding: .5rem;
+  height: 2.3125rem;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  transition: all .15s linear;
+}
+
+.dashHead {
+  .dashmenu {
+    float: right;
+    ul li {
+      margin-bottom: 0;
+      .btn {
+        font-size: 0.8em;
+        line-height: 1;
+      }
+    }
+  }
+}
+
+.adminMenu {
+  float: right;
+  ul li {
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 0;
+    p {
+      margin: 0;
+      font-size: 0.8em;
+      line-height: 1.1;
+      padding: 10px 20px;
+    }
+    a {
+      font-size: 0.8em;
+      line-height: 1.5em;
+    }
+    &.li-btn {
+      border: 2px solid #DCDCDC;
+      a {
+        padding: 8px 16px 5px 16px;
+      }
+    }
+  }
+}
+
+.c-inherit {
+  color: inherit;
+}
+
+
+.cover-page {
+  form {
+    max-width: inherit;
+  }
+  .cover-container {
+    max-width: 1000px;
+    margin: 70px auto;
+    button{
+      max-width: 200px;
+      &.reverse{
+        padding: 11px;
+      }
+    }
+    .cover-zone {
+      margin-bottom: 20px;
+      float: left;
+      h3 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-align: center;
+      }
+      .preview {
+        text-align: center;
+        margin-bottom: 20px;
+        min-height: 190px;
+        img{
+          max-height: 190px;
+        }
+      }
+      .error-img{
+        display: none;
+        margin-bottom: 20px;
+        color: red;
+        font-weight: 600;
+      }
+      .dropzone {
+        position: relative;
+        background: white;
+        border-radius: 5px;
+        border: 2px dashed #007398;
+        border-image: none;
+        max-width: 500px;
+        margin-left: auto;
+        min-height: 130px;
+        margin-right: auto;
+
+        .upload-btn {
+          color: #007398;
+          background-color: white;
+          padding: 8px 13px;
+          border-radius: 8px;
+          line-height: 1;
+          font-size: 16px;
+          font-weight: bold;
+          left: 50%;
+          transform: translateX(-50%);
+          top: 70px;
+          z-index: 9;
+          &:hover,&:active,&:focus{
+            color: #e9711c!important;
+            outline: none!important;
+          }
+        }
+        input[type=file] {
+          font-size: 100px;
+          position: absolute;
+          left: 0;
+          top: 0;
+          opacity: 0;
+        }
+
+        .dz-default.dz-message {
+          text-align: center;
+          position: absolute;
+          width: 100%;
+          top: 0;
+          height: 100%;
+          padding-top: 30px;
+        }
+        .dz-preview{
+          display: none;
+        }
+      }
+    }
+  }
+}
+.warning-highlight{
+  animation-name: clignot-color;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes clignot-color {
+  from {
+    color: #505050;
+    font-weight: normal;
+  }
+  to {
+    color: red;
+    font-weight: 800;
+  }
+}
+
+
+.box {
+  .box-msg {
+    display: none;
+  }
+  &.delete-add .delete-msg,&.delete-inst .delete-msg, &.close-block .close-msg,&.error-info .error-msg {
+    display: block !important;
+  }
+  &.error-info .error-msg{
+    a{
+      display: block !important ;
+    }
+  }
+  &.error-info{
+    #box-confirm{
+      display: none;
+    }
+  }
+  .confirmBox {
+    .box-footer {
+      margin-top: 30px !important;
+    }
+    position: fixed;
+    min-width: 325px !important;
+    max-width: 30%;
+    background: white;
+    margin: auto;
+    display: block;
+    z-index: 1000;
+    padding: 23px;
+    text-align: center;
+    button {
+      max-width: 200px !important;
+      width: 200px !important;
+      min-width: 125px !important;
+      margin-top: 0 !important;
+    }
+  }
+  .passwordBox {
+    position: fixed;
+    min-width: 325px !important;
+    max-width: 30%;
+    background: white;
+    margin: auto;
+    display: block;
+    z-index: 1000;
+    padding: 23px;
+    text-align: center;
+  }
+  overflow-y: auto;
+  bottom: 0;
+  z-index: 500;
+  display: none;
+  position: fixed;
+  background-color: #ffffff;
+  width: 100%;
+  height: 100%;
+  padding: 24px 24px;
+  .confirmBox-background {
+    background: white;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+  }
+  .passwordBox-background {
+    background: white;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+  }
+  .confirmBox .box-footer, .passwordBox {
+    margin-top: 30px !important;
+  }
+  &.active {
+    /* this is what centers your element in the fixed wrapper*/
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    /* aligns on vertical for column */
+    align-items: center;
+    /* aligns on horizontal for column */
+  }
+}
+/** this applies from 600px onwards */
+@media screen and (min-width: 640px){
+  .box {
+    left: 0;
+    padding: 0;
+    background: transparent;
+    z-index: 500;
+    .confirmBox-background , .passwordBox-background{
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+  }
+  body.scrollable.box-above-modal{
+    overflow-y: hidden!important;
+  }
+}
+
+@media (max-width: 1500px) {
+  .box .confirmBox button {
+    width: 125px !important;
+  }
+}
+.adminlogin{
+  width: 500px;
+  margin: auto;
+}
+.box {
+  .error-msg{
+    .fa{
+      display: none;
+    }
+  }
+}
+.main-category {
+  clear: both;
+  margin-bottom: 15px;
+  background: #dcdcdc;
+  padding: 15px;
+}
+.main-category >span{
+  font-size: 1.4rem;
+  font-weight: 600;
+}

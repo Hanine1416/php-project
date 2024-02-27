@@ -1,0 +1,57 @@
+.institution-modal{
+    padding: 60px 30px;
+    top: 150px;
+    z-index: 215;
+    display: none;
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 600px;
+    background-color: #ffffff;
+    border: 1px solid #dcdcdc;
+    min-height: 400px;
+    width: 100%;
+}
+.institution-text-block,.department-text-block:not(.is-br),.department-selector-block.is-br{
+    display: none;
+}
+#addInstitution {
+    background-color: #000;
+    color: #fff;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 0;
+    border-color: transparent;
+    margin-top: 20px;
+    max-width: 325px;
+}
+#addInstitution:hover {
+    opacity: 0.8;
+    color: #fff !important;
+}
+.institution-block input{
+    margin-bottom: 0;
+}
+.s2-loading-data~span span.select2-selection__rendered{
+    background: url("../../../assets/img/ajax-loader.gif") no-repeat 98% center;
+}
+.btn-new-institution,
+.btn-new-department{
+    margin-top: 5px;
+}
+.select2.select2-container{
+    width: 100% !important;
+    height: 35px!important;
+}
+.warning~span span.select2-selection__rendered{
+    border: 1px solid #E32510!important;
+}
+
+.institution-block.loading div{
+    visibility: hidden;
+}
+.institution-block.loading {
+    background: url("../../../assets/img/ajax-loader.gif") center no-repeat;
+}

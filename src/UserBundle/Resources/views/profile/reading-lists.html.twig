@@ -1,0 +1,124 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/reading-lists/reading-lists.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/showBookDetails/request-book.css') }}"/>
+    <!-- css for share mail library -->
+    <link rel="stylesheet" href="{{ asset('assets/page/showBookDetails/show_book_details.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/showBookDetails/lib/email.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/page/showBookDetails/review-rating-book-modal.css') }}">
+    <!-- end share mail library css -->
+{% endblock %}
+{% block title %} {{ 'reading_list.title'|trans }} {% endblock %}
+{% block body %}
+    <input type="hidden" id="page-title" value="profile: my reading lists">
+    <input type="hidden" id="tooltip-more" value={{ 'tooltip.more'|trans }}>
+
+    <div class="p-relative">
+        <span class="page-title reading-page-title nexusSans maincontainer">{{ 'reading_list.title'|trans }}</span>
+    </div>
+    <div class="reading-list-page maincontainer">
+        <div class="row mb-24">
+            <div class="see-menu-btn nexusSans small-12 columns pr-0 pl-0 right">{{ 'book.review.see_all_lists'|trans }}</div>
+        </div>
+        <div class="reading-list-container row">
+            <div class="tabs-nav">
+                <ul>
+                    {% set requestedList = false %}
+                    {% for readingList in readingLists %}
+                        {% if   readingList.Status == 'REQUESTED'%}
+                            {% set requestedList = true %}
+                            <li id="myBooksList"  class="active">
+                                <a href="#{{ readingList.ReadingListID }}" data-id="{{ readingList.ReadingListID }}" data-toggle="tab">
+                                    <div class="book-info">
+                                        <div class="book-name">{% if readingList.ListName=='Requested Copies' %}{{ 'reading_list.requested_book'|trans }}{% else %}{{ readingList.ListName }}{% endif %}</div>
+                                        <div class="nbr-books"
+                                             data-id="{{ readingLists.ReadingListID }}">{{ readingList.ListItems.ReadingListItem|length }} {{ 'reading_list.books'|trans }}</div>
+                                    </div>
+
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    {% for readingList in readingLists %}
+                        {% if readingList.Status != 'REQUESTED'%}
+                        <li {% if loop.index == 1 and not requestedList %} class="active" {% endif %}  >
+                            <a href="#{{ readingList.ReadingListID }}" data-id="{{ readingList.ReadingListID }}" data-toggle="tab">
+                                <div class="book-info">
+                                    <div class="book-name"> {{ readingList.ListName }}</div>
+                                    <div class="nbr-books"
+                                         data-id="{{ readingLists.ReadingListID }}">{{ readingList.ListItems.ReadingListItem|length }} {{ 'reading_list.books'|trans }}</div>
+                                </div>
+                            </a>
+                        </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                <button type="button" class="btn-add-reading-list left">
+                    <span class="reading_list_label">{{ 'reading_list.add_reading_list.btn'|trans}}</span>
+                </button>
+            </div>
+            {% if readingLists|length>0 %}
+            <div class="reading-list tabs-content" id="reading-list-content">
+                 {% include '@UserBundle/profile/reading-list-content.html.twig' with {'readingLists':readingLists,'user':user,'requestedList': requestedList} %}
+            </div>
+                <div class="reading-list list_reading_books" style="display: none">
+                    <div class="text-center no-list-books nexusSans">
+                        <div class="empty_book-img">
+                            <img class="retina-reload" src="{{ asset('assets/img/empty_book/book_empty@1x.png') }}"
+                                 style="height: 152px;width: 152px;">
+                        </div>
+                        <div class="empty_book-msg">
+                            <p>
+                                {{ 'reading_list.no_lists'|trans|raw }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="reading-list list_reading_books ">
+                    <div class="text-center no-list-books nexusSans">
+                        <div class="empty_book-img">
+                            <img class="retina-reload" src="{{ asset('assets/img/empty_book/book_empty@1x.png') }}"
+                                 style="height: 152px;width: 152px;">
+                        </div>
+                        <div class="empty_book-msg">
+                            <p>
+                                {{ 'reading_list.no_lists'|trans|raw }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="update-notif" id="copy-remove-success" style="display: none">
+        <div class="close-btn"></div>
+        <div class="validation-icon"></div>
+        <div class="cookies-content">
+            Text here!
+        </div>
+    </div>
+    {% include '@MainBundle/modal/review-rating-book-modal.html.twig'  with { 'BookName':'', 'bookIsbn': '', 'subtitle': '', 'edition' : '' } %}
+    {% include '@UserBundle/modal/action-book-reading-list.html.twig' %}
+    {% include '@MainBundle/modal/export-books-modal.html.twig' %}
+    {% include '@UserBundle/modal/remove-book-reading-list.html.twig' %}
+    {% include '@UserBundle/modal/add-reading-list-modal.html.twig' with {'institutions':institutions,'levels':levels} %}
+    {% include '@UserBundle/modal/account-verification-modal.html.twig' with {'institutions':institutionsModal,'professions': professions,'user': user} %}
+    {% include '@UserBundle/modal/pending-qualification-modal.html.twig' %}
+    {% include '@MainBundle/modal/share-book-modal.html.twig' with  { 'BookName':book.title, 'bookIsbn': book.isbn, 'subtitle':  book.subtitle, 'edition' : book.editionNumber } %}
+
+
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('assets/plugins/dropzone/dropzone.js') }}"></script>
+    <script src="{{ asset('assets/page/reading-lists/DragDropTouch.min.js') }}"></script>
+    <script src="{{ asset('assets/page/reading-lists/reading-lists.min.js') }}"></script>
+    <script src="{{ asset('assets/page/profile/account-verification.min.js') }}"></script>
+    <script src="{{ asset('assets/page/showBookDetails/review-rating-book-modal.min.js') }}"></script>
+    <!-- js for share mail library -->
+    <script src="{{ asset('assets/page/showBookDetails/lib/utils.js') }}"></script>
+    <script src="{{ asset('assets/page/showBookDetails/lib/emails-input.js') }}"></script>
+    <script src="{{ asset('assets/page/showBookDetails/lib/app.js') }}"></script>
+    <!-- end share mail js -->
+{% endblock %}

@@ -1,0 +1,53 @@
+<div id="close-modal"></div>
+<div class="modal-container scroll1 modal-content">
+    <!-- select multiple or single reading list -->
+    <div class="modal-step active" id="{{ action }}-step1">
+        <div class="modal-step-content row reading-lists" id="copy-move">
+            <div class="popup-title p-24">
+                {% if(action == "copy") %}
+                    {{ 'reading_list.copy_to'|trans }}
+                {% else %}
+                    {{ 'reading_list.move_to'|trans }}
+                {% endif %}</div>
+            <div class="modal-copy-container scroll scroll1">
+                <div class="small-12 medium-12 large-12 columns scroll scroll1 p-top p-bottom">
+                    {% for readingList in readingLists %}
+                        {% if (readingList.ReadingListID not in exists) and readingList.Status != 'REQUESTED' %}
+                        <div class="input-field user-term small-12 medium-12 large-12 columns checkbox__item reading-list-item ">
+                            <input   class="checkbox__input multi_institutions"
+                                     type="checkbox"
+                                     name="copy-move" id="{{ action }}{{ readingList.ReadingListID }}"
+                                     value="{{ readingList.ReadingListID }}">
+                            <label class="checlbox__label"
+                                   for="{{ action }}{{ readingList.ReadingListID }}">{{ readingList.ListName }}</label>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row step-controller p-24">
+            <button class="btn btn-transparent  right btnDisabled" id="{{action}}-book-reading-list">{{ 'book.request.form.continue_btn'|trans }}</button>
+        </div>
+    </div>
+    <div class="modal-step" id="{{action}}-step2">
+        <div class="modal-step-content row">
+
+
+            <div class="small-12 medium-12 large-12 columns step-controller p-104">
+                <div class="finish-img">
+                    <img class="retina-reload" src="{{ asset('assets/img/icon_success@1x.png') }}"
+                         style="height: 60px;width: 60px;">
+                </div>
+                {% if action == "copy" %}
+                    <div class="success-msg">Book successfully copied!</div>
+                {% else %}
+                    <div class="success-msg">Book successfully moved!</div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row step-controller p-24">
+            <button class="btn btn-transparent goStep right" id="finish-{{action}}-book">Ok</button>
+        </div>
+    </div>
+</div>

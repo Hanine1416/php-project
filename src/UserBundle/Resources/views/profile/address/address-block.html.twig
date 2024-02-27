@@ -1,0 +1,96 @@
+<div class="address-block tile-block small-12 medium-12 large-12 columns {% if totalAddresses==0 %} unique-address {% endif %}">
+    <button type="button" class="tile-toggle">
+        <span class="address-label">{{ 'user.profile.address.address'|trans }} {{ order }}</span>
+        <span class="plus-icon">+</span>
+    </button>
+    <div class="tile">
+        <input class="address-id" type="hidden" id="address_id"
+               name="address[{{ address.id }}][id]" disabled="disabled"
+               value="{{ address.id }}">
+        <div class="input-field">
+            <label for="addresses_{{ address.id }}_address2">{{ 'user.profile.address.address2'|trans }}</label>
+            <input type="text" name="addresses[{{ address.id }}][address2]"
+                   id="addresses_{{ address.id }}_address2" value="{{ address.address2 }}"
+                    {% if lang in ['en','es'] %} data-max-length="30"{% endif %}
+                   title="{{ 'validation.required'|trans }}"
+                   data-value="{{ address.address2 }}" class="address2-input validate">
+        </div>
+        <div class="input-field">
+            <label for="addresses_{{ address.id }}_address3">{{ 'user.profile.address.address3'|trans }}</label>
+            <input type="text" name="addresses[{{ address.id }}][address3]"
+                   id="addresses_{{ address.id }}_address3" value="{{ address.address3 }}"
+                    {% if lang in ['en'] %} data-max-length="30"{% endif %}
+                   title="{{ 'validation.required'|trans }}"
+                   data-value="{{ address.address3 }}" class="address3-input validate">
+        </div>
+        <div class="input-field">
+            <label for="addresses_{{ address.id }}_address1">{{ 'user.profile.address.address1'|trans }}</label>
+            <input type="text" name="addresses[{{ address.id }}][address1]"
+                   id="addresses_{{ address.id }}_address1" value="{{ address.address1 }}"
+                    {% if lang in ['en','es'] %} data-max-length="30"{% endif %}
+                   title="{{ 'validation.required'|trans }}"
+                   data-value="{{ address.address1 }}" class="address1-input validate">
+        </div>
+        {% if lang in ['br','es'] %}
+            <div class="input-field">
+                <label for="addresses_{{ address.id }}_address4">{{ 'user.profile.address.address4'|trans }}</label>
+                <input type="text" name="addresses[{{ address.id }}][address4]"
+                       id="addresses_{{ address.id }}_address4"
+                       value="{{ address.address4 }}"
+                       data-value="{{ address.address4 }}" class="address4-input validate"
+                       title="{{ 'validation.required'|trans }}">
+            </div>
+        {% endif %}
+        <div class="input-field">
+            <label for="addresses_{{ address.id }}_state">{{ 'user.profile.address.state'|trans }}</label>
+            <input type="text" name="addresses[{{ address.id }}][state]"
+                   id="addresses_{{ address.id }}_state"
+                    {% if lang in ['en','es'] %} data-max-length="30" title="{{ 'validation.required'|trans }}" {% endif %}
+                   value="{{ address.state }}" data-value="{{ address.state }}"
+                   class="state-input validate">
+        </div>
+        <div class="input-field">
+            <label for="addresses_{{ address.id }}_city">{{ 'user.profile.address.city'|trans }}</label>
+            <input type="text" name="addresses[{{ address.id }}][city]"
+                   id="addresses_{{ address.id }}_city"
+                    {% if lang in ['en','es'] %} data-max-length="30" title="{{ 'validation.required'|trans }}" {% endif %}
+                   value="{{ address.city }}" data-value="{{ address.city }}"
+                   class="city-input validate">
+        </div>
+        <div class="input-field">
+            <label for="addresses_{{ address.id }}_postalCode">{{ 'user.profile.address.postalCode'|trans }}</label>
+            <input type="text" name="addresses[{{ address.id }}][postalCode]"
+                   id="addresses_{{ address.id }}_postalCode"
+                    {% if lang in ['en','es'] %} data-max-length="30" {% endif %}
+                   title="{{ 'validation.required'|trans }}"
+                   value="{{ address.postalCode }}" data-value="{{ address.postalCode }}"
+                   class="postalCode-input validate">
+        </div>
+        <div class="input-field">
+            <label for="addresses_{{ address.id }}_country">{{ 'user.register.form.fields.country'|trans }}</label>
+            <select name="addresses[{{ address.id }}][country]"
+                    id="addresses_{{ address.id }}_country"
+                    data-value="{{ address.country }}"
+                    class="country-input validate"
+                    title="{{ 'validation.required'|trans }}">
+                <option></option>
+                {% set foundCountry = false %}
+                {% for country in countries %}
+                    <option value="{{ country.Text }}" {% if address.country == country.Text %} selected {% set foundCountry = true %} {% endif %}>{{ country.Text }}</option>
+                {% endfor %}
+                {% if not foundCountry %}
+                    <option value="{{ address.country }}"
+                            selected> {{ address.country }}</option>
+                {% endif %}
+            </select>
+        </div>
+        <div class="address-bloc-btn text-center pl-0 pr-0">
+            <button type="button" class="btn btn-black update-address-btn"
+                    disabled>{{ 'user.profile.update_btn'|trans }} <span></span></button>
+        </div>
+        <div class="address-bloc-btn text-center pl-0 pr-0">
+            <button data-address="{{ address.id }}" type="button"
+                    class="btn address-del-btn {% if totalAddresses == 0 %} hidden {% endif %}">{{ 'user.profile.address.delete_btn'|trans }}</button>
+        </div>
+    </div>
+</div>

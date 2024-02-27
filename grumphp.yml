@@ -1,0 +1,17 @@
+parameters:
+    git_dir: .
+    bin_dir: vendor/bin
+    tasks:
+        git_blacklist:
+            triggered_by: ['php']
+            regexp_type: G
+
+#        git_commit_message:
+#            matchers:
+#                Must contain JIRA issue number: /IC-\d+/
+#            case_insensitive: true
+#            multiline: true
+#            additional_modifiers: ''
+    ascii:
+        failed: ~
+        succeeded: ~

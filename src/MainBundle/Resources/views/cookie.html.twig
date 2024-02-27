@@ -1,0 +1,105 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheets %}
+    <style>
+        h2 {
+            font-size: 1.5rem;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: normal;
+            color: #5c5c5c;
+        }
+        table thead tr th {
+            padding: 18px 5px;
+            background: #ebebeb;
+            font-size: 18px;
+            font-weight: normal;
+            text-align: center;
+            color: #ff8200;
+            border: 5px solid white;
+        }
+        table tbody tr{
+            text-align: left;
+        }
+        table tbody tr td{
+            border: 1px solid #d9d9d9;
+        }
+        table {
+            border-spacing: 0;
+            border: 1px solid #e2e2e2;
+        }
+
+        table {
+            background: white;
+            margin: 45px 0 30px 0;
+            table-layout: auto;
+            width: 100%;
+            text-align: center;
+        }
+        .verticalPadding {
+            margin: auto;
+            width: 90%;
+            max-width: 1260px;
+        }
+        table caption{
+            background: transparent;
+            color: #007398;
+            font-size: 16px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        table tr.vr-tr{
+            position: absolute;
+        }
+        table tr.vr-tr td{
+            border: none!important;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <input type="hidden" id="page-title" value="cookies">
+    <div class="inner-wrap verticalPadding">
+        {{ cookiePage.topSection|raw }}
+        <table>
+            <caption>{% if tableElements.tableCaption|length>0 %}{{ tableElements.tableCaption }}{% else %}   {{ "admin.cookies.description"|trans }} {% endif %}</caption>
+            <thead>
+            <tr>
+                <th width="20%">{% if tableElements.service|length>0 %}{{ tableElements.service }}{% else %}  {{ "admin.cookies.service"|trans }} {% endif %}</th>
+                <th width="10%">{% if tableElements.cookieName|length>0 %}{{ tableElements.cookieName }}{% else %}  {{ "admin.cookies.cookie"|trans }} {% endif %}</th>
+                <th width="50%">{% if tableElements.purpose|length>0 %}{{ tableElements.purpose }}{% else %}  {{ "admin.cookies.purpose"|trans }}{% endif %}</th>
+                <th width="20%">{% if tableElements.moreInfo|length>0 %}{{ tableElements.moreInfo }}{% else %} {{ "admin.cookies.more_info"|trans }} {% endif %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="vr-tr"><td></td></tr>
+            {% for cookieTable in cookieTables %}
+                <tr>
+                    <td class="serviceNameValue">{{ cookieTable.serviceName }}</td>
+                    <td class="cookieNameValue">
+                        <ul>
+                            {% for cookieName in cookieTable.cookieNames %}
+                                <li>{{ cookieName }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td class="descriptionValue">
+                        {{ cookieTable.description|raw }}
+                    </td>
+                    <td class="moreInfoValue">
+                        {{ cookieTable.moreInfo|raw }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {{ cookiePage.bottomSection|raw }}
+    </div>
+{% endblock %}
+{% block javascripts %}
+<script>
+    $(document).ready(function () {
+        $('.cookie-block').hide();
+        localStorage.setItem('cookie','1')
+    });
+</script>
+{% endblock %}

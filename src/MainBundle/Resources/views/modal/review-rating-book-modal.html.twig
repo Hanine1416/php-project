@@ -1,0 +1,86 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/page/showBookDetails/request-book.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/showBookDetails/review-rating-book-modal.css') }}">
+{% endblock %}
+<!-- review book modal -->
+<div class="review-rating-book-modal lightbox modal" tabindex="-1" role="dialog" id="rating-book-modal">
+    <div class="modal-dialog" role="document">
+        <div class="close close-step-1"></div>
+        <div class="modal-container scroll1 modal-content">
+            <form autocomplete="off" class="fakeForm" data-url="{{ url('review-rating-book') }}"
+                  id="formBookReviewRating">
+                <!-- Feedback -->
+                <div class="modal-step" id="feedback-step">
+                    <div class="modal-step-content">
+                        <div class="popup-title popup_header" data-book_isbn="{{ bookIsbn }}">
+                            <div class="prodImgDetail p-0">
+                                <img class="cover" src="{{ imageCdn ~'/'~ bookIsbn ~'.jpg' }}"
+                                     onerror="imgError(this);">
+                            </div>
+                            <div class="detailDescription p-0">
+                                <p><span class="book_title">{{ BookName }}</span></p>
+                            </div>
+                            <div class="prodImgDetail-mobile p-0">
+                                <img class="cover-mobile" src="{{ imageCdn ~'/'~ bookIsbn ~'.jpg' }}"
+                                     onerror="imgError(this);">
+                            </div>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns feedback-txt p-0">
+                            <div class="popup-title">Your review</div>
+                            <div class="review-container popup_reviews">
+                                <button class="star active"><span class="stararea"><i class="star_icon"></i></span>
+                                </button>
+                                <button class="star active"><span class="stararea"><i class="star_icon"></i></span>
+                                </button>
+                                <button class="star"><span class="stararea"><i class="star_icon"></i></span></button>
+                                <button class="star"><span class="stararea"><i class="star_icon"></i></span></button>
+                                <button class="star"><span class="stararea"><i class="star_icon"></i></span></button>
+                            </div>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns feedback-txt p-0">
+                            <textarea name="feedBack" id="feedBack" class="feedback validate"
+                                      placeholder="Write your review..." rows="6"
+                                      title="{{ 'validation.required'|trans }}"></textarea>
+                            <span class="error text-center hide"
+                                  id="feedbackError" title="Please provide feedback"></span>
+
+                        </div>
+                        {# <div class="columns checkbox__item radio-box label-down mt-24">
+                             <input type="checkbox" name="feedback_public" id="feedback_public"
+                                    class="checkbox__input"
+                                    value="1">
+                             <label for="feedback_public"
+                                    class="checlbox__label">{{ 'book.review.feedback.accept_public'|trans }}</label>
+                         </div>#}
+                        <div class="small-12 medium-12 large-12 columns feedback-txt p-0 mt-14">
+                            <span>{{ 'book.modal.review_rating_book_modal.thank_you_for_taking_the_time_to_write_a_review'|trans }}</span>
+                        </div>
+                        <div class=" columns checkbox__item radio-box label-down mt-14">
+                            <input type="checkbox" name="feedback_name_public" id="feedback_name_public"
+                                   class="checkbox__input" value=1>
+                            <label for="feedback_name_public"
+                                   class="checlbox__label">{{ 'book.modal.review_rating_book_modal.i_agree_to_my_name_and_institution'|trans }}</label>
+                        </div>
+
+                    </div>
+                    <div class="row step-controller p-0 text-right">
+                        <button class="btn btn-transparent goStep  validate-feedback submit-book-review">{{ 'book.review.submit'|trans }}
+                            <span></span></button>
+                    </div>
+                </div>
+
+                <!-- Finish review success message -->
+                <div class="modal-step" id="finish-step">
+                    <div class="modal-step-content small-popup">
+                        <div class="finish-img">
+                            <img class="retina-reload" src="{{ asset('assets/img/icon_success@1x.png') }}"
+                                 style="height: 60px;width: 60px;">
+                        </div>
+                        <div class="success-msg">{{ 'book.review.success.title'|trans|raw }}</div>
+                        <div class="finish-msg rating-books">{{ 'book.review.success.message'|trans|replace({'__contact_link__':url('contactUs')})|raw }}</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

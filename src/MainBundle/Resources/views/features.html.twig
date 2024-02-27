@@ -1,0 +1,104 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/page/profile/identify-account.css') }}">
+{% endblock %}
+{% block title %} {{ "features.title"|trans }} {% endblock %}
+{% block body %}
+    <input type="hidden" id="page-title">
+    <div class="row feature_page">
+        <!--Account details page -->
+        <div class="desktop">
+            <div class="feature_header maincontainer">
+                <div class="small-12 columns nexusSans title pr-0 pl-0"> {{ "features.title"|trans }}</div>
+            </div>
+            <div class="main-menu-profile-container maincontainer identify-page">
+                <div class="small-12 columns nexusSans identify-verification ">
+                <div class="content_identify ">
+                <div class="left_zone">
+                    <div class="features_header">
+                        <div class="header_cell">1. {{ 'identity_verification.create_basic_account'|trans }}
+                        </div>
+                    </div>
+                     <div class="p_identify">{{ 'identity_verification.p_basic_account'|trans }} :</div>
+                    <div class="desktop_cell">
+                        <div class="featured-cell">
+                            <div class="checked_icon"></div>
+                        </div>
+                        <div class="features_name">{{ 'identity_verification.browse_cat'|trans }}</div>
+                        
+                    </div>
+                    <div class="desktop_cell">
+                        <div class="featured-cell">
+                            <div  class="checked_icon">
+                            </div>
+                        </div>
+                        <div class="features_name">{{ 'identity_verification.create_lists'|trans }}</div>
+                    </div>
+                </div>
+                <div class="right_zone">
+                    <div class="features_header">
+                        <div class="header_cell">
+                            2. {{ 'identity_verification.confirm_status_instructor'|trans }}
+                        </div>
+                    </div>
+                    <div class="p_identify nexusSans">
+                        {{ "features.feature_confirm_status"|trans }}:
+                    </div>
+
+                    <div class="desktop_cell">
+                        <div class="featured-cell">
+                            <div class="checked_icon">
+                            </div>
+                        </div>
+                        <div class="features_name">{{ 'identity_verification.auto_access'|trans }}</div>
+                        
+                    </div>
+                    <div class="desktop_cell">
+                        <div class="featured-cell">
+                            <div class="checked_icon">
+                            </div>
+                        </div>
+                        <div class="features_name">{{ 'identity_verification.access_student_educator'|trans }}</div>
+                        
+                    </div>
+
+                    <div class="desktop_cell">
+                        <div class="featured-cell">
+                            <div class="checked_icon">
+                            </div>
+                        </div>
+                        <div class="features_name">{{ 'identity_verification.share'|trans }}</div>
+                       
+                    </div>
+                    <div class="desktop_cell">
+                        <div class="featured-cell">
+                            <div class="checked_icon">
+                            </div>
+                        </div>
+                        <div class="features_name">{{ 'identity_verification.export'|trans }}</div>
+                        
+                    </div>
+                    <div class="desktop_cell">
+                        <div class="featured-cell">
+                            <div class="checked_icon">
+                            </div>
+                        </div>
+                        <div class="features_name">{{ 'identity_verification.send_feedback'|trans }}</div>
+                       
+                    </div>
+                    <div class="desktop_cell">
+                    <div class="featured-cell">
+                            <div class="checked_icon">
+                            </div>
+                        </div>
+                        <div class="features_name">{{ 'identity_verification.add_ratings'|trans }}</div>
+                    </div>
+                </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <!--End Account details page -->
+    </div>
+    {% include '@UserBundle/modal/account-verification-modal.html.twig' with {'institutions':institutions,'professions': professions,'user': user} %}
+{% endblock %}

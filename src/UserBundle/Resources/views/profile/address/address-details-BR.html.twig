@@ -1,0 +1,62 @@
+<div class="address-info br-address {% if  address.type == 'Disabled' %} disabled-inst {% endif %}"
+     data-address-id="{{ address.id }}">
+    <div class="title-address row">
+        <div class="institution-name small-10 columns">{{ address.address2 }}</div>
+        <div class="small-2 medium-12 icon-edit columns">
+            <a href="javascript:;" class="edit-address-btn" data-address-id="{{ address.id }}">
+                <img src="{{ asset('assets/img/icon-edit/icon_edit.jpg') }}"
+                     srcset="{{ asset('assets/img/icon-edit/icon_edit@2x.jpg') }} 2x,{{ asset('assets/img/icon-edit/icon_edit@3x.jpg') }} 3x"
+                     class="icon_edit"  data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.edit'|trans }}">
+            </a>
+        </div>
+        {% if address.canbedeleted == 'true' %}
+            <div class="small-2 medium-12 icon-delete columns">
+                <a href="javascript:;" class="delete-address-btn" data-address-id="{{ address.id }}">
+                    <img src="{{ asset('assets/img/icon-delete/icon_delete.png') }}"
+                         srcset="{{ asset('assets/img/icon-delete/icon_delete@2x.png') }} 2x,{{ asset('assets/img/icon-delete/icon_delete@3x.png') }} 3x"
+                         class="icon_delete" data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.delete'|trans }}">
+                </a>
+            </div>
+        {% else %}
+            <div class="small-2 medium-12 icon-disable columns">
+                <a href="javascript:;" class="disable-address-btn" data-address-id="{{ address.id }}">
+                    <img src="{{ asset('assets/img/icon-disable/icon_disable.png') }}"
+                         srcset="{{ asset('assets/img/icon-disable/icon_disable@2x.png') }} 2x,{{ asset('assets/img/icon-disable/icon_disable@3x.png') }} 3x"
+                         class="icon_disable" data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.disable'|trans }}">
+                </a>
+            </div>
+        {% endif %}
+        <div class="institution-infos">
+            <div class="CEP small-12 columns">
+                <div class="desc">{{ address.postalCode }}</div>
+            </div>
+            <div class="Endereço small-12 columns">
+                <div class="desc">{{ address.address2 }}</div>
+            </div>
+            <div class="Nº small-12 columns">
+                <div class="desc">{{ address.address3 }}</div>
+            </div>
+            <div class="Complemento small-12 columns">
+                <div class="desc">{{ address.address1 }}</div>
+            </div>
+            <div class="Bairro small-12 columns">
+                <div class="desc">{{ address.address4 }}</div>
+            </div>
+            <div class="Cidade small-12 columns">
+                <div class="desc">{{ address.city }}</div>
+            </div>
+            <div class="Estado small-12 columns">
+                <div class="desc"> {{ address.state }}</div>
+            </div>
+            {% if address.phone != '' %}
+                <div class="phone-block">
+                    <div class="institution-name label_phone small-10 columns">{{ 'user.register.form.fields.phone'|trans }}</div>
+                    <div class="country small-12 columns">
+                        <div class="desc number-phone">{{ address.phone }}</div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+</div>

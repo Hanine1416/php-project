@@ -1,0 +1,21 @@
+<!-- Confirm box -->
+<div class="box">
+    <div class="confirmBox">
+        <div class="box-content">
+            <div class="box-img">
+
+            </div>
+            <div class="box-messages">
+                <p class="box-msg confirm-msg hidden">{% block boxConfirm %}{{ 'user.profile.confirm_box.close_message'|trans }}{% endblock %}</p>
+                <p class="box-msg error-msg hidden"></p>
+                <p class="box-msg info-msg hidden"></p>
+            </div>
+        </div>
+        <div class="box-footer">
+            <button class="btn btn-blue reverse" id="box-ok">Ok</button>
+            <button class="btn btn-blue reverse" id="box-cancel">{{ 'user.register.form.button.cancel'|trans }}</button>
+            <button class="btn btn-blue" id="box-confirm">{{ 'user.profile.confirm_box.confirm_btn'|trans }} <span></span></button>
+        </div>
+    </div>
+    <div class="confirmBox-background"></div>
+</div>

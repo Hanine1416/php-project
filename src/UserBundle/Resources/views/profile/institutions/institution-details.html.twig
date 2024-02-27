@@ -1,0 +1,27 @@
+<div class="institution-details-block {% if not institution.enabled %} disabled-inst {% endif %}"
+     data-inst-id="{{ institution.id }}"
+     data-institution-id="{{ institution.institutionId }}"
+     data-institution-name="{{ institution.institutionName }}"
+     data-department-id="{{ institution.departmentId }}"
+     data-department-name="{{ institution.departmentName }}"
+     data-profession="{{ institution.profession }}"
+     data-speciality="{{ institution.speciality }}"
+     data-has-request="{{ institution.hasRequest }}"
+     data-primary="{{ institution.isPrimary?1:0 }}">
+    <div class="title-institution row">
+        <h3 class="small-10 columns">{{ institution.institutionName }}</h3>
+        <div class="small-2 columns">
+            <a href="javascript:;" class="edit-institution-btn">
+                <img src="{{ asset('assets/img/icon-edit/icon_edit.jpg') }}"
+                     srcset="{{ asset('assets/img/icon-edit/icon_edit@2x.jpg') }} 2x,{{ asset('assets/img/icon-edit/icon_edit@3x.jpg') }} 3x"
+                     class="icon_edit" data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.edit'|trans }}">
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="profession small-12 large-7 columns">
+            <div>{{ 'user.register.form.fields.program'|trans }}</div>
+            <div class="desc">{{ institution.profession }}</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,128 @@
+{% extends 'admin.layout.html.twig' %}
+{% block body %}
+    <main role="main" class="cover-page row">
+        <div class="large-12 cover-container">
+            <div class="dashHead clearfix">
+                <h1>{{  'admin.cover.home_page_visuals'|trans}}</h1>
+                <p class="img-validation-msg"><i class="fa fa-info-circle"></i> {{ 'admin.cover.error'|trans }}</p>
+            </div>
+            <div class="row verticalPadding">
+                <form action="{{ url('admin-edit-cover') }}" enctype="multipart/form-data"  method="post">
+                    {% set coversByType = getCoversByType(covers) %}
+                    {% set countCover = 0 %}
+                    {% if  coversByType['SH']|length > 0 and coversByType['ST']|length > 0 %}
+                            <div class="large-12 main-category"><span>{{ 'layout.health_sciences'|trans }}</span></div>
+                            {% for cover in coversByType['SH'] %}
+                                <div class="cover-zone large-3 columns">
+                                    <input type="hidden" name="covers[{{ countCover }}][id]" value="{{ cover.id }}" >
+                                    <input class="image-input" type="hidden" name="covers[{{ countCover }}][image]" value="{{ cover.image }}">
+                                    <h3>{{ cover.profession|convert_encoding('UTF-8', 'ISO-8859-1') }}</h3>
+                                    <div class="preview">
+                                        <img data-initial="{% if cover.image %}{{ cover.image }} {% else %} {{ asset('assets/img/bookOne.jpg') }} {% endif %}" src="{% if cover.image %}{{ cover.image }} {% else %} {{ asset('assets/img/bookOne.jpg') }} {% endif %}" alt="">
+                                    </div>
+                                    <div class="large-12 dropzone" data-drag-msg="{{ 'admin.cover.drag_drop'|trans }}">
+                                        <button class="upload-btn" type="button">{{ 'admin.cover.select_file'|trans }}</button>
+                                        <input type="file" name="covers[{{ countCover }}][image]" id="file_{{ countCover }}">
+                                    </div>
+                                </div>
+                                {% set countCover = countCover+1 %}
+                            {% endfor %}
+                            <div class="large-12 main-category"> <span>Science & Technology</span></div>
+                            {% for cover in coversByType['ST'] %}
+                                <div class="cover-zone large-3 columns">
+                                    <input type="hidden" name="covers[{{ countCover }}][id]" value="{{ cover.id }}" >
+                                    <input class="image-input" type="hidden" name="covers[{{ countCover }}][image]" value="{{ cover.image }}">
+                                    <h3>{{ cover.profession|convert_encoding('UTF-8', 'ISO-8859-1') }}</h3>
+                                    <div class="preview">
+                                        <img data-initial="{% if cover.image %}{{ cover.image }} {% else %} {{ asset('assets/img/bookOne.jpg') }} {% endif %}" src="{% if cover.image %}{{ cover.image }} {% else %} {{ asset('assets/img/bookOne.jpg') }} {% endif %}" alt="">
+                                    </div>
+                                    <div class="large-12 dropzone" data-drag-msg="{{ 'admin.cover.drag_drop'|trans }}">
+                                        <button class="upload-btn" type="button">{{ 'admin.cover.select_file'|trans }}</button>
+                                        <input type="file" name="covers[{{ countCover }}][image]" id="file_{{ countCover}}">
+                                    </div>
+                                </div>
+                                {% set countCover = countCover+1 %}
+                            {% endfor %}
+                        {% else %}
+                            {% for cover in covers %}
+                                <div class="cover-zone large-3 columns">
+                                    <input type="hidden" name="covers[{{ countCover}}][id]" value="{{ cover.id }}" >
+                                    <input class="image-input" type="hidden" name="covers[{{ countCover }}][image]" value="{{ cover.image }}">
+                                    <h3>{{ cover.profession|convert_encoding('UTF-8', 'ISO-8859-1') }}</h3>
+                                    <div class="preview">
+                                        <img data-initial="{% if cover.image %}{{ cover.image }} {% else %} {{ asset('assets/img/bookOne.jpg') }} {% endif %}" src="{% if cover.image %}{{ cover.image }} {% else %} {{ asset('assets/img/bookOne.jpg') }} {% endif %}" alt="">
+                                    </div>
+                                    <div class="large-12 dropzone" data-drag-msg="{{ 'admin.cover.drag_drop'|trans }}">
+                                        <button class="upload-btn" type="button">{{ 'admin.cover.select_file'|trans }}</button>
+                                        <input type="file" name="covers[{{ countCover}}][image]" id="file_{{ countCover }}">
+                                    </div>
+                                </div>
+                                {% set countCover = countCover+1 %}
+                            {% endfor %}
+                    {% endif %}
+
+                    <div class="small-12 columns text-right">
+                        <button type="reset" class="btn btn-blue reverse">{{ 'admin.cover.discard_btn'|trans }}</button>
+                        <button type="submit" class="btn btn-blue">{{ 'admin.cover.update_btn'|trans }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('assets/plugins/dropzone/dropzone.js') }}"></script>
+    <script>
+        Dropzone.autoDiscover = false;
+        $(document).ready(function () {
+            var dropzones = [];
+            $('.dropzone' ).each(function (i, el) {
+                $(el).find('.upload-btn').on('click',function (e) {
+                    e.preventDefault();
+                    $(el).click();
+                    $(this).blur();
+                });
+                const name = 'g_' + $(el).data('field');
+                var myDropzone = new Dropzone(el, {
+                    url: window.location.pathname,
+                    parallelUploads: 100,
+                    maxFiles: 1,
+                    paramName: name,
+                    thumbnailHeight: 190,
+                    thumbnailWidth: 150,
+                    addRemoveLinks: true,
+                    resizeWidth:150,
+                    resizeHeight:190,
+                    dictDefaultMessage: $(el).data('drag-msg'),
+                    acceptedFiles:'image/*',
+                    autoProcessQueue:false,
+                    thumbnail: function(file, dataUrl) {
+                        if (file.width > 600 || file.height > 750 || (file.height/file.width)>1.3 || (file.height/file.width)<1.2 ) {
+                            this.removeFile(file);
+                            showErrorBox($('.img-validation-msg').html());
+                        }else{
+                            $(el).closest('.cover-zone').find('.preview img').attr('src',dataUrl);
+                            $(el).parent().find('.image-input').val(dataUrl);
+                        }
+                    }
+                }).on('resetFiles', function() {
+                    if(this.files.length != 0){
+                        for(i=0; i<this.files.length; i++){
+                            this.files[i].previewElement.remove();
+                        }
+                        this.files.length = 0;
+                        $.each($('.preview img'),function (i,elem) {
+                            $(elem).attr('src',$(elem).data('initial'))
+                        })
+                    }
+                });
+                dropzones.push(myDropzone);
+            });
+            $(document).on('click','button[type="reset"]',function (e) {
+                $.each(dropzones,function (i,drp) {
+                    drp.emit('resetFiles');
+                })
+            })
+        });
+    </script>
+{% endblock %}

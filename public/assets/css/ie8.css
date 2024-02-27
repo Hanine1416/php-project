@@ -1,0 +1,22 @@
+
+		@media only screen and (max-width: 1118px) {
+
+		.header .head .text {
+		    *font-size: 0.8em;
+		}
+
+		.header .head .text h1{
+
+			font-size: 3em;
+		}
+		  .header .head .text h2{
+		  	font-size: 1.7em;
+		  }
+			
+		}	
+	@media only screen and (max-width: 1024px) {
+ .header .head .text h2{
+		  	font-size: 1.5em;
+		  }
+			
+	}

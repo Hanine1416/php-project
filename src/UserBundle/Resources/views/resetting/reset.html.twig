@@ -1,0 +1,70 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/page/resetPassword/reset-pwd.css') }}">
+{% endblock %}
+{% form_theme form '/parts/custom_form.html.twig' %}
+{% block main_css %} page-reset {% endblock %}
+{% block body %}
+    <input type="hidden" id="page-title" value="reset password">
+    <div class="inner-wrap edit-account reset-password">
+        <main role="main">
+            <div class="block">
+                <div class="row">
+                    <div class="resetArea">
+                        {% if tokenValid %}
+                            <div class="reset-large-12 columns large-12">
+                                <div class="section-title title-reset">{{ "user.reset_password.reset_password_text"|trans }}</div>
+                                <p class="text warning-text"></p>
+                                {{ form_start(form) }}
+                                <div class="form-register clearfix">
+                                    <div class="column small-12 passNoPadding password-field">
+                                        <div class="input-field">
+                                            {{ form_label(form.password.first) }}
+                                            {{ form_widget(form.password.first, {'attr' : {'data-error':'user.reset_password.error'|trans,autocomplete:"new-password",title:'validation.required'|trans},required:false}) }}
+                                            <span toggle="#resetting_form_password_first" class="eye-icon toggle-password"></span>
+                                            <div class="ps-st-meter-wrapper hide" data-strengthifyfor="p1">
+                                                <div class="ps-st-meter-bg"></div>
+                                                <div class="pwd-good " id="ps-st-meter-container"
+                                                     style="width: 0;"></div>
+                                                <div class="ps-st-meter-separator" style="left: 25%;"></div>
+                                                <div class="ps-st-meter-separator" style="left: 50%;"></div>
+                                                <div class="ps-st-meter-separator" style="left: 75%;"></div>
+                                                <div class="ps-strength-text">
+                                                    <span>{{ 'user.register.step1.bad'|trans }}</span>
+                                                    <span>{{ 'user.register.step1.medium'|trans }}</span>
+                                                    <span>{{ 'user.register.step1.good'|trans }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="input-field">
+                                            {{ form_label(form.password.second) }}
+                                            {{ form_widget(form.password.second,{required:false,attr:{title:'validation.required'|trans}}) }}
+                                            {{ form_errors(form.password) }}
+                                            <span toggle="#resetting_form_password_second" class="eye-icon toggle-password"></span>
+                                        </div>
+                                        <div class="input-field password-rule">
+                                            {{ "user.reset_password.info"|trans }}
+                                        </div>
+                                        {{ form_widget(form) }}
+                                        <div class="btngroup column small-12">
+                                            <div class="row passMarBottom">
+                                                <button id="reset-account-pass-btn" class="btn btn-blue submit updatePassword">{{ "user.register.form.button.save"|trans }}</button>
+                                                <button class="btn btn-blue reverse cancelRestPassword" href="{{ url('main') }}">{{ "user.register.form.button.cancel"|trans }}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{ form_end(form) }}
+                            </div>
+                        {% else %}
+                            <div  class="text-center mt-30" >{{ "user.reset_password.expired_token"|trans|replace({'__link__':url('main')})|raw }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock body %}
+{% block javascripts %}
+    <script src="{{ asset('assets/page/resetPassword/reset.min.js') }}"></script>
+{% endblock %}

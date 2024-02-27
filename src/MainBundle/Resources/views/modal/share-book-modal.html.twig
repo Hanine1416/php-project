@@ -1,0 +1,62 @@
+<!-- Verify account modal -->
+<div class="lightbox modal" id="share-book-modal" tabindex="-1"
+     role="dialog" data-url="{{ url('share-book') }}">
+    <div class="modal-dialog" role="document">
+        <div class="close" data-dismiss="modal"></div>
+        <div class="modal-container scroll1 modal-content">
+            <div class="modal-step active" id="step1">
+                <div class="modal-step-content row">
+                    <div class="popup-title popup_header" data-book_isbn="{{ bookIsbn }}">
+                      <div class="prodImgDetail p-0">
+                          <img class="cover" src="{{ imageCdn ~'/'~ bookIsbn ~'.jpg' }}" onerror="imgError(this);">
+                      </div>
+                        <div class="detailDescription p-0">
+                            <p>{{ "share_book.share"|trans }} <span class="book_title">{{ BookName }}</span></p>
+                            <span class="book_subtitle">{{ subtitle }}</span>
+                            <span class="edition_num" data-text-edition="{{ "book.edition_label"|trans }}"></span><br>
+                            <span class="dot-share-product-popup item_copylink"><a href="javascript:;" class="more-menu-btn "
+                                                               data-link="{{ url('showBookDetails',{isbn: bookIsbn}) }}">{{ "product_page.share_dots.share"|trans }}</a></span>
+                            <span class=" more-menu-item item_message for-mobile"> <a href="sms:;?&body={{ url('showBookDetails',{isbn: bookIsbn}) }}"
+                                                                class="more-menu-btn" role="menuitem">{{ "product_page.share_dots.message"|trans }}</a></span>
+                             <span class=" more-menu-item item_whatsapp for-mobile"><a href="whatsapp://send?abid=&text={{ url('showBookDetails',{isbn: bookIsbn}) }}"
+                                                                class="more-menu-btn" role="menuitem">{{ 'product_page.share_dots.whatsapp'|trans }}</a></span>
+                             <span class=" more-menu-item item_mail for-mobile"><a href="mailto:?body='{{ url('showBookDetails',{isbn: bookIsbn}) }}'"
+                                                                class="more-menu-btn" role="menuitem">{{ "product_page.share_dots.mail"|trans }}</a></span>
+                        </div>
+                    </div>
+                    <hr>
+                    <span class="add_mail small-12 medium-12 large-12 columns pr-0 pl-0" id="add_mail_btn">{{ "share_book.add_mail"|trans }}</span>
+                    <div class="mail-validation small-12 medium-12 large-12 columns pr-0 pl-0">
+                        <div id="emails-input" data-placeholder="{{ "share_book.filed_mail"|trans }}"></div>
+                        <span class="warning error-no-mail hidden">{{ "share_book.error_no_mail"|trans }}</span>
+                        <span class="warning error-invalid-mail hidden">{{ "share_book.invalid_mail"|trans }}</span>
+                    </div>
+
+                    <div class="small-12 medium-12 large-12 columns feedback-txt p-0">
+                        <textarea name="msgShare" id="msgShare" class="feedback" maxlength="250"
+                                  placeholder="{{ "share_book.filed_msg"|trans }}" rows="6"></textarea>
+                        <p class="share_msg">{{ "share_book.notif_msg"|trans }}</p>
+                    </div>
+                    <p id="no-share-msg" class="hidden">{{ "share_book.confirm_msg"|trans }}</p>
+                    <p id="share-msg-yes" class="hidden">{{ "share_book.add_msg"|trans }}</p>
+                </div>
+                <div class="row step-controller p-0 text-right pl-0 pr-0">
+                    <button class="btn btn-transparent share-btn">{{ "share_book.share_btn_popup"|trans }}</button>
+                </div>
+            </div>
+            <!-- Finish step -->
+            <div class="modal-step" id="step2">
+                <div class="modal-step-content row small-popup">
+                    <div class="finish-img">
+                        <img class="retina-reload" src="{{ asset('assets/img/icon_success@1x.png') }}"
+                             style="height: 60px;width: 60px;">
+                    </div>
+                    <div class="success-msg">{{ "share_book.success_send"|trans }}</div>
+                    <button class="btn btn-transparent continue_browsing_btn">
+                        {{ "share_book.btn_continue"|trans }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

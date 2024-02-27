@@ -1,0 +1,226 @@
+.mg-top-67 {
+  margin-top: 67px;
+}
+
+.signOut {
+  margin-left: 375px;
+  color: black !important;
+}
+
+.accountManager {
+  margin-bottom: 40px;
+  margin-top: 20px;
+  text-align: center;
+  color: black !important;
+  padding: 0 28px;
+  .accountInfo {
+    text-align: left;
+    line-height: 18px;
+  }
+}
+.verticalPadding{
+  padding: 0;
+}
+.myEducation-block {
+  margin-bottom: 15px;
+}
+
+.imgBlock img {
+  max-width: 180px;
+}
+
+.disabled-block * {
+  &:not(.switch) {
+    opacity: 0.5;
+  }
+  &:hover, &:focus {
+    opacity: 1;
+  }
+}
+.close-address-modal {
+  background: url(../../img/button_close.jpg) no-repeat scroll;
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  float: right;
+  opacity: 1;
+}
+.profile-container > .profile-block {
+  margin-bottom: 20px;
+  padding: 0 28px;
+  input {
+    border: 1px solid #e0e0e0 !important;
+    padding: 22px 10px;
+    color: #53565a;
+  }
+  .select2-selection__rendered {
+    border: 1px solid #e0e0e0  !important;
+    height: 45px;
+  }
+  input.warning, select.warning ~ .select2-container .select2-selection__rendered {
+    border-color: #E32510 !important;
+  }
+}
+
+.Contextuel-help {
+  color: #53565a;
+  font-size: 14px;
+}
+
+.profile-container {
+    padding: 20px 24px;
+  > .profile-block {
+    input[type=password] {
+      &:disabled, &[disabled] {
+        background: #dcdcdd;
+        font-size: 35px;
+        color: #53565a !important;
+      }
+    }
+    label {
+      color: #000;
+      font-size: 14px;
+    }
+  }
+  .tile-toggle {
+    margin-bottom: 0;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    color: gray;
+    cursor: pointer;
+    padding: 6px;
+    width: 100%;
+    text-align: left;
+    outline: none;
+    font-size: 16px;
+    transition: 0.4s;
+  }
+}
+
+.tile-toggle {
+  &:hover, &:active, &.active {
+    border-bottom: none !important;
+    color: white !important;
+  }
+}
+
+.profile-inner-block {
+  /*    padding: 0 18px;*/
+  background-color: white;
+  transition: all .5s ease-in-out;
+  width: 100%;
+}
+
+span.plus-icon {
+  font-size: 30px;
+  font-weight: 700;
+  color: #404040;
+  position: absolute;
+  right: 34px;
+  -webkit-transition: 400ms ease-in-out;
+  -moz-transition: 400ms ease-in-out;
+  -o-transition: 400ms ease-in-out;
+  transition: 400ms ease-in-out;
+}
+
+.tile {
+  display: none;
+}
+
+#add-address-form input[type=text] {
+  margin-bottom: 0;
+}
+
+/** Loading button effect */
+
+button.loading {
+  background-color: #e9711c;
+  border-color: #e9711c;
+  pointer-events: none;
+  opacity: 0.5;
+  padding-right: 40px;
+  > span {
+    position: relative;
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    top: 10px;
+    right: 10px;
+    border-radius: 50%;
+    border: 3px solid #000;
+    border-color: #ffffff transparent #ffffff transparent;
+    -webkit-animation: lds-dual-ring 1s linear infinite;
+    animation: lds-dual-ring 1s linear infinite;
+    width: 25px !important;
+    height: 25px !important;
+    -webkit-transform: translate(-27.5px, -27.5px) scale(0.275) translate(27.5px, 27.5px);
+    transform: translate(-27.5px, -27.5px) scale(0.275) translate(27.5px, 27.5px);
+  }
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+
+@-webkit-keyframes lds-dual-ring {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+
+.topMenu .menuItem.search, .burguerMenu, .mainMenu {
+  display: none;
+}
+
+nav {
+  border-bottom: none;
+}
+
+a.logoLink {
+  text-align: center;
+  display: block;
+  z-index: 0;
+}
+
+/* personal details */
+
+.profile-container > .profile-block .input-field {
+  width: 100%;
+  /*    margin: 0;*/
+  max-width: 100%;
+}
+
+#edit_profile_content .input-field:focus {
+  outline: 0;
+}
+
+
+.note {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 1024px) {
+  .verticalPadding {
+    padding-bottom: 50px;
+  }
+}

@@ -1,0 +1,1132 @@
+book:
+    edition_label: 'Auflage'
+    request:
+        request_digital: "Digitales Format"
+        request_print: "Print-Buch"
+        digital_requested: "Digitales Prüfexemplar angefordert"
+        print_requested: "Buch angefordert"
+        digital_pre_ordered: "Digitales Prüfexemplar vorbestellt"
+        print_pre_ordered: "Buch vorbestellt"
+        print_preorder_approved_info: "Lieferdauer beträgt 10-14 Tage"
+        digital_preorder_approved_info: "Sofortiger Zugriff nach Freigabe"
+        print_order_approved_info: "Lieferdauer beträgt 10-14 Tage"
+        digital_order_approved_info: "Sofortiger Zugriff nach Freigabe"
+        digital_order_popup: "Subject to approval; does not include Student Consult or interactive features"
+        digital_preorder_popup: "Nach Freigabe durch Ihren Kundenbetreuer*in aufnehmen erhalten Sie Zugriff auf ihr digitales Prüfexemplar."
+        request-book: "Buch auswählen"
+        preorder-book: "Buch auswählen"
+        preorder-label: Bald wieder lieferbar
+        form:
+            course_details: "Angaben zum Kurs"
+            check_course_details: "Angaben zum Kurs überprüfen"
+            confirm_course_details: "Angaben zum Kurs bestätigen oder aktualisieren"
+            institution: "Name der Institution/Schule"
+            continue_btn: "Weiter"
+            submit_btn: "Absenden"
+            leave_req_msg: "Wollen Sie diese Seite wirklich schließen? Die Registrierung muss abgeschlossen sein, um ein digitales Prüfexemplar anzufordern."
+            step1:
+                title: "Ich fordere das digitale Prüfexemplar an"
+                single: "für einen Kurs"
+                multiple: "für mehrere Kurse"
+            step2:
+                title: "Institution/Schule auswählen"
+                title2: "Institution/Schule"
+                add_inst_btn: "Neue Institution/Schule hinzufügen"
+                check_institution_msg: "Bitte fügen Sie mindestens eine Institution/Schule hinzu."
+            step3:
+                considering_book: "Ich benötige das Buch"
+                no_used_similar: "für einen bestehenden Kurs"
+                now_course: "für einen neuen Kurs"
+                alternative: "wegen Neu-Auflage/Ersatz"
+                book_currently_use: 'Aktuell verwendetes Buch:'
+                currentUsedBook: "Bitte geben Sie Titel, Autor und Auflage an."
+            step4:
+                course_type: "Fachbereich"
+                course_type_contextuel_help: "Wählen Sie die Option, die Ihren Kurs am besten beschreibt."
+                course_name: "Name des Kurses (optional)"
+                course_name_contextuel_help: "Bitte geben Sie den Namen an, unter dem Ihr Kurs/Modul innerhalb Ihrer Institut bzw. Fachbereich bekannt ist."
+                course_code: 'Kursnummer'
+                course_level: "Kursstufe"
+                student_number: "Anzahl Teilnehmer (pro Jahr)"
+                students_number_contextuel_help: "Gesamtzahl Studierende oder Schüler, die diesen Kurs ein akademisches Jahr oder ein Schuljahr lang besuchen"
+                start_date: "Anfangsdatum"
+                end_date: "Enddatum"
+                end_date_error: "Enddatum muss nach dem Anfagsdatum liegen"
+                date-format: "TT-MM-JJJJ"
+                contextuel_help: "Bitte geben Sie Studien- oder Ausbildungsjahr und Kurstyp an."
+            step5:
+                title: 'Für diesen Kurs ist der Titel:'
+                core: "Pflichtlektüre"
+                core_help: "Verpflichtend für diesen Kurs; es wird erwartet, dass der Kursteilnehmer den Titel erwirbt oder anderweitig ständigen Zugang zu ihm hat"
+                recommended: "Empfohlen/Sekundärliteratur"
+                recommended_help: "Ein wichtiger Titel, aber nicht verpflichtend. Ein Erwerb oder ständiger Zugang zum Titel wird empfohlen, ist aber nicht obligatorisch."
+                supplementary: "Ergänzende Lektüre"
+                supplementary_help: "Bestandteil der Leseliste."
+                undecided: "Noch nicht entschieden"
+                undecided_help: "Wir werden später noch einmal fragen."
+            step6:
+                title: 'Lieferadresse auswählen'
+                add_addr_btn: "Neu hinzufügen"
+                confirm_msg: "Bitte Adresse bestätigen"
+                select: "Bitte andere Adresse auswählen"
+                confirm_addr: "Lieferadresse bestätigen"
+                confirm: "Bestätigen"
+                edit_addr: "Bearbeiten"
+            step7:
+                success_title: "Ihre Anfrage wurde abgeschickt!"
+                success_msg: 'Wir werden Sie informieren, sobald die Freigabe erfolgt ist. Gerne möchten wir Sie auch nach Ihrer Meinung zu diesem Titel befragen.'
+                success_msg_EC: 'Kontaktieren Sie in der Zwischenzeit Ihren <a class="decorate" href="__education_consultant__">Kundenbetreuer*in aufnehmen</a>, wenn Sie Fragen haben.'
+                finish_btn: "Beenden"
+            cancel_box: "Sind Sie sicher, dass Sie Ihre Anfrage stornieren möchten?"
+        complete_url: 'Willkommen auf der neuen Inspection Copy Webseite! Jetzt <a href ="__url__" class="url-msg">anmelden</a> um neue Inhalte für Ihre Kurse zu entdecken.'
+        add: Add
+    review:
+        title: "Zur Leseliste hinzufügen und Feedback geben?"
+        yes: "Ja"
+        no: "Nein"
+        give_feedback: "Feedback geben"
+        rate_this_book: Dieses Buch bewerten
+        update_librarian: Bibliothek informieren
+        rate_review: Bewertung & Rezension
+        people_find_this_review_helpful: Personen finden diese Bewertung hilfreich
+        reviewed_on: Reviewed on
+        helpful: Nützlich
+        course_details:
+            title: "Feedback-Details"
+            course_type: "Fachbereich"
+            course_name: "Name des Kurses (optional)"
+            course_level: "Kursstufe"
+            students: "Erwartete Anzahl Studierende/Schüler"
+            start_date: "Anfangsdatum"
+            end_date: "Enddatum"
+            check_adoption: "Dieses Buch zur Leseliste hinzufügen?"
+        negative:
+            step1:
+                title: "Nicht geeignet für diesen Kurs"
+                option1: "Deckt nicht alles ab, was ich für meinen Kurs benötige"
+                option2: "Nicht für den Kurs geeignet"
+                option3: "Nicht geeignet für die Kursstufe"
+                option4: "Der Inhalt ist zu fortgeschritten"
+                option5: "Der Inhalt ist zu einfach"
+                option6: "Ich habe ein anderes Buch gewählt"
+                option9: "Preis"
+                option_other_book: "Ich habe ein anderes Buch ausgewählt"
+                option_other_reason: "Andere  (bitte angeben)"
+                other_reason_placeholder: "Bitte geben Sie eine Begründung an"
+            step2:
+                title: "Titel des ausgewählten Buches"
+                book_name: "Bitte geben Sie Details an"
+            step3:
+                title: "Ich habe dieses Buch gewählt, weil..."
+            reason_title: 'Sagen Sie uns, warum '
+        positive:
+            step1:
+                title: "Kursdetails"
+                edit_course: "Kursdetails bearbeiten"
+            step2:
+                title: "Dieses Buch wird"
+                core: "Pflichtlektüre"
+                core_help: "Verpflichtend für diesen Kurs; es wird erwartet, dass der Kursteilnehmer den Titel erwirbt oder anderweitig ständigen Zugang zu ihm hat"
+                recommended: "Empfohlen/Sekundärliteratur"
+                recommended_help: "Ein wichtiger Titel, aber nicht verpflichtend. Ein Erwerb oder ständiger Zugang zum Titel wird empfohlen, ist aber nicht obligatorisch."
+                supplementary: "Ergänzende Lektüre"
+                supplementary_help: "Bestandteil der Leseliste."
+        multiple:
+            step1:
+                title: "Bitte bestätigen Sie für jeden Kurs"
+                title_help: "Wählen Sie Ja/Nein für jeden Kurs aus "
+            positive_step:
+                title: "Ich übernehme dieses Buch für "
+            negative_step:
+                title: "Dieses Buch nicht übernehmen für "
+            current_course:
+                title: 'Für diesen Kurs'
+        feedback:
+            title:  "Bitte geben Sie Feedback (optional)"
+            placeholder: "Mein Feedback"
+            info: "Ihre Kommentare werden vor der Veröffentlichung freigegeben"
+            accept_public: "Ich bin damit einverstanden, dass meine Kommentare veröffentlicht werden"
+            accept_name_public: "Ich bin damit einverstanden, dass mein Name verwendet wird"
+            accept_public_info: "Ihre Kommentare werden vor der Veröffentlichung überprüft. Durch das Erstellen von Kommentaren geben Sie Elsevier die Erlaubnis, ihre persönlichen Daten in Übereinstimmung mit der <a href='__url__'>Datenschutzrichtlinie</a> zu verwenden und ihre Kommentare in den Medien von Elsevier zu verwenden."
+            previous: 'Vorheriges Feedback'
+            new: 'Sie können neues Feedback hier hinzufügen.'
+            new_placeholder: 'Aktualisierte Kommentare (optional)'
+        courses_details:
+            see_details: "Details ansehen"
+            title: "Feedback-Details"
+            confirmed_for: "Bestätigt für diese <span>##nbr##</span> Kurse"
+            confirmed_for_one: "Bestätigt für diesen Kurs <span>##nbr##</span>"
+            not_right_for: "Nicht geeignet für diese <span>##nbr##</span> Kurse"
+            not_right_for_one: "Nicht richtig für diesen <span>##nbr##</span> Kurs"
+            confirmed_and_not_right_for: "Bestätigt für ##confirmed_nbr##, nicht richtig für ##not_confirmed_nbr## Kurse"
+            confirmed_and_not_right_for_one: "Bestätigt für ##confirmed_nbr##, nicht richtig für ##not_confirmed_nbr## Kurs"
+            renewed_and_not_right_for: "Bestätigt für ##confirmed_nbr##, nicht richtig für ##not_confirmed_nbr## Kurse"
+            renewed_and_not_right_for_one: "Bestätigt für ##confirmed_nbr##, nicht richtig für ##not_confirmed_nbr## Kurs"
+        success:
+            title: "Herzlichen Dank!<br> Ihre Meinung ist uns wichtig. "
+            feedtext: "Zur besten Unterstützung ihrer Lehrtätigkeit haben Sie ständigen digitalen Zugang (der Zugang wird beendet, wenn der Titel vergriffen ist). "
+            message: "<a href='__contact_link__' target='_blank'>Haben Sie Fragen?</a>"
+        submit: "Absenden"
+        logout_msg: "Sie waren nicht angemeldet. Bitte melden Sie sich an, um Feedback zu geben."
+        previously: 'Vorheriges'
+        on: ''
+        dash: '-'
+        slash: '/'
+        at: ''
+        reading_list: 'Leseliste'
+        reading: 'Leseliste'
+        book_successfully_copied: Buch erfolgreich kopiert!
+        book_successfully_moved: Buch erfolgreich verschoben!
+        see_all_lists: Alle Listen anzeigen
+    renewal:
+        title_one: 'Dieses Buch auf deiner Leseliste behalten?'
+        title_many: 'Dieses Buch auf deiner Leseliste behalten?'
+        negative:
+            step1:
+                title: 'Nein, ich benutze dieses Buch nicht mehr für meinen Kurs, weil: '
+                option1: 'Ich unterrichte diesen Kurs nicht mehr'
+                option2: 'Der Lehrplan wurde geändert'
+        multiple:
+            title: 'Ich erneuere dieses Buch für folgenden Kurs'
+    modal:
+        you_don_t_have_any_list_yet: Sie haben noch keine Liste
+        Please_add_at_least_one_list: Please select at least one to continue
+        review_rating_book_modal:
+            thank_you_for_taking_the_time_to_write_a_review: Vielen Dank, dass Sie sich die Zeit nehmen, eine Bewertung zu schreiben. Ihr Name (wie in Ihrem Profil angezeigt) und Ihre Institution werden neben Ihrer Bewertung angezeigt.  Alle Kommentare werden vor der Veröffentlichung überprüft.
+            i_agree_to_my_name_and_institution: Ich bin damit einverstanden, dass mein Name und meine Institution zusammen mit meiner Bewertung angezeigt werden.
+        save_changes: Änderungen speichern
+contact_us:
+    title: 'Kontaktieren Sie uns'
+    form:
+        label_name: 'Name'
+        label_email: 'E-Mail-Adresse'
+        label_country: 'Land'
+        label_phone: 'Telefonnummer (optional)'
+        label_institution: 'Name der Institution/Schule'
+        label_subject: 'Betreff'
+        label_description: 'Beschreibung'
+        please_select: 'Bitte auswählen... '
+        subject_choices:
+            registration_issue: 'Probleme beim Registrieren'
+            login_issue: 'Probleme beim Anmelden'
+            where_book: 'Wo ist mein digitales Prüfexemplar?'
+            heath_resource: 'Hilfe - Ressourcen im Bereich Gesundheit'
+            stem_resource: 'Hilfe - MINT-Ressourcen'
+            other: 'Sonstige'
+            digital_not_available: 'Digitale Kopie noch nicht verfügbar'
+        error:
+            wrong_phone_format: "Bitte überprüfen Sie, ob das Format korrekt ist."
+
+    support_email: 'books.cs.muc@elsevier.com'
+    stem_email: 'emeatextbook@elsevier.com'
+    digital_not_descr: 'Melden: Digitale Kopie nicht verfügbar für ISBN '
+    flash:
+        success:  "Sie haben Ihre Anfrage erfolgreich eingereicht, einer unserer Mitarbeiter wird sich in Kürze mit Ihnen in Verbindung setzen."
+    mailer:
+        confirm_subject: 'E-Mail zur Bestätigung der Einreichung einer Anfrage'
+        confirm_message: '<p>Hallo ,<br>Danke für die Kontaktaufnahme. Wir freuen uns, dass Sie uns mit Ihrer Anfrage kontaktieren, einer unserer Mitarbeiter wird sich sehr schnell mit Ihnen in Verbindung setzen.</p>'
+    submit: 'Absenden'
+adresses:
+    title: "Wir können nicht an Postfächer liefern. Bitte verwenden Sie eine Adresse mit Straße und PLZ."
+    add-adress: "Lieferadresse hinzufügen"
+    add: "Hinzufügen"
+profile:
+    education-consultant:
+        title: 'Ihr Kundenbetreuer*in aufnehmen unterstützt Sie bei:'
+        liste1: "Inhaltliche Beratung bei der Auswahl Ihrer Kurslektüre"
+        liste2: "Wissensvermittlung zu elektronischen Lehrangeboten"
+        liste3: 'Informationen zu <span class="clinicalKey"><img class="retina-reload clinical-img" src="#img_src#" alt="ClincalKey"/></span> fürs Medizinstudium oder die Pflege'
+        liste4: ''
+        get-in-touch: "Nehmen Sie Kontakt auf!"
+        contact_your_team_at: 'Kontaktieren Sie Ihr Team unter:'
+    no_education_consultant:
+        title: 'Ihr Kundenbetreuer*in aufnehmen wird Ihnen zugewiesen, sobald Sie Ihr erstes digitales Prüfexemplar anfordern. Kundenbetreuer*in aufnehmens können Sie auf verschiedene Weise unterstützen:'
+product_page:
+    editors: 'Herausgeber/Autoren'
+    publication_date: 'Erscheinungsdatum'
+    digital_not_available: 'Nicht in digitalem Format verfügbar'
+    print_not_available: 'Das Buch ist derzeit nicht verfügbar'
+    purchase_book: 'Lehrbuch kaufen'
+    buttons:
+        pre_order_digital: "Digitales Format"
+        pre_order_print: "Print-Buch"
+        pre_ordered_digital: "Digitales Format"
+        pre_ordered_print: "Druck-Format"
+    share_dots:
+        share: "Link kopieren"
+        message: "Nachricht"
+        mail: "E-Mail"
+        education_consultant: "Kontaktieren Sie Ihren Kundenbetreuer*in aufnehmen"
+        copied_clipboard: 'Kopiert in die Zwischenablage'
+        mail_subject: 'Anfrage digitales Prüfexemplar'
+        whatsapp: Whatsapp
+    details:
+        toc_tab:
+            title:  'Inhaltsverzeichnis'
+        description_tab:
+            new_feature: 'Neuerungen'
+            title: 'Beschreibung'
+            key_features: 'Details'
+        review_tab:
+            title: 'Rezensionen'
+        details_tab:
+            title: 'Weitere Details'
+            illustrations: 'Illustrationen'
+            page_count: 'Seiten'
+            isbn: 'ISBN'
+            price: 'Preis'
+        author_tab:
+            title: 'Über die Herausgeber'
+        ancillary_tab:
+            title: 'Lehrmaterialien'
+            msg: 'Auf Zusatzmaterialien können Sie zugreifen, solange der Titel für Sie frei gegeben wurde, oder Sie diesen im Unterricht als Pflichtlektüre einsetzen. Um  Zusatzmaterialien anzusehen, fordern Sie bitte ein Prüfexemplar des Titels an.'
+        companion_tab:
+            title: 'Materialien für Studierende und SchülerInnen'
+        audience_tab:
+            title: 'Lehrbereich'
+    related:
+        title: 'Ähnliche Bücher'
+    preview_label: Voransicht
+home:
+    beta_release:
+        feedback_msg: 'Wir freuen uns über Ihr Feedback zu Ihren Erfahrungen mit den Prüfexemplaren. Ihre Meinung hilft unseren Service zu verbessern.'
+        feedback_placeholder: 'Teilen Sie Ihre Meinung mit uns.'
+        give_feedback: 'Feedback geben'
+        submit: 'Absenden'
+        success_msg: 'Vielen Dank für Ihren Beitrag!'
+        btn_continue: 'Weitersuchen'
+        beta_release: 'BETA VERSION'
+    discover:
+        title: "Entdecken. <span>Prüfen.</span> Unterrichten."
+        link: ' <a href="__url__"  id="click-here">Klicken Sie hier, um Ihre Prüfexemplare zu sehen.</a>'
+        welcome: 'Willkommen zur Elsevier Inspection Copy Website: <br>Entdecken Sie hier neue Inhalte für Ihre Kurse und bestellen digitale Prüfexemplare.'
+        welcome_first_login: 'Willkommen zur Elsevier Inspection Copy Website, ##username##!<br>Entdecken Sie hier neue Inhalte für Ihre Kurse und bestellen digitale Prüfexemplare.'
+        login: "Oder loggen Sie sich ein"
+        register: "Registrieren"
+        welcome_back: 'Willkommen zurück zur Elsevier Inspection Copy Website, ##username##!'
+        welcome_ic: 'Willkommen bei Elsevier Inspection Copy! , ##username##!'
+    banner:
+        covid-content: 'Unser <a href="https://shop.elsevier.de/" target="_blank">Elsevier Webshop </a> ist auch weiterhin für Sie geöffnet. Gemeinsam mit den meisten unserer Vertriebspartner versenden wir bis auf weiteres noch Bestellungen ohne Einschränkungen.'
+    booksInterest:
+        title: "Bücher, die Sie interessieren könnten"
+    timeline:
+        title: "Exklusiv für Lehrende und Dozierende"
+        descrp: "Hier finden Sie die richtigen Lehrbücher von Elsevier, um Ihren Unterricht zu ergänzen."
+        discover: "Entdecken"
+        label_descover: "Inhalte durchstöbern"
+        inspect: "Prüfexemplar anfordern"
+        label_inspect: "Buch auswählen"
+        teach: "Ihr Unterricht"
+        label_teach: "kann beginnen"
+        feedback: "Wir bitten Sie um Ihr Feedback."
+    books:
+        title: "Finden Sie die richtigen Bücher für Ihren Kurs"
+        medicine_book: "Medizinstudium"
+        nursing_book: "Pflege"
+        health_book: "Gesundheitsfachberufe"
+        dentistry_book: "Zahnmedizin"
+        veterinary_book: "Veterinärmedizin"
+        logopedics: "Logopedics"
+        teach: "Mein Bereich"
+        title_block: Finden Sie die richtigen Bücher für Ihren Kurs
+    cookies:
+        cookie_label: 'Wir verwenden Cookies, um unsere Dienstleistungen anbieten und verbessern zu können. Mit der Nutzung unserer Website stimmen Sie den Cookies zu. <a href="__url__"  target=_blank>Mehr erfahren. </a>'
+    virtual_tour:
+        back: Zurück
+        next: Nächste
+        skip: Überspringen
+        done: Fertig
+        intro: Herzlich willkommen! Wir zeigen Ihnen alles, damit Sie anfangen können
+        step1: Ihre Benachrichtigungen jedes Mal sehen, wenn Sie sich einloggen
+        step2: Klicken Sie auf Ihr Benutzersymbol, um zu Ihrem Konto zu navigieren
+        step3: Sie können Buchkataloge in anderen Sprachen auswählen
+        step4: Sie können die Sprache der Website auswählen
+        step5: Schneller Zugang zu Ihren angeforderten Prüfexemplaren und zum Feedback geben
+    virtual_tour_ic_page:
+        phase1:
+            step1:
+                intro_line: "Willkommen in Ihrem Bereich ‘Meine digitalen Prüfexemplare’! Hier können Sie:"
+                first_line: "Ihre digitalen Prüfexemplare ansehen"
+                second_line: "auf Zusatzmaterialien zugreifen (falls verfügbar)"
+                third_line: "Feedback geben"
+            step2: "Alle angeforderten Prüfexemplare sind hier aufgelistet."
+            step3: "Und den aktuellen Stand finden Sie auch hier"
+        phase2:
+            step1: "Wenn Ihr Antrag genehmigt ist, klicken Sie hier, um das Lehrbuch anzusehen"
+            step2: "Klicken Sie jederzeit hier, um uns mitzuteilen, ob Sie das Lehrbuch für Ihren Kurs verwenden"
+            step3: "Sie können die Ansicht jederzeit sortieren, um Ihre Liste der Prüfexemplare zu verwalten"
+            step4: "Wenn Ihre Liste länger wird, können Sie Ihre Prüfexemplare hier suchen"
+    recommendations_inbox:
+        title: 'Meine Empfehlungen Posteingang'
+        read_now_btn: 'Jetzt lesen'
+        load_more_btn: 'Mehr laden'
+        no_books_text: 'Wir haben heute keine Empfehlungen.'
+        share_dots:
+            mail_subject: 'Werfen Sie einen Blick auf dieses Lehrbuch von Elsevier'
+        add_book:
+            title: 'Zu meinen Leselisten hinzufügen'
+            btn: 'Hinzufügen'
+            success_step:
+                success_msg: 'Fertig!'
+                btn_go_to_readingList: 'Meine Lehrbuchlisten'
+                btn_explore: 'Mehr erfahren'
+        might_like: 'Das könnte Ihnen gefallen'
+        shared_collegues: 'Von anderen geteilt'
+        add_to_my_books: Zu meinen Lehrbüchern hinzufügen
+        awaiting_publication: 'Veröffentlichung anstehend'
+        back_soon: 'Bald wieder lieferbar'
+        title_recommended: Empfohlen für Sie
+    remove_recommendation: Empfehlung entfernen
+    confirm_remove_recommendation: Dieses Buch wird nicht mehr als Empfehlung angezeigt. Sie können es jederzeit im Katalog suchen.
+    catchy_image:
+        link_text: Jetzt ansehen
+        title_text1: Rang and Dale’s Pharmacology
+        title_text2: Pflege-Titel
+        title_text3: Macleod's Clinical Examination
+        title_text4: Explore our essential anatomy books
+        description_text1: Internationally acknowledged as the core textbook for students of pharmacology, providing accessible, up-to-date information on drugs and their mechanism of action.
+        description_text2: <span>Discover the right resource for your course</span> Explore our nursing textbooks.
+        description_text3: The textbook of choice for students who understand that excellence in clinical examination is integral to good practice.
+        description_text4: Focusing on the core information medical students need to know with world-renowned illustrations to enhance understanding and retention.
+    engage_banner:
+        title_content: Unterstützen Sie Lernende mit hochwertigen Lernressourcen
+        description_content: Unsere Inhalte sind für verschiedene Lehr- und Lernzwecke konzipiert und bieten Lehrkräften und Lernenden eine breite Palette an Möglichkeiten, um erfolgreiche Ergebnisse zu erzielen.
+        link_text: Bücher mit Lernressourcen erkunden
+    newbooks:
+        title: Was ist neu
+    text_book:
+        title: PflegeHeute
+        sub_title: PflegeHeute – sicher durch die Ausbildung! E-Book inklusive!
+        first_content: "Generationen von Auszubildenden haben mit diesem Buch gelernt, unzählige Lehrerinnen und Lehrer haben ihren Unterricht damit aufgebaut, in Krankenhäusern, stationären und ambulanten Pflegeeinrichtungen ist es zu Hause – PflegeHeute, jetzt in der 8. Auflage!"
+        second_content: <b>Für Lehre und Praxis</b>
+        third_content: "Erstellt nach dem neuen Pflegeberufegesetz (PflBG) und der Ausbildungs- und Prüfungsverordnung für die Pflegeberufe (PflAPrV), ist PflegeHeute das optimale Lehrbuch für die generalistische Ausbildung und DAS Nachschlagewerk für Praxis und Lehre."
+        btn_know_more: Mehr erfahren
+    reviews: Rezensionen
+notification:
+  notification: "Benachrichtigungen"
+  notif_digital_available: 'Gute Nachrichten! Ihr digitales Prüfexemplar <span class="book-title">__title__</span><span class="status"> ist jetzt verfügbar zum Lesen.</span> '
+  notif_digital_approved: 'Ihre Vorbestellung des Titels <span class="book-title">__title__</span><span class="status"> wurde freigegeben.</span> '
+  notif_print_approved: 'Gute Nachrichten! Ihr Buch <span class="book-title">__title__</span> <span class="status"> ist auf dem Weg.</span>'
+  notif_update_print:  'Aktualisieren Sie Ihr Buch <span class="book-title">__title__</span>'
+  notif_feedback: 'Geben Sie Ihr Feedback zu <span class="book-title">__title__</span><span class="status"> jetzt</span> '
+  notif_confirm_book: 'Titel <span class="book-title">__title__</span> <span class="status"> wieder verwenden?</span> '
+  notif_expired_digital: 'Ihr Zugang zum digitalen Prüfexemplar <span class="book-title">__title__</span><span class="status"> läuft bald ab. Jetzt ansehen </span> '
+  notif_same_book:
+  notif_none:  "Sie haben derzeit keine Benachrichtigungen"
+  new_user: "Willkommen zur neuen Inspection Copy website! Wir haben viele Änderungen vorgenommen, um Sie besser zu unterstützen. Klicken Sie auf Ihr Profilsymbol, um Ihren neuen Profilbereich zu sehen."
+  new_user_v1: Verwenden Sie das Hauptmenü am oberen Bildschirmrand, um Elsevier-Lehrbücher zu durchstöbern, oder geben Sie ein Stichwort in der Suchleiste ein, um das gewünschte Buch zu finden.
+  new_user_v2: Elsevier-Lehrbücher für Wissenschaft & Technik können Sie jetzt auch hier auf unserer Inspection Copy Website als Prüfexemplar anfordern! Klicken Sie im Hauptmenü auf 'Wissenschaft & Technik', um Bücher zu entdecken.
+  new_user_v3: Verwenden Sie das Hauptmenü am oberen Bildschirmrand, um Elsevier-Lehrbücher zu durchstöbern, oder geben Sie ein Stichwort in der Suchleiste ein, um das gewünschte Buch zu finden.
+  new_user_v5: Willkommen auf der neuen Inspection Copy Website! Wir arbeiten stets daran, Sie beim Unterrichten besser zu unterstützen. Klicken Sie auf ihr Profil-Symbol, um ihren neuen Profilbereich zu sehen.
+  new_user_v4:
+  new_user_v6:
+  new_user_v7:
+  like_book: "Wir dachten uns, dass Ihnen __book_title__ gefallen könnte"
+  sahred_by: "__firstname_lastname__ hat __book_title__ mit Ihnen geteilt"
+  new_edition: "Die neue Auflge von __book_title__ ist da! <a href='__book_link__' class='more_details'>Mehr Details </a>"
+  new_book: "__book_title__ ist jetzt für Sie zur Ansicht verfügbar!"
+books_page:
+    books:
+        meta_title: "Bücher in"
+        breadcrumb:
+            home: "Home"
+            all_product: "Alle Titel"
+            product: "Titel"
+        filter_show: "Anzeigen"
+        showing_page: 'Anzeigen #from# - #length# von #total#'
+        show_result: "Ergebnisse anzeigen"
+        view_all: "Alles anzeigen"
+        next: "Nächste"
+        prev: "Vorherige"
+        pagination_of: "von"
+        sortBy:
+            title: "Sortieren"
+            author_a_z: "Autor A-Z"
+            author_z_a: "Autor Z-A"
+            title_a_z: "Titel A-Z"
+            title_z_a: "Titel Z-A"
+            new: "Neueste zuerst"
+            old: "Älteste zuerst"
+            popularity: "Beliebt"
+        new_edition_label: Neue Auflage
+        new_label: Neu
+        top_seller_label: Topseller 
+        most_popular_label: Am beliebtesten
+        tag_filter:
+            new: Was ist neu
+            most_popular: Am beliebtesten
+            top_seller: Topseller
+    export:
+        export_list_btn: Liste exportieren
+        export_btn: Exportieren
+        export_list_title: Liste exportieren
+        course_book_list: "Kurs-Buchliste:"
+        created: "Erstellt"
+        course_code: "Kurs-Code"
+        start_date: "Startdatum"
+        student_intake: "Studentenanzahl"
+        contant_name: "Name der Kontaktperson"
+        email: "E-Mail"
+        comments: "Kommentare"
+        comments_text: "Leer gelassen für Ihre Kommentare"
+        published_date: "Veröffentlichungsdatum:"
+        publisher: "Herausgeber:"
+        edition: "Auflage:"
+        isbn: "ISBN:"
+        generated: 'Generiert bei '
+        by: ' durch '
+        using: ' unter Verwendung von '
+        select_all: 'Alle auswählen'
+        deselect_all: 'Alle abwählen'
+        btn_export: 'Exportieren'
+        export_error: 'Bitte wählen Sie mindestens ein Buch aus'
+        export_file: 'Datei exportieren'
+    filter:
+        specialism: "Fachbereich"
+        category: "Kategorie"
+        pub_year: "Veröffentlichungsjahr"
+        filter_title: "Filter"
+        sort_title: "Sortieren"
+        book_name: "Titel"
+        author_name: "Autor"
+        pub_date: "Veröffentlichungsdatum"
+        clear: "Löschen"
+        show_more: Mehr anzeigen
+        show_less: Weniger anzeigen
+        coming_soon: Erscheint demnächst
+        published: Veröffentlicht
+        digital_copy: Digital verfügbar
+        requested: Angefordert
+        reading_list: Ausgewählt
+        never_requested: Nie angefordert
+    error:
+        data_loading_failed: 'Daten laden fehlgeschlagen, bitte neu laden'
+        try_again: 'Erneut versuchen'
+faq:
+    faq_title: 'Häufig gestellte Fragen'
+    question1:  'Ich habe meine Anmelde-Daten vergessen.'
+    answer1: "<a href='__contact_link__' target='_blank'>Kontaktieren Sie uns</a> und wir werden Ihnen helfen, wieder auf Ihr Konto zuzugreifen."
+    question2: 'Ich habe mein Passwort vergessen.'
+    answer2: "Gehen Sie zu 'Anmelden' und klicken Sie auf 'Passwort vergessen'. Sie werden aufgefordert, die E-Mail-Adresse einzugeben, mit der Sie sich registriert haben. Geben Sie Ihre E-Mail-Adresse ein und wenn Sie registriert sind, erhalten Sie eine E-Mail mit Anweisungen, wie Sie Ihr Passwort zurücksetzen können."
+    question3: "Wie kann ich ein gedrucktes Buch anfordern?"
+    answer3: 'Über die Website Inspection Copies können Sie nur digitale Prüfexemplare bestellen.'
+    question4: "Wie fordere ich ein digitales Prüfexemplar an?"
+    answer4: '<ul><li>Finden Sie das gewünschte Buch, indem Sie entweder nach ISBN, Titel oder Autor suchen oder in unserem Katalog blättern.</li><li><li>Klicken Sie sich zu den Buchdetails durch und der Button "Digitales Prüfexemplar anforden" wird angezeigt.</li><li><li>Klicken Sie auf den Button und Sie werden nach Details zu Ihrem Kurs gefragt.</li><li><li>Nachdem Sie Ihre Anfrage abgesendet haben, wird Ihr Kundenbetreuer*in aufnehmen diese überprüfen und (wenn angemessen) freigeben.</li><li><li><li>Sie werden per E-Mail und auch in Ihrem <a href="__main_link__" target="_blank">Inspectioncopy.elsevier.com</a> Konto benachrichtigt. Alternativ, wenn das Buch noch nicht veröffentlicht wurde, können Sie es vorbestellen, indem Sie auf "Digitales Prüfexemplar vorbestellen" klicken und (falls freigegeben) sofort nach der Veröffentlichung zugreifen.</li></ul>'
+    question5: "Wie lange wird es dauern, bis ich Zugriff habe?"
+    answer5: 'Wenn Sie ein digitales Prüfexemplar eines veröffentlichten Titels anfordern, können Sie auf dieses (falls freigegeben) sofort hier zugreifen: <a href="__main_link__" target="_blank">Inspectioncopy.elsevier.com</a>'
+    question6: "Ich ein digitales Prüfexemplar angefordert, kann ich auch ein gedrucktes Buch anfordern?"
+    answer6: "Über die Website Inspection Copies können Sie nur digitale Prüfexemplare bestellen."
+    question7: "Ich bin kein hauptberuflicher Dozent, kann trotzdem ein digitales Prüfexemplar anfordern?"
+    answer7: "Ja! Auch Dozenten, die nicht hauptberuflich unterrichten, können digitale Prüfexemplare anfordern."
+    question8: "Ich unterrichte Kurse an einer Universität/Schule, die sich nicht in Deutschland, Österreich oder Schweiz befindet, lebe aber in einem dieser Länder. Kann ich trotzdem digitale Prüfexemplar anfordern?"
+    answer8: 'Ja! Bitte registrieren Sie sich bei uns und kontaktieren Sie Ihren Kundenbetreuer*in aufnehmen (Kontaktdaten finden Sie auf Ihrer Seite "Mein Kundenbetreuer*in aufnehmen in Ihrem Bereich "Mein Profil").'
+    question9: "Ich lebe nicht in Deutschland, Österreich oder Schweiz, gebe aber deutschsprachige Online-Kurse. Darf ich digitale Prüfexemplar anfordern?"
+    answer9: 'Bitte <a href="https://service.elsevier.com/app/overview/elsevier/" target="_blank"> klicken Sie hier</a> um herauszufinden, wie Sie in Ihrem Wohnsitzland Prüfexemplare anfordern können.'
+    question10: "Muss ich zu den angeforderten digitalen Prüfexemplaren eine Rezension schreiben?"
+    answer10: "Nein. Aber wir bitten Sie zu bestätigen, ob Sie beabsichtigen, den Titel für Ihren Kurs zu verwenden/empfehlen, damit wir sicherstellen können, dass wir die entsprechende Menge an Büchern in Ihrer(n) lokalen Buchhandlung(en) und online führen. Wir haben den Feedbackprozess so schnell und einfach wie möglich gestaltet. Wir bieten Ihnen die Möglichkeit, Ihre Kommentare und Bewertungen abzugeben, aber es ist nicht zwingend erforderlich."
+    question11: "Gibt es eine Begrenzung der Anzahl der digitalen Prüfexemplare, die ich anfordern kann?"
+    answer11: "Die Anzahl der von Ihnen angeforderten digitalen Prüfexemplare sollte für die von Ihnen unterrichteten Kurse angemessen sein. Die Freigabe von Anfragen liegt im Ermessen Ihres Kundenbetreuer*in aufnehmen. Sie sind eng in den Prozess eingebunden, so dass Sie die notwendige Unterstützung bei der Planung Ihrer Leselisten erhalten."
+    question12: "Kann ich auf die digitalen Prüfexemplare noch zugreifen, wenn mein Kurs beendet ist?"
+    answer12: "Wenn Ihr Kurs beendet ist, und Sie weiterhin auf ihr digitales Prüfexemplar zugreifen wollen, wenden Sie sich bitte an Ihren Kundenbetreuer*in aufnehmen."
+    question13: "Was mache ich mit dem Feedback-Formular? Kann ich stattdessen jemandem eine E-Mail schicken?"
+    answer13: 'Nein. Wir bitten Sie Ihr Feedback über die Website in Ihrem Bereich "Mein Profil" anzugeben. '
+    question14:  "Warum ist mein digitalen Prüfexemplar noch nicht freigegeben?"
+    answer14: 'Bitte wenden Sie sich an Ihren Kundenbetreuer*in aufnehmen, um den Status der Freigabe für Ihren Titel zu erfahren.'
+    question15: "Ich haben Zugang zum falschen digitalen Prüfexemplar, was soll ich machen?"
+    answer15: 'Bitte fordern Sie über die Website das korrekte digitalen Prüfexemplare an.'
+    question16: "Mein digitales Prüfexemplar wurde freigegeben, aber ich habe noch immer keinen Zugriff. Was soll ich machen?"
+    answer16: 'Bitte überprüfen Sie das Veröffentlichungsdatum Ihres Titels. Die Herstellung eines digitalen Prüfexemplars kann bis zu 6 Wochen nach Erscheinungstermin des gedruckten Buches dauern.'
+    question17: "Wie werde ich über Neu-Erscheinungen informiert?"
+    answer17: 'Wir informieren Sie automatisch zu neuen Auflagen Ihrer digitalen Prüfexemplare'
+    question20:  "Ich möchte einen Klassensatz von gedruckten Büchern bestellen. Wie geht das?"
+    answer20: 'Bitte wenden Sie sich direkt an Ihren Kundenbetreuer*in aufnehmen'
+admin:
+    layout:
+        hello: Hallo
+        faq_page: FAQ-Seite
+        dashboard: Übersicht
+        back: Back
+    cover:
+        home_page_visuals: "Homepage-Bilder"
+        error: "Die maximale Höhe muss weniger als 750 px und die maximale Breite weniger als 600 px betragen."
+        update_btn: "Bilder aktualisieren"
+        discard_btn: "Bilder verwerfen"
+        select_file: "Datei auswählen"
+        drag_drop: "Bild hierhin ziehen und ablegen oder"
+    faq:
+        faq: FAQs
+        add_question: Frage hinzufügen
+        discard_changes: Änderungen verwerfen
+        preview_faqs: Vorschau FAQs
+        question: Frage
+        type_question: Geben Sie hier eine neue Frage ein.....
+        answer: Antwort
+        type_answer: Geben Sie hier die Antwort ein.....
+        cancel: Abbrechen
+        add: Hinzufügen
+        preview: Vorschau
+        publish: Veröffentlichen
+        edit: Bearbeiten
+    cookies:
+        top_section: Oberer Bereich
+        bottom_section: Unterer Bereich
+        edit_cookie: Cookies-Seite bearbeiten
+        add_cookie: Cookie hinzufügen
+        service: Service
+        cookie: Cookie
+        purpose: Zweck
+        more_info: Mehr Informationen
+        action: Aktion
+        cancel: Abbrechen
+        save: Speichern
+        edit: Bearbeiten
+        hide: Ausblenden
+        description: In der nachstehenden Tabelle werden die von dieser Website gesetzten spezifischen Cookies und ihr Zweck erläutert.
+        service_name_title: 'Name des Service *'
+        service_name_placeholder: Please enter service name
+        cookie_title: 'Cookies *'
+        cookies_placeholder: Bitte wählen Sie mindestens ein Cookie aus
+    banner:
+        activate: Sie aktivieren das Banner für ALLE Regionen und Sprachen.
+        deactivate: Sie deaktivieren das Banner für ALLE Regionen und Sprachen.
+tooltip:
+    notification: "Benachrichtigungen"
+    search: "Suche"
+    Filter: "Filter"
+    edit: "Bearbeiten"
+    upper_arrow: "Neueste"
+    lower_arrow: "Älteste zuerst"
+    disable: "Adresse deaktivieren"
+    delete: "Adresse löschen"
+    more: "Mehr"
+    Expand: "Erweitern"
+    Collapse: "Einklappen"
+    delete_faq: 'Löschen'
+    reorder-faq: 'Nachbestellen'
+search:
+    placeholder: "Suche in Buchtiteln"
+    title_placeholder: "Titel"
+    keywords_placeholder: "Stichwort"
+    author_placeholder: "Autor"
+    ISBN_placeholder: "ISBN"
+    discipline_placeholder: "Fachbereich"
+    category_placeholder: "Kategorie"
+    search_btn: "Suche"
+    breadcrumb: "Suche"
+    no_search_result: "Keine Suchergebnisse für"
+    search_result_for: "Suchergebnisse für"
+    go_to: "Alternativ können Sie auch zur Seite"
+    go_to_homepage: "Homepage"
+    edit_search: '<ul><li class="editSearch"><a>Suche bearbeiten <img class="retina-reload" data-toggle="tooltip" data-placement="bottom" title="Edit" src="#img_src#" alt="editIcon" width="13" height="15"/></a></li></ul>'
+    edit_search_label: Suche bearbeiten
+    result_found: 'Suchergebnisse'
+user:
+    #Reset password journey
+    reset_password:
+        reset_password_text: "Passwort ändern"
+        error: "Das Passwort muss mindestens eine mittlere Komplexität aufweisen, um gültig zu sein"
+        info: "Das Passwort muss mindestens eine mittlere Komplexität aufweisen, um gültig zu sein"
+        notification: "Erfolgreich! Wir haben Ihnen eine E-Mail mit Anweisungen zum Ändern Ihres Passworts geschickt"
+        expired_token: "Der Link zum Zurücksetzen des Passworts ist abgelaufen, bitte senden Sie Ihre Anfrage erneut"
+        check_email: "Wir haben Ihnen eine E-Mail geschickt. Bitte folgen Sie dem Link, um Ihr Passwort zurückzusetzen."
+        close_btn: "Schließen"
+        old_password_placeholder: "Altes Passwort"
+        old_password_invalid: "Altes Passwort ungültig"
+        #Reset password emails
+        email:
+            # Account found email
+            found:
+                subject: "Passwort zurücksetzen"
+                body: "Hallo __title__ __lastname__,<br><p>Sie haben diese E-Mail erhalten, weil es eine Anfrage gab, Ihr Passwort zurückzusetzen auf <a href='__site__'>https://inspectioncopy.elsevier.com</a>. Um Ihr Passwort zurückzusetzen, klicken Sie bitte unten auf 'Passwort zurücksetzen'. Warten Sie nicht zu lange, da dieser Link in 6 Stunden verfällt.</p>"
+                botton: "Passwort zurücksetzen"
+            # Account not found email
+            not_found:
+                subject: "Passwort vergessen"
+                body: "Hallo, <br><br> <p>Vielen Dank, dass Sie versucht haben, sich einzuloggen. <a href='__site__'>https://inspectioncopy.elsevier.com</a>. Leider ist diese E-Mail-Adresse nicht bei uns registriert. Wenn Sie sich registrieren möchten, um digitale Prüfexemplare unserer Lehrbücher anzufordern, verwenden Sie bitte den untenstehenden Link.<p>"
+                botton: "Jetzt registrieren"
+            # Password was successfully reset email
+            sucess:
+                subject: "Ihr Passwort wurde erfolgreich zurückgesetzt"
+                body: "Hallo __title__ __lastname__,<br><br><p>Sie haben Ihr Passwort erfolgreich geändert für <a href='__site__'>https://inspectioncopy.elsevier.com.</a></p>"
+                salutation: '<br />Vielen Dank für die Nutzung unserer Elsevier Inspection Copy Website.<br /><br /><img src="http://www.3sixtycreative.com/mailhosting/1561_INN/logo.png" width="120" height="19" alt="Elsevier"/><br />
+                <p style="FONT-SIZE: 12px; line-height:16px; padding-top: 0px; FONT-FAMILY: Arial, Helvetica, sans-serif; COLOR: #747474; "></p>'
+                bottom: "<br><br><b>Sie haben das nicht veranlasst?</b> Achten Sie darauf, dass Sie Ihr Passwort sofort ändern."
+        enter_email: 'E-Mail eingeben'
+        not_match: 'Die Passwörter stimmen nicht überein, bitte geben Sie diese erneut ein.'
+        confirm_password_placeholder: 'Passwort bestätigen'
+    change_password:
+        title: Passwort ändern
+        success: Ihr Passwort wurde aktualisiert
+        error: Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.
+        confirm_new_password: Neues Passwort bestätigen
+    #Registration
+    register:
+        step1:
+            title: "Benutzerkonto erstellen"
+            email: "Institutionelle E-Mail-Adresse"
+            password: "Passwort"
+            confirm_password: "Passwort bestätigen"
+            notification_check_box: 'Gelegentlich möchten wir Sie kontaktieren, um Sie über die Inspection Copy Website zu informieren, insbesondere über neue Titel und Prüfexemplare, die für Sie von Interesse sein könnten. Wenn Sie diese Nachrichten nicht erhalten möchten, kreuzen Sie bitte dieses Kästchen an.'
+            accept_term: "Bitte akzeptieren Sie die Allgemeinen Geschäftsbedingungen und die Datenschutzerklärung, um fortzufahren."
+            bad: "Schwach"
+            medium: "Mittel"
+            good: "Stark"
+            register_agree: 'Ich akzeptiere die <a href="https://www.elsevier.com/legal/elsevier-website-terms-and-conditions" target=_blank>Allgemeinen Geschäftsbedingungen</a> und erkenne die <a href="https://www.elsevier.com/legal/privacy-policy-de-de" target=_blank>Datenschutzerklärung</a> an.'
+        step2:
+            title: "Bitte bestätigen Sie Ihre E-Mail-Adresse."
+            msg1: "Wir haben Ihnen eine E-Mail geschickt."
+            msg2: "Bitte folgen Sie dem Link in dieser E-Mail, um Ihre Registrierung abzuschließen."
+            msg3: "Sie können dieses Fenster jetzt schließen."
+            msg4: "Wenn die E-Mail nicht innerhalb weniger Minuten in Ihrem Posteingang eintrifft, überprüfen Sie bitte Ihren 'Junk-E-Mail'- oder SPAM-Ordner."
+        step3:
+            title: "Über mich"
+        step4:
+            title: "Mehr über mich"
+            delete_inst: "Institution/Schule löschen"
+            add_inst: "Weitere Institution/Schule hinzufügen"
+        step5:
+            title: "Meine Adresse"
+            cep:
+                data_not_found: 'Keine Daten gefunden'
+        title_content: Willkommen bei Elsevier Inspection Copy!
+        description_content: Für Lehrkräfte stehen kostenlose Prüfexemplare zur Verfügung
+        continue_btn: "Weiter"
+        token_expired:
+            title: "Link abgelaufen"
+            message: "Leider ist dieser Registrierungslink abgelaufen. Die Registrierung muss innerhalb von 6 Stunden nach Erhalt der E-Mail 'Registrierung abschließen' abgeschlossen sein. Bitte klicken Sie <a href='__link__'>hier</a> und registrieren sich erneut.<br><br>"
+        completed:
+            email:
+                subject: "Herzlichen Glückwunsch! Sie haben sich erfolgreich registriert"
+                body: "<p>Hallo __title__ __lastname__,<br><br>Um ihre Registrierung abzuschließen, klicken Sie bitte auf den unten stehenden Link. Warten Sie nicht zu lange, da dieser Link in 6 Stunden abläuft.</p>"
+                btn_browse: "Registrierung abschließen"
+                finish: "Herzlichen Glückwunsch! Sie haben sich erfolgreich registriert"
+            get_started_btn: 'Erste Schritte'
+        form:
+            fields:
+                email: "Institutionelle E-Mail-Adresse"
+                email_popover: "Diese Website richtet sich ausschließlich an Lehrende, die Elsevier-Lehrbücher zur Unterstützung ihres Unterrichts suchen. Um diesen Service zu nutzen, müssen Sie sich mit der institutionellen E-Mail-Adresse ihrer Bildungseinrichtung registrieren."
+                email_tooltip: ''
+                password: "Passwort"
+                country: "Land"
+                title: "Titel (optional)"
+                title_no_optional: "Titel"
+                firstname: "Vorname"
+                middlename: "Zweiter Vorname (optional)"
+                lastname: "Nachname"
+                phone: "Telefon"
+                cpf: "CPF"
+                url: "Professionelles Online-Profil"
+                institution: "Name der Institution/Schule"
+                department: "Institut bzw. Fachbereich"
+                profession: "Bereich"
+                program: "Programm"
+                speciality: "Fachbereich"
+                isPrimary:
+                    label: "Das ist meine primäre Institution/Schule."
+                    yes: "Ja"
+                    no: "Nein"
+            button:
+                other: "Sonstige"
+                cancel: "Abbrechen"
+                save: "Speichern"
+                add: "Hinzufügen"
+            help:
+                title: "Brauchen Sie Hilfe?"
+                text: "Sie können einen Link zu Ihrem professionellen Online-Profil hochladen (z.B. ein Profil der Universitäts-Website oder ein LinkedIn-Profil)."
+                country: "Sie können Ihr Land nicht finden?"
+                content: "<a href='https://de.service.elsevier.com/app/answers/detail/a_id/21587/supporthub/els-deutschland/p/14805/' target='_blank'>Klicken Sie hier</a>, um herauszufinden, wie Sie digitale Prüfexemplare in anderen Ländern anfordern können. "
+                password: "Passwort vergessen?"
+                email: "Müssen Sie Ihre E-Mail-Adresse bearbeiten? Kontaktieren Sie Ihren <a href='mailto:__ec_email__'>Kundenbetreuer*in aufnehmen</a>"
+                add_institution: "Sie können Ihre Institution nicht in der Liste finden? Klicken Sie auf 'Hinzufügen' und geben Ihre Institution manuell ein."
+            error:
+                invalid_email: "Sie haben eine ungültige E-Mail eingegeben."
+                invalid_url: "Leider ist der Link, den Sie hochgeladen haben, ist ungültig. Bitte versuchen Sie es erneut mit einer gültigen URL."
+                recaptcha_not_found: "Sie müssen die Captcha-Abfrage eingeben"
+            placeholder:
+                title: 'Bitte geben Sie Ihren Titel ein'
+                url: "URL eingeben"
+            upload:
+                label: Oder
+                zone: Datei (pdf, jpg,png) hineinziehen oder zum Durchsuchen <span class="browse-btn">anklicken</span>
+                tooltip: "Laden Sie ein Dokument hoch, dass uns hilft, ihre aktive Lehrtätigkeit zu überprüfen."
+                delete: Datei löschen
+                max_size: 'Upload fehlgeschlagen, weil die Dateigröße 1 Megabyte überschreitet'
+            url:
+                tooltip: "Alle Anfragen werden vor der Genehmigung geprüft. Die Bereitstellung eines Links oder eines Dokuments hilft uns bei der Verifikation ihrer Lehrtätigkeit, so können wir ihre Anfragen nach Prüfexemplaren schneller bearbeiten.."
+        #request register email"
+        email:
+            subject: "Registrierung abschließen"
+            body: "Hallo,<br><p>vielen Dank, dass Sie sich auf <a href='__site__'>https://inspectioncopy.elsevier.com</a> angemeldet haben.<br><br>Um ihre Registrierung abzuschließen, klicken Sie bitte auf den unten stehenden Link. Warten Sie nicht zu lange, da dieser Link in 6 Stunden abläuft.</p>"
+            button: "Registrierung abschließen"
+        #request register existing slx account
+        email_user_not_ic:
+            subject: "Registrierung abschließen"
+            body: "Hallo,<br><p>vielen Dank, dass Sie versucht haben sich auf <a href='__site__'>https://inspectioncopy.elsevier.com</a> zu registrieren, aber Ihre E-Mail-Adresse ist bereits registriert. Um Ihr Passwort zu erstellen, klicken Sie einfach unten auf'Passwort erstellen'. Warten Sie nicht zu lange, da dieser Link in 6 Stunden abläuft.</p>"
+            button: "Passwort erstellen"
+        #request register existing ic account
+        email_user_from_ic:
+            subject: "Registrierung abschließen"
+            body: "Hallo __title__ __lastname__,<br><p>vielen Dank, dass Sie sich auf <a href='__site__'>https://inspectioncopy.elsevier.com</a> registriert haben, aber Ihre E-Mail-Adresse ist bereits registriert. Um Ihr Passwort zurückzusetzen, klicken Sie einfach unten auf 'Passwort zurücksetzen'. Warten Sie nicht zu lange, da dieser Link in 6 Stunden abläuft.</p>"
+            button: "Passwort zurückzusetzen"
+        expired_token: "Der angeforderte Link zur Registrierung ist abgelaufen, bitte senden Sie Ihre Anfrage erneut."
+    #edit profile
+    profile:
+        profile_overview: "< Profilübersicht"
+        sign_out_btn: "Abmelden"
+        update-info: 'Ihr Profil wurde aktualisiert'
+        education_consultant: "Mein Kundenbetreuer*in aufnehmen"
+        no_education_consultant: "Kein Kundenbetreuer*in aufnehmen vorhanden"
+        my_profile: "Mein Profil"
+        home: "Homepage"
+        inspection_copies: "Meine digitalen Prüfexemplare"
+        inspection_copies_page: "Meine digitalen Prüfexemplare"
+        books:
+            no_books:
+                title: "Sie haben noch keine digitalen Prüfexemplare angefordert."
+                button: "Klicken Sie hier, um jetzt neue Inhalte zu entdecken."
+            reviewed: "Rezensiert"
+            adopted: "Für Kurs bestätigt"
+            adopted_for: "Bestätigt für <span>##confirmed_nbr##</span> Kurse"
+            not_adopted: "Nicht passend für den Kurs"
+            has_feedback: "Sie haben Feedback für dieses Buch gegeben"
+            feedback_contextual_help:
+                title: "Feedback von Ihnen"
+                help1: "Hilft uns, neue Inhalte zu entwickeln"
+                help2: "Ermöglicht es uns, lokale Buchhandlungen zu unterstützen"
+                help3: "Stellt sicher, dass wir die Online-Nachfrage erfüllen können"
+            pending: "Erwartet Freigabe (beantragt)"
+            pending_filter: "Erwartet Freigabe"
+            coming_soon: "Demnächst verfügbar"
+            coming_soon_contextual_help: "Sie werden benachrichtigt, wenn das Buch veröffentlicht wird."
+            read_book_contextual_help: "Digitales Prüfexemplar enthält keine Plus-Im-Web Materialien."
+            approved: "Überprüfung läuft"
+            on_its_way: "(Ihr Druckexemplar ist auf dem Weg!)"
+            declined: "Anfrage nicht freigegeben"
+            cancelled: "Abgebrochen"
+            expired: "Feedback fällig"
+            digital_expired: "<span>Digitaler Zugriff abgelaufen</span><br><span class='expired-info'>Sie brauchen mehr Zeit? Kontaktieren Sie <a href='mailto:__education_consultant__'>Ihren  Kundenbetreuer*in aufnehmen</a></span>"
+            dispatched: 'Versendet:'
+            dispatched_msg: "<p class='dispatched-date'>Druckexemplar versandt __day__ - und kann 10-14 Tage dauern</p><p class='expected'>Sie haben erwartet, dass Sie Ihr Buch bereits erhalten haben? Kontaktieren Sie </p><p class='mail'><a href='mailto:Tradeorders@elsevier.com'>Tradeorders@elsevier.com</a></p>"
+            expire: 'Ihre digitale Kopie läuft ab zum '
+            allow: '- Die Lieferzeit beträgt 2-3 Wochen. Problem mit Ihrer Lieferung?'
+            contact_us: "Kontaktieren Sie uns."
+            adopt_btn: "Übernehmen"
+            read_btn: "Buch jetzt lesen"
+            read_more_btn: "Buch ansehen"
+            renewed: 'Bestätigt für Kurs'
+            not_renewed: 'Nicht mehr auf der Leseliste'
+            mixed_renewal: 'Bestätigt für ##confirmed_nbr##, nicht erneuert für ##not_confirmed_nbr## Kurse'
+            renewed_for: 'Bestätigt für ##confirmed_nbr## Kurse'
+            renew_book: 'Buch verlängern'
+            cancel_request: 'Anfrage stornieren'
+            filter_no_results: 'Leider gibt es keine Ergebnisse zu Ihrer Suche'
+        address:
+            title: "Lieferadresse"
+            titles: "Lieferadressen"
+            address: "Adresse"
+            new_delivery_address: "Neue Adresse hinzufügen"
+            new_address: "Neue Lieferadresse hinzufügen"
+            add_address: "Möchten Sie eine neue Lieferadresse hinzufügen?"
+            address_msg: "Bitte beachten Sie, dass wir nicht an ein Postfach liefern können."
+            address_characters_invalid: "Maximal 30 Zeichen erlaubt"
+            address1: "Straße, Hausnummer"
+            address2: "Name Institution/Schule"
+            address3: "Abteilung/Gebäude-/Bürobezeichnung"
+            city: "Ort"
+            postalCode: "PLZ"
+            state: "Bundesland"
+            delete_btn: "Adresse löschen"
+            message: "Sie können eine neue Lieferadresse hinzufügen, wenn Sie neue Prüfexemplare anfordern. Wenn Sie einen Fehler in Ihrer Lieferadresse entdeckt haben, wenden Sie sich bitte an Ihren Kundenbetreuer*in aufnehmen"
+            phone_help: "Bitte geben Sie eine gültige Telefonnummer mit Vorwahl ein"
+            confirm_box:
+                close_message: "Sie haben Änderungen vorgenommen, sind Sie sicher, dass Sie diese Seite verlassen wollen?"
+                delete_message: "Sind Sie sicher, dass Sie diese Adresse aus Ihrem Profil löschen möchten?"
+                confirm_btn: "Bestätigen"
+        details: "Persönliche Angaben"
+        institutions:
+            title: "Meine Institution/Schule"
+            titles: "Meine Institutionen/Schulen"
+            edit_title: "Institutionen/Schule bearbeiten"
+            delete_btn: "Institution löschen"
+            disable_btn: "Institution deaktivieren"
+            add_btn: "Institution hinzufügen"
+            primary_institution: "Primäre Institution/Schule"
+            institution: "Institution/Schule"
+            primary_info: "Wenn Sie weitere Institutionen/Schulen hinzufügen, können Sie dies ändern."
+            isPrimary: "Machen Sie dies zu meiner primären Institution."
+            has_request_msg: "Unter dieser Zugehörigkeit wurde ein Prüfexemplar angefordert; Sie können keine Änderungen vornehmen."
+            require_one: "Wir benötigen mindestens eine Zugehörigkeit"
+        update_btn: "Aktualisieren"
+        password_help:
+            title: "Lorem ipsum"
+            text: "Lorem ipsum"
+            placeholder_new_pwd: "Neues Passwort"
+        confirm_box:
+            close_message: "Es wurden Änderungen vorgenommen. Sind Sie sicher, dass Sie diese Seite verlassen möchten, ohne Ihre Änderungen zu speichern?"
+            delete_message: "Sind Sie sicher, dass Sie diese Institution/Schule aus Ihrem Profil löschen möchten?"
+            delete_address_message: "Sind Sie sicher, dass Sie diese Adresse aus Ihrem Profil löschen möchten?"
+            delete_last_address_message: "Sind Sie sicher, dass Sie diese Adresse löschen wollen? Für die Anforderung eines gedruckten Prüfexemplars wird eine Adresse benötigt."
+            disable_address_message: "Sind Sie sicher, dass Sie diese Adresse in Ihrem Profil deaktivieren möchten?"
+            disable_last_address_message: "Sind Sie sicher, dass Sie diese Adresse deaktivieren wollen? Für die Anforderung eines gedruckten Prüfexemplars wird eine Adresse benötigt."
+            no_address_message: "Sie haben keine gespeicherten Adressen."
+            confirm_btn: "Bestätigen"
+            yes_btn: "Ja"
+            no_btn: "Nein"
+        password_box:
+            text: "Passwort vergessen?"
+            link: "Klicken Sie hier, um es zurückzusetzen."
+            contact_us: 'Or <a href="__url__" target="_blank">Kontaktieren Sie uns</a> für Hilfe.'
+    confirm_logout_msg: 'Sind Sie sicher, dass Sie sich abmelden wollen?'
+#Login
+navbar:
+    login_btn: "Anmelden"
+    remember_me: "Angemeldet bleiben"
+    register_btn: "Registrieren"
+#validators:
+validation:
+    required: "Bitte füllen Sie das Pflichtfeld aus"
+    firstname: Bitte Vornamen eingeben
+    lastname: Bitte Nachnamen eingeben
+    password: Bitte Passwort erstellen
+    email: Bitte E-Mail-Adresse eingeben
+    confirm_password: Bitte Passwort bestätigen
+    number_required: "Bitte geben Sie eine Zahl ein"
+    wrong_phone_number: "Bitte geben Sie eine gültige Telefonnummer mit Vorwahl ein."
+    institution_zip_code: 'Es wurde keine Institution/Schule mit dieser PLZ gefunden, bitte überprüfen Sie die PLZ oder geben Sie den Namen Ihrer Institution/Schule ein.'
+    teacher_url: 'Bitte fügen Sie entweder eine URL hinzu oder laden Sie ein Dokument hoch'
+#footer
+footer:
+    contact_us_footer: 'Kontaktieren Sie uns'
+    resource_center_footer: '<a href="http://elsevierresource.com/" target="_blank">Ressourcen-Center</a>'
+    terms_footer: '<a href="https://www.elsevier.com/legal/elsevier-website-terms-and-conditions" target="_blank">Allgemeine Geschäftsbedingungen</a>'
+    privacy_footer: '<a href="https://www.elsevier.com/legal/privacy-policy-de-de" target="_blank">Datenschutzerklärung</a>'
+    register_footer: '<a href="https://www.elsevier.com/de-de/legal/impressum" target="_blank">Impressum</a>'
+    help_footer: '<a href="https://www.elsevier.com/de-de/support" target="_blank">Hilfe</a>'
+    faq_footer: 'FAQ'
+    copyright: 'Alle Inhalte auf dieser Website: Copyright © __current_year__ Elsevier, seine Lizenzgeber und Mitwirkende. Alle Rechte vorbehalten, einschließlich derer für Text- und Data-Mining, KI-Training und ähnliche Technologien. Für alle Open-Access-Inhalte gelten die Creative-Commons-Lizenzbedingungen.'
+    cookie_link: 'Auf dieser Website werden Cookies verwendet. Um abzulehnen oder mehr zu erfahren, besuchen Sie unsere <button id="ot-sdk-btn" class="cookie-settings ot-sdk-show-settings">Cookie-Einstellungen</button>.'
+layout:
+    page_title: 'Elsevier Inspection Copies'
+    health_sciences: 'Gesundheitswissenschaften'
+    science_tech: 'Wissenschaft & Technik'
+    page_generic_title: 'Elsevier Inspection Copies'
+    page_description: 'Diese Website richtet sich ausschließlich an Lehrende, die Elsevier-Lehrbücher zur Unterstützung ihres Unterrichts suchen.'
+    book_description: 'Lehrende und Dozierende können digitale Prüfexemplare anfordern.'
+#mainling
+email:
+    ip_date: 'Anfordernde IP : %ip% Datum: %date%'
+    support: 'Wenn Sie Hilfe benötigen <a href="__contact_url__" style="color: #007398; text-decoration: none">kontaktieren Sie uns</a>.'
+    sent: 'Wir Ihnen eine E-Mail mit der Anleitung zum Ändern Ihres aktuellen Passworts geschickt.'
+    els_team: 'Elsevier Education Team'
+    best_wishes: 'Herzliche Grüße'
+    subject: 'Zugriffsversuch auf Ihr Inspection Copy Konto'
+    access: 'Jemand versucht, von einem neuen Gerät aus auf Ihr Inspection Copy-Konto zuzugreifen.'
+    when: 'Wenn:'
+    device: 'Gerät:'
+    country: 'Land:'
+    msg_code: 'Verwenden Sie diesen eindeutigen Authentifizierungscode, wenn Sie mit der Anmeldung fortfahren wollen:'
+cep:
+    data_not_found: 'Daten nicht gefunden'
+error:
+    error: 'Ups! Da ist etwas schief gelaufen. Bitte versuchen Sie es später noch einmal.'
+    nb_1103: 'Bitte E-Mail-Adresse eingeben'
+    nb_1074: 'Sie haben eine ungültige E-Mail-Adresse eingegeben'
+    nb_1105: 'Hoppla! <br>Dieses Konto wurde nicht aktiviert.<br>Bitte folgen Sie dem Link in der E-Mail, die wir Ihnen bei der Registrierung geschickt haben, oder klicken <a href="__url__" class="inline" target="_blank">Sie hier</a>, um erneut zu beginnen.'
+    nb_1121: 'Wir haben Ihre Daten nicht erkannt. Bitte überprüfen Sie Ihre E-Mail-Adresse und Ihr Passwort.'
+    nb_1201: "Anfrage kann nicht storniert werden, der Freigabe-Prozess hat bereits begonnen"
+    captcha: 'Bitte vervollständigen Sie die Captcha-Aufgabe'
+    logged_out: 'Sie wurden abgemeldet. Bitte melden Sie sich zunächst an'
+    back_dashboard: 'Zurück zum Dashboard'
+
+login_modal:
+    title: 'Anmelden'
+    subtitle: 'Wenn Sie ein Benutzerkonto bei uns haben, melden Sie sich bitte an.'
+    email: 'E-Mail-Adresse'
+    password: 'Passwort'
+    forget_password:
+        link: 'Passwort vergessen?'
+        title: 'Passwort zurücksetzen'
+        submit: 'Absenden'
+        cancel: 'Abbrechen'
+    create_account: 'Benutzerkonto erstellen'
+    confirm_box:
+        close_btn: 'Schließen'
+welcome_modal:
+    title: 'Hallo'
+    subtitle1: Sind Sie hier richtig?
+    subtitle2: Bestätigen Sie die gewünschte Sprache und die Katalogauswahl.
+    language: Sprache
+    catalogue: Katalog
+    btn_label: Weiter
+datepicker:
+    clear: 'Löschen'
+#language:
+languages:
+    en: 'Englisch'
+    es: 'Spanisch'
+    fr: 'Französisch'
+    de: 'Deutsch'
+#catalogues language
+catalogues:
+    en: 'Lehrbücher in Englisch'
+    de: 'Lehrbücher in Deutsch'
+    es: 'Lehrbücher in Spanisch'
+    fr: 'Lehrbücher in Französisch'
+    in: ''
+
+historical_data:
+    title: XXX Bücher bei Elsevier angefragt. <a href ="__url__">Verlauf meiner Anfragen ansehen</a>
+    link_name: Verlauf meiner anfragen
+    request_btn: Erneut anfordern
+    desciption_1: Zuvor wurden Titel von Elsevier über Textbooks.Elsevier.Com angefordert.
+    desciption_2: Um Zugang zu beantragen, klicken Sie auf 'Erneut beantragen'.
+    msg_request_again: Requested again on dd-Mon-yyyy. To view, go to <a href="__url__" class="p-0"><u>My Inspection Copies</u></a>.
+    back_profile: Zurück zu meinem Profil
+    back_ic: Zurück zu meinen Prüfexemplaren
+    show_history: Verlauf anzeigen
+    hide_history: Verlauf ausblenden
+    students_number: Anzahl Teilnehmer
+
+reading_list:
+    title: Meine Bücher
+    uncategorized: Nicht kategorisiert
+    books: Bücher
+    students_number: Anzahl Kursteilnehmer
+    would_you_like_to: 'Möchten Sie:'
+    remove_book_from_list: Buch von Liste entfernen
+    remove_book_current_list: Das Buch nur aus der aktuellen Liste entfernen
+    remove_book_all_lists: Das Buch aus alle Listen entfernen
+    remove: entfernen
+    core: Pflichtlektüre
+    Supplementary: Ergänzende Lektüre
+    Recommended: Empfohlen/Sekundärliteratur
+    drag_books: Dieser Bereich ist leer. Ziehen Sie Bücher hierher, um sie zu organisieren.
+    remove_book_success: Bevor Sie gehen, würden wir gerne verstehen, warum dieses Buch nicht mehr auf Ihrer Liste steht
+    pending_btn: Freigabe ausstehend
+    pending_tooltip: Der Zugang erfordert eine Freigabe durch einen Elsevier Kundenbetreuer*in aufnehmen. Wir werden Sie benachrichtigen, sobald der Zugang freigeschaltet ist.
+    add_reading_list:
+        btn: 'Eine neue Liste hinzufügen'
+        cancel_btn: 'Sind Sie sicher, dass Sie abbrechen wollen?'
+    remove_list: Liste entfernen
+    remove_list_popup:
+        popup_text: Sind Sie sicher, dass Sie diese Liste aus Ihrem Konto löschen möchten? <br> (Sie können sie später nicht mehr wiederherstellen)
+        success_msg: Liste erfolgreich gelöscht
+    success_adding_list: 'Sie können jetzt anfangen, Bücher hinzuzufügen, um Ihre Liste zu verwalten und Zugang zu erhalten.'
+    create_list: Neue Liste erstellen
+    list_name: Name der Liste
+    list_btn: Liste erstellen
+    default_list_name: Lehrbuch-Liste
+    no_books: Diese Liste ist leer.<br> Fügen Sie hier Lehrbücher hinzu, die Sie gerne lesen möchten.
+    no_lists: Diese Seite ist leer.<br> Fügen Sie hier neue Listen hinzu.
+    requested_book: Bereits angeforderte Prüfexemplare
+    move_to_other_list: Zu einer anderen Liste wechseln
+    copy_to_other_list: In andere Liste(n) kopieren
+    copy_to: kopieren nach
+    move_to: Verschieben nach
+    section_name: Abschnittsname
+    new_section: Neuer Abschnitt
+    empty_section: Dieser Bereich ist leer.
+    alert_remove: Alle in diesem Bereich gespeicherten Bücher werden entfernt.
+    add_section: Abschnitt hinzufügen
+    change_history:  Changes History
+    list_created: List created on
+    last_update: Letzte Aktualisierung
+ancillary:
+    instructor_resources: 'Zu diesem Buch gibt es Lehrmaterialien'
+    student_resources: 'Dieses Buch enthält Materialien für Schüler/innen'
+    instructor_resources_label: Ressourcen für Lehrkräfte
+    student_resources_label: Ressourcen für Studierende
+    ancillary_text: "Die hier verfügbaren zusätzlichen Materialien beziehen sich auf  <span class='books_info'> <a class='book-title' href='__basePath__/book/details/__isbn__'> __title__ </a> (ISBN __isbn__)</span>. Sie können sie herunterladen, weitergeben und für Unterrichtszwecke verwenden."
+    ancillary_tc: "Bitte beachten Sie, dass der Zugriff auf das Buch selbst den vollständigen <a href='__url__' target='_blank'>Geschäftsbedingungen </a> von Elsevier unterliegt."
+    ClinicalKey_label: Verfügbar auf Clinical Key Student
+explore:
+    explore_name: Mehr entdecken
+
+user_interests:
+    wlc_msg: Vielen Dank, dass Sie Ihre E-Mail überprüft haben.
+    wlc_ic: Willkommen bei Inspection Copy!
+    select_catg_msg: Helfen Sie uns, Ihnen sofortigen Zugang zu Lehrbüchern zu verschaffen, indem Sie die Buchkategorien auswählen, an denen Sie am meisten interessiert sind
+    started_btn: Los geht's
+    error_interests: Bitte treffen Sie eine Auswahl um fortzufahren
+    select_catg_msg_old_user: Bevor Sie sich näher damit befassen, helfen Sie uns bitte, Ihnen sofortigen Zugang zu Lehrbüchern zu verschaffen, indem Sie die Kategorien von Büchern auswählen, die Sie am meisten interessieren.
+    wlc_ic_updated: Die Inspection Copy Webseite hat einen neuen Look!
+    started_btn_ic: Gehe zu Inspection Copy
+qualified:
+    qualified-title: Bitte füllen Sie Ihr Profil aus, um Zugang zu den digitalen Prüfexemplaren von Elsevier zu erhalten.
+    qualified-msg: Damit wir Sie als Ausbilder bestätigen können, bitten wir Sie um einen Link zu Ihrem beruflichen Online-Profil oder ein Dokument, das Ihre Position bestätigt.
+    account-details-btn: Zu den Kontodetails gehen
+identity_verification:
+    basic_account: Basis-Konto
+    p_basic_account: Indem Sie Ihre E-Mail verifizieren, können Sie
+    create_basic_account: Erstellen Sie ein kostenloses Basiskonto
+    qualified_account: Qualifiziertes Konto
+    create_free_account: KOSTENLOSES Konto erstellen
+    browse_cat: Katalog der Elsevier-Lehrbücher durchsuchen
+    create_lists: Bücherlisten erstellen
+    auto_access: Sofortiger Zugang zu jedem digitalen Prüfexemplar
+    access_student: Zugang zu Materialien für Schüler/innen und Student/innen
+    access_teacher: Zugang zu Lehrmaterialien
+    share: Mit Kolleginnen und Kollegen teilen
+    export: Exportieren Sie Buchdetails für die Aktualisierung Ihrer Bibliothek
+    send_feedback: Feedback an den Elsevier-Redaktion senden
+    add_ratings: Bewertungen und Rezensionen hinzufügen
+    confirmed_instructor: Bestätigte Lehrkraft
+    institutional_information: Institutionelle Informationen vollständig
+    qualify: Qualifizieren
+    completed: Abgeschlossen
+    email_verif: Überprüfung per E-Mail
+    pending: Ausstehend
+    more_info: Mehr Information
+    access_student_educator: Zugang zu Ressourcen für Studierende und Lehrkräfte
+    confirm_status_instructor:  Einmalige Verifikation Ihres Profils als Lehrkraft
+    identify_verification: Identity verification
+    recommendations: Empfehlungen
+account_verification:
+  modal_title: 'Qualifikation als Lehrkraft'
+  step1:
+    select_program: 'Programm auswählen'
+    add_inst_program_btn: 'Weitere Einrichtung/Programm hinzufügen'
+  step3:
+    success_msg: 'Vielen Dank!'
+    finish_msg: Sie erhalten eine E-Mail-Benachrichtigung zur Bestätigung Ihres neuen Kontostatus. <br>
+      Obwohl wir uns bemühen, Ihnen so schnell wie möglich zu antworten, kann die Überprüfung in Stoßzeiten bis zu 5 Arbeitstage in Anspruch nehmen.
+  pending_modal:
+      success_msg: 'Konto-Qualifikation ausstehend'
+      finish_msg: 'Während Sie warten, können Sie diesen Titel zu Ihrem Bereich "Meine Bücher" hinzufügen, um später bequem darauf zugreifen zu können.'
+share_book:
+  share_btn: Teilen
+  share_btn_popup: Senden
+  confirm_msg: Weiter ohne persönliche Nachricht?
+  notif_msg: Ihr Empfänger erhält diese Nachricht mit Ihrem Namen und einem Link, der ihn einlädt, das Buch unter Inspectioncopy.elsevier.com anzusehen.
+  error_no_mail: Bitte Empfänger-E-Mail-Adresse(n) hinzufügen
+  filed_mail: E-Mail-Adresse eingeben
+  filed_msg: Ihre Nachricht
+  add_msg: Nachricht hinzufügen
+  success_send: Nachricht gesendet!
+  btn_continue: Weitersuchen
+  share: Teilen
+  no_books: 'Noch nichts geteilt!<br> Gehen Sie zu einem beliebigen Buch und klicken Sie auf "Teilen", um mit der Zusammenarbeit zu beginnen  '
+  add_mail: E-Mail hinzufügen
+  invalid_mail: Sie haben eine ungültige E-Mail-Adresse eingegeben
+  shared_with_you: Mit Ihnen geteilt durch
+support:
+    support_msg: 'Bitte kontaktieren Sie den <a href="__contact_link__">Support</a>, um dieses Buch zu rezensieren'
+features:
+    title: Konto-Funktionen
+    explore: Inhalte entdecken
+    explore_descrp: Stöbern Sie in unseren Lehrbüchern und entdecken Sie die besten Inhalte zur Unterstützung Ihres Unterrichts mit sofortigem Zugriff auf digitale Prüfexemplare
+    access_student: Zugriff auf Lehrmaterialien
+    access_student_descrp: Laden Sie Zusatzmaterialien herunter und nutzen diese im Unterricht, um Auszubildende oder Studierende zu motivieren und Lernergebnisse zu verbessern.
+    share_colleague: Austausch mit Kolleginnen und Kollegen
+    share_colleague_descrp: Arbeiten Sie mit Ihren Kolleginnen und Kollegen zusammen, um Ihre Leseliste mit unserer einfachen Freigabefunktion zu erstellen und zu erweitern
+    see_features: Alle Funktionen anzeigen
+    feature_descrp: 'Diese Website ist ausschließlich für Lehrkräfte gedacht, die nach ElsevierLehrbüchern zur Unterstützung ihres Unterrichts suchen.'
+    feature_header: 'Um Zugang zu den    digitalen Prüfexemplaren von Elsevier zu erhalten, müssen Sie als Dozent bestätigt sein: Wir bitten Sie um einen Link zu Ihrem beruflichen OnlineProfil oder um ein Dokument, das Ihre Position bestätigt, sowie um vollständige institutionelle Informationen.'
+    feature_confirm_status: "Um automatisch Zugang zu den kostenlosen digitalen Prüfexemplaren zu erhalten, müssen Sie sich als Lehrkraft ausweisen. Dazu bitten wir Sie, sich mit der institutionellen E-Mail-Adresse Ihrer Bildungseinrichtung zu registrieren. Sobald wir diese geprüft haben, verfügen Sie über ein verifiziertes Konto und haben folgenden Vorteile"
+confirm_authentication:
+    you_are_logging_in_from_a_new_device: Sie melden sich mit einem neuen Gerät an.
+    please_enter_the_authentication_code_received_by_email: Bitte geben Sie den 6-stelligen Authentifizierungscode ein, den Sie per E-Mail erhalten haben.
+    please_add_the_correct_code: Bitte geben Sie den korrekten Code ein
+    enter_code: Code eingeben
+    click_here_to_resend_authentication_code: Klicken Sie <a id="resend-code" >hier</a> um den Authentifizierungscode erneut zu senden.
+    new_code_has_been_sent: Ein neuer Code wurde gesendet!

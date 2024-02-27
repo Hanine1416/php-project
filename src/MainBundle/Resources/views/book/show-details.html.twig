@@ -1,0 +1,606 @@
+{% extends 'layout.html.twig' %}
+{% block ogType %}Book{% endblock %}
+{% block ogTitle %}{{ book.title }} - {{ 'book.edition_label'|trans }} {{ book.editionNumber }} - {{ book.editors }}{% endblock %}
+{% block ogDescription %}{{ 'layout.book_description'|trans }}{% endblock %}
+{% block description %}{{ 'layout.book_description'|trans }}{% endblock %}
+{% block ogImage %}{{ imageCdn }}/{{ book.isbn }}.jpg {% endblock %}
+{% block title %}{{ book.title }} - {{ 'book.edition_label'|trans }} {{ book.editionNumber }} - {{ book.editors }}{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/slick/slick.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/fontawesome-all.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/showBookDetails/show_book_details.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/showBookDetails/request-book.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/page/main/institution-modal.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/address/address-modal.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/slick-slider-custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/profile/personal-details.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/profile/identify-account.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/my_books/review-book-modal.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/showBookDetails/review-rating-book-modal.css') }}">
+    <!-- css for share mail library -->
+    <link rel="stylesheet" href="{{ asset('assets/page/showBookDetails/lib/email.css') }}"/>
+    <!-- end share mail library css -->
+{% endblock %}
+{% block body %}
+<input type="hidden" id="page-title" value="books: books details">
+<div class="inner-wrap review-eCopy row indexation">
+    <main role="main">
+        <div class="productDetailSection">
+            <div class="mainRow">
+                <div class="section-one maincontainer">
+                    <div class="prodImgDetail p-0" id="{{ book.isbn }}">
+                        <div class="detailImg   {% if book.ExternalBookIdPrev == '' or user.digitalAutoapproval == false %} hide-preview  {% else %} show-preview {% endif %}">
+                            {% if prevLink is not null or prevLink is not empty or nextLink is not null or nextLink is not empty %}
+                                <div class="navigate maincontainer hide {% if prevLink is not null or prevLink is not empty or nextLink is not null or nextLink is not empty %} show {% endif %}">
+                                    {% if (prevLink is not null or prevLink is not empty) and prevLink.isbn is defined %}
+                                        <a href="{{ basePath }}/book/details/{{ prevLink.isbn }}"><i class="arrow prev-book"></i>{{ "books_page.books.prev" |trans }}</a>
+                                    {% endif %}
+                                    {% if (nextLink is not null or nextLink is not empty) and nextLink.isbn is defined%}
+                                        <a href="{{ basePath }}/book/details/{{ nextLink.isbn }}" >{{ "books_page.books.next" |trans }}<i class="arrow next-book"></i></a>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                            <img src="{{ imageCdn }}/{{ book.isbn }}.jpg" onerror="imgError(this);"
+                                 alt="{{ book.title }}"/>
+                        </div>
+                       {% if book.ExternalBookIdPrev != '' and user.digitalAutoapproval != false %}
+                        <div class="preview_link">
+                            <a href="{{ url('read-book',{'isbn':book.ExternalBookIdPrev}) }}" data-link="{{ url('read-book',{'isbn':book.ExternalBookIdPrev}) }}" target="_blank" title="{{ "product_page.preview_label" |trans }}">{{ "product_page.preview_label" |trans }}</a>
+                        </div>
+                       {% endif %}
+                        <div>
+                            {% set purchaseUrl = getUrlPurchaseBook(book.isbn,session.get('region'),book.subCategory[0]['id']) %}
+                            <a href="{{ purchaseUrl }}" class="text-center purchase-link"
+                               target="_blank">{{ "product_page.purchase_book" |trans }}</a>
+                        </div>
+
+                    </div>
+
+                    <div class="detailDescription p-0">
+                        <div class="">
+                        
+                            <div class="detailBlock">
+                                <!--Title-->
+                                <div class="detailHeader">
+                                    {% if book.tag == 'updatedEdition' %}
+                                    <div class="tag_book">
+                                        <div class="red">{{ "books_page.books.new_edition_label" |trans }}</div> 
+                                    </div>
+                                    {% endif %}
+                                    {% if book.tag == 'isNew' %}
+                                    <div class="tag_book"> 
+                                        <div class="yellow">{{ "books_page.books.new_label" |trans }}</div> 
+                                    </div>
+                                    {% endif %}
+                                    {% if book.tag == 'isMostPopular' %}
+                                    <div class="tag_book"> 
+                                        <div class="green">{{ "books_page.books.most_popular_label" |trans }}</div> 
+                                    </div>
+                                    {% endif %}
+                                    {% if book.tag == 'isTopSeller' %}
+                                    <div class="tag_book"> 
+                                        <div class="purple">{{ "books_page.books.top_seller_label" |trans }}</div>
+                                    </div>
+                                    {% endif %}
+                                    <div class="nexusSerif book-title">{{ book.title }},</div>
+                                    <span class="edition">{{ "book.edition_label"|trans }} {{ book.editionNumber }}</span>
+                                    <span class="book_subtitle">{{ book.subtitle }}</span>
+                                    {% if book.editors != '' %}
+                                        <div class="editorInfo">
+                                            <span class="bold hidden">{{ "product_page.editors"|trans }}:</span>
+                                            {{ book.editors }}
+                                        </div>
+                                    {% else %}
+                                        <div class="editorInfo">
+                                            <span class="bold hidden">{{ "product_page.editors"|trans }}:</span>
+                                            {{ book.aboutAuthor }}
+                                        </div>
+                                    {% endif %}
+                                    <h3 class="nexusSerif txtGrey"></h3>
+                                </div>
+                                <!--Description-->
+                                <div class="bookDetail nexusSans">
+                                    {% if book.pubdateopco != '' %}
+                                        <div class="pubDate">
+                                            <span>{{ "product_page.publication_date"|trans }}:</span>
+                                            {{ book.pubdateopco|date("d M Y") }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <!-- ancillary block -->
+                                <div class="btns_books_links">
+                                {% if book.ancillary|length > 0 or ancillary is not empty %}
+                                    <ul class="ancillary-block">
+                                        <!-- check for student and teacher ancillary-->
+                                        {% set studentResource = false %}
+                                        {% set teacherResource = false %}
+                                        {% for item in book.ancillary %}
+                                            {% for source in item %}
+                                                {% if(source.Audience == "Student") %}
+                                                    {% set studentResource = true %}
+                                                {% else %}
+                                                    {% set teacherResource = true %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endfor %}
+                                        {% if ancillary is not empty or teacherResource == true %}
+                                            <li>
+                                                <a class="instrutor_ressources ancillary_label"
+                                                   data-toggle="tooltip" data-placement="top"
+                                                   title="{{ 'ancillary.instructor_resources'|trans|raw }}"
+                                                        {% if is_logged_in() and (user.digitalAutoapproval != false) %}
+                                                            target="_blank" href="{{ url('teacher-resources',{isbn: book.isbn}) }}"
+                                                        {% endif %} >
+                                                    {{ 'ancillary.instructor_resources_label'|trans }}
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                        {% if studentResource %}
+                                            <li>
+                                                <a class="student_ressources ancillary_label" data-toggle="tooltip"
+                                                   data-placement="top"
+                                                   title="{{ 'ancillary.student_resources'|trans|raw }}"
+                                                        {% if is_logged_in() and user.digitalAutoapproval != false %}
+                                                            target="_blank" href="{{ url('student-resources',{isbn: book.isbn}) }}"
+                                                        {% endif %} >
+                                                    {{ 'ancillary.student_resources_label'|trans }}</a>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                {% endif %}
+                                    {%  if book.ckAvailable %}
+                                    <div class="clinical_btn">
+                                        <a href="{{ book.ckUrl }}" target=”_blank” title="{{ 'ancillary.ClinicalKey_label'|trans }}">
+                                            {{ 'ancillary.ClinicalKey_label'|trans }}
+                                        </a>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <!-- End ancillary block -->
+                                {#review books#}
+                                <div class="path_for_ajax_average" url-data="/average-review-book-ajax?isbn={{book.isbn}}"></div>
+                                <div class="average_reviews">
+                                    {% include '@MainBundle/parts/average_reviews.html.twig' with {'book':book} %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--CTA-->
+                    <div class="controls_books">
+                        {# btns #}
+                        <div class="ctaBox p-0"
+                             style="position: inherit;">
+                            {% set requestBtnDegitalStatus = '' %}
+                            {% set requestBtnPrintStatus = '' %}
+                            <div class="ctaDetails {% if session.get('site-lang') =='de' %}site-de {% elseif session.get('site-lang') == 'fr' %}site-fr{% endif %}">
+                                {% set bookDigitalRequest = getRequestDetails(book.isbn,bookService,'Digital') %}
+                                {% set bookPrintRequest = getRequestDetails(book.isbn,bookService,'Print') %}
+                                {# {% include  '@MainBundle/parts/request-button-old.html.twig' with {'book':book, 'bookDigitalRequest':bookDigitalRequest, 'bookPrintRequest':bookPrintRequest}  %} #}
+                                <div class="googlelink">
+                                    <script src="//books.google.com/books/previewlib.js"></script>
+                                    <script>GBS_setLanguage('{{ lang }}');</script>
+                                    <script>GBS_insertPreviewButtonPopup('{{ isbn }}');</script>
+                                </div>
+                                {# request digital #}
+                                {% set today = "now"|date("Y-m-d") %}
+                                {% set isPublished = book.PublicationDate[lang]|date("Y-m-d") < today %}
+                                {% if  book.availableTypes.contains('Digital') %}
+                                    {% if not is_logged_in() %}
+                                        <a class="request btn btn-blue btn-call-login"> {{ 'home.recommendations_inbox.read_now_btn'|trans|raw }}</a>
+                                    {% elseif user.digitalAutoapproval == false and user.institutions|length == 0 %}
+                                        <a class="request btn btn-blue"
+                                           id="verify-btn" data-isbn="{{ book.isbn }}"> {{ 'home.recommendations_inbox.read_now_btn'|trans|raw }}</a>
+                                    {% elseif user.digitalAutoapproval == false and user.institutions|length > 0 %}
+                                        <a class="request btn btn-blue"
+                                           id="pending-btn" data-isbn="{{ book.isbn }}"> {{ 'home.recommendations_inbox.read_now_btn'|trans|raw }}</a>
+                                    {% elseif user.digitalAutoapproval == true %}
+                                        <a href="{{ url('read-book',{'isbn':book.externalBookId}) }}"
+                                           target="_blank"
+                                           class="btn btn-blue request read-book-btn" data-isbn="{{ book.isbn }}">{{ 'home.recommendations_inbox.read_now_btn'|trans|raw }}
+                                        </a>
+                                    {% endif %}
+                                    {# preorder request digital #}
+                                    {# {% elseif isPublished == false and book.availableTypes.contains('Digital') == true %}
+                                            <a class="request btn btn-blue btn-call-login inActive"> Awaiting
+                                                publication</a> #}
+                                {% else %}
+                                    {% if isPublished == false %}
+                                        <a class="request btn btn-blue inActive">{{ 'home.recommendations_inbox.awaiting_publication'|trans }}</a>
+                                    {% else %}
+                                        {% set tooltipText = ('support.support_msg'|trans|replace({'__contact_link__': url('contactUsIsbn',{'isbn': book.isbn}) }))|raw %}
+                                        <div class="read_container product_page">
+                                            <a class="request btn btn-blue inActive">{{ 'contact_us.form.subject_choices.digital_not_available'|trans|raw }}</a>
+                                            <i class="fa fa-info-circle support_tooltip"
+                                               data-toggle="popover" data-html="true"
+                                               data-content="{{ tooltipText }}"
+                                               data-placement="bottom"></i>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        {# sharing menu #}
+                        {# options block #}
+                        <div class="book_options">
+                            <ul>
+                                {% if is_logged_in() %}
+                                    <li class="more-menu-item share-book options_item"
+                                        role="presentation">
+                                        <a id="add-book-btn"
+                                           data-isbn="{{ book.isbn }}"
+                                           class="more-menu-btn"
+                                           role="menuitem"
+                                           data-title="{{ book.title }}"
+                                        >{{ 'home.recommendations_inbox.add_to_my_books'|trans }}</a>
+                                    </li>
+                                {% endif %}
+                                <li class="more-menu-item options_item">
+                                    <a class="more-menu-btn share-book {% if not is_logged_in() %}btn-call-login {% endif %}"
+                                       id="share-book" data-toggle="modal" data-target="#share-book-modal"
+                                       data-target="#share-book-modal" data-isbn="{{ book.isbn }}"
+                                       data-title="{{ book.title }}" data-subtitle="{{ book.subtitle }}"
+                                       data-editionNumber="{{ book.editionNumber }}">{{ "share_book.share_btn"|trans }}</a>
+                                </li>
+                                <li class="more-menu-item options_item">
+                                    <a class="more-menu-btn p-0 update_librarian {% if not is_logged_in() %}btn-call-login {% endif %}"
+                                            {% if is_logged_in() %}
+                                        data-url="{{ url('export-book',{isbn: book.isbn}) }}"
+                                        id="update-librarian"
+                                            {% endif %}> {{ 'book.review.update_librarian'|trans }}</a>
+                                </li>
+                                <li class="more_options">
+                                    <div class="columns sharing">
+                                        <div class="container">
+                                            <div class="more">
+                                                <button id="more-btn" class="more-btn">
+                                                    <span class="more-dot"></span>
+                                                    <span class="more-dot"></span>
+                                                    <span class="more-dot"></span>
+                                                    <a class="more_item">{{ 'tooltip.more'|trans }}</a>
+                                                </button>
+                                                <div class="more-menu">
+                                                    <ul class="more-menu-items" tabindex="-1" role="menu"
+                                                        aria-labelledby="more-btn" aria-hidden="true">
+                                                        <li class="more-menu-item dot-share-message for-mobile"
+                                                            role="presentation">
+                                                            <a href="sms:;?&body={{ url('showBookDetails',{isbn: book.Isbn}) }}"
+                                                               class="more-menu-btn" role="menuitem">{{ 'product_page.share_dots.message'|trans }}</a>
+                                                        </li>
+                                                        <li class="more-menu-item dot-share-whatsapp for-mobile"
+                                                            role="presentation">
+                                                            <a href="whatsapp://send?abid=&text={{ url('showBookDetails',{isbn: book.Isbn}) }}"
+                                                               class="more-menu-btn" role="menuitem">{{ 'product_page.share_dots.whatsapp'|trans }}</a>
+                                                        </li>
+                                                        <li class="more-menu-item dot-share-mail for-mobile"
+                                                            role="presentation">
+                                                            <a href="mailto:?body='{{ url('showBookDetails',{isbn: book.Isbn}) }}'"
+                                                               class="more-menu-btn" role="menuitem">{{ 'product_page.share_dots.mail'|trans }}</a>
+                                                        </li>
+                                                        <li class="more-menu-item dot-share-product"
+                                                            role="presentation">
+                                                            <a href="javascript:;" class="more-menu-btn"
+                                                               data-link="{{ url('showBookDetails',{isbn: book.Isbn}) }}"
+                                                               role="menuitem">{{ "product_page.share_dots.share"|trans }}</a>
+                                                        </li>
+                                                        {% if is_logged_in() and user.amEmail is not null and user.amEmail is not empty %}
+                                                            <li class="more-menu-item dot-education-consultant"
+                                                                role="presentation">
+                                                                <a href="mailto:{{ user.amEmail }}?subject={{ "product_page.share_dots.mail_subject"|trans }}"
+                                                                   class="more-menu-btn"
+                                                                   role="menuitem">{{ "product_page.share_dots.education_consultant"|trans }}</a>
+                                                            </li>
+                                                        {% endif %}
+                                                        {% if is_logged_in() %}
+                                                        <li class="more-menu-item review-book"
+                                                            role="presentation">
+                                                            <a href="javascript:;" class="more-menu-btn"
+                                                               role="menuitem">{{ 'book.review.rate_review'|trans }}</a>
+                                                        </li>
+                                                        {% endif %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="">
+                    <div class="small-12 columns productTabs maincontainer">
+                        <div class="tabsList nexusSans book-description-tiles accordion">
+                            {% if book.description|striptags|trim|length >0 or  book.keyfeatures|length >0 or book.newfeatures|string|length>0 %}
+                                <div class="tile-tab active-tile">
+                                    <a id="Description" class="title-accordion active">
+                                        {{ "product_page.details.description_tab.title"|trans }}
+                                        <i class="expand-tile" data-toggle="tooltip" data-placement="bottom"
+                                           title="{{ 'tooltip.Expand'|trans }}"></i>
+                                        <i class="collapse-tile" data-toggle="tooltip" data-placement="bottom"
+                                           title="{{ 'tooltip.Collapse'|trans }}"></i>
+                                    </a>
+                                    <div class="hiddenDescription content" style="display: block;">
+                                        {% if book.description|striptags|trim|length >0 or  book.keyfeatures|length >0 or book.newfeatures|string|length>0 %}
+                                            <div class="descriptionContent">
+                                                {{ book.description|raw }}
+                                                {% if book.keyfeatures|trim|length >0 %}
+                                                    <h3 class="nexusSans">{{ "product_page.details.description_tab.key_features"|trans }}</h3>
+                                                    {{ book.keyfeatures|raw }}
+                                                {% endif %}
+                                                {% if book.newfeatures|string|trim|length>0 %}
+                                                    <h3 class="nexusSans">{{ "product_page.details.description_tab.new_feature"|trans() }}</h3>
+                                                    {{ book.newfeatures|raw }}
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if book.aboutAuthor|trim|length > 0 %}
+                                <div class="tile-tab">
+                                    <a id="Editor" class="title-accordion">
+                                        {{ "product_page.details.author_tab.title"|trans }}
+                                        <i class="expand-tile" data-toggle="tooltip" data-placement="bottom"
+                                           title="{{ 'tooltip.Expand'|trans }}"></i>
+                                        <i class="collapse-tile" data-toggle="tooltip" data-placement="bottom"
+                                           title="{{ 'tooltip.Collapse'|trans }}"></i>
+                                    </a>
+                                    <div class="hiddenEditor content">
+                                        <div class="descriptionContent">
+                                            {{ book.aboutAuthor|raw }}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if book.contentTable|trim|length > 0 %}
+                                <div class="tile-tab">
+                                    <a id="TOC" class="title-accordion">
+                                        {{ "product_page.details.toc_tab.title"|trans }}
+                                        <i class="expand-tile" data-toggle="tooltip" data-placement="bottom"
+                                           title="{{ 'tooltip.Expand'|trans }}"></i>
+                                        <i class="collapse-tile" data-toggle="tooltip" data-placement="bottom"
+                                           title="{{ 'tooltip.Collapse'|trans }}"></i></a>
+                                    <div class="hiddenTOC content">
+                                        {% if book.contentTable|trim|length > 0 %}
+                                        {% endif %}
+                                        <div class="descriptionContent">
+                                            {{ book.contentTable|raw }}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if book.reviews|trim|length > 0 %}
+                                <div class="tile-tab">
+                                    <a id="Review" class="title-accordion">
+                                        {{ "product_page.details.review_tab.title"|trans }}
+                                        <i class="expand-tile" data-toggle="tooltip" data-placement="bottom"
+                                           title="{{ 'tooltip.Expand'|trans }}"></i>
+                                        <i class="collapse-tile" data-toggle="tooltip" data-placement="bottom"
+                                           title="{{ 'tooltip.Collapse'|trans }}"></i></a>
+                                    <div class="hiddenReview content">
+                                        <div class="descriptionContent">
+                                            {{ book.reviews|raw }}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <div class="tile-tab">
+                                <a id="Details"
+                                   class="title-accordion">
+                                    {{ "product_page.details.details_tab.title"|trans }}
+                                    <i class="expand-tile" data-toggle="tooltip" data-placement="bottom"
+                                       title="{{ 'tooltip.Expand'|trans }}"></i>
+                                    <i class="collapse-tile" data-toggle="tooltip" data-placement="bottom"
+                                       title="{{ 'tooltip.Collapse'|trans }}"></i></a>
+                                <div class="hiddenDetails content">
+                                    <div class="descriptionContent">
+                                        <div class="isbn">
+                                            <span>{{ "product_page.details.details_tab.isbn"|trans }}:</span>
+                                            <span class="referrer_isbn">{{ book.isbn |raw }}</span>
+                                        </div>
+                                        {% if book.pageCount != '' %}
+                                            <div class="pageCount">
+                                                <span class="page">{{ "product_page.details.details_tab.page_count"|trans }}</span>: {{ book.pageCount|raw }}
+                                            </div>
+                                        {% endif %}
+                                        {% if book.illustrations != '' %}
+                                            <div class="pageCount">
+                                                    <span class="page"> {{ "product_page.details.details_tab.illustrations"|trans }}
+                                                        : </span> {{ book.illustrations|raw }}
+                                            </div>
+                                        {% endif %}
+                                        {% if lang not in ['in','de','es'] and session.get('region') != 5 %}
+                                            <div class="retailPrice">
+                                                    <span class="retailTitle">{{ "product_page.details.details_tab.price"|trans }}
+                                                        :</span>
+                                                {% for item in currencyRegion[region] %}
+                                                    {% set country = cookies.get('country') %}
+                                                    {% if item == 'USD' %}
+                                                        {% if country in ['australia','au'] %}
+                                                            <span class="price"> ${{ book.price['AUD']|first*1.1 }}</span>
+                                                        {% elseif country in ['new zealand','nz'] %}
+                                                            <span class="price"> ${{ book.price['NZD']|first *1.15 }}</span>
+                                                        {% elseif region == 1 %}
+                                                            <span class="price"> ${{ book.price['AUD']|first }}</span>
+                                                        {% else %}
+                                                            <span class="price"> ${{ book.price['USD']|first }}</span>
+                                                        {% endif %}
+                                                    {% elseif item == 'MXN' %}
+                                                        <span class="price"> ${{ book.price['MXN']|first }}</span>
+                                                    {% elseif item == 'GBP' %}
+                                                        <span class="price"> £{{ book.price['GBP']|first }}</span>
+                                                    {% elseif item == 'EUR' %}
+                                                        <span class="price"> €{{ book.price['EUR']|first }}</span>
+                                                    {% elseif item == 'BRL' %}
+                                                        <span class="price"> R${{ book.price['BRL']|first }}</span>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                        <div>
+                                            {{ book.details|raw }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% if book.ancillary|length > 0 or ancillary is not empty %}
+                                {% set hasAccess =  is_logged_in() and user.digitalAutoapproval != false %}
+                                {% if (ancillary is not empty or teacherResource == true) %}
+                                <div class="tile-tab ancillary">
+                                    <a id="ancillary" class="title-accordion">
+                                        {{ "product_page.details.ancillary_tab.title"|trans }}
+                                        <i class="expand-tile" data-toggle="tooltip" data-placement="bottom"
+                                           title="{{ 'tooltip.Expand'|trans }}"></i>
+                                        <i class="collapse-tile" data-toggle="tooltip" data-placement="bottom"
+                                           title="{{ 'tooltip.Collapse'|trans }}"></i></a>
+                                    <div class="hiddenAncillary content">
+                                        <div class="descriptionContent ancillary-link">
+                                            {% if not hasAccess %}
+                                                <div class="ancillary-descrp">{{ "product_page.details.ancillary_tab.msg"|trans }}</div>
+                                            {% endif %}
+                                            {% if ancillary is not empty %}
+                                                <ul>{{ treeDisplayAncillary(ancillary,hasAccess)|raw }}</ul>
+                                            {% else %}
+                                                {% for item in book.ancillary %}
+                                                    {% for source in item %}
+                                                        {% if(source.Audience == "Instructor") %}
+                                                            {% if(hasAccess and source.Url) %}
+                                                                <a href="{{ source.Url }}"
+                                                                   target="_blank">{{ source.Text }}</a>
+                                                            {% else %}
+                                                                <a class="disbled-ressource">{{ source.Text }}</a>
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% if studentResource and (user.digitalAutoapproval != false) %}
+                                    <div class="tile-tab">
+                                        <a id="ancillary" class="title-accordion">
+                                            {{ "product_page.details.companion_tab.title"|trans }}
+                                            <i class="expand-tile" data-toggle="tooltip" data-placement="bottom"
+                                               title="{{ 'tooltip.Expand'|trans }}"></i>
+                                            <i class="collapse-tile" data-toggle="tooltip" data-placement="bottom"
+                                               title="{{ 'tooltip.Collapse'|trans }}"></i></a>
+                                        <div class="hiddenAncillary content">
+                                            <div class="descriptionContent ancillary-link">
+                                                {% for item in book.ancillary %}
+                                                    {% for source in item %}
+                                                        {% if(source.Audience == "Student") %}
+                                                            <a href="{{ source.Url }}"
+                                                               target="_blank">{{ source.Text }}</a>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                            {% if book.audience|trim|length > 0 %}
+                                <div class="tile-tab">
+                                    <a id="audience" class="title-accordion">
+                                        {{ "product_page.details.audience_tab.title"|trans }}
+                                        <i class="expand-tile" data-toggle="tooltip" data-placement="bottom"
+                                           title="{{ 'tooltip.Expand'|trans }}"></i>
+                                        <i class="collapse-tile" data-toggle="tooltip" data-placement="bottom"
+                                           title="{{ 'tooltip.Collapse'|trans }}"></i></a>
+                                    <div class="hiddenReview content">
+                                        <div class="descriptionContent">
+                                            {{ book.audience|raw }}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {#review tile#}
+                            <div class="path_for_ajax" url-data="/review-rating-book-ajax?isbn={{book.isbn}}"></div>
+                            <div class="content_review_rating_comments">
+                                {% include '@MainBundle/parts/review.html.twig' with {'feedBacks':feedBacks} %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end row-->
+            {% if relatedBooks|length>0 %}
+                <!-- begin related book block -->
+                <div class="related-book-container productTabs maincontainer columns">
+                    <div class="title-block">{{ 'product_page.related.title'|trans }}</div>
+                    <div class="related-books-slider pt-0">
+                        {% for relatedBook in relatedBooks|slice(0,30) %}
+                            <div class="product-box">
+                                <div class="singleProduct">
+                                    <div class="productImg">
+                                        <div class="tag_book">
+                                            {% if relatedBook.tag == 'updatedEdition' %}
+                                                <div class="red">{{ "books_page.books.new_edition_label" |trans }}</div>
+                                            {% endif %}
+                                            {% if relatedBook.tag == 'isNew' %}
+                                                <div class="yellow">{{ "books_page.books.new_label" |trans }}</div>
+                                            {% endif %}
+                                            {% if relatedBook.tag == 'isMostPopular' %}
+                                                <div class="green">{{ "books_page.books.most_popular_label" |trans }}</div>
+                                            {% endif %}
+                                            {% if relatedBook.tag == 'isTopSeller' %}
+                                                <div class="purple">{{ "books_page.books.top_seller_label" |trans }}</div>
+                                            {% endif %}
+                                        </div>
+                                        <a href="{{ url('showBookDetails',{isbn:relatedBook.isbn,lang:session.get('lang'),reg:region}) }}">
+                                            <img class="cover" id="{{ relatedBook.isbn }}"
+                                                 src="{{ imageCdn~'/'~relatedBook.isbn|replace({'DUP':''}) }}.jpg"
+                                                 onerror="imgError(this);" alt="{{ relatedBook.title }}"></a>
+                                    </div>
+                                    <div class="prodTitle nexusSans">
+                                        <div class="nexusSans"><a
+                                                    href="{{ url('showBookDetails',{isbn:relatedBook.isbn,lang:session.get('lang'),reg:region}) }}">{{ relatedBook.title }}</a>
+                                        </div>
+                                    </div>
+                                    <div class="prodAuthor nexusSans">
+                                        <p class="author-name">{{ relatedBook.author }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- end related book block -->
+            {% endif %}
+        </div><!--end productDetailSection-->
+    </main>
+</div>
+    {% if is_logged_in() %}
+        {% include '@MainBundle/modal/request-book-modal.html.twig' with {'institutions':user.institutions, 'addresses':user.addresses} %}
+        {% include '@UserBundle/modal/institution-modal.html.twig' with {'institutionForm':institutionForm, 'insitutions':institutions} %}
+        {% include '@UserBundle/modal/account-verification-modal.html.twig' with {'institutions':institutions,'professions': professions,'user': user} %}
+        {% include '@UserBundle/modal/pending-qualification-modal.html.twig' %}
+        {% include '@UserBundle/profile/address/address-details.html.twig' with {'address':address} %}
+        {% include '@MainBundle/modal/share-book-modal.html.twig' with { 'BookName':book.title, 'bookIsbn': book.isbn, 'subtitle':  book.subtitle, 'edition' : book.editionNumber } %}
+        {% include '@MainBundle/modal/add-book-modal-ajax.html.twig' %}
+        {% include '@UserBundle/modal/add-reading-list-modal.html.twig' %}
+        {% include '@MainBundle/modal/review-rating-book-modal.html.twig'  with { 'BookName':book.title, 'bookIsbn': book.isbn, 'subtitle':  book.subtitle, 'edition' : book.editionNum } %}
+    {% endif %}
+    {% endblock %}
+    {% block javascripts %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/libphonenumber-js/1.9.19/libphonenumber-js.min.js"></script>
+        <script type="text/javascript" src="{{ asset('assets/plugins/slick/slick.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/dropzone/dropzone.js') }}"></script>
+        <script src="{{ asset('assets/page/showBookDetails/show_book_details.min.js') }}"></script>
+        <script src="{{ asset('assets/page/showBookDetails/review-rating-book-modal.min.js') }}"></script>
+        <script src="{{ asset('assets/page/main/institution-controls.min.js') }}"></script>
+        <script src="{{ asset('assets/page/request_book/new-institution-modal.min.js') }}"></script>
+        {# <script src="{{ asset('assets/page/showBookDetails/request-book.min.js') }}"></script> #}
+        <!-- js for share mail library -->
+        <script src="{{ asset('assets/page/showBookDetails/lib/utils.js') }}"></script>
+        <script src="{{ asset('assets/page/showBookDetails/lib/emails-input.js') }}"></script>
+        <script src="{{ asset('assets/page/showBookDetails/lib/app.js') }}"></script>
+        <!-- end share mail js -->
+        <script src="{{ asset('assets/page/profile/account-verification.min.js') }}"></script>
+        <!-- add book modal js -->
+        <script src="{{ asset('assets/page/main/add-book-modal.min.js') }}"></script>
+    {% endblock %}

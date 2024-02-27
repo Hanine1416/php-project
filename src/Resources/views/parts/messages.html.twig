@@ -1,0 +1,104 @@
+<div class="hidden helper">
+    <div id="search-placeholder">{{ "search.search_btn"|trans }}</div>
+    <div id="resetPassWrong">{{ "user.reset_password.not_match"|trans }}</div>
+    <div id="emailSent">{{ "email.sent"|trans }}</div>
+    <div id="error_1103">{{ "error.nb_1103"|trans }}</div>
+    <div id="error_1074">{{ "error.nb_1074"|trans }}</div>
+    <div id="error_1105">{{ "error.nb_1105"|trans|replace({'__url__':url('register')})}}</div>
+    <div id="error_1121">{{ "error.nb_1121"|trans }}</div>
+    <div id="error_1201">{{ "error.nb_1201"|trans }}</div>
+    <div id="error_captcha">{{ "error.captcha"|trans }}</div>
+    <div id="error">{{ "error.error"|trans }}</div>
+    <div id="cep_not_found">{{ "user.register.step5.cep.data_not_found"|trans }}</div>
+    <div id="basepathhelper">{{ basePath }}</div>
+    <div id="loggedOutMsg">{{ 'error.logged_out'|trans }}</div>
+    <div id="prompet-forget-pwd-msg">{{ 'user.profile.password_box.text'|trans }}<a href="#" id="show-forget"> {{ 'user.profile.password_box.link'|trans }}</a><br>{{ 'user.profile.password_box.contact_us'|trans|replace({'__url__':url('contactUs')})|raw }}</div>
+    <div id="my_ic_page"  {% if is_logged_in() %} data-log="1"  data-url="{{ url('my-books') }}" {% else  %} data-log="0"  {% endif %}></div>
+    <div id="my-profile-page" data-url ="{{ url('my-personal-details') }}"></div>
+    <div id="box-msg-no">{{ 'book.review.no'|trans }}</div>
+    <div id="box-msg-yes">{{ 'book.review.yes'|trans }}</div>
+    <div id="box-msg-close">{{ 'login_modal.confirm_box.close_btn'|trans }}</div>
+    <div id="close-msg-reset-password">{{ 'user.reset_password.close_btn'|trans}}</div>
+    <div id="ok-btn-box">Ok</div>
+    <div id="evolve-msg">For healthcare educators in North America, instructor review copies and teaching materials are available on Elsevier Evolve. <br> Would you like to be redirected? </div>
+    <div id="activate-banner" >{{ 'admin.banner.activate'|trans}}</div>
+    <div id="deactivate-banner" >{{ 'admin.banner.deactivate'|trans}}</div>
+    <div id="cancel-btn-box">{{ 'user.register.form.button.cancel'|trans }}</div>
+    <div id="cancel-request-msg">{{ 'book.request.form.cancel_box'|trans }}</div>
+    <div id="delete-address-msg">{{ 'user.profile.confirm_box.delete_address_message'|trans }}</div>
+    <div id="delete-faq-msg">{{ 'admin.delete_faq_msg'|trans }}</div>
+    <div id="delete-last-address-msg" > {{'user.profile.confirm_box.delete_last_address_message'|trans }}</div>
+    <div id="disable-address-msg">{{ 'user.profile.confirm_box.disable_address_message'|trans }}</div>
+    <div id="disable-last-address-msg" > {{'user.profile.confirm_box.disable_last_address_message'|trans }}</div>
+    <div id="complete-url-msg">{{ 'book.request.complete_url'|trans|replace({'__url__':url('my-personal-details')})|raw }}</div>
+    <div id="confirm-close-msg">{{ 'user.profile.confirm_box.close_message'|trans }}</div>
+    <div id="delete-institution-msg">{{ 'user.profile.confirm_box.delete_message'|trans }}</div>
+    <div id="logout-feedback-msg">{{ 'book.review.logout_msg'|trans}}</div>
+    <div id="current_lang" data-lang="{{ session.get('lang') }}"></div>
+    <div id="current_region" data-region="{{ session.get('region') }}"></div>
+    <div id="current_country" data-country="{{ cookies.get('country') }}"></div>
+    <div id="request-book"> {{'book.request.request-book'|trans}} </div>
+    <div id="preorder-book"> {{'book.request.preorder-book'|trans}} </div>
+    <div id="max-size-file-upload"> {{ 'user.register.form.upload.max_size'|trans }}</div>
+    <div id="request-book"> {{'book.request.request-book'|trans}} </div>
+    <div id="preorder-book"> {{'book.request.preorder-book'|trans}} </div>
+    <div id="book-status-trans" data-adopted-one="{{ 'user.profile.books.adopted'|trans }}" data-adopted-for="{{ 'user.profile.books.adopted_for'|trans }}"
+            data-not-adopted="{{ 'user.profile.books.not_adopted'|trans }}" data-mixed-adoption-for="{{ 'book.review.courses_details.confirmed_and_not_right_for'|trans }}"
+            data-mixed-adoption-one="{{ 'book.review.courses_details.confirmed_and_not_right_for_one'|trans }}"
+            data-renewed-one="{{ 'user.profile.books.adopted'|trans }}" data-not-renewed="{{ 'user.profile.books.not_adopted'|trans }}"
+            data-renewed-for="{{ 'user.profile.books.adopted_for' |trans}}" data-mixed-renewal-one="{{ 'book.review.courses_details.confirmed_and_not_right_for_one'|trans }}"
+            data-mixed-renewal-for="{{ 'book.review.courses_details.confirmed_and_not_right_for'|trans }}" data-see-details="{{ 'book.review.courses_details.see_details'|trans }}"
+            data-on="{{ 'book.review.on'|trans }}" data-reading-list="{{ 'book.review.reading_list'|trans }}"></div>
+    <div id="clipboard-copy">{{ 'product_page.share_dots.copied_clipboard'|trans }}</div>
+    <div id="virtual-tour-back">{{ 'home.virtual_tour.back'|trans }}</div>
+    <div id="virtual-tour-next">{{ 'home.virtual_tour.next'|trans }}</div>
+    <div id="virtual-tour-skip">{{ 'home.virtual_tour.skip'|trans }}</div>
+    <div id="virtual-tour-done">{{ 'home.virtual_tour.done'|trans }}</div>
+    <div id="virtual-tour-intro">{{ 'home.virtual_tour.intro'|trans }}</div>
+    <div id="virtual-tour-step1">{{ 'home.virtual_tour.step1'|trans }}</div>
+    <div id="virtual-tour-step2">{{ 'home.virtual_tour.step2'|trans }}</div>
+    <div id="virtual-tour-step3">{{ 'home.virtual_tour.step3'|trans }}</div>
+    <div id="virtual-tour-step4">{{ 'home.virtual_tour.step4'|trans }}</div>
+    <div id="virtual-tour-step5">{{ 'home.virtual_tour.step5'|trans }}</div>
+    <div id="virtual-tour-ic-phase1-step1-intro">{{ 'home.virtual_tour_ic_page.phase1.step1.intro_line'|trans }}</div>
+    <div id="virtual-tour-ic-phase1-step1-line1">{{ 'home.virtual_tour_ic_page.phase1.step1.first_line'|trans }}</div>
+    <div id="virtual-tour-ic-phase1-step1-line2">{{ 'home.virtual_tour_ic_page.phase1.step1.second_line'|trans }}</div>
+    <div id="virtual-tour-ic-phase1-step1-line3">{{ 'home.virtual_tour_ic_page.phase1.step1.third_line'|trans }}</div>
+    <div id="virtual-tour-ic-phase1-step2">{{ 'home.virtual_tour_ic_page.phase1.step2'|trans }}</div>
+    <div id="virtual-tour-ic-phase1-step3">{{ 'home.virtual_tour_ic_page.phase1.step3'|trans }}</div>
+    <div id="virtual-tour-ic-phase2-step1">{{ 'home.virtual_tour_ic_page.phase2.step1'|trans }}</div>
+    <div id="virtual-tour-ic-phase2-step2">{{ 'home.virtual_tour_ic_page.phase2.step2'|trans }}</div>
+    <div id="virtual-tour-ic-phase2-step3">{{ 'home.virtual_tour_ic_page.phase2.step3'|trans }}</div>
+    <div id="virtual-tour-ic-phase2-step4">{{ 'home.virtual_tour_ic_page.phase2.step4'|trans }}</div>
+    <div id="continue-btn">{{ 'book.request.form.continue_btn'|trans }}</div>
+    <div id="books-tab">{{ 'reading_list.books'|trans }}</div>
+    <div id="category-">{{ 'reading_list.uncategorized'|trans }}</div>
+    <div id="category-core">{{ 'reading_list.core'|trans }}</div>
+    <div id="category-supplementary">{{ 'reading_list.Supplementary'|trans }}</div>
+    <div id="category-recommended">{{ 'reading_list.Recommended'|trans }}</div>
+    <div id="drag-books">{{ 'reading_list.drag_books'|trans }}</div>
+    <div id="error_interests">{{ "user_interests.error_interests"|trans }}</div>
+    <div id="validation-msg">{{ 'validation.required'|trans }}</div>
+    <div id="select-institution">{{ 'book.request.form.step2.title'|trans }}</div>
+    <div id="select-program">{{ 'account_verification.step1.select_program'|trans }}</div>
+    <div id="institution">{{ 'user.profile.institutions.institution'|trans }}</div>
+    <div id="add-btn">{{ 'user.register.form.button.add'|trans }}</div>
+    <div id="cancel-btn">{{ 'user.register.form.button.cancel'|trans }}</div>
+    <div id="pending-btn">{{ 'identity_verification.pending'|trans }}</div>
+    <div id="contextual-help-inst">{{ 'user.register.form.help.add_institution'|trans }}</div>
+    <div id="btn-confirm">{{ 'user.profile.confirm_box.confirm_btn'|trans }}</div>
+    <div id="resend-code-url" data-url="{{ url('resend-code') }}"></div>
+    <div id="remove-list-text"> {{ 'reading_list.remove_list_popup.popup_text'|trans|raw }}</div>
+    <div id="no-books-reading-list"> {{ 'reading_list.no_books'|trans }}</div>
+    <div id="no-lists-reading-list"> {{ 'reading_list.no_lists'|trans }}</div>
+    <div id="cancel-list-msg">{{ 'reading_list.add_reading_list.cancel_btn'|trans|raw }}</div>
+    <div id="copy-book-msg">{{ 'book.review.book_successfully_copied'|trans }}</div>
+    <div id="move-book-msg">{{ 'book.review.book_successfully_moved'|trans }}</div>
+    <div id="remove-list">{{ 'reading_list.remove_list'|trans }}</div>
+    <div id="book-list-export">{{ 'reading_list.default_list_name'|trans}}</div>
+    <div id="export-list">{{ "books_page.export.export_list_btn"|trans }}</div>
+    <div id="export-url">{{ url('export-list') }}</div>
+    <div id="tooltip-edit">{{ 'tooltip.edit'|trans }}</div>
+    <div id="tooltip-more">{{ 'tooltip.more'|trans }}</div>
+    <div id="tooltip-remove">{{ 'reading_list.remove'|trans }}</div>
+</div>

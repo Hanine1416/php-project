@@ -1,0 +1,76 @@
+version: '3'
+services:
+    #PHP Service
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: app
+        restart: unless-stopped
+        tty: true
+        environment:
+            SERVICE_NAME: app
+            SERVICE_TAGS: dev
+        working_dir: /var/www
+        depends_on:
+          - db
+        networks:
+            - ic-network
+        volumes:
+            - .:/var/www
+            - ./.docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    #Nginx Service
+    webserver:
+        image: nginx:alpine
+        container_name: webserver
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "80:80"
+            - "443:443"
+        networks:
+            - ic-network
+        volumes:
+            - ./:/var/www
+            - ./.docker/nginx/conf.d/:/etc/nginx/conf.d/
+    #MySQL Service
+    db:
+        image: mysql:5.7.22
+        container_name: db
+        restart: unless-stopped
+        command: ["--init-file", "/docker-entrypoint-initdb.d/inspection-copy.sql"]
+        tty: true
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_DATABASE: inspection-copy
+            MYSQL_ROOT_PASSWORD: root
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        networks:
+            # - app-network
+              - ic-network
+        volumes:
+            - ./.docker/mysql/data:/var/lib/mysql
+            - ./.docker/mysql/my.cnf:/etc/mysql/my.cnf
+            - ./.docker/mysql/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+            - C:/Users/lenovo/Desktop/PFE/php-project/InspectionCopy/inspection-copy.sql:/docker-entrypoint-initdb.d/inspection-copy.sql
+    #Phpmyadmin Service
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: pma
+        links:
+            - db
+        environment:
+            PMA_HOST: db
+            PMA_PORT: 3306
+            PMA_ARBITRARY: 1
+        restart: always
+        ports:
+            - 8081:80
+        networks:
+            - ic-network
+#Docker Networks
+networks:
+    ic-network:
+        driver: bridge

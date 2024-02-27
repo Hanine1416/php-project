@@ -1,0 +1,80 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/page/contactUs/contact_us.css') }}">
+{% endblock %}
+{% block body %}
+    <input type="hidden" id="page-title" value=" contact us">
+    <div class="inner-wrap">
+        <div class="row contact-us-container">
+            <div class="small-12 columns ">
+                <div class="contact-title">{{ 'contact_us.title'|trans }}</div>
+            </div>
+            {{ form_start(form,{attr:{id:'contact_form',novalidate:true}}) }}
+            <div class="input-field">
+                {{ form_label(form.name) }}
+                <div class="input-container">
+                    {{ form_widget(form.name) }}
+                </div>
+            </div>
+            <div class="input-field">
+                {{ form_label(form.email) }}
+                <div class="input-container">
+                    {{ form_widget(form.email) }}
+                </div>
+            </div>
+            <div class="input-field">
+                {{ form_label(form.country) }}
+                <div class="input-container">
+                    {{ form_widget(form.country,{attr:{'data-institutions':basePath }}) }}
+                </div>
+            </div>
+            <div class="input-field">
+                {{ form_label(form.institution) }}
+                <div class="input-container" id="contact_institution_block">
+                    <select id="institutions" title="{{ "validation.required"|trans }}" class="validate required"
+                            placeholder="{{ "contact_us.form.please_select"|trans }}">
+                    </select>
+                    <input title="{{ "validation.required"|trans }}"
+                           placeholder="{{ 'contact_us.form.label_institution'|trans }}" id="other_institution"
+                           type="text" style="display: none" class="validate required">
+                    <div data-cancel="{{ "user.register.form.button.cancel"|trans }}" data-other="{{ "user.register.form.button.other"|trans }}"
+                         id="btn-other-institution" class="newBtn other-btn"
+                         data-alternatebtntext="{{ "user.register.form.button.cancel"|trans }}">{{ "user.register.form.button.other"|trans }}</div>
+                </div>
+                {{ form_widget(form.institution) }}
+                <img id="institution_loader" style="display: none;"
+                     src="{{ asset('/assets/img/ajax-loader.gif') }}">
+            </div>
+            <div class="input-field">
+                {{ form_label(form.phone) }}
+                <div class="input-container">
+                    {{ form_widget(form.phone,{type:'number',attr:{'class':'validate phone','data-wrong':'validation.wrong_phone_number'|trans}}) }}
+                </div>
+            </div>
+            <div class="input-field">
+                {{ form_label(form.subject) }}
+                <div class="input-container">
+                    {{ form_widget(form.subject) }}
+                </div>
+            </div>
+            <div class="input-field d-block">
+                {{ form_label(form.description) }}
+                {{ form_widget(form.description,{attr:{'rows':5}}) }}
+            </div>
+            <div class="input-field small-12 medium-12 large-12 columns p-0 important-filed">
+                <input type="text" id="more_details" title="">
+            </div>
+            <div class="input-field small-12 medium-12 large-12 columns p-0">
+                <div class="g-recaptcha" id="recaptcha" data-sitekey="{{ recaptchasite }}"></div>
+            </div>
+            <div class="contact-btn">
+                <button id="submitContact" role="button" class="btn btn-blue submit">{{ "contact_us.submit"|trans }}</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/libphonenumber-js/1.9.19/libphonenumber-js.min.js"></script>
+    <script src="{{  asset('assets/page/contactUs/contact_us.min.js') }}"></script>
+{% endblock %}

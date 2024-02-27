@@ -1,0 +1,79 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/page/ancillary/ancillary.css') }}">
+{% endblock %}
+{% block title %}
+    {% if student == true %}
+    {{ "product_page.details.companion_tab.title"|trans }}
+    {% else %}
+        {{ "product_page.details.ancillary_tab.title"|trans }}
+    {% endif %}
+{% endblock %}
+{% block body %}
+    <input type="hidden" id="page-title" value="book: students/teachers resources">
+    <div class="detailDescription p-0">
+        <div class="maincontainer resources_page">
+            <div class="detailBlock">
+                <!--Title-->
+                <div class="detailHeader">
+                   <span class="resource_tag">
+                        {% if student == true %}
+                            {{ "product_page.details.companion_tab.title"|trans }}
+                        {% else %}
+                            {{ "product_page.details.ancillary_tab.title"|trans }}
+                        {% endif %}
+                    </span>
+                    <div class="book_title">{{ book.title }}</div>
+                    <span class="book_subtitle">
+                        {% if book.subtitle != '' %}{{ book.subtitle }}, {% endif %}
+                         {{ "book.edition_label"|trans }} {{ book.editionNumber }}</span>
+                    <h3 class="nexusSerif txtGrey"></h3>
+                    <div class="terms_conditions">
+                        <p>
+                            {{ 'ancillary.ancillary_text'|trans|replace({"__title__": book.title, "__isbn__": book.isbn,"__basePath__": basePath})|raw}}
+                        </p>
+                        <p>
+                            {{ 'ancillary.ancillary_tc'|trans|replace({"__url__": 'https://www.elsevier.com/legal/elsevier-website-terms-and-conditions', "__urlic__": 'https://educate.elsevier.com/', "__urlicen__": 'https://inspectioncopy.elsevier.com/'})|raw}}
+
+                        </p>
+                    </div>
+                    {% if book.ancillary|length > 0 or ancillary is not empty %}
+                        <!-- get url of ancillary-->
+                        {% set url = '' %}
+                        {% if(book.ancillary[0]) is not empty %}
+                            {% if((book.ancillary[0])[0].Url) is defined %}
+                                {% set url = (book.ancillary[0])[0].Url %}
+                            {% endif %}
+                        {% endif %}
+                        {% set hasAccess =  is_logged_in() and user.digitalAutoapproval != false %}
+                        {% if student == false %}
+                            <div class="descriptionContent ancillary-link pdf">
+                                {% if ancillary is not empty %}
+                                    <ul>{{ treeDisplayAncillary(ancillary,hasAccess)|raw }}</ul>
+                                {% else %}
+                                    {% for item in book.ancillary %}
+                                        {% for source in item %}
+                                            {% if(hasAccess) %}
+                                                <a href="{{ source.Url }}" target="_blank">{{ source.Text }}</a>
+                                            {% else %}
+                                                <a class="disbled-ressource">{{ source.Text }}</a>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            {% if url %}
+                                <div class="descriptionContent ancillary-link url">
+                                    <a href="{{ url }}" target="_blank" style="border-bottom: none">{{ url }}</a>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+{% endblock %}

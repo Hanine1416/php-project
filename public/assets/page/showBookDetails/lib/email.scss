@@ -1,0 +1,121 @@
+.emails.emails-input {
+  background: #fff;
+  border: 1px solid #d8d8d8;
+  padding: 10px 16px;
+  font-size: 17px;
+  width: 100%;
+  color: #b5b5b5;
+  .email-chip {
+    box-sizing: border-box;
+    position: relative;
+    display: inline-block;
+    background: rgba(102, 153, 255, 0.2);
+    vertical-align: top;
+    border-radius: 6.25rem;
+    padding-left: 0.625rem;
+    padding-right: 1.5rem;
+    margin: 0.125rem;
+    max-width: 100%;
+    overflow: hidden;
+    color: #404040;
+    .content {
+      display: inline-block;
+      vertical-align: top;
+      max-width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .remove {
+      text-decoration: none;
+      color: inherit;
+      text-align: center;
+      position: absolute;
+      cursor: pointer;
+      width: 1rem;
+      font-size: 1rem;
+      user-select: none;
+      -moz-user-select: none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+      -o-user-select: none;
+    }
+  }
+  .email-chip.invalid {
+    background: #fff;
+    border-bottom: 1px dashed #d92929;
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 1rem;
+  }
+  input {
+    border: 0 !important;
+    line-height: inherit;
+    padding: 0;
+    margin: 0;
+    color: #404040;
+    font-size: 17px;
+    width: auto;
+    display: inline-block;
+    height: 26px;
+    &:focus{
+      background: #fff;
+    }
+
+    &::placeholder {
+      color: #b5b5b5;
+      opacity: 1;
+    }
+    &::-ms-input-placeholder {
+      color: #b5b5b5;
+      opacity: 1;
+    }
+    &:-ms-input-placeholder {
+      color: #b5b5b5;
+      opacity: 1;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+}
+#emails-input {
+  .emails-input.warning {
+    border-color: #E32510 !important;
+  }
+}
+.error-no-mail.warning,.error-invalid-mail.warning {
+  font-size: 13px;
+  line-height: 1.38;
+  text-align: left;
+  color: #f63f33;
+}
+.mail-validation {
+  margin-bottom: 20px;
+}
+.confirm-info.active {
+  z-index: 1051;
+}
+.feedback-txt{
+  textarea{
+    border: 1px solid #d8d8d8;
+    padding: 16px;
+    font-size: 17px;
+    line-height: 2.12;
+    color: #404040;
+    box-shadow: none;
+    height: 104px;
+    &:focus{
+      background: #fff;
+    }
+    &::placeholder {
+      color: #b5b5b5;
+    }
+  }
+}
+.share_msg{
+  font-size: 15px;
+  line-height: 18px;
+  color: #404040;
+  margin: 24px 0;
+}

@@ -1,0 +1,894 @@
+book:
+    edition_label: 'Edition'
+    request:
+        request_digital: Digital format
+        request_print: Print format
+        digital_requested: Digital copy requested
+        print_requested: Copy requested
+        digital_pre_ordered: Pre-ordered digital copy
+        print_pre_ordered: Pre-ordered print copy
+        print_preorder_approved_info: Allow 10-14 days for delivery
+        print_preorder_approved_info_weeks: Allow 2-3 weeks for delivery
+        digital_preorder_approved_info: Immediate access
+        print_order_approved_info: Allow 10-14 days for delivery
+        digital_order_approved_info: Immediate access
+        digital_order_popup: subject to approval; does not include Student Consult or teacher resources
+        digital_preorder_popup: subject to approval; does not include Student Consult or teacher resources
+        request-book: Request
+        preorder-book: Pre-order
+        preorder-label: Back in stock soon
+        form:
+            course_details: Course details
+            check_course_details: Check course details
+            confirm_course_details: Confirm or update course details
+            institution: Institution
+            continue_btn: Continue
+            submit_btn: Submit
+            leave_req_msg: Are you sure you want to leave? Registration must be complete before you can request an inspection copy
+            step1:
+                title: I’m reviewing this for
+                single: A single course
+                multiple: More than one course
+            step2:
+                title: Select Institution
+                title2: Select institution/s
+                add_inst_btn: Add new institution
+                check_institution_msg: Please add at least one institution
+            step3:
+                considering_book: For this course, I'm considering it
+                no_used_similar: As an additional resource for my course
+                now_course: For a new course
+                alternative: To replace/update a resource
+                book_currently_use: 'Currently used:'
+                currentUsedBook: Please provide detail
+            step4:
+                course_type: Course type
+                course_type_contextuel_help: Select the option that most closely describes your course
+                course_name: Course name (optional)
+                course_name_contextuel_help: Please provide the name your course/module is known by within your department
+                course_code: Course code
+                course_level: Course level
+                student_number: Expected intake (per year)
+                students_number_contextuel_help: Total number of students attending this course over one full academic year
+                start_date: Start date
+                end_date: End date
+                end_date_error: End date should be after start date
+                date-format: dd-Mth-yyyy
+                contextuel_help: Please provide detail, such as Undergraduate Y1, Undergraduate Y3, etc
+            step5:
+                title: 'For this course, the book will be:'
+                core: Core
+                core_help: Mandatory for the course; expectation is that the student will purchase or otherwise have ongoing access to the content
+                recommended: Recommended
+                recommended_help: A ‘key’ title for the course, but not mandatory for the student to purchase or have ongoing access
+                supplementary: Supplementary
+                supplementary_help: Included on reading list/in lecture notes as optional and/or additional reading material
+                undecided: Undecided
+                undecided_help: We'll ask again later
+            step6:
+                title: 'Select delivery address'
+                add_addr_btn: Add new
+                confirm_msg: Please confirm your address
+                select: Select another address
+                confirm_addr: Confirm delivery address
+                confirm: Confirm
+                edit_addr: Edit address
+            step7:
+                success_title: Your request has been submitted!
+                success_msg: 'We’ll let you know once the book is available. And, when you’ve had time to view it, we’ll ask you what you think.'
+                success_msg_EC: 'In the meantime, contact your <a class="decorate" href="__education_consultant__">Account manager</a> if you have any queries.'
+                finish_btn: Finish
+            cancel_box: Are you sure you want to cancel your request?
+        complete_url: Welcome to the new Inspection Copy website! <a href ="__url__" class="url-msg">Log in</a> to discover great new content for your courses now.
+    review:
+        title:    Adding to reading list?
+        yes: Yes
+        no: No
+        give_feedback: Give feedback
+        course_details:
+            title: Feedback details
+            course_type: Course type
+            course_name: Course name (optional)
+            course_code: Course code
+            course_level: Course level
+            students: Expected intake (per year)
+            students_number_contextuel_help: Total number of students attending this course over one full academic year
+            start_date: Start date
+            end_date: End date
+            check_adoption: Adding this to your reading list?
+        negative:
+            step1:
+                title: "Not right for this course"
+                option1: "Does not cover everything I need for my course"
+                option2: "Not appropriate for course"
+                option3: "Not appropriate for level"
+                option4: "Content is too advanced"
+                option5: "Content is too basic"
+                option6: "I’ve chosen another resource "
+                option9: "Price"
+                option_other_book: "I’ve chosen another resource"
+                option_other_reason:  "Other  (please specify) "
+                other_reason_placeholder: "Please provide reason"
+            step2:
+                title: "Title of chosen resource"
+                book_name: "Please provide detail"
+            step3:
+                title: "I have chosen this resource because..."
+            reason_title: 'Tell us why '
+        positive:
+            step1:
+                title: "Courses details"
+                edit_course: "Edit course details"
+            step2:
+                title: "This book will be"
+                core: "Core"
+                core_help: "Mandatory for the course; expectation is that the student will purchase or otherwise have ongoing access to the content"
+                recommended: "Recommended"
+                recommended_help: "A ‘key’ title for the course, but not mandatory for the student to purchase or have ongoing access"
+                supplementary: "Supplementary"
+                supplementary_help: "Included on reading list/in lecture notes as optional and/or additional reading material"
+        multiple:
+            step1:
+                title: "Please confirm for each course"
+                title_help: "Select Yes/No for each course "
+            positive_step:
+                title: "I’m adopting this book for"
+            negative_step:
+                title: "Not adopting this book for"
+            current_course:
+                title: 'For this course'
+        feedback:
+            title:  "Please give feedback (optional)"
+            placeholder: "My feedback"
+            info: "Your comments will be approved before publication"
+            accept_public: "I agree for my comments to be shared publicly"
+            accept_public_info: "Your comments will be reviewed before publication. By posting reviews you give permission to Elsevier to use your personal data in accordance with the <a href='__url__'>Privacy Policy</a> and to use your review in Elsevier’s media."
+            accept_name_public: "I agree to my name being used"
+            previous: 'Previous feedback'
+            new: 'You can add new feedback here'
+            new_placeholder: 'Updated comments (optional)'
+            feedback_date: 'Feedback provided on '
+        courses_details:
+            see_details: See details
+            title: Feedback details
+            confirmed_for: Confirmed for these <span>##nbr##</span> courses
+            confirmed_for_one: Confirmed for this <span>##nbr##</span> course
+            not_right_for: Not right for these <span>##nbr##</span> courses
+            not_right_for_one: Not right for this <span>##nbr##</span> course
+            confirmed_and_not_right_for: "Confirmed for ##confirmed_nbr##, not right for ##not_confirmed_nbr## courses"
+            confirmed_and_not_right_for_one: "Confirmed for ##confirmed_nbr##, not right for ##not_confirmed_nbr## course"
+            renewed_and_not_right_for: "Confirmed for ##confirmed_nbr##, not right for ##not_confirmed_nbr## courses"
+            renewed_and_not_right_for_one: "Confirmed for ##confirmed_nbr##, not right for ##not_confirmed_nbr## course"
+        success:
+            title: "Thank you!<br> Your feedback is important to us "
+            feedtext: "For your convenience, you have continual digital access (access will cease when the title becomes out of print). "
+            message: "<a href='__contact_link__' target='_blank'>Have any questions?</a>"
+        submit: "Submit"
+        logout_msg: You have been logged out. Please log in to provide your feedback.
+        previously: 'Previously'
+        on: 'on '
+        dash: '-'
+        slash: '/'
+        at: 'on '
+        reading_list: 'Course list'
+        reading: 'reading list'
+    renewal:
+        title_one: 'Keeping this book on your reading list?'
+        title_many: 'Keeping this book on your reading lists?'
+        negative:
+            step1:
+                title: 'No, I am no longer using this book for my course because'
+                option1: 'I no longer teach this course'
+                option2: 'The curriculum changed'
+        multiple:
+            title: 'I am still using this book for the following course/s'
+contact_us:
+    title: 'Contact us'
+    form:
+        label_name: 'Name'
+        label_email: 'Email Address'
+        label_country: 'Country'
+        label_phone: 'Telephone N°(optional)'
+        label_institution: 'Institution'
+        label_subject: 'Subject'
+        label_description: 'Description'
+        please_select: 'Please Select... '
+        subject_choices:
+            registration_issue: 'Registration Issues'
+            login_issue: 'Login Issue'
+            where_book: 'Where is my print inspection copy ?'
+            heath_resource: 'Help - Health resources'
+            stem_resource: 'Help - STEM resources'
+            other: 'Other'
+        error:
+            wrong_phone_format: Please check the format is correct
+
+    support_email: 'inspectioncopy@elsevier.com'
+    stem_email: 'emeatextbook@elsevier.com'
+    flash:
+        success:  You have successfully submitted your request, one of our team will get back to you very soon.
+    mailer:
+        confirm_subject: 'Enquiry submission confirmation'
+        confirm_message: '<p>Hello ,<br>Thanks for getting in touch. We appreciate you contacting us with your enquiry, one of our team will get back to you very soon.</p>'
+    submit: 'Submit'
+adresses:
+    title: We cannot deliver to PO boxes. Please use street address only.
+    add-adress: Add delivery address
+    add: Add
+profile:
+    education-consultant:
+        title: 'Your Account manager can support you in a number of ways:'
+        liste1: Advising on Elsevier content for your courses
+        liste2: Support on electronic teaching resources
+        liste3: Information about <span class="clinicalKey"><img class="retina-reload clinical-img" src="#img_src#" alt="ClincalKey"/></span>
+        liste4: or
+        get-in-touch: Get in touch!
+    no_education_consultant:
+        title: 'Your Account manager will be assigned once you make your first request. Account managers can support you in a number of ways:'
+product_page:
+    editors: 'Editors'
+    publication_date: 'Publication Date'
+    digital_not_available: 'This title is not available in digital format'
+    print_not_available: 'The print book is not currently available.'
+    purchase_book: 'Purchase textbook'
+    buttons:
+        pre_order_digital: Digital format
+        pre_order_print: Print format
+        pre_ordered_digital: Digital format
+        pre_ordered_print: Print format
+    share_dots:
+        share: Share
+        education_consultant: Contact my Account manager
+        copied_clipboard: 'Copied to clipboard'
+        mail_subject: 'Inspection Copy inquiry'
+    details:
+        toc_tab:
+            title:  'Table of Contents'
+        description_tab:
+            new_feature: 'New Features'
+            title: 'Description'
+            key_features: 'Key Features'
+        review_tab:
+            title: 'Book Reviews'
+        details_tab:
+            title: 'Book details'
+            illustrations: 'Illustrations'
+            page_count: 'Page Count'
+            isbn: 'ISBN'
+            price: 'Retail Price'
+        author_tab:
+            title: 'About the author'
+        ancillary_tab:
+            title: 'Instructor Resources'
+            msg: 'Access to teacher/student resources is available to registered users with approved inspection copies or confirmed adoptions. To review this material, please request an inspection copy.'
+        companion_tab:
+            title: 'Student Resources'
+    related:
+        title: 'Related Titles'
+home:
+    beta_release:
+        feedback_msg: 'We welcome your feedback on your experience with Inspection Copy, which will help us make the website even better'
+        feedback_placeholder: 'Share your thoughts'
+        give_feedback: 'Give feedback'
+        submit: 'Submit'
+        success_msg: 'Thank you for sharing!'
+        btn_continue: 'Continue browsing'
+    discover:
+        title: Discover. <span>Inspect.</span> Teach.
+        link: ' <a href="__url__"  id="click-here">Click here to see your inspection copies</a> '
+        welcome: Welcome to Elsevier Inspection Copy!<br>Discover great content for your course.
+        welcome_first_login: 'Welcome to Elsevier Inspection Copy, ##username##!<br>Discover great content for your course.'
+        login: Or log in
+        register: Create a FREE account
+        welcome_back: 'Welcome back to Elsevier Inspection Copy, ##username##!'
+    banner:
+        covid-content: 'The <a href="http://www.elsevierhealth.com" target="_blank">Elsevier webshops</a> are still open. Along with most of our retail partners, we continue to ship orders until further notice.'
+    booksInterest:
+        title: Books you might be interested in
+    timeline:
+        title: How it works
+        descrp: "This website is exclusively for instructors looking for Elsevier textbooks to support their teaching.  "
+        discover: Discover
+        label_descover: Great content
+        inspect: Inspect
+        label_inspect: A text
+        teach: Teach
+        label_teach: Your course
+        feedback: We'll ask you for your feedback
+    books:
+        title: Find the right resource for your course
+        medicine_book: Medicine
+        nursing_book: Nursing
+        health_book: Health Professions
+        dentistry_book: Dentistry
+        veterinary_book: Veterinary Science and Veterinary Medicine
+        teach: I teach
+        Engineering_book: Engineering & Materials Sciences
+        Life_book: Life Sciences
+        Math_book: Mathematics & Computer Sciences
+        Physical_book: Physical Sciences
+        Social_book: Social Sciences
+    cookies:
+        cookie_label: We use cookies to provide and improve our services. By using our site you consent to cookies. <a href="__url__"  target=_blank>Learn more. </a>
+    virtual_tour:
+        back: Back
+        next: Next
+        skip: Skip
+        done: Done
+        intro: Welcome! Let us show you around so you can get started
+        step1: See your notifications each time you log in
+        step2: Click your user icon to navigate your account information
+        step3: You can change book catalogue to find books in other languages
+        step4: You can view the website in a different language
+        step5: Quick access to your inspection copy requests for review and providing feedback
+    virtual_tour_ic_page:
+        phase1:
+            step1:
+                intro_line: "Welcome to your ‘My Inspection Copies’ area! Here, you can:"
+                first_line: "access your digital inspection copies"
+                second_line: "access teacher/student resources (if available)"
+                third_line: "Submit your feedback"
+            step2: "All your inspection copy requests  are listed here."
+            step3: "And the latest status can be found here too"
+        phase2:
+            step1: "When your request is approved, click here to view the textbook"
+            step2: "Click here at any time to tell us if you’re adopting the textbook"
+            step3: "You can sort your view anytime to manage your list of inspection copies"
+            step4: "When your list gets longer, you can search your inspection copies here"
+notification:
+    notification: Notifications
+    notif_digital_available: 'Good news! Your digital copy of <span class="book-title">__title__</span><span class="status"> is available to read now </span> '
+    notif_digital_approved: 'Your pre-order of <span class="book-title">__title__</span><span class="status"> has been approved</span> '
+    notif_print_approved: 'Good news! Your print copy of <span class="book-title">__title__</span> <span class="status"> is on its way </span>'
+    notif_update_print:  'Update on your print copy of <span class="book-title">__title__</span>'
+    notif_feedback: 'Provide your feedback on <span class="book-title">__title__</span><span class="status"> now</span> '
+    notif_confirm_book: 'Using <span class="book-title">__title__</span> <span class="status"> again?</span> '
+    notif_expired_digital: 'Your digital access to <span class="book-title">__title__</span><span class="status"> is expiring soon. View it now </span> '
+    notif_same_book:
+    notif_none:  You currently have no notifications
+    new_user: Welcome to the new Inspection Copy website! We have made lots of changes to support you better. Click on your profile icon to see your new profile space.
+    new_user_v1: Use the main menu at the top of the screen to start browsing Elsevier textbooks or click on the search bar to find the book you’re looking for.
+    new_user_v2: Elsevier’s Science & Technology textbooks are now on Inspection Copy to browse and request! Click on ‘Science & Technology’ from the main menu to start browsing.
+    new_user_v3: For your convenience, any requests made via Textbooks.Elsevier.com can be found under ‘Previously requested’ at your 'My inspection copies’ page. From there, you can request renewed access or confirm/provide feedback.
+    new_user_v5: Welcome to the new Inspection Copy website! We are working to support you and your teaching better than ever before. Click on your profile icon to see your new profile space.
+    new_user_v4: Welcome to Inspection Copy, the new home of Elsevier’s textbooks! You can request inspection copies and ancillary resources, submit feedback, and connect with your Account manager.
+    new_user_v6: For your convenience, any requests made to us previously can be found under ‘Previously requested’ at your 'My inspection copies’ page. From there, you can request renewed access or provide feedback.
+    new_user_v7: Discover more titles to browse and request by clicking on your area of interest from the main menu, or by searching for your course topics.
+books_page:
+    books:
+        meta_title: 'Titles in'
+        breadcrumb:
+            home: Home
+            all_product: All titles
+            product: Titles
+        filter_show: 'Show'
+        showing_page: 'Showing #from# - #length# of #total#'
+        show_result: Show results
+        view_all: View all
+        next: Next
+        prev: Previous
+        pagination_of: 'of'
+        sortBy:
+            title: Sort by
+            author_a_z: Author A-Z
+            author_z_a: Author Z-A
+            title_a_z: Title A-Z
+            title_z_a: Title Z-A
+            new: Newest first
+            old: Oldest first
+            popularity: Popularity
+    export:
+        export_list_btn: Export list
+        export_btn: Exporter
+        export_list_title: Export list
+        course_book_list: "Course Book List:"
+        created: "Created"
+        course_code: "Course code:"
+        start_date: "Start date:"
+        student_intake: "Student intake:"
+        contant_name: "Contact name:"
+        email: "Email:"
+        comments: "Comments"
+        comments_text: "Left blank for your comments"
+        published_date: "Published date:"
+        publisher: "Publisher:"
+        edition: "Edition:"
+        isbn: "ISBN:"
+        generated: 'Generated at '
+        by: ' by '
+        using: ' using '
+        select_all: 'Select all'
+        deselect_all: 'Deselect all'
+        btn_export: 'Export'
+        export_error: 'Please select at least one book'
+        export_file: 'Export File'
+    filter:
+        specialism: Specialism
+        category: Category
+        pub_year: Publication Year
+        filter_title: Filters
+        sort_title: Sort by
+        book_name: Title
+        author_name: Author
+        pub_date: Publication date
+        clear: Clear all
+        show_more: Show more
+        show_less: Show less
+        coming_soon: Coming soon
+        published: Published
+        digital_copy: Digital copy available
+        requested : Requested
+        reading_list : On my reading list
+        never_requested : Never requested
+    error:
+        data_loading_failed: 'Data loading failed please reload'
+        try_again: 'Try again'
+faq:
+    faq_title: Frequently asked questions
+    question1:  I’ve forgotten my login details
+    answer1: "<a href='__contact_link__' target='_blank'>Contact us</a> and we'll help you to get back into your account."
+    question2: I’ve forgotten my password
+    answer2: Go to 'Log in' and click 'Forgotten your password?'. You'll be prompted to enter the email address you registered with. Enter your email address and, if you're registered, you'll receive an email with instructions on how to reset your password.
+    question3: How do I request a Health Sciences print inspection copy?
+    answer3: '<ul><li>Find the title you are interested in by either searching with ISBN, title or author name, or browse our catalog.</li><li>Click through to the title details and - if print inspection copies are available - the "Request print copy" button is displayed.</li><li>Click the button and you will be asked for details of your course and a delivery address.</li><li>Once your request is submitted, your Account manager will review it and (if appropriate) approve.<li>Delivery of print books takes 10-14 days. With all print inspection copies, you also receive immediate access to the digital copy via <a href="__main_link__" target="_blank">Inspectioncopy.elsevier.com</a></li><li>Alternatively, if the book has not yet published, you will be able to pre-order it by clicking "Pre-order print copy" and (if approved) the book will be dispatched as soon as it publishes.</li></ul>'
+    questionX: How do I request a Science & Technology print inspection copy?
+    answerX: '<ul><li>Print copies for Science & Technology titles are not currently available via the Inspection Copy site.</li></ul>'
+    question4: How do I request a digital inspection copy?
+    answer4: '<ul><li>Find the title you are interested in by either searching with ISBN, title or author name, or browse our catalog.</li><li>Click through to the title details and - if digital inspection copies are available - the "Request digital copy" button is displayed.</li><li>Click the button and you will be asked for details of your course.</li><li>Once your request is submitted, your Account manager will review it and (if appropriate) approve.</li><li>You will be notified by email and also in your <a href="__main_link__" target="_blank">Inspectioncopy.elsevier.com</a> account. You will have immediate access to the digital copy via your "My inspection copies" page of your "My profile" space.</li><li>Alternatively, if the title has not yet published, you will be able to pre-order it by clicking "Pre-order digital copy" and (if approved) you will have immediate access as soon as it publishes.</li></ul>'
+    question5: How long will it take for a print inspection copy to get to me?
+    answer5: 'Once a request for a print inspection copy of a published title is approved, delivery takes 10-14 days. <br> Once a request for a digital inspection copy of a published title is approved, access is immediate via <a href="__main_link__" target="_blank">Inspectioncopy.elsevier.com</a>'
+    question6: I requested a digital copy by accident, can I also request a print copy? Is there a way to do this quickly?
+    answer6: "The quickest way to request a print inspection copy is using your <a href='__main_link__' target='_blank'>Inspectioncopy.elsevier.com</a> account. See <a class='degital-book'>'How do I request a print inspection copy?'</a>"
+    question7: I’m not a full-time lecturer, can I get books sent to my home address?
+    answer7: Our policy is that print inspection copies must be delivered to your department address. However, digital copies are accessed online and can be reviewed via desktop or mobile device at your convenience.
+    question8: "I teach courses at a university that is in a country not covered by Inspectioncopy.elsevier.com but live in the UK. Can I still request Inspection copies?"
+    answer8: "Yes! Please register with us and  contact your Account manager (contact details can be found on your 'My Account manager' page of your 'My profile' space)."
+    question9: I live in a country that is not covered by inspectioncopy.elsevier.com but teach online courses through a university in a country within Europe, Middle East and Africa. Can I request Inspection copies?
+    answer9: 'Please <a href="https://service.elsevier.com/app/overview/elsevier/" target="_blank"> click here</a> to find out how to request inspection copies in your country of residence.'
+    question10: Do I need to review the copies you give me?
+    answer10: "No. But we do ask you to confirm whether you plan to use/recommend the title for your course so we can stock the appropriate volume of copies, as well as keep you posted with any updates to that or related titles. We've also made the feedback process as quick and easy as possible. Sending feedback is not required, but it helps us to understand your needs better— and to continue to improve our titles!"
+    question11: Is there a limit to the number of copies I can request?
+    answer11: The number of inspection copies you request should be appropriate for the course(s) you teach. The approval of requests is at the discretion of your Account manager. They are closely involved in the process so that you have the support you need for planning your course reading lists.
+    question12: Can I keep the inspection copies or do I send them back when I’m done with them?
+    answer12: We do not ask that you return print books to us, but we do ask that you tell us your decision.
+    question13: What do I do with the feedback form that is sometimes packed with the ICs? Who does this go to? Can I email someone instead?
+    answer13: "We now ask that you provide your course information and decision via your 'My inspection copies' page of your 'My profile' space. "
+    question14:  Why is the packing form invoicing me for the cost of the book? I thought these were free?
+    answer14: 'We do not charge for inspection copies. However, the packing form displays the list price of the book(s). <br> You should also have received a copy of the invoice via email, with the total shown as zero. If in doubt, please contact Elsevier Customer Services team via email: <a href="mailto:tradeorders@elsevier.com">tradeorders@elsevier.com</a> quoting the invoice number.'
+    question15: I’ve been sent the wrong print inspection copy, but the invoice lists the right one. What do I do?
+    answer15: 'Contact the Elsevier Customer Services team via email: <a href="mailto:tradeorders@elsevier.com">tradeorders@elsevier.com.</a><br>Please provide the invoice number, the ISBN of the book you should have received and the ISBN of the incorrectly received book. The Customer Services team will advise as to what action to take.'
+    question16: I’m missing a print inspection copy that is listed on the invoice as being there but it’s not. What do I do?
+    answer16: 'Contact the Elsevier Customer Services team via email: <a href="mailto:tradeorders@elsevier.com">tradeorders@elsevier.com.</a><br>Please provide the invoice number and the ISBN of the missing book(s). The Customer Services Team will advise.'
+    question17: How can I return incorrect/spare books to Elsevier?
+    answer17: 'Contact the Elsevier Customer Services team via email: <a href="mailto:tradeorders@elsevier.com">tradeorders@elsevier.com.</a><br> Please provide the invoice number and a list of the titles you would like to return.  The Customer Services team will provide the necessary documentation and returns information.'
+    question20:  I’ve been sent two copies of everything and I just ordered one. What do I do with the extra books?
+    answer20: 'Contact the Elsevier Customer Services team via email: <a href="mailto:tradeorders@elsevier.com">tradeorders@elsevier.com.</a><br>Please provide the invoice number and a list of the additional titles. The Customer Services team will provide the necessary documentation and returns information.'
+admin:
+    layout:
+        hello: Hello
+        faq_page: FAQ page
+        dashboard: Dashboard
+        back: Back
+    cover:
+        home_page_visuals: Home page visuals
+        error: The Max height must be less than 750 px and the Max width must be less than 600 px
+        update_btn: Update images
+        discard_btn: Discard images
+        select_file: Select a file
+        drag_drop: Drag and drop an image or
+    delete_faq_msg: Are you sure you want to delete this FAQ?
+    faq:
+        faq: FAQs
+        add_question: Add a question
+        discard_changes: Discard changes
+        preview_faqs: Preview FAQs
+        question: Question
+        type_question: Type new question here...
+        answer: Answer
+        type_answer: Type answer here...
+        cancel: Cancel
+        add: Add
+        preview: Preview
+        publish: Publish
+        edit: Edit
+    banner:
+      activate: You are activating the banner for ALL regions and languages.
+      deactivate: You are deactivating the banner for ALL regions and languages.
+    cookies:
+        top_section: Top Section
+        bottom_section: Bottom Section
+        edit_cookie: Edit cookie page
+        add_cookie: Add Cookie
+        service: Service
+        cookie: Cookie
+        purpose: Purpose
+        more_info: More Info
+        action: Action
+        cancel: Cancel
+        save: Save
+        edit: Edit
+        hide: Hide
+        description: The table below explains the unique site-specific cookies set by this site and their purpose.
+        service_name_title: 'Service name *'
+        service_name_placeholder: Please enter service name
+        cookie_title: 'Cookies *'
+        cookies_placeholder: Please select at least one cookie
+tooltip:
+    notification: Notifications
+    search: Search
+    Filter: Filter
+    edit: Edit
+    upper_arrow: Newest
+    lower_arrow: Oldest first
+    disable: Disable address
+    delete: Delete address
+    more: More
+    Expand: Expand
+    Collapse: Collapse
+    delete_faq: Delete
+    reorder-faq: Re-order
+search:
+    placeholder: Search Inspection Copies
+    title_placeholder: Title
+    keywords_placeholder: Keyword
+    author_placeholder: Author
+    ISBN_placeholder: ISBN
+    discipline_placeholder: Discipline
+    category_placeholder: Category
+    search_btn: Search
+    breadcrumb: Search
+    no_search_result: No search results found for
+    search_result_for: results for
+    go_to: Alternatively, you can go to the
+    go_to_homepage: homepage
+    edit_search: '<ul><li class="editSearch"><a>Edit Search <img class="retina-reload" data-toggle="tooltip" data-placement="bottom" title="Edit" src="#img_src#" alt="editIcon" width="13" height="15"/></a></li></ul>'
+    edit_search_label: Edit Search
+    result_found: 'Results found'
+user:
+    #Reset password journey
+    reset_password:
+        reset_password_text: Change Password
+        error: The password must be at least medium complexity to be valid
+        info: The password must be at least medium complexity to be valid
+        notification: Success! We have sent you an email with instructions for changing your password
+        expired_token: Oops!<br><br>The link for resetting your password has expired.<br><br><a href='__link__?r=true'>Click here to start again.</a>
+        check_email: "We've sent you an email. Please follow the link to reset your password."
+        close_btn: Close
+        old_password_placeholder: Old Password
+        old_password_invalid: Invalid old password
+        #Reset password emails
+        email:
+            # Account found email
+            found:
+                subject: Reset password
+                body: Hello __username__,<br><p>You have been sent this email because there has been a request to reset your password at <a href="__site__">https://inspectioncopy.elsevier.com</a>. To reset your password, please click on 'Reset Password' below. Don’t wait too long as this link expires in 6 hours.</p>
+                botton: Reset Password
+            # Account not found email
+            not_found:
+                subject: Forgotten password
+                body: Hello, <br><br> <p>Thank you for trying to log in at <a href="__site__">https://inspectioncopy.elsevier.com</a>. Unfortunately, this email address is not registered with us. If you would like to register to request inspection copies of our Education textbooks, please use the link the below.<p>
+                botton: Register Now
+            # Password was successfully reset email
+            sucess:
+                subject: Your password was successfully reset
+                body: Hello __username__,<br><br><p>You've successfully changed your password for <a href="__site__">https://inspectioncopy.elsevier.com.</a></p>
+                salutation: '<br />Thanks for using Elsevier Inspection Copies!<br /><br /><img src="http://www.3sixtycreative.com/mailhosting/1561_INN/logo.png" width="120" height="19" alt="Elsevier"/><br />
+                <p style="FONT-SIZE: 12px; line-height:16px; padding-top: 0px; FONT-FAMILY: Arial, Helvetica, sans-serif; COLOR: #747474; "></p>'
+                bottom: <br><br><b>Didn't do this?</b> Be sure to change your password straight away.
+        enter_email: 'Enter Email'
+        not_match: 'Passwords do not match, please check.'
+        confirm_password_placeholder: 'Confirm password'
+    #Registration
+    register:
+        step1:
+            title: Create your account
+            email: Email
+            password: Password
+            confirm_password: Confirm password
+            notification_check_box: 'Occasionally, we’d like to keep in touch with you to tell you about the Inspection Copy site, especially new resources that may be of interest to you.  If you do not wish to receive these messages, please tick this box'
+            accept_term: Please accept the Terms & Conditions and Privacy Policy to continue
+            bad: Weak
+            medium: Medium
+            good: Strong
+            register_agree: 'I accept <a href="https://www.elsevier.com/legal/elsevier-website-terms-and-conditions" target=_blank>Terms & Conditions</a> and <a href="https://www.elsevier.com/legal/privacy-policy" target=_blank>Privacy Policy</a>.'
+        step2:
+            title: Please verify your email.
+            msg1: We've sent you an email.
+            msg2: Please follow the link to complete your registration.
+            msg3: You can now close this window.
+            msg4: If the email does not arrive at your inbox within a few minutes, please check your 'Junk email' or SPAM folder.
+        step3:
+            title: About you
+        step4:
+            title: More about you
+            delete_inst: Delete this institution
+            add_inst: Add another institution
+        step5:
+            title: Your address
+            cep:
+                data_not_found: 'Data not found'
+        continue_btn: Continue
+        token_expired:
+            title: Link Expired
+            message: "Oops! <br><br>The link for completing your registration has expired.<br>Click <a href='__link__'>here</a> to start again."
+        completed:
+            email:
+                subject: Please complete your registration
+                body: <p>Hello __username__,<br><br>Thank you for your interest in Elsevier’s Inspection Copy platform. </p><p>Kindly click the link below in order to verify your email address and complete the registration process.</p><p><strong>Please note that this link will expire in 6 hours.</strong></p>
+                btn_browse: Email verification
+                finish:  Congratulations! You are registered
+            get_started_btn: 'Get Started'
+        form:
+            fields:
+                email: Email
+                email_popover: Using your institutional email address helps us validate your registration. If using a personal email address, please supply a link to your professional profile or supporting document.
+                email_tooltip: Please supply a link to your professional profile or supporting document.
+                email_error: This website is exclusively for academics. All requests are subject to approval. Do you wish to continue?
+                password: Password
+                country: Country
+                title:  Title (optional)
+                firstname: First name
+                middlename: Middle name (optional)
+                lastname:  Last name
+                phone: Phone
+                cpf: CPF
+                url: Professional online profile
+                institution: Institution
+                department: Department
+                profession: Subject
+                speciality: Specialism
+                isPrimary:
+                    label:  This is my primary institution
+                    yes: Yes
+                    no: No
+            button:
+                other: Other
+                cancel: Cancel
+                save: Save
+                add: Add
+            help:
+                title: "Need help?"
+                text: "You may upload a link to your professional online profile (e.g. a university website profile or LinkedIn profile)."
+                country: "Can't find your country?"
+                content: "<a href='https://service.elsevier.com/app/answers/detail/a_id/7203/supporthub/ecommerce/' target='_blank'>Click here</a> to find out how to request Inspection Copies in other countries"
+                password: "Forgot password?"
+                email: "Need to edit your email address? Contact your <a href='mailto:__ec_email__'>Account manager</a>"
+                add_institution: Can’t find your institution in the list? Click ‘Add’ to enter manually
+            error:
+                invalid_email: You have entered an invalid email
+                invalid_url: Sorry, the link that you have uploaded is not valid.  Please try again with a valid URL.
+                recaptcha_not_found: You have to enter recaptcha
+            placeholder:
+                title: 'Please type in your title'
+                url: Enter URL
+            upload:
+                label: Or
+                zone: Drag a file ( pdf, jpg,png) or click to <span class="browse-btn">browse</span>
+                tooltip: "Upload a document to enable us to verify your profile as an active teacher"
+                delete: Delete file
+                max_size: 'Upload failed because the file size exceeds 1 megabyte'
+            url:
+                tooltip: "All requests for inspection copies are reviewed before approval. Providing a link or document means we can verify you as an instructor and process your requests faster"
+        #request register email
+        email:
+            subject: Complete registration
+            body: Hello,<br><p>Thanks for registering on <a href="__site__">https://inspectioncopy.elsevier.com.</a> We just need to know an bit more about you to complete your registration, and then you can start requesting Inspection Copies! <br><br>To complete your registration, just click on the link below. Don’t wait too long as this link will expire in 6 hours.</p>
+            button: Complete Registration
+        #request register existing slx account
+        email_user_not_ic:
+            subject: Complete Registration
+            body: Hello,<br><p>Thanks for trying to register on <a href="__site__">https://inspectioncopy.elsevier.com</a> however we already know you. To create your password just click on 'Create Password' below. Don’t wait too long as this link expires in 6 hours.</p>
+            button: Create Password
+        #request register existing ic account
+        email_user_from_ic:
+            subject: Complete Registration
+            body: Hello __username__,<br><p>Thanks for trying to register on <a href="__site__">https://inspectioncopy.elsevier.com</a> however we already know you. To reset your password just click on 'Reset Password' below. Don’t wait too long as this link expires in 6 hours.</p>
+            button: Reset Password
+        expired_token: The request registration link has expired, please submit your request again.
+    #edit profile
+    profile:
+        profile_overview: < Profile overview
+        sign_out_btn: Sign out
+        update-info: Your details have been updated
+        education_consultant: My Account manager
+        no_education_consultant: No Manager
+        my_profile: My profile
+        home: Home page
+        inspection_copies: My inspection copies
+        inspection_copies_page: My inspection copies
+        books:
+            no_books:
+                title: You have not yet requested any Inspection Copies
+                button: Click here to discover great content now
+            reviewed: Reviewed
+            adopted: Confirmed for course
+            adopted_for: Confirmed for <span>##confirmed_nbr##</span> courses
+            not_adopted: Not right for course
+            has_feedback: You have reviewed this title
+            feedback_contextual_help:
+                title: Feedback from you
+                help1: Helps us to develop new content
+                help2: Enables us to support local bookstores
+                help3: Ensures we can fulfil online demand
+            pending: Awaiting approval (you have requested this)
+            pending_filter: Awaiting approval
+            coming_soon: Coming soon
+            coming_soon_contextual_help: You will be notified when the title is published and on its way to you.
+            read_book_contextual_help: The digital review copy does not include Student Consult or interactive features.
+            approved: Review in progress
+            on_its_way: (Your print copy is on its way!)
+            declined: Request not approved
+            cancelled: Cancelled
+            expired: Feedback due
+            digital_expired: <span>Digital access expired</span><br><span class="expired-info">Need more time? Contact <a href="mailto:__education_consultant__">your Account manager</a></span>
+            dispatched: 'Dispatched:'
+            dispatched_msg: '<p class="dispatched-date">Print copy dispatched __day__ - allow 10-14 days</p><p class="expected">Expected to have received your book? Contact </p><p class="mail"><a href="mailto:Tradeorders@elsevier.com">Tradeorders@elsevier.com</a></p>'
+            expire: 'Your digital copy will expire on '
+            allow: '- Please allow 2-3 weeks for delivery. Problem with your delivery?'
+            contact_us: Contact us.
+            adopt_btn: Adopt
+            read_btn: Read digital copy now
+            read_more_btn: View digital copy
+            renewed: 'Confirmed for course'
+            not_renewed: 'No longer on reading list'
+            mixed_renewal: 'Confirmed for ##confirmed_nbr##,not renewed for ##not_confirmed_nbr## courses'
+            renewed_for: 'Confirmed for ##confirmed_nbr## courses'
+            renew_book: 'Renew book'
+            cancel_request: 'Cancel Request'
+            filter_no_results: 'Unfortunately, there are no results for your search. Try again'
+        address:
+            title: Delivery address
+            titles: Delivery addresses
+            address: Address
+            new_delivery_address: Add a new address
+            new_address: Add a new delivery address
+            add_address: Want to add a new delivery address?
+            address_msg: Please note that we cannot deliver to a PO Box
+            address_characters_invalid: You should not pass 30 characters
+            address1: Street name, number
+            address2: Institution name
+            address3: Dept/building/office name
+            city: City
+            postalCode: Postal Code
+            state: County/State
+            delete_btn: Delete this address
+            message: You may add a new delivery address when you request a print inspection copy. If you see an error in your delivery address, contact your Account manager
+            phone_help: Please enter a valid phone number with area code
+            confirm_box:
+                close_message: You have made changes, are you sure you want to leave this page?
+                delete_message: Are you sure you want to delete this address from your profile?
+                confirm_btn: Confirm
+        details: Personal details
+        institutions:
+            title:  My institution
+            titles: My institutions
+            edit_title: Edit institution
+            delete_btn: Delete this institution
+            disable_btn: Disable this institution
+            add_btn: Add institution
+            primary_institution: Primary Institution
+            institution: Institution
+            primary_info: When you add more institutions, you can change this
+            isPrimary: Make this my primary institution
+            has_request_msg: A request has been made for this affiliation; you cannot make changes
+            require_one: We require at least one affiliation
+        update_btn: Update
+        password_help:
+            title: Lorem ipsum
+            text: Lorem ipsum
+            placeholder_new_pwd: New Password
+        confirm_box:
+            close_message: Edits have been made. Are you sure you want to exit without saving your changes?
+            delete_message: Are you sure you want to delete this institution from your profile?
+            delete_address_message: Are you sure you want to delete this address from your profile?
+            delete_last_address_message: Are you sure you want to delete this address? An address is needed to request a print inspection copy
+            disable_address_message: Are you sure you want to disable this address from your profile?
+            disable_last_address_message: Are you sure you want to disable this address? An address is needed to request a print inspection copy
+            no_address_message: You have no saved addresses
+            confirm_btn: Confirm
+            yes_btn: Yes
+            no_btn: No
+        password_box:
+            text: Forgotten your password?
+            link: Click here to reset.
+            contact_us: 'Or <a href="__url__" target="_blank">contact us</a> for help.'
+    confirm_logout_msg: 'Are you sure you want to sign out?'
+#Login
+navbar:
+    login_btn: Log in
+    remember_me: 'Remember Me'
+    register_btn: Register
+#validators:
+validation:
+    required: Please complete the mandatory field
+    number_required: Please enter a number
+    wrong_phone_number: Please enter a valid phone number with area code
+    institution_zip_code: ''
+    teacher_url: Please add either a URL or upload a document
+#footer
+footer:
+    contact_us_footer: 'Contact Us'
+    resource_center_footer: '<a href="http://elsevierresource.com/" target="_blank">Resource Center</a>'
+    terms_footer: '<a href="https://www.elsevier.com/legal/elsevier-website-terms-and-conditions" target="_blank">Terms and Conditions</a>'
+    privacy_footer: '<a href="https://www.elsevier.com/legal/privacy-policy" target="_blank">Privacy Policy</a>'
+    register_footer: '<a href="https://www.elsevier.com/legal/elsevier-registered-user-agreement" target="_blank">Registered User Agreement</a>'
+    help_footer: '<a href="https://service.elsevier.com/app/overview/elsevier/" target="_blank">Help</a>'
+    faq_footer: 'FAQ'
+    copyright: 'All content on this site: Copyright © __current_year__ Elsevier, its licensors, and contributors. All rights are reserved, including those for text and data mining, AI training, and similar technologies. For all open access content, the Creative Commons licensing terms apply.'
+    cookie_link: 'Cookies are used by this site. To decline or learn more, visit our <button id="ot-sdk-btn" class="cookie-settings ot-sdk-show-settings">Cookie Settings</button>.'
+#layout:
+layout:
+    page_title: 'Elsevier Health Inspection Copies'
+    health_sciences: 'Health Sciences'
+    science_tech: 'Science & Technology'
+    page_generic_title: 'Elsevier Inspection Copies'
+    page_description: 'This website is exclusively for instructors looking for Elsevier textbooks to support their teaching.'
+    book_description: 'Instructors may request a copy of this title for examination.'
+#mainling
+email:
+    ip_date: 'Requesting IP : %ip% Time: %date%'
+    support: 'If you need any help please <a href="__contact_url__" style="color: #007398; text-decoration: none">contact us</a>.'
+    sent: 'We sent you an email with instructions to change your current password.'
+    els_team: 'Elsevier Education team'
+    best_wishes: 'Best Wishes'
+    subject: 'Inspection Copy account access attempt'
+    access: 'Someone is attempting to access your Inspection Copy account from a new device'
+    when: 'When:'
+    device: 'Device:'
+    country: 'Country:'
+    msg_code: 'Use this unique authentication code to continue to log in:'
+cep:
+    data_not_found: 'Data not found'
+error:
+    error: 'Error'
+    nb_1103: 'Please enter your email address'
+    nb_1074: 'You have entered an invalid email'
+    nb_1105: 'Oops! <br>This account has not been activated.<br>Please follow the link in the email we sent when you registered or <a href="__url__" class="inline" target="_blank">Click here</a> to start again.'
+    nb_1121: "We didn't recognize your details. Please check your email address and password."
+    nb_1201: "Request cannot be cancelled. The approval process has already begun"
+    captcha: 'Please complete the reCAPTCHA images.'
+    logged_out: 'You have been logged out please login first'
+    back_dashboard: 'Back to dashboard'
+
+login_modal:
+    title: 'Login'
+    subtitle: 'If you have an account with us please log in.'
+    email: 'Email'
+    password: 'Password'
+    forget_password:
+        link: 'Forgotten your password?'
+        title: 'Password Reset'
+        submit: 'Submit'
+        cancel: 'Cancel'
+    create_account: 'Create An Account'
+    confirm_box:
+        close_btn: 'Close'
+datepicker:
+    clear: 'Clear'
+
+#language:
+languages:
+    en: 'English'
+    es: 'Spanish'
+    fr: 'French'
+    de: 'German'
+#catalogues language
+catalogues:
+    en: 'English catalogue'
+    de: 'German catalogue'
+    es: 'Spanish catalogue'
+    fr: 'French catalogue'
+    in: ''
+
+historical_data:
+    title: XXX books previously requested from Elsevier. <a href ="__url__">See My Request History</a>
+    link_name: My request history
+    request_btn: Request again
+    desciption_1: Previously requested titles from Elsevier via Textbooks.Elsevier.Com.
+    desciption_2: To request access, click on 'Request again'
+    msg_request_again: Requested again on dd-Mon-yyyy. To view, go to <a href="__url__" class="p-0"><u>My Inspection Copies</u> </a>.
+    back_profile: Go back to my profile
+    back_ic: Go back to my inspection copies
+    show_history: See history
+    hide_history: Hide history
+    students_number: Students number

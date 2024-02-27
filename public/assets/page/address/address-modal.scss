@@ -1,0 +1,197 @@
+.new-address-modal {
+  z-index: 358;
+  display: none;
+  padding: 0;
+  .modal-dialog{
+    width: 100%;
+    height: 100%;
+    .modal-content{
+      padding: 24px;
+    }
+  }
+  .address-block {
+    &.address-block-request {
+      border: none;
+      margin-top: 32px;
+    }
+  }
+  .input-field .error, .error-phone {
+    position: relative !important;
+    margin-bottom: 20px !important;
+  }
+  span.phone-contextual-txt {
+    font-size: 13px;
+    color: #707376;
+    display: inherit;
+    margin-top: 10px;
+  }
+  .new-address-modal-title, .edit-address-modal-title {
+    font-size: 25px;
+    margin-bottom: 0;
+    line-height: 1.44;
+    color: #404040;
+  }
+  .edit-address-modal-title {
+    display: none;
+  }
+  .edit-controls {
+    display: none;
+  }
+
+  &.edit-mode {
+    .new-address-modal-title {
+      display: none;
+    }
+    .edit-address-modal-title {
+      display: block;
+    }
+    .add-controls {
+      display: none;
+    }
+    .edit-controls {
+      display: block;
+    }
+    .address-block.loading {
+      div {
+        visibility: hidden;
+      }
+      background: url("../../../assets/img/ajax-loader.gif") center no-repeat;
+    }
+    .close-address-modal {
+      background: url(../../img/button_close.jpg) no-repeat scroll;
+      cursor: pointer;
+      height: 24px;
+      width: 24px;
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      float: right;
+      opacity: 1;
+    }
+    .input-field {
+      margin: 0 !important;
+      padding: 0;
+      padding-bottom: 24px;
+      .select2-selection {
+        margin-bottom: 0;
+      }
+      input {
+        height: 52px;
+      }
+      .error, .error-phone {
+        margin-top: 8px;
+        bottom: inherit !important;
+      }
+    }
+  }
+}
+
+
+.popup-title {
+  font-size: 25px !important;
+  margin-bottom: 32px;
+  margin-top: 34px;
+  color: #404040;
+}
+
+.close-address-modal {
+  background: url(../../img/button_close.jpg) no-repeat scroll;
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  float: right;
+  opacity: 1;
+  z-index: 358;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2) {
+  .close {
+    background: url(../../img/button_close@2x.png) no-repeat scroll;
+    background-size: contain;
+  }
+}
+
+@media (-webkit-min-device-pixel-ratio: 3) {
+  .close {
+    background: url(../../img/button_close@3x.png) no-repeat scroll;
+    background-size: contain;
+  }
+}
+
+.delivery-address-content {
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 24px;
+}
+
+.unique-address > {
+  .tile {
+    display: block;
+  }
+  button.tile-toggle {
+    display: none;
+  }
+}
+
+/************** this applies from 600px onwards **********/
+@media screen and (min-width: 640px) {
+  #addresses{
+    max-height: 500px;
+    overflow-y: auto;
+  }
+
+  .new-address-modal {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 0;
+    height: auto;
+    form{
+      display: block;
+    }
+    .modal-dialog{
+      max-width: 630px;
+      min-height: 480px;
+      margin: 70px auto;
+      .modal-content{
+        padding: 32px;
+        border-radius: 4px;
+        margin-bottom: 0;
+      }
+    }
+    z-index: 358;
+    box-shadow: 0 4px 8px 0 rgba(9, 30, 66, 0.16);
+  }
+  .close{
+    top: 32px;
+    right: 32px;
+  }
+  .popup-title{
+    margin-bottom: 40px;
+    margin-top: 0;
+  }
+  .modal-container{
+    overflow: auto;
+    overflow-x: hidden;
+    margin-bottom: 24px;
+  }
+  .address-page-container {
+    width: 422px;
+  }
+  body.modal-open {
+    position: relative;
+    &.scrollable {
+      overflow-y: auto;
+    }
+  }
+
+  .deliver-adress {
+    line-height: 24px;
+    padding-left: 0;
+  }
+
+}
+#addAddress{
+  position: relative;
+}

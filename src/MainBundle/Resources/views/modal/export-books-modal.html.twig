@@ -1,0 +1,35 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/page/showBookDetails/request-book.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/my_books/review-book-modal.css') }}">
+{% endblock %}
+<!-- review book modal -->
+<div class="export-books-modal lightbox modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title text-left">{{ "books_page.export.export_list_title"|trans }}</h3>
+                <div class="close-modal close" data-dismiss="modal" aria-label="Close"></div>
+            </div>
+
+            <div class="modal-container scroll1 modal-body scroll1">
+                <div class="columns  checkbox__item last-check-box undefined select-all">
+                    <input id="select-all" type="checkbox" class="checkbox__input" data-select-all="{{ "books_page.export.select_all"|trans }}" data-deselect-all="{{ "books_page.export.deselect_all"|trans }}">
+                    <label for="select-all" id="select-deselect" class="checlbox__label small-checkbox ">{{ "books_page.export.select_all"|trans }}</label>
+                </div>
+                <form autocomplete="off" class="fakeForm scroll scroll1"  id="formExportBooks">
+                    <div class="loading-spinner"></div>
+                    <!-- Show books list -->
+                    <ul class="scroll scroll1 books-filtered">
+                    </ul>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="row step-controller p-0 text-right">
+                    <a class="btn btn-transparent" id="export-books" data-url="{{ url('export-file') }}" data-error-text="{{ "books_page.export.export_error"|trans }}">{{ "books_page.export.btn_export"|trans }}
+                        <span></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+{% extends 'mail/base.html.twig' %}
+
+{% block body %}
+    <table>
+        <tbody>
+            <tr>
+                <td style="font-size:15px;color:#53565A;font-family: Arial, Helvetica, sans-serif;text-align: left;  padding-top: 20px; padding-bottom: 0">{{ 'contact_us.form.label_name'|trans|replace('*',' ') }}</td>
+                <td style="font-size:15px;color:#53565A;font-family: Arial, Helvetica, sans-serif;text-align: left;  padding-top: 20px; padding-bottom: 0">{{ contact.name }}</td>
+            </tr>
+            <tr>
+                <td style="font-size:15px;color:#53565A;font-family: Arial, Helvetica, sans-serif;text-align: left;  padding-top: 20px; padding-bottom: 0">{{ 'contact_us.form.label_email'|trans|replace('*',' ') }}</td>
+                <td style="font-size:15px;color:#53565A;font-family: Arial, Helvetica, sans-serif;text-align: left;  padding-top: 20px; padding-bottom: 0">{{ contact.email }}</td>
+            </tr>
+            <tr>
+                <td style="font-size:15px;color:#53565A;font-family: Arial, Helvetica, sans-serif;text-align: left;  padding-top: 20px; padding-bottom: 0">{{ 'contact_us.form.label_country'|trans|replace('*',' ') }}</td>
+                <td style="font-size:15px;color:#53565A;font-family: Arial, Helvetica, sans-serif;text-align: left;  padding-top: 20px; padding-bottom: 0">{{ contact.country }}</td>
+            </tr>
+            <tr>
+                <td style="font-size:15px;color:#53565A;font-family: Arial, Helvetica, sans-serif;text-align: left;  padding-top: 20px; padding-bottom: 0">{{ 'contact_us.form.label_institution'|trans|replace('*',' ') }}</td>
+                <td style="font-size:15px;color:#53565A;font-family: Arial, Helvetica, sans-serif;text-align: left;  padding-top: 20px; padding-bottom: 0">{{ contact.institution }}</td>
+            </tr>
+            <tr>
+                <td style="font-size:15px;color:#53565A;font-family: Arial, Helvetica, sans-serif;text-align: left;  padding-top: 20px; padding-bottom: 0">{{ 'contact_us.form.label_phone'|trans }}</td>
+                <td style="font-size:15px;color:#53565A;font-family: Arial, Helvetica, sans-serif;text-align: left;  padding-top: 20px; padding-bottom: 0">{{ contact.phone }}</td>
+            </tr>
+            <tr>
+                <td style="font-size:15px;color:#53565A;font-family: Arial, Helvetica, sans-serif;text-align: left;  padding-top: 20px; padding-bottom: 0">{{ 'contact_us.form.label_subject'|trans|replace('*',' ') }}</td>
+                <td style="font-size:15px;color:#53565A;font-family: Arial, Helvetica, sans-serif;text-align: left;  padding-top: 20px; padding-bottom: 0">{{ contact.subject }}</td>
+            </tr>
+            <tr>
+                <td style="font-size:15px;color:#53565A;font-family: Arial, Helvetica, sans-serif;text-align: left;  padding-top: 20px; padding-bottom: 0">{{ 'contact_us.form.label_description'|trans|replace('*',' ') }}</td>
+                <td style="font-size:15px;color:#53565A;font-family: Arial, Helvetica, sans-serif;text-align: left;  padding-top: 20px; padding-bottom: 0">{{ contact.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock body %}

@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /0/en/account
+Disallow: /1/en/account
+Disallow: /2/en/account
+Disallow: /3/en/account
+Disallow: /4/en/account
+Disallow: /5/en/account
+Disallow: /6/en/account
+Disallow: /7/en/account
+Disallow: /8/en/account
+Disallow: /9/en/account

@@ -1,0 +1,140 @@
+<!-- Verify account modal -->
+<div class=" request-book-modal lightbox modal verify-account-modal" id="verify-account-modal" tabindex="-1"
+     role="dialog">
+    <div class="modal-dialog" role="document">
+        <div id="close-modal" class="close-verify-account"></div>
+        <div class="modal-container scroll1 modal-content">
+            <form autocomplete="off" role="form" id="formVerifyAccount" data-url="{{ url('verify-account') }}">
+                <!-- Verify account message -->
+                <div class="modal-step" id="step0">
+                    <div class="modal-step-content row">
+                        <div class="success-msg">{{ 'qualified.qualified-title'|trans }}</div>
+                        <div class="finish-msg" id="reading-lists-success">
+                            {{ 'qualified.qualified-msg'|trans }}
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns step-controller p-0">
+                            <a class="btn btn-blue goStep verify-btn"   data-target-step="step1">
+                                {{ 'identity_verification.qualify'|trans }}
+                            </a>
+                            <a class="btn btn-transparent more_info" href="{{ url('identify-verification') }}"> {{ 'identity_verification.more_info'|trans }}
+                                <span></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Select institution and program  -->
+                <div class="modal-step active" id="step1">
+                    <div class="modal-step-content row">
+                        <div id="single-institution" data-professions="{{ professions|json_encode }}" data-country="{{ user.country }}" data-institutions-length = "{{ institutions|length }}">
+                            <div class="popup-title"> {{ 'account_verification.modal_title'|trans }}</div>
+                            <div class="institution-program-block scroll1 instructor_account_modal">
+                                <div class="institution-block block-0 ">
+                                    <div class="small-12 medium-12 large-12 columns input-step institution-selector-block pl-0 pr-0 mb-24" {% if(institutions|length)==0 %} style="display: none" {% endif %}>
+                                        <label class="label-title"
+                                               for="institutions-selector-0">{{ 'book.request.form.step2.title'|trans }}</label>
+                                        <select name="institutions-list" id="institutions-selector-0" class="validate"
+                                                title="{{ 'validation.required'|trans }}"
+                                                placeholder="{{ "contact_us.form.please_select"|trans }}">
+                                            <option value=""></option>
+                                            {% for institution in institutions %}
+                                                <option value="{{ institution.id }}">
+                                                    {{ institution.name }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                        <div class="">
+                                            <a class="pull-right btn-new-institution decorate">{{ 'user.register.form.button.add'|trans }}</a>
+                                        </div>
+                                        <span class="contextual-txt mb-0">{{ 'user.register.form.help.add_institution'|trans }}</span>
+                                    </div>
+                                    <div class="input-step institution-text-block small-12 medium-12 large-12 columns pl-0 pr-0 mb-24" {% if(institutions|length)==0 %} style="display: block" {% endif %} >
+                                        <label for="institutionName">{{ 'user.profile.institutions.institution'|trans }}</label>
+                                        <input type="text" id="institutionName" name="institutionName" class="institution-name validate" title="{{ 'validation.required'|trans }}">
+                                        <div class="small-12 medium-12 large-12 columns  pl-0 pr-0 hidden">
+                                            <a class="pull-right btn-cancel-new-institution decorate ">{{ 'user.register.form.button.cancel'|trans }}</a>
+                                        </div>
+                                    </div>
+                                    <div class="small-12 medium-12 large-12 columns input-step pl-0 pr-0 mb-24">
+                                        <label for="program-selector-0"
+                                               class="label-title "> {{ 'account_verification.step1.select_program'|trans }}</label>
+                                        <select name="professions-list" id="program-selector-0" class="validate"
+                                                title="{{ 'validation.required'|trans }}"
+                                                placeholder="{{ "contact_us.form.please_select"|trans }}">
+                                            <option value=""></option>
+                                            {% for profession in professions %}
+                                                <option value="{{ profession }}">
+                                                    {{ profession }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="small-12 medium-12 large-12 columns pl-0 pr-0">
+                                <button class="btn"
+                                        id="new-block-btn">{{ 'account_verification.step1.add_inst_program_btn'|trans }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row step-controller p-0 text-right pl-0 pr-0">
+                        <button class="btn btn-transparent goStep"
+                                data-target-step="step2">{{ 'book.request.form.continue_btn'|trans }}</button>
+                    </div>
+                </div>
+                <!-- Add url and file step -->
+                <div class="modal-step" id="step2">
+                    <div class="modal-step-content row">
+                        <div class="popup-title">  {{ 'account_verification.modal_title'|trans }}</div>
+                        <div class="input-field small-12 medium-12 large-12 columns pr-0 pl-0 url-file-container">
+                            <div class="input-field small-12 medium-12 large-12 columns mb-0 url-and-upload-fields">
+                                <div class="input-step small-12 medium-12 large-12 columns mb-0 url-field p-0 email-popover  url-field error-case">
+                                    <div>
+                                        <label for="url"
+                                               class="label-title">{{ 'user.register.form.fields.url'|trans }}</label>
+                                        <input type="text" name="url" id="url" class="validate mb-24-imp"
+                                               title="{{ 'validation.teacher_url'|trans }}" {% if user.url is not null %} value="{{ user.url }}" data-user-url ="{{ user.url }}" {% else %} data-user-url =""{% endif %}>
+                                    </div>
+                                </div>
+                                <div class="input-field small-12 medium-12 large-12 columns mb-10 p-0 ">
+                                    <div class="upload-file-label" data-reg="{{ region }}">
+                                        {{ 'user.register.form.upload.label'|trans }}
+                                    </div>
+                                </div>
+                                <div class="input-field small-12 medium-12 large-12 columns pl-0 pr-0 email-popover upload-field-block">
+                                    <div class="large-12 dropzone
+                                    {% if ( user.profileFileProvided is defined and user.profileFileProvided is not null and user.profileFileProvided>0) or session.get('fileUploaded') == true %}
+                                        has-file
+                                    {% endif %}"
+                                         id="dropzone-upload"
+                                         data-drag-msg="{{ 'user.register.form.upload.zone'|trans }}"
+                                         data-delete-msg="{{ 'user.register.form.upload.delete'|trans }}">
+                                        <input type="file" name="covers[{{ loop.index }}][file]"
+                                               id="file_{{ loop.index }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row step-controller p-0 text-right">
+                        <button class="btn btn-transparent goStep" id="submit-request-btn"
+                                data-target-step="step3">{{ 'book.request.form.submit_btn'|trans }}</button>
+                    </div>
+                </div>
+                <!-- Finish step -->
+                <div class="modal-step" id="step3">
+                    <div class="modal-step-content row">
+                        <div class="finish-img">
+                            <img class="retina-reload" src="{{ asset('assets/img/icon_success@1x.png') }}"
+                                 style="height: 60px;width: 60px;">
+                        </div>
+                        <div class="success-msg">{{ 'account_verification.step3.success_msg'|trans }}</div>
+                        <div class="finish-msg" id="reading-lists-success">
+                            {{'account_verification.step3.finish_msg'|trans|raw}}
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>{{bookTitle}}</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="content-language" content="es">
+    <style type="text/css">
+        html,body,#vc,#vci,#ph,#js-dis{height:100%;}
+        html{overflow:hidden;}
+        body{max-height:100%;margin:0;padding:0;background-color:#313639;}
+        #vci{font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:bold;text-align:center;color:white;text-shadow:-1px -1px 0px black;}
+        #vci span,#vci a{font-size:75%;font-weight:normal;color:#a0c4f9;font-weight:normal;}
+        #ph{display:none;background:black;}
+        #ph,#js-dis{font-weight:bold;padding:5px 16px;}
+        #js-dis span{color:#9a9a9a;}
+        #ph-content{float:left;}
+        .withad{height:auto !important;}
+        .withad #vc{position:absolute;left:0;right:0;height:auto;}
+        .withad #vc iframe{display:block;position:absolute;left:0;right:0;top:0;bottom:0;}
+        .withad-top #vc{top:100px;bottom:0px;}
+        .withad-bottom #vc{top:0px;bottom:100px;}
+        .withad #ac{position:absolute;left:0;right:0;height:100px;background:#313639;}
+        .withad-top #ac{top:0px;}
+        .withad-bottom #ac{bottom:0px;}
+        #aci{width:728px;margin:0 auto;}
+        #ad-close{position:absolute;right:5px;top:5px;font-size:12px;line-height:12px;font-weight:bold;text-decoration:none;color:#CACACA;display:none;background: rgba(255,255,255,0.1);padding: 4px 5px 3px 4px;border-radius: 10px;}
+        #ad-close:hover{background:rgba(255,255,255,0.3);}
+        .withad #ad-close{display:block;}
+    </style>
+</head>
+<body>
+<input type="hidden" id="page-title" value="books: read book">
+<div id="vc">
+    <div id="vci">
+        <div id="ph">
+            <table border="0" height="100%" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                    <td>
+                        <div id="ph-content"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <noscript>
+            <div id="js-dis">
+                <table border="0" height="100%" cellspacing="0" cellpadding="0" align="center">
+                    <tr>
+                        <td>Javascript disabled!<br/><span>You need to enable Javascript in your browser to view this publication.</span></td>
+                    </tr>
+                </table>
+            </div>
+        </noscript>
+    </div>
+</div>
+<script type="text/javascript" src="{{ asset('assets/js/embed.js') }}"></script>
+<script type="text/javascript" src="{{ jsSource }}"></script>
+</body>
+</html>

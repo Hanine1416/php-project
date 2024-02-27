@@ -1,0 +1,52 @@
+{% extends 'layout.html.twig' %}
+{% block title %} {{ "user.profile.institutions.title"|trans }} {% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/page/profile/my-institutions.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-component/css/bootstrap-component.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/main/institution-modal.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/switcher.css') }}">
+{% endblock %}
+{% block body %}
+    <input type="hidden" id="page-title" value="profile: institutions">
+    <!--menu profile section-->
+    <div class="menu-profile-mobile">
+        {% include '@UserBundle/profile/profile-menu.html.twig' with {'user' : user} %}
+    </div>
+    <div class="my-institution-page">
+        <div id="nb-institution" data-nb-institution="{{ user.institutions|length }}"></div>
+
+        <!--  My institutions -->
+        {% if user.digitalAutoapproval == false and user.institutions|length == 0 %}
+                <div class="small-12 medium-12 large-12 columns p-0">
+                    {% include '@MainBundle/parts/not-qualified-banner.html.twig' %}
+                </div>
+                {% endif %}
+        <div class="desktop main-content-menu">
+        <div class="main-menu-profile-container maincontainer">
+                {% include '@UserBundle/profile/profile-menu.html.twig' with {'user' : user} %}
+            <div id="institutions-container">
+                {% for institution in user.institutions %}
+                    {% include '@UserBundle/profile/institutions/institution-details.html.twig' with {'institution':institution} %}
+                {% endfor %}
+                <div class="add-institution-button">
+                    <button type="button" class="btn-add" id="new-institution-btn">
+                        <span class="new-institution-label">{{ 'user.profile.institutions.add_btn'|trans }}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div id="profile-js-message"
+             data-institution-primary="{{ 'user.profile.institutions.primary_institution'|trans }}"
+             data-institution="{{ 'user.profile.institutions.institution'|trans }}"></div>
+        {% include '@UserBundle/modal/institution-modal.html.twig' with {'institutionForm':newInstitutionForm ,'allowEdit':true} %}
+        <!-- End My institutions -->
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('assets/page/main/institution-controls.min.js') }}"></script>
+    <script src="{{ asset('assets/page/profile/institutions.min.js') }}"></script>
+    <script src="{{ asset('assets/page/profile/menu-profile.min.js') }}"></script>
+{% endblock %}

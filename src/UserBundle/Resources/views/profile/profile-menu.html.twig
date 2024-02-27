@@ -1,0 +1,68 @@
+{# profile menu #}
+<div class="profile_menu_container">
+    <ul class="scrolling-wrapper">
+        <!-- My Inspection copies -->
+       {# <li id="my-inspections-copies" class="">
+            <a class=""
+               href="{{ url('my-inspection-copies') }}">{{ "user.profile.inspection_copies"|trans }}</a>
+        </li>#}
+        <!--  Personal details -->
+        <li id="personal-details" class="">
+            <a class=""
+               href="{{ url('my-personal-details') }}">{{ 'user.profile.details'|trans }}</a>
+        </li>
+
+        <!--  My institutions -->
+        <li id="my-institutions" class="">
+            {% if user.institutions|length==1 %}
+                <a class=""
+                   href="{{ url('my-institutions') }}">{{ "user.profile.institutions.title"|trans }}</a>
+            {% else %}
+                <a class=""
+                   href="{{ url('my-institutions') }}">{{ "user.profile.institutions.titles"|trans }}</a>
+            {% endif %}
+        </li>
+        <!-- End My institutions -->
+        <!-- Identify verification -->
+        <li id="identify-verification" class="">
+            <a class=""
+               href="{{ url('identify-verification') }}">{{ 'identity_verification.identify_verification'|trans }}</a>
+        </li>
+        <!-- End Identify verification -->
+        <!-- change password-->
+        <li id="change-password" class="">
+            <a class=""
+               href="{{ url('change-password') }}">{{ "user.change_password.title"|trans }}</a>
+        </li>
+        <!-- End change password-->
+        <!-- recommendations-->
+        <li id="recommendations" class="">
+            <a class=""
+               href="{{ url('recommendations-page') }}"> {{ 'identity_verification.recommendations'|trans }}</a>
+        </li>
+        <!-- End recommendations-->
+        <!-- End My Inspection copies -->
+        {% if(nbBooksHistory > 0) %}
+            <!-- Historical data -->
+            <li id="my-inspections-copies" class="">
+                <a class=""
+                   href="{{ url('historical-data') }}?source=profile">{{ "historical_data.link_name"|trans }}</a>
+            </li>
+            <!-- Historical data -->
+        {% endif %}
+        <!-- My Education Consultant -->
+        <li id="my-education-consultant" class="">
+            <a class=""
+               href="{{ url('my-education-consultant') }}">{{ "user.profile.education_consultant"|trans }}</a>
+        </li>
+        <!-- End My Education Consultant  -->
+        <!-- sign out -->
+        <li class="">
+            <a href="javascript:;" class=" logout" data-url="{{ url('logout') }}"  data-msg="{{ 'user.confirm_logout_msg'|trans }}">{{ 'user.profile.sign_out_btn'|trans }}</a>
+        </li>
+        <!-- end sign out -->
+    </ul>
+
+</div>
+
+

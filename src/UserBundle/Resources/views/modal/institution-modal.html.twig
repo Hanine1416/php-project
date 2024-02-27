@@ -1,0 +1,137 @@
+<!-- add institution modal -->
+<div class="institution-modal lightbox modal">
+    <div class="modal-dialog" role="document">
+        <div class="close-institution-modal"></div>
+        <div class="modal-container scroll1 modal-content">
+            <div class="row">
+                <h2 class="new-institution-modal-title">{{ 'user.profile.institutions.add_btn'|trans }}</h2>
+                <h2 class="edit-institution-modal-title">{{ 'user.profile.institutions.edit_title'|trans }}</h2>
+                {{ form_start(institutionForm,{attr:{class:'institution-block','data-lang':lang,id:'institution-form','action':url('add-institution')}}) }}
+                <div class="fieldset">
+                    {{ form_widget(institutionForm.id) }}
+                    {%  if user.country|length == 0 %}
+                        <div class="input-field country-block "  data-first="{{institutions|length}}">
+                            <label for="complete_register_country">{{ 'user.register.form.fields.country'|trans|raw }}</label>
+                            <select name="details[country]" id="complete_register_country"
+                                    class="validate country-id" data-invalid="{{ 'validation.required'|trans }}">
+                                <option value=""></option>
+                                {% for country in countries %}
+                                    <option {% if (form.country==country.Text) %} selected {% endif %}
+                                            value="{{ country.Text }}"
+                                            data-st="{{ country.Shorttext }}">{{ country.Text }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="small-12 medium-12 large-12 columns help-popover p-0 mt-5">
+                                <a class="pull-right" data-toggle="popover" data-html="true" data-placement="top"
+                                   data-content="{{ 'user.register.form.help.content'|trans|raw }}">{{ 'user.register.form.help.country'|trans }}</a>
+                            </div>
+                            <span></span>
+                        </div>
+                    {%  endif %}
+                    {% if cookies.get('lang') == 'in' %}
+                        <div class="input-field city-selector">
+                            <label for="city_filter_modal">{{ 'user.profile.address.city'|trans }}</label>
+                            <select name="city_filter_modal" id="city_filter_modal" class="city-filter"
+                                    data-country="{{ user.country }}">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    {% endif %}
+                    {% if (cookies.get('reg') == '1' and user.country|lower in ['australia'] ) or (cookies.get('reg') == '9' and user.country|lower in ['us','united states']) %}
+                        <div class="input-field city-selector">
+                            <label for="state_filter_modal">State</label>
+                            <select name="state_filter_modal" id="state_filter_modal" class="state-filter validate"
+                                    data-country="{{ user.country }}" title="{{ 'validation.required'|trans }}"  >
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    {% endif %}
+                    {% if lang == 'de' or user.country|lower in ['deutschland','österreich','schweiz'] %}
+                        <div class="input-field zip-filter-block {% if user.country|lower not in ['deutschland','österreich','schweiz'] %} hidden {% endif %}" style="margin-bottom: 30px!important;">
+                            <label for="zip_filter_modal">{{ 'user.profile.address.postalCode'|trans }}</label>
+                            <input data-country="{{ user.country }}" type="text" id="zip_filter_modal"
+                                   class="zip-filter validate" title="{{ 'validation.required'|trans }}" data-wrong="{{ 'validation.institution_zip_code'|trans }}">
+                        </div>
+                    {% endif %}
+                    <div class="input-field institution-selector-block small-12 medium-12 large-12 columns {% if(institutions|length)==0 %} hidden {% endif %}">
+                        {{ form_label(institutionForm.institutionId) }}
+                        {{ form_widget(institutionForm.institutionId) }}
+                        <div class="">
+                            <a class="pull-right btn-new-institution decorate">{{ 'user.register.form.button.add'|trans }}</a>
+                        </div>
+                        <span class="contextual-txt mb-0">{{ 'user.register.form.help.add_institution'|trans }}</span>
+                    </div>
+                    <div class="input-field institution-text-block small-12 medium-12 large-12 columns" {% if(institutions|length)==0 %} style="display: block" {% endif %}>
+                        {{ form_label(institutionForm.institutionName) }}
+                        {{ form_widget(institutionForm.institutionName) }}
+                        <div class="small-12 medium-12 large-12 columns  pl-0 pr-0 hidden">
+                            <a class="pull-right btn-cancel-new-institution decorate ">{{ 'user.register.form.button.cancel'|trans }}</a>
+                        </div>
+                    </div>
+                    {% if lang == 'in' %}
+                        <div class="input-field small-12 medium-12 large-12 columns">
+                            <div class="input-field">
+                                {{ form_label(institutionForm.profession) }}
+                                {{ form_widget(institutionForm.profession) }}
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="input-field department-selector-block small-12 medium-12 large-12 columns{% if lang=="br" %} is-br {% endif %} {% if(institutions|length)==0 %} hidden {% endif %}">
+                        {{ form_label(institutionForm.departmentId) }}
+                        {{ form_widget(institutionForm.departmentId) }}
+
+                        <div class="small-12 medium-12 large-12 columns  pl-0 pr-0"><a
+                                    class="pull-right btn-new-department decorate ">{{ 'user.register.form.button.other'|trans }}</a>
+                        </div>
+                    </div>
+                    <div class="input-field department-text-block small-12 medium-12 large-12 columns{% if lang=="br" %} is-br {% endif %}" {% if(institutions|length)==0 %} style="display: block" {% endif %}>
+                        {{ form_label(institutionForm.departmentName) }}
+                        {{ form_widget(institutionForm.departmentName) }}
+                        {% if lang!= 'br' %}
+                            <div class="small-12 medium-12 large-12 columns  pl-0 pr-0 hidden">
+                                <a class="pull-right btn-cancel-new-department decorate">{{ 'user.register.form.button.cancel'|trans }}</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% if lang != 'in' %}
+                        <div class="input-field small-12 medium-12 large-12 columns">
+                            <div class="input-field">
+                                {{ form_label(institutionForm.profession) }}
+                                {{ form_widget(institutionForm.profession) }}
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="input-field small-12 medium-12 large-12 columns{% if lang == 'in' %} hidden {% endif %}">
+                        <div class="input-field">
+                            {{ form_label(institutionForm.speciality) }}
+                            {{ form_widget(institutionForm.speciality) }}
+                        </div>
+                    </div>
+                    <div class="input-field small-12 medium-12 large-12 columns" id="primary-block">
+                        {{ form_label(institutionForm.isPrimary,null,{'label_attr':{'class':'small-9 medium-9 large-9 columns m-0 lh-30 p-0'}}) }}
+                        <div class="apple-switch small-3 medium-3 large-3 columns p-0 " >
+                            {{ form_widget(institutionForm.isPrimary, ( (user.institutions|length == 0) ? {'attr': {'checked': 'checked', 'disabled':'disabled'}} : {})  )}}
+                            <label class="label-switch" for="institution_isPrimary"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="small-12 medium-12 large-6 columns text-center pl-0 pr-0 add-controls right-ctr">
+                    <button id="addInstitution" class="btn btn-black">{{ 'adresses.add'|trans }}</button>
+                </div>
+                {% if allowEdit %}
+                    <div class="small-12 medium-12 large-6 columns text-center pl-0 pr-0 edit-controls right-ctr">
+                        <button id="updateInstitution" class="btn btn-black"
+                                disabled>{{ 'user.profile.update_btn'|trans }}</button>
+                    </div>
+                    <div class="small-12 medium-12 large-6 columns text-center pl-0 pr-0 edit-controls left-ctr">
+                        <a href="javascript:;"
+                           id="deleteInstitution">{{ 'user.profile.institutions.delete_btn'|trans }}</a>
+                        <a href="javascript:;" id="disableInstitution"
+                           class="hidden">{{ 'user.profile.institutions.disable_btn'|trans }}</a>
+                    </div>
+                {% endif %}
+                {{ form_end(institutionForm, {'render_rest': false}) }}
+            </div>
+        </div>
+    </div>
+</div>

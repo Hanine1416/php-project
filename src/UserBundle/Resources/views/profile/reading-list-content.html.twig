@@ -1,0 +1,427 @@
+{% for readingList in readingLists %}
+    <div class="tab-pane {% if readingList.Status == 'REQUESTED' %} myBooksList active {% elseif loop.index == 1 and not requestedList %}active{% endif %}"
+         id="{{ readingList.ReadingListID }}">
+        <div id="tab1" class="tabs_container">
+            {% set hasBooks = readingList.ListItems.ReadingListItem|length > 0 %}
+            <div class="reading-info nexusSans row">
+                <div class="text-center loader-list">
+                    <div class="loading-spinner" style="display:none;position: initial"></div>
+                </div>
+                <div class="reading-info-container row">
+                    <div class="reading-list-name small-12 medium-8 large-8 columns pr-0">
+                        <div class="">
+                            <input type="text" class="input-list-name input-section-name readonly"
+                                   value="{% if readingList.ListName=='Requested Copies' and readingList.Status=='REQUESTED' %}{{ 'reading_list.requested_book'|trans }}{% else %}{{ readingList.ListName }}{% endif %}"
+                                   readonly maxlength="50">
+                        </div>
+                        <div class="update-actions hidden"><span class="save-update"><div
+                                        class="check"></div></span><span class="cancel-update">
+                                    <div class="close_section"></div>
+                                </span>
+                        </div>
+                    </div>
+                    <div class="right_block small-12 large-4 medium-4 pr-0 pl-0 columns">
+                        <div class="small-12 medium-2 large-2 columns sharing_menu">
+
+                            <!-- Share Action  -->
+                            <div class="sharing sharing_header">
+                                <div class="container">
+                                    <div class="more">
+                                        {% if readingList.Status != 'REQUESTED' %}
+                                        <button id="more-btn" class="more-btn" data-toggle="tooltaip"
+                                                data-placement="bottom"
+                                                title="{{ 'tooltip.more'|trans }}">
+                                            <span class="more-dot"></span>
+                                            <span class="more-dot"></span>
+                                            <span class="more-dot"></span>
+                                        </button>
+                                        {% endif %}
+                                        <div class="more-menu">
+                                            <ul class="more-menu-items" tabindex="-1" role="menu"
+                                                aria-labelledby="more-btn" aria-hidden="true">
+                                                <li class="more-menu-item export-list" {% if not hasBooks %} style="display: none" {% endif %}>
+                                                    <a class="btn-blue export-list-btn" id="export-list"
+                                                       data-url="{{ url('export-list') }}"
+                                                       data-reading-list-id="{{ readingList.ReadingListID }}">{{ "books_page.export.export_list_btn"|trans }}</a>
+                                                </li>
+                                                {% if readingList.Status !='REQUESTED' %}
+                                                <li class="more-menu-item edit-list-name-item" id="edit-list"
+                                                    role="">
+                                                    <div>
+                                                        <a href="javascript:;" class="more-menu-btn edit-list-name"
+                                                           role="presentation">{{ 'tooltip.edit'|trans }}</a>
+                                                    </div>
+                                                </li>
+                                                <li class="more-menu-item export-list"
+                                                    role="">
+                                                    <div class="read-now-btn" id="remove-list-btn"
+                                                         data-reading-list-id="{{ readingList.ReadingListID }}">
+                                                        <a href="javascript:;"
+                                                           class="more-menu-btn delete"
+                                                           role="menuitem">{{ 'reading_list.remove_list'|trans }}</a>
+                                                    </div>
+                                                </li>
+                                                {% endif %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Share Action  -->
+                        </div>
+                        {% if  readingList.Status!='REQUESTED' %}
+                            <div class="date_container">
+                                <div class="date">
+                                    {% set lastUpdateTime =  readingList.LastModified|date('g:i A') %}
+                                    {{ 'reading_list.last_update'|trans }} {{ readingList.LastModified|date('j M Y') }}
+                                    , {{ lastUpdateTime }}
+                                </div>
+                                <div class="link-history">
+                                    <a href="javascript:;" class="see-history"
+                                       data-list-id="{{ readingList.ReadingListID }}"
+                                       data-list-name="{{ readingList.ListName }}">{{ 'historical_data.show_history'|trans }}</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% if hasBooks %}
+                {% if readingList.Status != 'REQUESTED' %}
+                    {% set myArraySections = [] %}
+                    {% set myArraySections = myArraySections|merge(['reading_list.section_name'|trans]) %}
+                    {% set bookWithoutSection = 0 %}
+                    {% for book in readingList.ListItems.ReadingListItem|sortbyfield('Title','asc') %}
+                        {% if book.Section not in myArraySections and book.Section != '' %}
+                            {% set myArraySections = myArraySections|merge([book.Section]) %}
+                        {% endif %}
+                        {% if(book.Section == '' or book.Section == 'reading_list.section_name'|trans ) %}
+                            {% set bookWithoutSection = 1 %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if(bookWithoutSection == 0) %}
+                        {% set myArraySections = myArraySections | slice(1) %}
+                    {% endif %}
+                    {% for sections in myArraySections %}
+                        <div class="list_reading_books have-books row">
+                            <div class="book_type text-center section_name row">
+                                <div class="new-section-bloc">
+                                    <div class="input-container">
+                                        <input type="text" class="input-section-name readonly" style='width:auto'
+                                               value="{{ sections }}" readonly maxlength="65">
+                                        <div class="update-actions hidden">
+                                                <span class="save-update">
+                                                <div class="check"></div></span>
+                                            <span class="cancel-update"> <div class="close_section"></div></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Share Action  -->
+                                <div class="sharing edit-section-name">
+                                    <div class="container">
+                                        <div class="more">
+                                            <button id="more-btn" class="more-btn" data-toggle="tooltip"
+                                                    data-placement="bottom"
+                                                    title="{{ 'tooltip.more'|trans }}">
+                                                <span class="more-dot"></span>
+                                                <span class="more-dot"></span>
+                                                <span class="more-dot"></span>
+                                            </button>
+                                            <div class="more-menu">
+                                                <ul class="more-menu-items" tabindex="-1" role="menu"
+                                                    aria-labelledby="more-btn" aria-hidden="true">
+                                                    <li class="more-menu-item"
+                                                        role="presentation">
+                                                        <div>
+                                                            <a href="javascript:;"
+                                                               class="more-menu-btn edit-section-name"
+                                                               role="menuitem">{{ 'tooltip.edit'|trans }}</a>
+                                                        </div>
+                                                    </li>
+                                                    <li class="more-menu-item"
+                                                        role="presentation">
+                                                        <div>
+                                                            <a href="javascript:;"
+                                                               class="more-menu-btn delete-section-btn"
+                                                               role="menuitem">{{ 'reading_list.remove'|trans }}</a>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Share Action  -->
+
+                            </div>
+                            <div class="books_list row">
+                                <div class="drop-zone row" id="{{ sections }}" data-title="{{ readingList.ReadingListID }}"
+                                     data-section-name="{{ sections }}">
+                                    {% include '@UserBundle/profile/book-category-content.html.twig' with {'category':sections,'user':user} %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="list_reading_books have-books mt-20 row requested_books">
+                        <div class="books_list row">
+                            {% for book in  readingList.ListItems.ReadingListItem %}
+                                <div class="book_item mb-20 draggable" id="book-item" data-isbn="{{ book.Isbn }}"
+                                     data-reading-list-id="{{ readingList.ReadingListID }}">
+                                    <div class="book-item-content">
+                                        <div class="move_icon"></div>
+                                        <div class="block_cover_book prodImg" id="{{ book.Isbn }}">
+                                            <a class="imgBlock" href="{{ basePath }}/book/details/{{ book.Isbn }}">
+                                                <img class="cover" id="{{ book.Isbn }}"
+                                                     src="//d16jkos453if22.cloudfront.net/{{ book.Isbn }}.jpg"
+                                                     onerror="imgError(this);" alt="{{ book.Title }}"></a>
+                                        </div>
+                                        <div class="book_info prodDetail">
+                                            <div class="prodTitle book-title title-book nexusSans"
+                                                 data-book-title="{{ book.Title }}">
+                                                <a class="book-title"
+                                                   href="{{ basePath }}/book/details/{{ book.Isbn }}"> {{ book.Title }}</a>
+                                            </div>
+                                            <div class="author-name prodAuthor nexusSans">{{ book.Author }}</div>
+                                            <!-- ancillary block -->
+
+                                                <ul class="ancillary-block">
+                                                    {% if user.digitalAutoapproval != false and book.HasProfessorResources == true %}
+                                                        <li>
+                                                            <a class="instrutor_ressources ancillary_label"
+                                                               data-toggle="tooltip"
+                                                               data-placement="top" target="_blank"
+                                                               href="{{ url('teacher-resources',{isbn: book.Isbn}) }}"
+                                                               title="{{ 'ancillary.instructor_resources'|trans|raw }}">{{ 'ancillary.instructor_resources_label'|trans }}
+                                                            </a>
+                                                        </li>
+                                                    {% endif %}
+                                                    {% if user.digitalAutoapproval != false and book.HasStudentResources == true %}
+                                                        <li>
+                                                            <a class="student_ressources ancillary_label"
+                                                               data-toggle="tooltip"
+                                                               data-placement="top" target="_blank"
+                                                               href="{{ url('student-resources',{isbn: book.Isbn}) }}"
+                                                               title="{{ 'ancillary.student_resources'|trans|raw }}">{{ 'ancillary.student_resources_label'|trans }}
+                                                            </a>
+                                                        </li>
+                                                    {% endif %}
+                                                </ul>
+
+                                            <!-- End ancillary block -->
+                                        </div>
+                                    </div>
+                                    <!-- Share Action  -->
+                                    <div class="sharing">
+                                        <div class="container">
+                                            <div class="more">
+                                                <button id="more-btn" class="more-btn" data-toggle="tooltip"
+                                                        data-placement="bottom"
+                                                        title="{{ 'tooltip.more'|trans }}">
+                                                    <span class="more-dot"></span>
+                                                    <span class="more-dot"></span>
+                                                    <span class="more-dot"></span>
+                                                </button>
+                                                <div class="more-menu">
+                                                    <ul class="more-menu-items" tabindex="-1" role="menu"
+                                                        aria-labelledby="more-btn" aria-hidden="true">
+                                                        <li class="more-menu-item"
+                                                            role="presentation">
+                                                            {% if existInAll or readingLists|length ==1 %}
+                                                                <div id="copy-book-btn"
+                                                                     data-isbn="{{ book.Isbn }}"
+                                                                     data-title="{{ book.Title }}"
+                                                                     title="">
+                                                                    <a href="javascript:;"
+                                                                       class="more-menu-btn isDisabled"
+                                                                       role="menuitem">{{ 'reading_list.copy_to_other_list'|trans }}</a>
+                                                                </div>
+                                                            {% else %}
+                                                                <div id="copy-book-btn"
+                                                                     data-isbn="{{ book.Isbn }}"
+                                                                     data-title="{{ book.Title }}"
+                                                                     title="">
+                                                                    <a href="javascript:;" class="more-menu-btn"
+                                                                       role="menuitem">{{ 'reading_list.copy_to_other_list'|trans }}</a>
+                                                                </div>
+                                                            {% endif %}
+                                                        </li>
+                                                        <li class="more-menu-item"
+                                                            role="presentation">
+                                                            {% if readingList.Status != 'REQUESTED' %}
+                                                                {% if existInAll or readingLists|length ==1 %}
+                                                                    <div id="move-book-btn"
+                                                                         data-reading-list-id="{{ readingList.ReadingListID }}"
+                                                                         data-isbn="{{ book.Isbn }}"
+                                                                         data-title="{{ book.Title }}"
+                                                                         title="">
+                                                                        <a href="javascript:;"
+                                                                           class="more-menu-btn isDisabled" role="menuitem">
+                                                                            {{ 'reading_list.move_to_other_list'|trans }}  </a>
+                                                                    </div>
+                                                                {% else %}
+                                                                    <div id="move-book-btn"
+                                                                         data-reading-list-id="{{ readingList.ReadingListID }}"
+                                                                         data-isbn="{{ book.Isbn }}"
+                                                                         title=""
+                                                                         data-title="{{ book.Title }}">
+                                                                        <a href="javascript:;" class="more-menu-btn"
+                                                                           role="menuitem">{{ 'reading_list.move_to_other_list'|trans }}  </a>
+                                                                    </div>
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        </li>
+                                                        <li class="more-menu-item"
+                                                            role="presentation">
+                                                            <div>
+                                                                <a href="javascript:;" class="more-menu-btn review-book"
+                                                                   role="menuitem"
+                                                                   data-toggle="modal"
+                                                                   data-target="#rating-book-modal"
+                                                                   data-isbn="{{ book.Isbn }}"
+                                                                   data-title="{{ book.Title }}"
+                                                                   data-subtitle="{{ book.Author }}"
+                                                                   data-editionNumber="{{ book.Edition }}"
+                                                                >{{ 'book.review.rate_this_book'|trans }} </a>
+                                                            </div>
+                                                        </li>
+                                                        <li class="more-menu-item">
+                                                            <a class="more-menu-btn"
+                                                               id="share-book" data-toggle="modal"
+                                                               data-target="#share-book-modal"
+                                                               data-isbn="{{ book.Isbn }}"
+                                                               data-title="{{ book.Title }}"
+                                                               data-subtitle="{{ book.Author }}"
+                                                               data-editionNumber="{{ book.Edition }}"
+                                                               onclick="showStepOne()">{{ "share_book.share_btn"|trans }}</a>
+                                                        </li>
+                                                        <li class="more-menu-item">
+                                                            <a class="more-menu-btn update_librarian"
+                                                               data-url="{{ url('export-book',{isbn: book.Isbn}) }}"
+                                                               id="update-librarian">{{ 'book.review.update_librarian'|trans }}</a>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Share Action  -->
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="list_reading_books no-books" style="display: none">
+                    <div class="text-center no-list-books nexusSans">
+                        <div class="empty_book-img" id="{{ readingList.ReadingListID }}">
+                            <img class="retina-reload" src="{{ asset('assets/img/empty_book/book_empty@1x.png') }}"
+                                 style="height: 152px;width: 152px;">
+                        </div>
+                        <div class="empty_book-msg">
+                            <p>
+                                {{ 'reading_list.no_books'|trans|raw }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% if readingList.Status != 'REQUESTED' %}
+                    <div class="text-center mt-24 add-section-bloc">
+                        <span class="add-new-section"
+                              style="cursor: pointer"> {{ 'reading_list.add_section'|trans|raw }}</span>
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="list_reading_books have-books" style="display: none">
+
+                    <div class="book_type text-center section_name row">
+                        <div class="new-section-bloc">
+                            <div class="input-container">
+                                <input type="text" class="input-section-name readonly" style='width:auto'
+                                       value="{{ 'reading_list.section_name'|trans }}" readonly maxlength="65">
+                                <div class="update-actions hidden">
+                                                <span class="save-update">
+                                                <div class="check"></div></span>
+                                    <span class="cancel-update"> <div class="close_section"></div></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Share Action  -->
+                        <div class="sharing edit-section-name">
+                            <div class="container">
+                                <div class="more">
+                                    <button id="more-btn" class="more-btn" data-toggle="tooltip" data-placement="bottom"
+                                            title="{{ 'tooltip.more'|trans }}">
+                                        <span class="more-dot"></span>
+                                        <span class="more-dot"></span>
+                                        <span class="more-dot"></span>
+                                    </button>
+                                    <div class="more-menu">
+                                        <ul class="more-menu-items" tabindex="-1" role="menu"
+                                            aria-labelledby="more-btn" aria-hidden="true">
+                                            <li class="more-menu-item"
+                                                role="pres entation">
+                                                <div>
+                                                    <a href="javascript:;" class="more-menu-btn edit-section-name"
+                                                       role="menuitem">{{ 'tooltip.edit'|trans }}</a>
+                                                </div>
+                                            </li>
+                                            <li class="more-menu-item"
+                                                role="presentation">
+                                                <div>
+                                                    <a href="javascript:;" class="more-menu-btn delete-section-btn"
+                                                       role="menuitem">{{ 'reading_list.remove'|trans }}</a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Share Action  -->
+
+                    </div>
+                    <div class="books_list">
+                        <div class="drop-zone empty-zone" id="" data-title="{{ readingList.ReadingListID }}">
+                            <div class="drag-placeholder nexusSans"
+                                 id="placeholder_drag">{{ 'reading_list.drag_books'|trans }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list_reading_books no-books" id="{{ readingList.ReadingListID }}">
+                    <div class="text-center no-list-books nexusSans">
+                        <div class="empty_book-img" id="{{ readingList.ReadingListID }}">
+                            <img class="retina-reload" src="{{ asset('assets/img/empty_book/book_empty@1x.png') }}"
+                                 style="height: 152px;width: 152px;">
+                        </div>
+                        <div class="empty_book-msg">
+                            <p>
+                                {{ 'reading_list.no_books'|trans|raw }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% if readingList.Status != 'REQUESTED' %}
+                    <div class="text-center mt-24 add-section-bloc" style="display: none;">
+                        <span class="add-new-section"
+                              style="cursor: pointer;"> {{ 'reading_list.add_section'|trans|raw }}</span>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+{% endfor %}
+<span class="no-section hidden">{{ 'reading_list.empty_section'|trans }}<br>{{ 'reading_list.drag_books'|trans }}</span>
+<span class="default-section-name hidden">{{ 'reading_list.new_section'|trans }}</span>
+<span class="initial-section-name hidden">{{ 'reading_list.section_name'|trans }}</span>
+<span class="remove-section-alert hidden">{{ 'reading_list.alert_remove'|trans }}</span>
+<span class="see-history-text hidden">{{ 'historical_data.show_history'|trans }}</span>
+<span class="add-section-text hidden">{{ 'reading_list.add_section'|trans }}</span>
+<span class="edit_list hidden">{{ 'tooltip.edit'|trans }}</span>
+<div class="update-profile-cookie" style="display: none">
+    <div class="close-btn"></div>
+    <div class="validation-icon"></div>
+    <div class="cookies-content">
+        {{ 'reading_list.remove_list_popup.success_msg'|trans }}
+    </div>
+</div>

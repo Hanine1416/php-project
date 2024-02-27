@@ -1,0 +1,43 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/page/faq/faq.css') }}">
+{% endblock %}
+
+{% block body %}
+    <input type="hidden" id="page-title" value="profile: faq">
+    <div class="inner-wrap">
+        <div class="row">
+            <div class="section-one">
+                <div class="small-12 columns p-0">
+                    <div class="small-12 columns faq-title">
+                        {{ "faq.faq_title"|trans }}
+                    </div>
+                    <div class="small-12 columns faqTabs">
+                        <div class="tabsList nexusSans book-description-tiles accordion">
+                            {% for faq in faqs %}
+                                {#question1#}
+                                <div class="tile-tab">
+                                    <a id="Description"
+                                       class="title-accordion">{{ faq.question }}
+                                        <i class="expand-tile" data-toggle="tooltip" data-placement="bottom"
+                                          title="{{ 'tooltip.Expand'|trans }}"></i>
+                                        <i class="collapse-tile" data-toggle="tooltip" data-placement="bottom"
+                                           title="{{ 'tooltip.Collapse'|trans }}"></i></a>
+                                    <div class="hiddenDescription content">
+                                        <div class="descriptionContent">
+                                            {{ faq.answer | raw }}
+                                        </div>
+                                    </div>
+                                </div>
+                                {#end question1#}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('assets/page/faq/faq.min.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'admin.layout.html.twig' %}
+{% block bs3 %}
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.css') }}">
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/fontawesome-all.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/sortable/jquery-ui.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/admin/faq.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-component/css/bs-tooltip.css') }}">
+{% endblock %}
+{% block body %}
+    <div class="inner-wrap adminEdit register-account verticalPadding">
+        <main role="main" class="faq-page">
+            <div class="large-12 faq-container">
+                <div class="block">
+                    <div class="row">
+                        <h1 class="text-center">What's New</h1>
+                        <hr>
+                        {% for flashMessage in app.session.flashbag.get('success') %}
+                            <div class="alert alert-success" role="alert">  {{ flashMessage }}</div>
+                        {% endfor %}
+                        {% for flashMessage in app.session.flashbag.get('error') %}
+                            <div class="alert alert-danger" role="alert">  {{ flashMessage }}</div>
+                        {% endfor %}
+                        <form method="post" class="form-full-width" name="whats-new" id="formWhatNewPage">
+                            <div class="col-md-12">
+                            <button type="button" class="pull-right col-md-3 " onclick="addInput()"><i class="fa fa-plus fa-sm"></i></a> Add new book</button>
+                            </div>
+                            <div id="inputs-container">
+                                {% for index in 0..5 %}
+                                <div class="col-md-6 ">
+                                    <input type="text" class="form-control" name="isbn[]" placeholder="URL book *" required value="{% if listBooksNew[index] is not null  %} {{ basePath }}/book/details/{{ listBooksNew[index].getIsbn() }}{% endif %}">
+                                </div>
+                              {% endfor %}
+                                {% if listBooksNew|length > 6 %}
+                                    {% for i in 6..(listBooksNew|length)-1 %}
+                                    <div class="col-md-6 del-input">
+                                        <input type="text" class="form-control" name="isbn[]" placeholder="URL book"  value="{% if listBooksNew[i] is not null  %} {{ basePath }}/book/details/{{ listBooksNew[i].getIsbn() }}{% endif %}">
+                                        <a class="remove-btn btn" onclick="removeInput(this)"><i class="fa fa-trash-alt"></i></a>
+                                    </div>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="col-md-12">
+
+                                <button type="submit" class="pull-right col-md-2 ">Send</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+        function addInput() {
+            var inputsContainer = document.getElementById("inputs-container");
+            var newInput = document.createElement("div");
+            newInput.classList.add('col-md-6');
+            newInput.classList.add('del-input');
+            newInput.innerHTML = '<input type="text" class="form-control" name="isbn[]" placeholder="URL Book">' +
+                '<a class="remove-btn btn" onclick="removeInput(this)" data-id="col-"><i class="fa fa-trash-alt"></i></a>';
+            inputsContainer.appendChild(newInput);
+        }
+        function removeInput(button) {
+            var container = document.getElementById("inputs-container");
+            var inputContainer = button.parentNode;
+            container.removeChild(inputContainer);
+        }
+    </script>
+{% endblock %}

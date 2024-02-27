@@ -1,0 +1,123 @@
+nav{
+   border-bottom: 0;
+}
+/*.menu{
+  border: none;
+}*/
+.header{
+  .mobileMenu {
+    margin-top: 0px;
+    display: none;
+  }
+  .logo-block{
+    margin-left: 0;
+  }
+}
+.consultant-container{
+  padding: 32px 24px 24px 24px;
+  font-size: 15px;
+  color: #404040;
+  .education-content{
+    line-height: 35px;
+  }
+  ul{
+    li{
+      &:before{
+        content: "•";
+        display: inline-block;
+        font-size: 24px;
+        color: #ff893d;
+        margin-right: 8px;
+      }
+      .evolution{
+        margin-left: 0px;
+        margin-right: 6px;
+        .evolution-img{
+          margin-top: -4px;
+          margin-right: 0;
+          width: 83px;
+          height: 16px;
+        }
+      }
+      .scienceDirect{
+        margin-left: 6px;
+        .science-img{
+          margin-top: -4px;
+          margin-right: 0;
+          width: 108px;
+          height: 14px;
+        }
+      }
+      .clinicalKey{
+        margin-left: 6px;
+        margin-right: 6px;
+        .clinical-img{
+          width: 150px;
+          height: 19px;
+        }
+      }
+    }
+  }
+  hr {
+    margin-top: 24px;
+    margin-bottom: 32px;
+  }
+  .accountInfo{
+    .getInTouch{
+      color: #6b6b6b;
+      font-size: 15px;
+      line-height: 35px;
+    }
+    .accountName{
+      font-size: 21px;
+      line-height: 36px;
+    }
+    .accountEmail{
+      a{
+        font-size: 17px;
+        line-height: 36px;
+        color: #00749c;
+        &:before{
+          display: none;
+        }
+        &:hover{
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+/************** this applies from 600px onwards **********/
+@media screen and (min-width: 640px) {
+/*  nav {
+    border-bottom: solid 1px #e0e0e0;
+  }*/
+  .menu{
+    border-top: solid 1px #e0e0e0;
+  }
+  .consultant-container{
+    padding: 0;
+    color: #404040;
+    margin: 0 auto 65px auto;
+    max-width: 60%;
+    .education-content{
+      margin-bottom: 10px;
+      color: #404040;
+    }
+    .accountInfo{
+      margin-bottom: 112px;
+      .getInTouch{
+        color: #6b6b6b;
+      }
+      .accountEmail{
+        a{
+          text-decoration: none;
+        }
+      }
+    }
+    hr{
+      margin-top: 16px;
+      margin-bottom: 20px;
+    }
+  }
+}

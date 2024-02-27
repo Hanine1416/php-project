@@ -1,0 +1,76 @@
+<!-- add book modal -->
+<div class="request-book-modal lightbox modal reading_list_modal" id="remove-book-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-container scroll1 modal-content">
+            <!-- select multiple or single reading list -->
+            <div class="modal-step active" id="step1">
+                <div class="text-center loader-list-modale">
+                    <div class="loading-spinner" style="display: none"></div>
+                </div>
+                <div class="modal-step-content reading-lists">
+                    <div class="popup-title p-24">{{ 'reading_list.would_you_like_to'|trans }}</div>
+                    <div class="small-12 medium-12 large-12 columns scroll scroll1 p-24">
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box mt_checkbox">
+                            <input type="radio" id="remove-one" value="0" name="remove-option" class="checkbox__input">
+                            <label for="remove-one" class="checlbox__label">
+                                {{ 'reading_list.remove_book_current_list'|trans }}
+                            </label>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box mt_checkbox">
+                            <input type="radio" id="remove-all" value="1" name="remove-option" class="checkbox__input">
+                            <label for="remove-all" class="checlbox__label">
+                                {{ 'reading_list.remove_book_all_lists'|trans }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-controller p-24">
+                    <button class="btn btn-transparent goStep right" data-target-step="step2"
+                            id="remove-book-reading-list">{{ 'book.request.form.continue_btn'|trans }}</button>
+                    <button type="button" id="cancel-remove" class="btn btn-transparent goStep left">
+                        {{ 'admin.faq.cancel'|trans }}
+                    </button>
+                </div>
+            </div>
+
+            <div class="modal-step" id="step2">
+                <div class="modal-step-content reading-lists">
+                    <div class="popup-title p-24" style="font-size:20px !important">{{ 'reading_list.remove_book_success'|trans }} : </div>
+                    <div class="small-12 medium-12 large-12 columns scroll scroll1 p-24">
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box mt_checkbox">
+                            <input type="radio" class="reason checkbox__input" name="scales" id="advanced">
+                            <label for="advanced" class="checlbox__label">{{ 'book.review.negative.step1.option4'|trans }}</label>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box mt_checkbox">
+                            <input type="radio" class="reason checkbox__input" name="scales" id="basic">
+                            <label for="basic" class="checlbox__label">{{ 'book.review.negative.step1.option5'|trans }}</label>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box mt_checkbox">
+                            <input type="radio" class="reason checkbox__input" name="scales" id="another-resources">
+                            <label for="another-resources" class="checlbox__label">{{ 'book.review.negative.step1.option6'|trans }}</label>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box mt_checkbox">
+                            <input type="radio" class="reason checkbox__input" name="scales" id="prices">
+                            <label for="prices" class="checlbox__label">{{ 'book.review.negative.step1.option9'|trans }}</label>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box mt_checkbox">
+                            <input type="radio" class="reason checkbox__input" id="other_reason" name="scales">
+                            <label for="other_reason" class="checlbox__label">{{ 'book.review.negative.step1.option_other_reason'|trans }}</label>
+                        </div>
+                        <div id="other_reason_block" class="small-12 medium-12 large-12 columns">
+                            <input type="text" id="other_reason"
+                                   placeholder="{{ 'book.review.negative.step1.other_reason_placeholder'|trans }}"
+                                   class="validate" title="{{ 'validation.required'|trans }}">
+                        </div>
+                    </div>
+                </div>
+                <div class=" step-controller p-24">
+                    <button class="btn btn-transparent goStep right" type="button"
+                            id="remove-book-reading-list-reason">{{ 'book.request.form.submit_btn'|trans }}</button>
+                            <button class="btn btn-transparent  left" type="button"
+                            id="skip-btn">{{ 'home.virtual_tour.skip'|trans }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

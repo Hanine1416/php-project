@@ -1,0 +1,190 @@
+<div class="recommended-list row maincontainer">
+    {% for recommendedBook in recommendedBooks %}
+        <div class="maincontainer recommended-books-list" id="{{ recommendedBook.isbn }}">
+            <div class="recommended-books-content">
+                <div class="block_cover_book">
+                    <a class="imgBlock"
+                       href="{{ url('showBookDetails',{isbn:recommendedBook.isbn,lang:lang,reg:region}) }}">
+                        <img class="cover" id="{{ recommendedBook.isbn }}"
+                             src="{{ imageCdn~'/'~recommendedBook.isbn|replace({'DUP':''}) }}.jpg"
+                             onerror="imgError(this);" alt="{{ recommendedBook.title }}"></a>
+                </div>
+                <!-- End Book Image -->
+                <!-- book informations -->
+                <div class="book_informations">
+                    {% if recommendedBook.tag == 'updatedEdition' %}
+                        <div class="tag_book">
+                            <div class="red">{{ "books_page.books.new_edition_label" |trans }}</div>
+                        </div>
+                    {% endif %}
+                    {% if recommendedBook.tag == 'isNew' %}
+                        <div class="tag_book">
+                            <div class="yellow">{{ "books_page.books.new_label" |trans }}</div>
+                        </div>
+                    {% endif %}
+                    {% if recommendedBook.tag == 'isMostPopular' %}
+                        <div class="tag_book">
+                            <div class="green">{{ "books_page.books.most_popular_label" |trans }}</div>
+                        </div>
+                    {% endif %}
+                    {% if recommendedBook.tag == 'isTopSeller' %}
+                        <div class="tag_book">
+                            <div class="purple">{{ "books_page.books.top_seller_label" |trans }}</div>
+                        </div>
+                    {% endif %}
+                    {% if recommendedBook.tag == '' %}
+                        <div class="tag_book">
+                            <div class="no_tag"></div>
+                        </div>
+                    {% endif %}
+                    <!-- Book Title -->
+                    <div class="book_title nexusSans">
+                        <a href="{{ url('showBookDetails',{isbn:recommendedBook.isbn,lang:lang,reg:region}) }}">{{ recommendedBook.title }}</a>
+                    </div>
+                    <!-- End Book Title -->
+                    <!-- Book Editors -->
+                    <div class="book_edition nexusSans">
+                        {% if recommendedBook.subtitle|length >0 %}
+                            {{ recommendedBook.subtitle }},
+                        {% endif %}
+                        {% if recommendedBook.subtitle is not null %}
+                            {{ "book.edition_label"|trans }} {{ recommendedBook.editionNumber }}
+                        {% endif %}
+                    </div>
+                    <!-- End Book Editors -->
+                    <!--  Book author -->
+                    <div class="book_author nexusSans">
+                        {{ recommendedBook.author }}
+                    </div>
+                    <!-- End Book author -->
+                    <!-- publication date  -->
+                    <div class="book_pub_date">
+                        {{ "product_page.publication_date"|trans }}
+                        : {{ recommendedBook.publicationDate[language]|site_date_format }}
+                    </div>
+                    
+                    <!-- End publication date -->
+                    <!-- ancillary block -->
+                        <ul class="ancillary-block">
+                            {% if user.digitalAutoapproval != false and recommendedBook.HasProfessorResources == true %}
+                                <li>
+                                    <a class="instrutor_ressources ancillary_label" data-toggle="tooltip"
+                                       data-placement="top" target="_blank"
+                                       href="{{ url('teacher-resources',{isbn: recommendedBook.Isbn}) }}"
+                                       title="{{ 'ancillary.instructor_resources'|trans|raw }}"> {{ 'ancillary.instructor_resources_label'|trans }}
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if user.digitalAutoapproval != false and recommendedBook.HasStudentResources == true %}
+                                <li>
+                                    <a class="student_ressources ancillary_label" data-toggle="tooltip"
+                                       data-placement="top" target="_blank"
+                                       href="{{ url('student-resources',{isbn: recommendedBook.Isbn}) }}"
+                                       title="{{ 'ancillary.student_resources'|trans|raw }}">{{ 'ancillary.student_resources_label'|trans }}</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    <!-- End ancillary block -->
+                    <div class="rating_book">
+                        <div class="stars_rating">
+                            <div class="average_reviews">
+                                {% include '@MainBundle/parts/average_reviews_home.html.twig' with {'book': recommendedBook } %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Book informations  -->
+                <!-- Share Action  -->
+                <div class="sharing">
+                    <div class="container">
+                        <div class="more">
+                            <button id="more-btn" class="more-btn" data-toggle="tooltip" data-placement="bottom"
+                                    title="{{ 'tooltip.more'|trans }}">
+                                <span class="more-dot"></span>
+                                <span class="more-dot"></span>
+                                <span class="more-dot"></span>
+                            </button>
+                            <div class="more-menu">
+                                <ul class="more-menu-items" tabindex="-1" role="menu"
+                                    aria-labelledby="more-btn" aria-hidden="true">
+                                    {% if isMobile %}
+                                        <li class="more-menu-item dot-share-message for-mobile"
+                                            role="presentation">
+                                            <a href="sms:;?&body={{ url('showBookDetails',{isbn: recommendedBook.Isbn}) }}"
+                                               class="more-menu-btn" role="menuitem">{{ 'product_page.share_dots.message'|trans }}</a>
+                                        </li>
+                                        <li class="more-menu-item dot-share-whatsapp for-mobile"
+                                            role="presentation">
+                                            <a href="whatsapp://send?abid=&text={{ url('showBookDetails',{isbn: recommendedBook.Isbn}) }}"
+                                               class="more-menu-btn" role="menuitem">{{ 'product_page.share_dots.whatsapp'|trans }}</a>
+                                        </li>
+                                        <li class="more-menu-item dot-share-mail for-mobile"
+                                            role="presentation">
+                                            <a href="mailto:?body='{{ url('showBookDetails',{isbn: recommendedBook.Isbn}) }}'"
+                                               class="more-menu-btn" role="menuitem">{{ 'product_page.share_dots.mail'|trans }}</a>
+                                        </li>
+                                        <li class="more-menu-item dot-share-product"
+                                            role="presentation">
+                                            <a href="javascript:;" class="more-menu-btn"
+                                               data-link="{{ url('showBookDetails',{isbn: recommendedBook.Isbn}) }}"
+                                               role="menuitem">{{ "product_page.share_dots.share"|trans }}</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="more-menu-item dot-share-product"
+                                            role="presentation">
+                                            <a href="javascript:;" class="more-menu-btn"
+                                               data-link="{{ url('showBookDetails',{isbn: recommendedBook.Isbn}) }}"
+                                               role="menuitem">{{ "product_page.share_dots.share"|trans }}</a>
+                                        </li>
+                                    {% endif %}
+                                    {% if is_logged_in() and user.amEmail is not null and user.amEmail is not empty %}
+                                        <li class="more-menu-item dot-education-consultant"
+                                            role="presentation">
+                                            <a href="mailto:{{ user.amEmail }}?subject={{ "home.recommendations_inbox.share_dots.mail_subject"|trans }}&body={{ url('showBookDetails',{isbn: recommendedBook.Isbn}) }}"
+                                               class="more-menu-btn"
+                                               role="menuitem">{{ "product_page.share_dots.education_consultant"|trans }}</a>
+                                        </li>
+                                    {% endif %}
+                                        <li class="more-menu-item share-book"
+                                            role="presentation">
+                                            <a id="add-book-btn"
+                                               data-isbn="{{ recommendedBook.isbn }}"
+                                               class="more-menu-btn"
+                                               role="menuitem"
+                                               data-title="{{ recommendedBook.title }}">{{ 'home.recommendations_inbox.add_to_my_books'|trans }}</a>
+                                        </li>
+                                    <li class="more-menu-item">
+                                        <a class="more-menu-btn share-book"
+                                           id="share-book" data-toggle="modal" data-target="#share-book-modal"
+                                           data-isbn="{{ recommendedBook.isbn }}"
+                                           data-title="{{ recommendedBook.title }}"
+                                           data-subtitle="{{ recommendedBook.subtitle }}"
+                                           data-editionNumber="{{ recommendedBook.editionNumber }}">{{ "share_book.share_btn"|trans }}</a>
+                                    </li>
+                                    <li class="more-menu-item">
+                                        <a class="more-menu-btn remove-recommendation"
+                                           data-isbn="{{ recommendedBook.isbn }}">{{ "home.remove_recommendation"|trans }}</a>
+                                    </li>
+                                    <li class="more-menu-item">
+                                        <a class="more-menu-btn update_librarian" data-url="{{ url('export-book',{isbn: recommendedBook.isbn}) }}"
+                                           id="update-librarian">{{ 'book.review.update_librarian'|trans }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Share Action  -->
+                <!-- Book Action  -->
+{% include '@MainBundle/prototypes/book-action.html.twig' with {'book':recommendedBook,'user':user} %}
+      <!-- End Book Action  -->
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% if numberOfRecommendations > 10 %}
+    <div class="load-more-btn">
+        <img src="{{ asset('/assets/img/ajax-loader.gif') }}" class="load-more-book hidden">
+        <span class="nexusSans" id="load-more">{{ 'home.recommendations_inbox.load_more_btn'|trans|raw }}</span>
+    </div>
+{% endif %}

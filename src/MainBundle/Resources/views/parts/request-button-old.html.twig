@@ -1,0 +1,266 @@
+
+{#request digital#}
+{% if  book.availableTypes.contains('Digital') %}
+     {% if is_logged_in() %}
+         <!-- Check if book has no pending digital or print request  -->
+         {% if bookDigitalRequest is null and bookPrintRequest is null %}
+             <div class="radio-request-btn digital">
+                 <input type="radio" id="digital-request" name="radio-group"
+                        class="requestCopy"
+                        data-isbn="{{ book.isbn }}"
+                        data-request="request"
+                        data-format="Digital"
+                        data-requested="{{ 'book.request.digital_requested'|trans }}"
+                        checked="checked">
+                 <label for="digital-request" href="javascript:;"
+                        class="requestCopy  {% if session.get('lang')=='fr' %} frensh-site {% endif %}">
+                     {{ "book.request.request_digital"|trans }} {% if session.get('lang') != 'es' %}
+                         <p class="info-print-requested">{{ 'book.request.digital_order_approved_info'|trans }}
+                         {% if session.get('lang')=='en' or session.get('lang')=='in' or session.get('lang') =='de' %}
+                             <i class="fa fa-info-circle"
+                                data-toggle="popover" data-html="true"
+                                data-trigger="hover"
+                                data-content="{{ 'book.request.digital_order_popup'|trans }}"
+                                data-placement="top"></i></p> {% endif %} {% endif %}
+                 </label>
+             </div>
+             <!-- Check if book has an approved digital request not expired to show read book -->
+         {% elseif bookDigitalRequest is not null and bookDigitalRequest['Status'] == 'Approved' and  date('now')<=date(bookDigitalRequest['EndDate']) %}
+             <div class="read-digital-book">
+                 <a href="{{ url('read-book',{'isbn':bookDigitalRequest['ExternalBookId']}) }}"
+                    target="_blank"
+                    class="btn btn-blue read-book-btn">{{ "user.profile.books.read_more_btn"|trans }} </a>
+             </div>
+             <!-- Check if book has an approved print request to show read book -->
+         {% elseif bookPrintRequest is not null and bookPrintRequest['Status'] == 'Approved' %}
+             <div class="read-digital-book">
+                 <a href="{{ url('read-book',{'isbn':bookPrintRequest['ExternalBookId']}) }}"
+                    target="_blank"
+                    class="btn btn-blue read-book-btn">{{ "user.profile.books.read_more_btn"|trans }} </a>
+             </div>
+             <!-- Check if book has a pending digital or print request -->
+         {% elseif (bookDigitalRequest is not null and bookDigitalRequest['Status'] == 'Pending')
+             or (bookPrintRequest is not null and  bookPrintRequest['Status'] == 'Pending') %}
+             {% set requestBtnPrintStatus = 'true' %}
+             <div class="radio-request-btn digital">
+                 <input type="radio" id="digital-request" name="radio-group"
+                        class="requestCopy radioDisabled"
+                        data-isbn="{{ book.isbn }}"
+                        disabled="true"
+                        data-request="request"
+                        data-format="Digital"
+                        data-requested="{{ 'book.request.digital_requested'|trans }}">
+                 <label for="digital-request" href="javascript:;"
+                        class="requestCopy {% if session.get('lang')=='fr' %} frensh-site {% endif %}">
+                     {{ "book.request.request_digital"|trans }} {% if session.get('lang') != 'es' %}
+                         <p class="info-print-requested">{{ 'book.request.digital_order_approved_info'|trans }}
+                         {% if session.get('lang')=='en' or session.get('lang')=='in' or session.get('lang') =='de' %}
+                             <i class="fa fa-info-circle"
+                                data-toggle="popover" data-html="true"
+                                data-trigger="hover"
+                                data-content="{{ 'book.request.digital_preorder_popup'|trans }}"
+                                data-placement="top"></i></p> {% endif %} {% endif %}
+                 </label>
+             </div>
+         {% endif %}
+     {% else %}
+         {#request digital #}
+         <div class="radio-request-btn digital {% if session.get('lang') =='de' %}site-de{% endif %}">
+             <input type="radio" id="digital-request" name="radio-group"
+                    data-request="request"
+                    class="requestCopy {% if session.get('lang')=='fr' %} frensh-site {% endif %}"
+                    checked="checked">
+             <label for="digital-request"
+                    data-request="request">{{ "book.request.request_digital"|trans }} {% if session.get('lang')!='es' %}
+                     {% if session.get('lang')=='en' or session.get('lang')=='in' or session.get('lang')=='de' %}
+                     <i class="fa fa-info-circle"
+                        data-toggle="popover" data-html="true"
+                        data-trigger="hover"
+                        data-content="{{ 'book.request.digital_order_popup'|trans }}"
+                        data-placement="top"></i>{% endif %}
+                     <p class="info-print-requested">{{ 'book.request.digital_order_approved_info'|trans }}
+                     </p> {% endif %}</label>
+         </div>
+     {% endif %}
+{% elseif date(book.publicationDate[lang])<date('+10 month') and  date(book.publicationDate[lang])>date('-2 month') %}
+     {% if is_logged_in() %}
+         {% if (bookDigitalRequest is null and bookPrintRequest is null ) %}
+             <div class="radio-request-btn digital">
+                 <input type="radio" id="digital-request" name="radio-group"
+                        class="requestCopy {% if session.get('lang')=='fr' %} frensh-site {% endif %}"
+                        data-isbn="{{ book.isbn }}"
+                        data-preOrder="1"
+                        data-format="Digital"
+                        data-request="preorder"
+                        data-requested="{{ 'product_page.buttons.pre_ordered_digital'|trans }}"
+                        checked="checked">
+                 <label for="digital-request" href="javascript:;"
+                        data-isbn="{{ book.isbn }}"
+                        class="requestCopy {% if session.get('lang')=='fr' %} frensh-site {% endif %}">
+                     {{ "product_page.buttons.pre_order_digital"|trans }}
+                     <i class="fa fa-info-circle"
+                        data-toggle="popover" data-html="true"
+                        data-trigger="hover"
+                        data-content="{{ 'book.request.digital_preorder_popup'|trans }}"
+                        data-placement="top"></i>
+                     {% if session.get('lang')=='en' or session.get('lang')=='fr' or session.get('lang')=='in' or session.get('lang')=='de' %}
+                         <p
+                                 class="info-print-requested">{{ 'book.request.digital_preorder_approved_info'|trans }}
+                         </p> {% endif %}</label>
+             </div>
+         {% elseif (bookDigitalRequest is not null) or (bookPrintRequest is not null) %}
+             {% set requestBtnDegitalStatus = 'true' %}
+             <div class="radio-request-btn digital">
+                 <input type="radio" id="digital-request" name="radio-group"
+                        data-isbn="{{ book.isbn }}"
+                        data-format="Digital"
+                        data-request="preordered"
+                        class="requestCopy" checked="checked">
+                 <label for="digital-request" href="javascript:;"
+                        class="btnDisabled requestCopy  {% if session.get('lang')=='fr' %} frensh-site {% endif %}">{{ "product_page.buttons.pre_ordered_digital"|trans }}
+                     {% if session.get('lang') in ['en','in','de','fr'] %}
+                         <i class="fa fa-info-circle"
+                            data-toggle="popover" data-html="true"
+                            data-trigger="hover"
+                            data-content="{{ 'book.request.digital_preorder_popup'|trans }}"
+                            data-placement="top"></i>
+                         <p class="info-print-requested">
+                             {{ 'book.request.digital_preorder_approved_info'|trans }}</p>
+                     {% endif %}</label>
+             </div>
+         {% endif %}
+     {% else %}
+         <div class="radio-request-btn digital">
+             <input type="radio" id="digital-request" name="radio-group"
+                    data-isbn="{{ book.isbn }}"
+                    data-format="Digital"
+                    data-request="preorder"
+                    class="requestCopy {% if session.get('lang')=='fr' %} frensh-site {% endif %}"
+                    checked="checked">
+             <label for="digital-request"
+                    data-request="preorder">{{ "product_page.buttons.pre_order_digital"|trans }}
+                 {% if session.get('lang') in ['en','in','de','fr'] %}
+                     <i class="fa fa-info-circle"
+                        data-toggle="popover" data-html="true"
+                        data-trigger="hover"
+                        data-content="{{ 'book.request.digital_preorder_popup'|trans }}"
+                        data-placement="top"></i>
+                     <p class="info-print-requested">
+                         {{ 'book.request.digital_preorder_approved_info'|trans }}
+                     </p>
+                 {% endif %}</label>
+         </div>
+     {% endif %}
+{% else %}
+     <p>{{ "product_page.digital_not_available"|trans }}</p>
+{% endif %}
+{#request print#}
+{% if (session.get('lang') not in ['es','br','fr','de','us']) and ( isBookHS(book.subCategory[0]['id'])) %}
+    {% if session.get('region') !='5' and session.get('region') !='8' and session.get('region') !='1' %}
+        {% if book.stockCount > 0 and book.availableTypes.contains('Print') %}
+            {% if bookPrintRequest is null %}
+                <div class="radio-request-btn ">
+                    <input type="radio" id="print-request"
+                           name="radio-group"
+                            {% if is_logged_in() %}
+                                data-isbn="{{ book.isbn }}"
+                                data-requested="{{ 'book.request.print_requested'|trans }}"
+                            {% endif %}
+                           data-format="Print"
+                           data-request="request"
+                           class="requestCopy ">
+                    <label for="print-request"
+                           href="javascript:;"
+                           data-request="request"
+                           class="requestCopy {% if session.get('lang')=='fr' %} frensh-site {% endif %} ">{{ "book.request.request_print"|trans }}
+                        <p class="info-print-requested">{{ 'book.request.print_order_approved_info'|trans }}</p>
+                    </label>
+                </div>
+            {% else %}
+                {% set requestBtnPrintStatus = 'true' %}
+                <div class="radio-request-btn  ">
+                    <input type="radio" id="print-request"
+                           name="radio-group"
+                            {% if is_logged_in() %}
+                                data-isbn="{{ book.isbn }}"
+                                data-requested="{{ 'book.request.print_requested'|trans }}"
+                                disabled="true"
+                            {% endif %}
+                           data-format="Print"
+                           data-request="request"
+                           class="requestCopy radioDisabled">
+                    <label for="print-request"
+                           href="javascript:;"
+                           data-request="request"
+                           class="requestCopy {% if session.get('lang')=='fr' %} frensh-site {% endif %} ">{{ "book.request.request_print"|trans }}
+                        {% if  bookPrintRequest['Status'] == 'Pending' and book.availableTypes.contains('Digital') %}
+                            <p class="info-print-requested">{{ 'book.request.print_order_approved_info'|trans }}</p>  {% endif %}
+                    </label>
+                </div>
+            {% endif %}
+        {% elseif book.availableTypes.contains('Print') and date(book.publicationDate[lang])<date('+10 month') and  date(book.publicationDate[lang])>date('-2 month') %}
+            {% if is_logged_in() %}
+                {% if bookPrintRequest is null %}
+                    <div class="radio-request-btn">
+                        <input type="radio" id="print-request"
+                               name="radio-group"
+                               data-format="Print"
+                               data-isbn="{{ book.isbn }}"
+                               class="requestCopy"
+                               data-preOrder="1"
+                               data-request="preorder"
+                               data-requested="{{ 'product_page.buttons.pre_ordered_print'|trans }}">
+                        <label for="print-request"
+                               data-request="preorder"
+                               href="javascript:;">
+                            {{ "product_page.buttons.pre_order_print"|trans }}
+                            <p class="info-print-requested">{{ 'book.request.print_preorder_approved_info'|trans }}</p>
+                        </label>
+                    </div>
+                {% else %}
+                    {% set requestBtnPrintStatus = 'true' %}
+                    <div class="radio-request-btn">
+                        <input type="radio" id="print-request"
+                               name="radio-group"
+                               data-format="Print"
+                               class="requestCopy radioDisabled"
+                               disabled="true"
+                               data-content="{{ 'book.request.digital_preorder_popup'|trans }}"
+                               data-request="preordered">
+                        <label for="print-request"
+                               href="javascript:;">
+                            {{ "product_page.buttons.pre_ordered_print"|trans }}
+                            <p class="info-print-requested">{{ 'book.request.print_preorder_approved_info'|trans }}
+                                <i class="fa fa-info-circle"
+                                   data-toggle="popover" data-html="true"
+                                   data-trigger="hover"
+                                   data-content="{{ 'book.request.digital_preorder_popup'|trans }}"
+                                   data-placement="top"></i></p>
+                        </label>
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="radio-request-btn">
+                    <input type="radio" id="print-request"
+                           name="radio-group"
+                           class="requestCopy"
+                           data-request="preorder">
+                    <label for="print-request"
+                           data-request="preorder">{{ "product_page.buttons.pre_order_print"|trans }}
+                        <p class="info-print-requested">{{ 'book.request.print_preorder_approved_info'|trans }}</p>
+                    </label>
+                </div>
+            {% endif %}
+        {% else %}
+            <p class="print-unavailable">{{ "product_page.print_not_available"|trans }}</p>
+        {% endif %}
+    {% endif %}
+{% endif %}
+<div class="googlelink">
+    <script src="//books.google.com/books/previewlib.js"></script>
+    <script>GBS_setLanguage('{{ lang }}');</script>
+    <script>GBS_insertPreviewButtonPopup('{{ isbn }}');</script>
+</div>
+<a class="request btn btn-blue {% if not is_logged_in() %}btn-call-login {% else %}
+                                                {% if requestBtnPrintStatus == 'true' and requestBtnDegitalStatus == 'true' %} disabled btnDisabled {% else %} request-book-btn{% endif %}
+                                            {% endif %}"> {{ 'book.request.request-book'|trans }}</a>

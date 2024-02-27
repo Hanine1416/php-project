@@ -1,0 +1,72 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/switcher.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/page/profile/education-consultant.css') }}">
+{% endblock %}
+{% block title %} {{ "user.profile.education_consultant"|trans }} {% endblock %}
+{% block body %}
+    <input type="hidden" id="page-title" value="profile:  education consultant">
+    <div class="profile-container row">
+        <!--menu profile section-->
+        <div class="menu-profile-mobile">
+            {% include '@UserBundle/profile/profile-menu.html.twig' with {'user' : user} %}
+        </div>
+        <!--My Education Consultant page title-->
+{#        <div class="p-relative">
+           <span class="page-title">{{ "user.profile.education_consultant"|trans }}</span>
+        </div>#}
+        <!--End Education Consultant page title-->
+        <!--My Education Consultant page -->
+               <div class="desktop main-content-menu">
+                    <div class="main-menu-profile-container maincontainer">
+                            {% include '@UserBundle/profile/profile-menu.html.twig' with {'user' : user} %}
+                    <div class="small-12 columns accountManager nexusSans consultant-container">
+                        {% if user.amName is not null and user.amName != "" %}
+                            <div class=" nexusSans">
+                                <div class="education-content">{{ 'profile.education-consultant.title'|trans }}</div>
+                                <ul>
+                                    <li> {{ 'profile.education-consultant.liste1'|trans }}</li>
+                                    <li> {{ 'profile.education-consultant.liste2'|trans }}</li>
+                                     {% if session.get('site-lang') in ['en','in'] and categoriesByType['SH']|length > 0 and categoriesByType['ST']|length > 0   %}
+                                         <li> {{ 'profile.education-consultant.liste3'|trans|replace({'#img_src#':asset('assets/img/logo-clinicalkey@1x.png')})|raw}}
+                                             {{ "profile.education-consultant.liste4"|trans }} <span class="scienceDirect"><img class="retina-reload science-img" src="{{ asset('assets/img/science-direct-logo/ScienceDirect_logo@1x.png')}}" alt="ScienceDirect"/></span></li>
+                                    {% else %}
+                                    <li> {{ 'profile.education-consultant.liste3'|trans|replace({'#img_src#':asset('assets/img/logo-clinicalkey@1x.png')})|raw}}</li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                            <hr>
+                            <div class="accountInfo nexusSans">
+                                <div>
+                                    <div class="getInTouch">{{ 'profile.education-consultant.get-in-touch'|trans }}</div>
+                                    <div class="accountName">{{ user.amName }}</div>
+                                    {% if session.get('site-lang') == 'in' and user.amPhone is not null %}
+                                        <div class="accountName">{{ user.amPhone }}</div>
+                                    {% endif %}
+                                    <div class="accountEmail"><a href="mailto:{{ user.amEmail }}">{{ user.amEmail }}</a></div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class=" nexusSans">
+                                <div class="education-content">{{ 'profile.no_education_consultant.title'|trans }}</div>
+                                <ul class="mb-10">
+                                    <li> {{ 'profile.education-consultant.liste1'|trans }}</li>
+                                    <li> {{ 'profile.education-consultant.liste2'|trans }}</li>
+                                    <li> {{ 'profile.education-consultant.liste3'|trans|replace({'#img_src#':asset('assets/img/logo-clinicalkey@1x.png')})|raw}}</li>
+                                </ul>
+                                {% if session.get('region') == 9 %}
+                                <div class="accountEmail">{{ 'profile.education-consultant.contact_your_team_at'|trans }} <a href="mailto:educate@elsevier.com">educate@elsevier.com</a>
+                                </div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    </div>
+               </div>
+        <!--End My Education Consultant page -->
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/libphonenumber-js/1.9.19/libphonenumber-js.min.js"></script>
+    <script src="{{ asset('assets/page/profile/menu-profile.min.js') }}"></script>
+{% endblock %}

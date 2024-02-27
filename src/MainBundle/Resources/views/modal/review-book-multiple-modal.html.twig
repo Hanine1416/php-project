@@ -1,0 +1,211 @@
+<!-- review book multiple institutions modal -->
+<div class="review-book-multiple-modal lightbox modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="close"></div>
+        <div class="modal-container scroll1 modal-content">
+            <form autocomplete="off" class="fakeForm" data-url="{{ url('review-book') }}" id="formBookReviewMultiple">
+                <div class="modal-step active" id="step1_multi">
+                    <div class="modal-step-content">
+                        <div class="popup-title adoption-display">
+                            {{ 'book.review.multiple.step1.title'|trans }}<br>
+                            <span class="contextual-txt mb-0">{{ 'book.review.multiple.step1.title_help'|trans }}</span>
+                            <div class="step-indicator initial">
+                                <span class="filled"></span>
+                            </div>
+                        </div>
+                        <div class="popup-title renewal-display">
+                            {{ 'book.renewal.multiple.title'|trans }}<br>
+                            <span class="contextual-txt mb-0">{{ 'book.review.multiple.step1.title_help'|trans }}</span>
+                            <div class="step-indicator initial">
+                                <span class="filled"></span>
+                            </div>
+                        </div>
+                        <div id="courseDetailList_multi">
+                        </div>
+                    </div>
+                    <div class="row step-controller p-0 text-right">
+                        <button class="btn btn-transparent goStep go-first-course">{{ 'book.request.form.continue_btn'|trans }} </button>
+                    </div>
+                </div>
+                <!-- Positive review steps -->
+                <div class="modal-step" id="positive-step_multi">
+                    <div class="modal-step-content">
+                        <div class="popup-title">
+                            {{ 'book.review.multiple.current_course.title'|trans }}
+                            <div class="step-indicator initial">
+                                <span class="filled"></span>
+                            </div>
+                        </div>
+                        <div class="course-info-block columns small-12 p-0">
+
+                        </div>
+                        <div class="popup-title sub-title columns small-12 p-0">{{ 'book.review.positive.step2.title'|trans }}</div>
+                        {% if lang!='br' %}
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box label-down  mt_checkbox {% if lang == 'br' %} mb-24-imp {% endif %}">
+                            <input type="radio" name="recLevel_multi" id="core_rev_multi" value="Core"
+                                   class="checkbox__input"
+                                   checked>
+                            <label for="core_rev_multi"
+                                   class="checlbox__label">{{ 'book.review.positive.step2.core'|trans }}</label>
+                        </div>
+                        {% endif %}
+                        {% if lang!='br' %}  <span
+                                class="contextual-txt radio-txt"> {{ 'book.review.positive.step2.core_help'|trans|raw }}</span>{% endif %}
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box label-down  mt_checkbox {% if lang == 'br' %} mb-24-imp  {% endif %}">
+                            <input type="radio" name="recLevel_multi" id="recommended_rev_multi" class="checkbox__input"
+                                   value="Recommended">
+                            <label for="recommended_rev_multi"
+                                   class="checlbox__label">{{ 'book.review.positive.step2.recommended'|trans }}</label>
+                        </div>
+                        {% if lang!='br' %}
+                            <span class="contextual-txt radio-txt"> {{ 'book.review.positive.step2.recommended_help'|trans|raw }}</span>
+                        {% endif %}
+                            <div class="small-12 medium-12 large-12 columns checkbox__item radio-box label-down  mt_checkbox {% if lang == 'br' %} mb-24-imp  {% endif %}">
+                                <input type="radio" name="recLevel_multi" id="supplementary_rev_multi"
+                                       class="checkbox__input"
+                                       value="Supplementary">
+                                <label for="supplementary_rev_multi"
+                                       class="checlbox__label">{{ 'book.review.positive.step2.supplementary'|trans }}</label>
+                            </div>
+                        {% if lang!='br' %} <span
+                                class="contextual-txt radio-txt hidden"> {{ 'book.review.positive.step2.supplementary_help'|trans|raw }}</span>{% endif %}
+                    </div>
+                    <div class="row step-controller p-0 text-right">
+                        <button class="btn btn-transparent goStep go-next-course">{{ 'book.request.form.continue_btn'|trans }} </button>
+                    </div>
+                </div>
+                <!-- Negative review  -->
+                <div class="modal-step" id="negative-step_multi">
+                    <div class="modal-step-content">
+                        <div class="popup-title">
+                            {{ 'book.review.negative.step1.title'|trans }}
+                            <div class="step-indicator initial"><span class="filled"></span></div>
+                        </div>
+                        <div class="course-info-block small-12 columns p-0">
+                        </div>
+                        <div class="popup-title sub-title small-12 columns p-0">{{ 'book.review.negative.reason_title'|trans }}</div>
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box  mt_checkbox renewal-display">
+                            <input type="radio" name="negative_reason_multi" id="option1_multi"
+                                   value="{{ 'book.renewal.negative.step1.option1'|trans({local:'en'}) }}" class="checkbox__input">
+                            <label for="option1_multi"  class="checlbox__label">{{ 'book.renewal.negative.step1.option1'|trans }}</label>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box">
+                            <input type="radio" name="negative_reason_multi" id="option4_multi" class="checkbox__input"
+                                   value="Content is too comprehensive">
+                            <label for="option4_multi"
+                                   class="checlbox__label">{{ 'book.review.negative.step1.option4'|trans }}</label>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box">
+                            <input type="radio" name="negative_reason_multi" id="option5_multi" class="checkbox__input"
+                                   value="Content is too low level">
+                            <label for="option5_multi"
+                                   class="checlbox__label">{{ 'book.review.negative.step1.option5'|trans }}</label>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box">
+                            <input type="radio" name="negative_reason_multi" id="option_other_book_multi" class="checkbox__input"
+                                   value="{{ 'book.review.negative.step1.option_other_book'|trans }}">
+                            <label for="option_other_book_multi"
+                                   class="checlbox__label">{{ 'book.review.negative.step1.option_other_book'|trans }}</label>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns checkbox__item radio-box">
+                            <input type="radio" name="negative_reason_multi" id="option9_multi" class="checkbox__input"
+                                   value="{{ 'book.review.negative.step1.option9'|trans({'locale':'en'}) }}">
+                            <label for="option9_multi"
+                                   class="checlbox__label">{{ 'book.review.negative.step1.option9'|trans }}</label>
+                        </div>
+                        {% if lang =='in' or lang =='en' %}
+                            <div class="small-12 medium-12 large-12 columns checkbox__item radio-box ">
+                                <input type="radio" name="negative_reason_multi" id="option_other_reason_multi" class="checkbox__input"
+                                       value="Other">
+                                <label for="option_other_reason_multi"
+                                       class="checlbox__label">{{ 'book.review.negative.step1.option_other_reason'|trans }}</label>
+                            </div>
+                            <div id="other_reason_block_multi">
+                                <input type="text" id="other_reason_multi"
+                                       placeholder="{{ 'book.review.negative.step1.other_reason_placeholder'|trans }}"
+                                       class="validate" title="{{ 'validation.required'|trans }}">
+                            </div>
+                        {% endif %}
+                        <div id="other_book_block_multi" class="small-12 medium-12 large-12 columns">
+                            <div class="small-12 medium-12 large-12 columns p-0">
+                                <label for="book_current_use_multi">{{ 'book.review.negative.step2.title'|trans }}</label>
+                                <input type="text" name="book_current_use_multi" id="book_current_use_multi"
+                                       placeholder="{{ 'book.review.negative.step2.book_name'|trans }}"
+                                       class="validate" title="{{ 'validation.required'|trans }}">
+                            </div>
+                            <div class="small-12 medium-12 large-12 columns p-0 feedback-txt mt-15">
+                                <label for="book_description_multi">{{ 'book.review.negative.step3.title'|trans }}</label>
+                                <textarea name="book_description_multi" id="book_description_multi" class="validate"
+                                          cols="30" rows="8" title="{{ 'validation.required'|trans }}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row step-controller p-0 text-right">
+                        <button class="btn btn-transparent goStep go-next-course">{{ 'book.request.form.continue_btn'|trans }}
+                            <span></span>
+                        </button>
+                        <button class="btn btn-transparent goStep submit-book-review-multi hidden">{{ 'book.request.form.step7.finish_btn'|trans }}
+                            <span></span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Feedback -->
+                <div class="modal-step" id="feedback-step_multi">
+                    <div class="modal-step-content">
+                        <div class="popup-title">
+                            {{ 'book.review.feedback.title'|trans }}
+                            <div class="step-indicator initial"><span class="filled"></span></div>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns feedback-txt p-0 renewal-display">
+                            <textarea name="feedBack_previous_multi" id="feedBack_previous_multi" class="feedback" rows="6"
+                                      readonly title="{{ 'validation.required'|trans }}"></textarea>
+                            <div class="contextual-txt mb-32">{{ 'book.review.feedback.previous'|trans }} - <span id="feedback_previous_multi_date"></span></div>
+                        </div>
+                        <div class="small-12 medium-12 large-12 columns feedback-txt p-0">
+                            <textarea name="feedBack_multi" id="feedBack_multi" class="feedback"
+                                      placeholder="{{ 'book.review.feedback.placeholder'|trans }}" rows="6"
+                                      data-adoption-placeholder="{{ 'book.review.feedback.placeholder'|trans }}"
+                                      data-renewal-placeholder="{{ 'book.review.feedback.new_placeholder'|trans }}"
+                                      title="{{ 'validation.required'|trans }}"></textarea>
+                            <div class="contextual-txt mb-0 renewal-display">{{ 'book.review.feedback.new'|trans }}</div>
+                        </div>
+                            <div class="columns checkbox__item radio-box label-down mt-24">
+                                <input type="checkbox" name="feedback_public_multi" id="feedback_public_multi"
+                                       class="checkbox__input"
+                                       value="1">
+                                <label for="feedback_public_multi"
+                                       class="checlbox__label">{{ 'book.review.feedback.accept_public'|trans }}</label>
+                            </div>
+                            <div class="contextual-txt mb-0 public-info hidden">
+                              <small>{{ "book.review.feedback.accept_public_info"|trans|replace({"__url__":"https://www.elsevier.com/legal/privacy-policy"})|raw }} </small>
+                            </div>
+                            <div class="columns checkbox__item radio-box label-down mt-24">
+                                <input type="checkbox" name="feedback_name_public_multi" id="feedback_name_public_multi"
+                                       class="checkbox__input" value=1>
+                                <label for="feedback_name_public_multi"
+                                       class="checlbox__label">{{ 'book.review.feedback.accept_name_public'|trans }}</label>
+                            </div>
+                    </div>
+                    <div class="row step-controller p-0 text-right">
+                        <button class="btn btn-transparent goStep submit-book-review-multi">{{ 'book.request.form.step7.finish_btn'|trans }}
+                            <span></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Finish review success message -->
+                <div class="modal-step" id="success-step_multi">
+                    <div class="modal-step-content">
+                        <div class="finish-img">
+                            <img class="retina-reload" src="{{ asset('assets/img/icon_success@1x.png') }}"
+                                 style="height: 60px;width: 60px;">
+                        </div>
+                        <div class="success-msg">{{ 'book.review.success.title'|trans|raw }}</div>
+                        <div class="success-msg">{{ 'book.review.success.feedtext'|trans|raw }}</div>
+                        <div class="finish-msg">{{ 'book.review.success.message'|trans|replace({'__contact_link__':url('contactUs')})|raw }}</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -2,10 +2,10 @@ name: staging pipeline
 on:
   pull_request:
     branches:
-      - develop
+      - staging
   push:
     branches:
-      - develop
+      - staging
 jobs:
   buildArtifact:
     runs-on: ubuntu-latest
@@ -15,21 +15,51 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: azure/docker-login@v1
+      
+      #"##############################"
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
         with:
-          login-server: stagepfe.azurecr.io
-          username: stagePFE
-          password: ${{ secrets.ACR_PASSWORD }}
-      - name: build artifact
-        run: |
-          docker build -t stagepfe.azurecr.io/inspection-copy:$(echo ${GITHUB_SHA} | cut -c1-7) .
-#          docker push stagepfe.azurecr.io/inspection-copy:$(echo ${GITHUB_SHA} | cut -c1-7)
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Setup Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build and Push Docker Image
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          file: ./Dockerfile
+          builder: ${{ steps.buildx.outputs.name }}
+          push: true
+          tags: toanbk21096/go-github-actions:latest
+          cache-from: type=registry,ref=toanbk21096/go-github-actions:latest
+          cache-to: type=inline
+
+      - name: Deploy Image
+        run: echo ${{ steps.docker_build.outputs.digest }}
+      #"##############################"
+      
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: "stagepfe.azurecr.io/inspection-copy:${{ github.sha | slice(0, 7) }}"
+          image-ref: 'docker.io/toanbk21096/go-github-actions:${{ github.sha }}'
           format: 'table'
-          exit-code: '0'
+          exit-code: '1'
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
+      - name: Notification Slack 
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: ci
+          SLACK_TITLE: new code
+          SLACK_USERNAME: Github_Action
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_MESSAGE: "new version of application ${GITHUB_SHA}"
+	
+
+

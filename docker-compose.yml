@@ -19,6 +19,7 @@ services:
         volumes:
             - .:/var/www
             - ./.docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+            - ./custom_hosts:/etc/hosts
     #Nginx Service
     webserver:
         image: nginx:alpine
@@ -28,11 +29,14 @@ services:
         ports:
             - "80:80"
             - "443:443"
+        environment:
+            HOST_IP: "192.168.56.1"
         networks:
             - ic-network
         volumes:
             - ./:/var/www
             - ./.docker/nginx/conf.d/:/etc/nginx/conf.d/
+            - ./custom_hosts:/etc/hosts
     #MySQL Service
     db:
         image: mysql:5.7.22

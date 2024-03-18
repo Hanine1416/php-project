@@ -3,6 +3,7 @@ name: Deploy-InspectionCopy
 on:
   push:
     branches:
+      - main 
       - staging
 env:
   build_path: /var/www/inspectioncopy.staging.mobelite.fr

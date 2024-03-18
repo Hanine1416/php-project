@@ -3,9 +3,11 @@ name: Staging Pipeline with SonarCloud and PHP Code Sniffer
 on:
   pull_request:
     branches:
+      - main
       - develop
   push:
     branches:
+      - main 
       - develop
 
 jobs:

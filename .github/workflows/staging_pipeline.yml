@@ -2,9 +2,12 @@ name: staging pipeline
 on:
   pull_request:
     branches:
+      - main
       - staging
+      
   push:
     branches:
+      - main 
       - staging
 jobs:
   buildArtifact:
@@ -60,6 +63,3 @@ jobs:
           SLACK_USERNAME: Github_Action
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_MESSAGE: "new version of application ${GITHUB_SHA}"
-	
-
-

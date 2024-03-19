@@ -1,81 +1,42 @@
-name: Checkmarx & Sonar Scan
+name: php sniffer & Sonar Scan
 on:
-  workflow_dispatch:
   pull_request:
     branches:
-      - 'development'
-      - 'qa'
-      - 'main'
+      - staging
+      - main
+  push:
+    branches:
+      - staging
+      - main
     paths-ignore:
       - 'README.md'
       - '.gitignore'
       - '.github/**'
 jobs:
-  checkmarx:
-    runs-on: [self-hosted, rootful, dev, ephemeral]
+  build-and-test:
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Code checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+
+      - name: Composer install
+        uses: php-actions/composer@v6
+
+      - name: PHP Code Sniffer
+        uses: php-actions/phpcs@v1
         with:
-          fetch-depth: 0
-      - name: Install AWS CLI v2
-        run: |
-          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o /tmp/awscliv2.zip
-          unzip -q /tmp/awscliv2.zip -d /tmp
-          rm /tmp/awscliv2.zip
-          sudo /tmp/aws/install --update
-          rm -rf /tmp/aws/
-      - name: Get Env Vars
-        run: |
-          echo "CHECKMARX_USER=$(aws ssm get-parameter --name /gme/ic/checkmarx_user --with-decryption | jq -r .Parameter.Value)" >> $GITHUB_ENV
-          echo "CHECKMARX_PASS=$(aws ssm get-parameter --name /gme/ic/checkmarx_pass --with-decryption | jq -r .Parameter.Value)" >> $GITHUB_ENV
-          echo "GITHUB_TOKEN=$(aws ssm get-parameter --name /tio/github/access_token --with-decryption | jq -r .Parameter.Value)" >> $GITHUB_ENV
-      - uses: ./.github/actions/checkmarx
-        with:
-          CHECKMARX_USER: ${{ env.CHECKMARX_USER }}
-          CHECKMARX_PASS: ${{ env.CHECKMARX_PASS }}
-          RUN_ID: ${{ github.run_id }}
-          CX_PROJECT: gme-inspectioncopy
-          CX_TEAM: \CxServer\SP\Elsevier\HealthCare\ESP
-          CX_SKIP_IF_FAIL: true
-          CX_INCREMENTAL: true
-          GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
-#    uses: elsevier-health/gme-github-actions-workflows/.github/workflows/checkmarx.yml@main
-#    with:
-#      RUNS_ON_LABELS: '["self-hosted", "rootful", "dev", "ephemeral"]'
-#      ROLE_ARN_TO_ASSUME: arn:aws:iam::154093075259:role/gha-elsevier-org-runners-role-dev
-#      CHECKMARX_USER_SSM_PATH: "/gme/ic/checkmarx_user"
-#      CHECKMARX_PASS_SSM_PATH: "/gme/ic/checkmarx_pass"
-#      RUN_ID: ${{ github.run_id }}
-#      CX_PROJECT: gme-inspectioncopy
-#      CX_TEAM: \CxServer\SP\Elsevier\HealthCare\ESP
-#      CX_SKIP_IF_FAIL: false
-#      CX_INCREMENTAL: ${{ github.ref_name != 'main' }}
-  sonarqube:
-    runs-on: [self-hosted, rootful, dev, ephemeral]
+          php_version: 8.1
+          path: src/
+          standard: phpcs.xml
+  sonarCloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
     steps:
-      - name: Code checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
         with:
-          fetch-depth: 0
-      - name: Install AWS CLI v2
-        run: |
-          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o /tmp/awscliv2.zip
-          unzip -q /tmp/awscliv2.zip -d /tmp
-          rm /tmp/awscliv2.zip
-          sudo /tmp/aws/install --update
-          rm -rf /tmp/aws/
-      - name: Get Env Vars
-        run: |
-          echo "SONAR_TOKEN=$(aws ssm get-parameter --name /gme/ic/sonar_token --with-decryption | jq -r .Parameter.Value)" >> $GITHUB_ENV
-          echo "GITHUB_TOKEN=$(aws ssm get-parameter --name /tio/github/access_token --with-decryption | jq -r .Parameter.Value)" >> $GITHUB_ENV
-      - uses: ./.github/actions/sonarqube
-        with:
-          SKIP_CHECKOUT: true
-          GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ env.SONAR_TOKEN }}
-          GITHUB_WORKSPACE: $GITHUB_WORKSPACE
-          SONAR_PROJECT_KEY: gme-inspectioncopy
-          SONAR_WAIT_FOR_QUALITY_GATE: true
-          SONAR_SOURCES: ./src
-          SONAR_EXTRA_FLAGS: -Dsonar.java.binaries=./target/classes
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

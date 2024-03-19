@@ -15,10 +15,31 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Setup PHP
+      # Update composer.json
+      - name: Update composer.json
+        run: |
+          jq '.require."jms/serializer" = "^2.0"
+              | .require."phpro/grumphp" = "^1.0"
+              | .require."symfony/dependency-injection" = "^4.4"
+              | .require."symfony/http-kernel" = "^4.4"
+              | .require."codeception/codeception" = "^3.0"
+              | .require."facebook/webdriver" = "^1.5"
+              | .require."phpspec/phpspec" = "^8.0"
+              | .require."phpspec/prophecy" = "^2.0"
+              | .require."phpunit/php-timer" = "^2.1"
+              | .require."sebastian/diff" = "^4.0"
+              | .require."sebastian/environment" = "^5.0"
+              ' composer.json > composer.json.tmp && mv composer.json.tmp composer.json
+        working-directory: ${{ github.workspace }}
+
+      # Update PHP version and packages
+      - name: Setup PHP 8.1
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: 8.1
+
+      - name: Install dependencies
+        run: composer install
 
       - name: Install Composer dependencies
         run: composer install

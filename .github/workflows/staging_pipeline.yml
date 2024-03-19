@@ -38,8 +38,8 @@ jobs:
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: toanbk21096/go-github-actions:latest
-          cache-from: type=registry,ref=toanbk21096/go-github-actions:latest
+          tags: hanine16/php-proj:latest
+          cache-from: type=registry,ref=hanine16/php-proj:latest
           cache-to: type=inline
 
       - name: Deploy Image

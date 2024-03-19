@@ -9,7 +9,7 @@ env:
   build_path: /var/www/inspectioncopy.staging.mobelite.fr
 jobs:
   deploy-inspectioncopy:
-    runs-on: icopy-staging
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code

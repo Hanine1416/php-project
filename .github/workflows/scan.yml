@@ -37,9 +37,13 @@ jobs:
         with:
           php-version: 8.1
 
-      - name: Install dependencies
-        run: composer install --no-interaction
-        working-directory: ${{ github.workspace }}
+       # Update composer.lock
+      - name: Update composer.lock
+        run: composer update --lock
+
+      # Run composer update
+      - name: Run composer update
+        run: composer update --no-interaction
 
       - name: PHP Code Sniffer
         run: vendor/bin/phpcs --standard=phpcs.xml src/

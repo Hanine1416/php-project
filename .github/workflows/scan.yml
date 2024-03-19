@@ -38,10 +38,8 @@ jobs:
           php-version: 8.1
 
       - name: Install dependencies
-        run: composer install
-
-      - name: Install Composer dependencies
-        run: composer install
+        run: composer install --no-interaction
+        working-directory: ${{ github.workspace }}
 
       - name: PHP Code Sniffer
         run: vendor/bin/phpcs --standard=phpcs.xml src/

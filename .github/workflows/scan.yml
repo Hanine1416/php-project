@@ -43,10 +43,19 @@ jobs:
 
       # Run composer update
       - name: Run composer update
-        run: composer update --no-interaction
+        run: composer update --lock --no-interaction
 
       - name: PHP Code Sniffer
         run: vendor/bin/phpcs --standard=phpcs.xml src/
+
+      - name: Commit Changes
+        run: |
+          git config --local user.email "hanine.azzabi@gmail.com"
+          git config --local user.name "hanine1416"
+          git add composer.json composer.lock
+          git commit -m "Update dependencies for PHP 8.1.27"
+          git push
+
   sonarCloud:
     name: SonarCloud
     runs-on: ubuntu-latest

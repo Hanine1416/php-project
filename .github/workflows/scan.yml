@@ -20,6 +20,8 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '7.4'
+      - name: Enable phpro/grumphp plugin
+        run: composer config --no-plugins allow-plugins.phpro/grumphp true
       - name: install-dep
         run: |
           composer self-update

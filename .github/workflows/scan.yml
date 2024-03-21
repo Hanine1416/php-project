@@ -32,7 +32,7 @@ jobs:
           php_version: 7.4
           path: src/
           #use PSR12 standard
-          standard: ruleset.xm
+          standard: PSR12
   sonarCloud:
     name: SonarCloud
     runs-on: ubuntu-latest

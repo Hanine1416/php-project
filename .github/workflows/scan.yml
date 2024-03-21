@@ -12,50 +12,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Update composer.json
-        run: |
-          jq '.require."jms/serializer" = "^2.0"
-              | .require."phpro/grumphp" = "^1.0"
-              | .require."symfony/dependency-injection" = "^4.4"
-              | .require."symfony/http-kernel" = "^4.4"
-              | .require."codeception/codeception" = "^3.0"
-              | .require."facebook/webdriver" = "^1.5"
-              | .require."phpspec/phpspec" = "^8.0"
-              | .require."phpspec/prophecy" = "^2.0"
-              | .require."phpunit/php-timer" = "^2.1"
-              | .require."sebastian/diff" = "^4.0"
-              | .require."sebastian/environment" = "^5.0"
-              ' composer.json > composer.json.tmp && mv composer.json.tmp composer.json
-        working-directory: ${{ github.workspace }}
-
-      # Update PHP version and packages
-      - name: Setup PHP 8.1
+      - name: code checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.1
-
-       # Update composer.lock
-      - name: Update composer.lock
-        run: composer update --lock
-
-      # Run composer update
-      - name: Run composer update
-        run: composer update --lock --no-interaction
-
-      - name: PHP Code Sniffer
-        run: vendor/bin/phpcs --standard=phpcs.xml src/
-
-      - name: Commit Changes
+          php-version: '7.4'
+      - name: install-dep
         run: |
-          git config --local user.email "hanine.azzabi@gmail.com"
-          git config --local user.name "hanine1416"
-          git add composer.json composer.lock
-          git commit -m "Update dependencies for PHP 8.1.27"
-          git push
-
+          composer self-update
+          composer install
+      - name: PHP Code Sniffer
+        uses: php-actions/phpcs@v1
+        with:
+          php_version: 7.4
+          path: src/
+          #use PSR12 standard
+          standard: ruleset.xm
   sonarCloud:
     name: SonarCloud
     runs-on: ubuntu-latest

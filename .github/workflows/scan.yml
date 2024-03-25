@@ -44,7 +44,7 @@ jobs:
         run: composer global require "squizlabs/php_codesniffer=*"
 
       - name: Run PHP Code Beautifier and Fixer (PHPCBF)
-        run: phpcbf src/
+        run: phpcbf --standard=PSR12 src/
 
         
       - name: Clear Composer Cache

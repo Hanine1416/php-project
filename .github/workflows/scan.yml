@@ -45,7 +45,7 @@ jobs:
         uses: sonarsource/sonarcloud-github-action@master
         with:
             args: >
-              -Dsonar.organization=hanine1416
-              -Dsonar.projectKey=php-project
+              -Dsonar.organization=hanineazzabi
+              -Dsonar.projectKey=hanineazzabi
 
               

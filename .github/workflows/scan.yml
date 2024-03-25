@@ -42,12 +42,15 @@ jobs:
 
       - name: Update PHP Code Sniffer
         run: composer global require "squizlabs/php_codesniffer=*"
+
+      - name: Run PHP Code Beautifier and Fixer (PHPCBF)
+        run: phpcbf src/
+
         
       - name: Clear Composer Cache
         run: composer clear-cache
       
-      
-        
+       
   sonarCloud:
     name: SonarCloud
     runs-on: ubuntu-latest

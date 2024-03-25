@@ -12,43 +12,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: code checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v2
+      - uses: shalior/wordpress-phpcs-action@master
         with:
-          fetch-depth: 0
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          use_default_configuration_file: true
+          phpcs_args: '-n' # ignore warnings
+      - uses: stefanzweifel/git-auto-commit-action@v4 # auto commit the fixes action for GitHub
         with:
-          php-version: '8.1'
-
-      - name: Enable phpro/grumphp plugin
-        run: composer config --no-plugins allow-plugins.phpro/grumphp true
-      
-      - name: install-dep
-        run: |
-          composer self-update
-          composer install --no-interaction
-
-      - name: PHP Code Sniffer
-        uses: php-actions/phpcs@v1
-        with:
-          php_version: 8.1
-          path: src/
-          standard: PSR12
-
-      - name: Verify Installed Standards
-        run: phpcs -i
-
-      - name: Update PHP Code Sniffer
-        run: composer global require "squizlabs/php_codesniffer=*"
-
-      - name: Run PHP Code Beautifier and Fixer (PHPCBF)
-        run: phpcbf --standard=PSR12 src/
-
+          commit_message: Fix PHPCS errors
         
-      - name: Clear Composer Cache
-        run: composer clear-cache
       
        
   sonarCloud:

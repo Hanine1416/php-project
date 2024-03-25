@@ -18,7 +18,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           use_default_configuration_file: true
-          phpcs_args: '-n' # ignore warnings
+          phpcs_args: '-n' 
       - uses: stefanzweifel/git-auto-commit-action@v4 # auto commit the fixes action for GitHub
         with:
           commit_message: Fix PHPCS errors
@@ -34,7 +34,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0  
 
       - name: Set up SonarCloud analysis
         uses: SonarSource/sonarcloud-github-action@master

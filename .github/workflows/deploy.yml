@@ -1,0 +1,53 @@
+name: deploy 
+on:
+    pull_request:
+      branches:
+        - staging
+        - main
+    push:
+      branches:
+        - main
+        - staging
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      # Deploy to server
+      - name: multiple command
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
+          script: |
+            docker stop go-container || true && docker rmi hanine16/php-proj
+            docker pull hanine16/php-proj:latest
+            docker run -d --rm --name go-container -p 8081:8081 hanine16/php-proj
+
+     # Send slack alert after done pipeline
+
+      - name: Send slack notification
+        uses: 8398a7/action-slack@v3
+        with:
+            status: custom
+            fields: workflow,job,commit,repo,ref,author,took
+            custom_payload: |
+              {
+                attachments: [{
+                color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+                text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}@${process.env.AS_REF} by ${process.env.AS_AUTHOR} ${{ job.status }} in ${process.env.AS_TOOK}`,
+                }]
+
+              }
+        env:
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        
+        if: always() # Pick up events even if the job fails or is canceled.
+
+
+            
+
+
+
+    
